@@ -72,6 +72,15 @@ export default function HomePage() {
   const showFeatured =
     !search && category === "All" && city === "All" && price === "All";
 
+  const uniqueCities = useMemo(
+    () => new Set(MOCK_PLACES.map((p) => p.city)).size,
+    []
+  );
+  const uniqueCategories = useMemo(
+    () => new Set(MOCK_PLACES.map((p) => p.category)).size,
+    []
+  );
+
   return (
     <div>
       {/* Hero Section */}
@@ -93,7 +102,7 @@ export default function HomePage() {
             </h1>
             <p className="text-text-muted text-lg sm:text-xl mb-8 leading-relaxed">
               Discover the best restaurants, cafés, bars, hotels, and
-              experiences across Colombia&apos;s most vibrant cities.
+              attractions across Colombia&apos;s most vibrant cities.
             </p>
 
             <SearchBar
@@ -109,10 +118,10 @@ export default function HomePage() {
               {MOCK_PLACES.length} places
             </span>
             <span className="px-3 py-1.5 rounded-pill text-sm text-text-muted border border-[rgba(242,237,232,0.07)] bg-bg-card">
-              6 cities
+              {uniqueCities} cities
             </span>
             <span className="px-3 py-1.5 rounded-pill text-sm text-text-muted border border-[rgba(242,237,232,0.07)] bg-bg-card">
-              6 categories
+              {uniqueCategories} categories
             </span>
           </div>
         </div>
