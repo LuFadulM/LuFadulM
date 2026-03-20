@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { Review } from "@/lib/types";
+import { createClient } from "@/lib/supabase/client";
 
 interface UseReviewsReturn {
   reviews: Review[];
@@ -21,14 +22,14 @@ export function useReviews(initialReviews: Review[] = []): UseReviewsReturn {
     setIsLoading(true);
     setError(null);
     try {
-      // In production: fetch from Supabase
-      // const { data } = await supabase
-      //   .from('reviews')
-      //   .select('*, profile:profiles(*)')
-      //   .eq('place_id', placeId)
-      //   .order('created_at', { ascending: false });
-      // setReviews(data ?? []);
-      console.log("Fetching reviews for place:", placeId);
+      const supabase = createClient();
+      const { data, error: fetchError } = await supabase
+        .from("reviews")
+        .select("*, profile:profiles(*)")
+        .eq("place_id", placeId)
+        .order("created_at", { ascending: false });
+      if (fetchError) throw fetchError;
+      setReviews(data ?? []);
     } catch (err) {
       setError("Failed to load reviews");
       console.error(err);
@@ -42,27 +43,20 @@ export function useReviews(initialReviews: Review[] = []): UseReviewsReturn {
       setIsLoading(true);
       setError(null);
       try {
-        // In production: insert to Supabase
-        // const { data } = await supabase.from('reviews').insert({
-        //   place_id: placeId, rating, text, user_id: user.id
-        // }).select('*, profile:profiles(*)').single();
-        // setReviews(prev => [data, ...prev]);
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) throw new Error("You must be signed in to leave a review.");
 
-        // Mock optimistic update
-        const mockReview: Review = {
-          id: `temp-${Date.now()}`,
-          place_id: placeId,
-          user_id: "current-user",
-          rating,
-          text,
-          helpful_count: 0,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        };
-        setReviews((prev) => [mockReview, ...prev]);
-      } catch (err) {
-        setError("Failed to submit review. Please try again.");
-        console.error(err);
+        const { data, error: insertError } = await supabase
+          .from("reviews")
+          .insert({ place_id: placeId, rating, text, user_id: user.id })
+          .select("*, profile:profiles(*)")
+          .single();
+        if (insertError) throw insertError;
+        setReviews((prev) => [data, ...prev]);
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Failed to submit review. Please try again.";
+        setError(message);
         throw err;
       } finally {
         setIsLoading(false);
@@ -73,12 +67,17 @@ export function useReviews(initialReviews: Review[] = []): UseReviewsReturn {
 
   const voteHelpful = useCallback(async (reviewId: string) => {
     try {
-      // In production: insert helpful_vote to Supabase
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      await supabase
+        .from("helpful_votes")
+        .insert({ review_id: reviewId, user_id: user.id });
+
       setReviews((prev) =>
         prev.map((r) =>
-          r.id === reviewId
-            ? { ...r, helpful_count: r.helpful_count + 1 }
-            : r
+          r.id === reviewId ? { ...r, helpful_count: r.helpful_count + 1 } : r
         )
       );
     } catch (err) {

@@ -2,10 +2,13 @@
 
 import React, { useEffect } from "react";
 import Link from "next/link";
+import type { User } from "@supabase/supabase-js";
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  user: User | null;
+  onSignOut: () => void;
 }
 
 const navLinks = [
@@ -18,7 +21,7 @@ const navLinks = [
   { href: "/saved", label: "Guardados" },
 ];
 
-export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileMenuProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -72,20 +75,40 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Auth Buttons */}
         <div className="px-4 pb-8 pt-4 border-t border-[rgba(242,237,232,0.07)] space-y-3">
-          <Link
-            href="/auth/login"
-            onClick={onClose}
-            className="block w-full text-center px-4 py-2.5 text-sm text-text border border-[rgba(242,237,232,0.14)] rounded-btn hover:bg-bg-card transition-colors"
-          >
-            Iniciar sesión
-          </Link>
-          <Link
-            href="/auth/signup"
-            onClick={onClose}
-            className="block w-full text-center px-4 py-2.5 text-sm bg-coral text-white rounded-btn hover:bg-coral-hover transition-colors font-medium"
-          >
-            Registrarse
-          </Link>
+          {user ? (
+            <>
+              <Link
+                href="/profile"
+                onClick={onClose}
+                className="block w-full text-center px-4 py-2.5 text-sm text-text border border-[rgba(242,237,232,0.14)] rounded-btn hover:bg-bg-card transition-colors"
+              >
+                {user.user_metadata?.display_name ?? user.email?.split("@")[0] ?? "Profile"}
+              </Link>
+              <button
+                onClick={() => { onClose(); onSignOut(); }}
+                className="block w-full text-center px-4 py-2.5 text-sm text-text-muted border border-[rgba(242,237,232,0.07)] rounded-btn hover:bg-bg-card transition-colors"
+              >
+                Salir
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                onClick={onClose}
+                className="block w-full text-center px-4 py-2.5 text-sm text-text border border-[rgba(242,237,232,0.14)] rounded-btn hover:bg-bg-card transition-colors"
+              >
+                Iniciar sesión
+              </Link>
+              <Link
+                href="/auth/signup"
+                onClick={onClose}
+                className="block w-full text-center px-4 py-2.5 text-sm bg-coral text-white rounded-btn hover:bg-coral-hover transition-colors font-medium"
+              >
+                Registrarse
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -1,17 +1,19 @@
 import React from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Saved Places",
   description: "Your saved places on descubre",
 };
 
-export default function SavedPage() {
-  // In production this would check Supabase auth and load saved places
-  const isAuthenticated = false;
+export default async function SavedPage() {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  if (!isAuthenticated) {
+  if (!user) {
     return (
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
         <div className="max-w-md mx-auto text-center">
@@ -65,11 +67,36 @@ export default function SavedPage() {
     );
   }
 
-  // Authenticated view would show saved places grid
+  const { data: savedRows } = await supabase
+    .from("saved_places")
+    .select("*, place:places(*)")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
+
+  const savedPlaces = savedRows?.map((r) => r.place).filter(Boolean) ?? [];
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       <h1 className="text-3xl font-serif text-text mb-8">Saved Places</h1>
-      <p className="text-text-muted">You haven&apos;t saved any places yet.</p>
+      {savedPlaces.length === 0 ? (
+        <div className="text-center py-16">
+          <p className="text-text-muted mb-4">You haven&apos;t saved any places yet.</p>
+          <Link href="/" className="text-coral text-sm hover:text-coral-hover transition-colors">
+            Browse places →
+          </Link>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {savedPlaces.map((place) => (
+            <Link key={place.id} href={`/places/${place.slug}`} className="block group">
+              <article className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card overflow-hidden card-hover h-full p-4">
+                <h3 className="font-serif text-text text-lg mb-1">{place.name}</h3>
+                <p className="text-text-muted text-sm">{place.city}</p>
+              </article>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

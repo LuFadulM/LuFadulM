@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { Place } from "@/lib/types";
+import { createClient } from "@/lib/supabase/client";
 
 interface UseSavedPlacesReturn {
   savedPlaceIds: Set<string>;
@@ -20,13 +21,15 @@ export function useSavedPlaces(): UseSavedPlacesReturn {
   const fetchSaved = useCallback(async () => {
     setIsLoading(true);
     try {
-      // In production: fetch from Supabase
-      // const { data } = await supabase
-      //   .from('saved_places')
-      //   .select('*, place:places(*)')
-      //   .eq('user_id', user.id);
-      // setSavedPlaceIds(new Set(data?.map(s => s.place_id) ?? []));
-      // setSavedPlaces(data?.map(s => s.place).filter(Boolean) ?? []);
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase
+        .from("saved_places")
+        .select("*, place:places(*)")
+        .eq("user_id", user.id);
+      setSavedPlaceIds(new Set(data?.map((s) => s.place_id) ?? []));
+      setSavedPlaces(data?.map((s) => s.place).filter(Boolean) ?? []);
     } catch (err) {
       console.error("Failed to fetch saved places:", err);
     } finally {
@@ -46,51 +49,41 @@ export function useSavedPlaces(): UseSavedPlacesReturn {
       // Optimistic update
       setSavedPlaceIds((prev) => {
         const next = new Set(prev);
-        if (wasSaved) {
-          next.delete(place.id);
-        } else {
-          next.add(place.id);
-        }
+        if (wasSaved) next.delete(place.id);
+        else next.add(place.id);
         return next;
       });
-
-      setSavedPlaces((prev) => {
-        if (wasSaved) {
-          return prev.filter((p) => p.id !== place.id);
-        } else {
-          return [place, ...prev];
-        }
-      });
+      setSavedPlaces((prev) =>
+        wasSaved ? prev.filter((p) => p.id !== place.id) : [place, ...prev]
+      );
 
       try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) throw new Error("Not authenticated");
+
         if (wasSaved) {
-          // In production: delete from Supabase
-          // await supabase.from('saved_places').delete()
-          //   .eq('user_id', user.id).eq('place_id', place.id);
+          await supabase
+            .from("saved_places")
+            .delete()
+            .eq("user_id", user.id)
+            .eq("place_id", place.id);
         } else {
-          // In production: insert to Supabase
-          // await supabase.from('saved_places').insert({
-          //   user_id: user.id, place_id: place.id
-          // });
+          await supabase
+            .from("saved_places")
+            .insert({ user_id: user.id, place_id: place.id });
         }
       } catch (err) {
         // Revert on error
         setSavedPlaceIds((prev) => {
           const next = new Set(prev);
-          if (wasSaved) {
-            next.add(place.id);
-          } else {
-            next.delete(place.id);
-          }
+          if (wasSaved) next.add(place.id);
+          else next.delete(place.id);
           return next;
         });
-        setSavedPlaces((prev) => {
-          if (wasSaved) {
-            return [place, ...prev];
-          } else {
-            return prev.filter((p) => p.id !== place.id);
-          }
-        });
+        setSavedPlaces((prev) =>
+          wasSaved ? [place, ...prev] : prev.filter((p) => p.id !== place.id)
+        );
         console.error("Failed to toggle saved place:", err);
       }
     },
