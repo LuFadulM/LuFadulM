@@ -20,6 +20,16 @@ const cities: FilterCity[] = [
   "Cali",
   "Santa Marta",
   "Barranquilla",
+  "Bucaramanga",
+  "Manizales",
+  "Pereira",
+  "Salento",
+  "Villa de Leyva",
+  "Popayán",
+  "San Andrés",
+  "Barichara",
+  "San Gil",
+  "Leticia",
 ];
 
 const prices: FilterPrice[] = ["All", "$", "$$", "$$$", "$$$$"];

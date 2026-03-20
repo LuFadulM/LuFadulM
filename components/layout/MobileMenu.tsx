@@ -18,6 +18,17 @@ const navLinks = [
   { href: "/city/cartagena", label: "Cartagena" },
   { href: "/city/cali", label: "Cali" },
   { href: "/city/santa-marta", label: "Santa Marta" },
+  { href: "/city/barranquilla", label: "Barranquilla" },
+  { href: "/city/bucaramanga", label: "Bucaramanga" },
+  { href: "/city/manizales", label: "Manizales" },
+  { href: "/city/salento", label: "Salento" },
+  { href: "/city/villa-de-leyva", label: "Villa de Leyva" },
+  { href: "/city/popayan", label: "Popayán" },
+  { href: "/city/san-andres", label: "San Andrés" },
+  { href: "/city/barichara", label: "Barichara" },
+  { href: "/city/san-gil", label: "San Gil" },
+  { href: "/city/pereira", label: "Pereira" },
+  { href: "/city/leticia", label: "Leticia" },
   { href: "/saved", label: "Guardados" },
 ];
 

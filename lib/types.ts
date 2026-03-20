@@ -95,6 +95,16 @@ export type FilterCity =
   | "Cali"
   | "Santa Marta"
   | "Barranquilla"
+  | "Salento"
+  | "Villa de Leyva"
+  | "Popayán"
+  | "San Andrés"
+  | "Barichara"
+  | "San Gil"
+  | "Manizales"
+  | "Pereira"
+  | "Bucaramanga"
+  | "Leticia"
   | string;
 
 export type FilterPrice = "All" | "$" | "$$" | "$$$" | "$$$$";
