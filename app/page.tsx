@@ -12,6 +12,8 @@ import CategoryGrid from "@/components/categories/CategoryGrid";
 
 type CategoryFilter = Category | "All";
 
+const CITIES = ["Bogotá", "Medellín", "Cartagena", "Cali", "Santa Marta", "Barranquilla"];
+
 export default function HomePage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<CategoryFilter>("All");
@@ -19,7 +21,6 @@ export default function HomePage() {
   const [price, setPrice] = useState<FilterPrice>("All");
   const [sort, setSort] = useState<SortOption>("Rating");
 
-  // Read ?category= from URL on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const cat = params.get("category");
@@ -84,63 +85,159 @@ export default function HomePage() {
     () => new Set(MOCK_PLACES.map((p) => p.city)).size,
     []
   );
-  const uniqueCategories = useMemo(
-    () => new Set(MOCK_PLACES.map((p) => p.category)).size,
-    []
-  );
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="relative bg-bg overflow-hidden">
-        {/* Background gradient texture */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 50%, #E2725B 0%, transparent 50%), radial-gradient(circle at 80% 50%, #3CC9AD 0%, transparent 50%)",
-          }}
-        />
+      {/* ── HERO ────────────────────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden"
+        style={{ background: "#0A0A09", borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Main hero grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 py-20 md:py-28">
+            {/* Left — headline */}
+            <div className="pr-0 md:pr-16 border-r-0 md:border-r md:border-[rgba(255,255,255,0.04)]">
+              {/* Micro label */}
+              <p
+                className="label-micro mb-8"
+                style={{ color: "#C8A44E" }}
+              >
+                La guía editorial de Colombia
+              </p>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-14">
-          <div className="max-w-2xl">
-            <p className="text-text-dim text-sm font-medium tracking-widest uppercase mb-4">
-              Colombia · Gastronomía · Experiencias
-            </p>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif text-text leading-tight mb-4">
-              Descubre{" "}
-              <span className="text-coral italic">Colombia</span>
-            </h1>
-            <p className="text-text-muted text-lg sm:text-xl mb-8 leading-relaxed">
-              Los mejores restaurantes, cafés, bares, hoteles y atracciones
-              en las ciudades más vibrantes de Colombia.
-            </p>
+              {/* Big serif headline */}
+              <h1
+                className="font-serif leading-none mb-8"
+                style={{ fontSize: "clamp(52px, 7vw, 88px)", color: "#D4D0C8" }}
+              >
+                Descubre
+                <br />
+                <span style={{ color: "#C8A44E", fontStyle: "italic" }}>
+                  Colombia.
+                </span>
+              </h1>
 
-            <SearchBar
-              large
-              placeholder="Busca lugares, ciudades, cocinas..."
-              onSearch={setSearch}
-            />
-          </div>
+              {/* Thin rule */}
+              <div
+                style={{
+                  width: "40px",
+                  height: "1px",
+                  background: "rgba(200,164,78,0.4)",
+                  marginBottom: "24px",
+                }}
+              />
 
-          {/* Stat pills */}
-          <div className="flex flex-wrap gap-3 mt-8">
-            <span className="px-3 py-1.5 rounded-pill text-sm text-text-muted border border-[rgba(242,237,232,0.07)] bg-bg-card">
-              {MOCK_PLACES.length} lugares
-            </span>
-            <span className="px-3 py-1.5 rounded-pill text-sm text-text-muted border border-[rgba(242,237,232,0.07)] bg-bg-card">
-              {uniqueCities} ciudades
-            </span>
-            <span className="px-3 py-1.5 rounded-pill text-sm text-text-muted border border-[rgba(242,237,232,0.07)] bg-bg-card">
-              {uniqueCategories} categorías
-            </span>
+              <p
+                style={{
+                  color: "#706D64",
+                  fontSize: "14px",
+                  lineHeight: "1.8",
+                  fontWeight: 300,
+                  maxWidth: "380px",
+                  marginBottom: "40px",
+                }}
+              >
+                Restaurantes, cafés, bares, hoteles y experiencias culturales
+                en las ciudades más vibrantes del país.
+              </p>
+
+              {/* Search */}
+              <div className="mb-8">
+                <SearchBar
+                  large
+                  placeholder="Busca lugares, cocinas, ciudades..."
+                  onSearch={setSearch}
+                />
+              </div>
+
+              {/* Stats */}
+              <div className="flex items-center gap-8">
+                <div>
+                  <p
+                    className="font-serif"
+                    style={{ fontSize: "28px", color: "#D4D0C8", lineHeight: 1 }}
+                  >
+                    {MOCK_PLACES.length}
+                  </p>
+                  <p className="label-micro mt-1">Lugares</p>
+                </div>
+                <div
+                  style={{
+                    width: "1px",
+                    height: "32px",
+                    background: "rgba(255,255,255,0.06)",
+                  }}
+                />
+                <div>
+                  <p
+                    className="font-serif"
+                    style={{ fontSize: "28px", color: "#D4D0C8", lineHeight: 1 }}
+                  >
+                    {uniqueCities}
+                  </p>
+                  <p className="label-micro mt-1">Ciudades</p>
+                </div>
+                <div
+                  style={{
+                    width: "1px",
+                    height: "32px",
+                    background: "rgba(255,255,255,0.06)",
+                  }}
+                />
+                <div>
+                  <p
+                    className="font-serif"
+                    style={{ fontSize: "28px", color: "#D4D0C8", lineHeight: 1 }}
+                  >
+                    6
+                  </p>
+                  <p className="label-micro mt-1">Categorías</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right — city index */}
+            <div className="hidden md:flex flex-col justify-center pl-16">
+              <p className="label-micro mb-6">Ciudades destacadas</p>
+              <ul>
+                {CITIES.map((c, i) => (
+                  <li key={c}>
+                    <button
+                      onClick={() => setCity(c as FilterCity)}
+                      className="w-full text-left py-4 border-b border-[rgba(255,255,255,0.04)] group transition-all duration-200"
+                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
+                    >
+                      <span
+                        className="font-serif transition-colors duration-200"
+                        style={{ fontSize: "20px", color: "#3A3835" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "#3A3835")}
+                      >
+                        {c}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          letterSpacing: "0.12em",
+                          color: "#3A3835",
+                          fontWeight: 600,
+                        }}
+                      >
+                        0{i + 1}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-        {/* Category grid — shown only on unfiltered homepage */}
+      {/* ── MAIN CONTENT ────────────────────────────────────────────── */}
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        {/* Category grid — homepage only */}
         {showFeatured && (
           <CategoryGrid
             places={MOCK_PLACES}
@@ -148,16 +245,29 @@ export default function HomePage() {
           />
         )}
 
-        {/* Featured section */}
+        {/* Featured editorial section */}
         {showFeatured && <FeaturedSection places={featuredPlaces} />}
 
-        {/* Category Pills */}
-        <div className="mb-5">
-          <CategoryPills active={category} onChange={setCategory} />
-        </div>
-
-        {/* Filter Bar */}
-        <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        {/* Filter + pills bar */}
+        <div
+          className="mb-8 pb-6 border-b border-[rgba(255,255,255,0.04)]"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+            <CategoryPills active={category} onChange={setCategory} />
+            <p
+              style={{
+                fontSize: "10px",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "#4A4843",
+                fontWeight: 500,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {filteredPlaces.length}{" "}
+              {filteredPlaces.length === 1 ? "lugar" : "lugares"}
+            </p>
+          </div>
           <FilterBar
             city={city}
             price={price}
@@ -166,16 +276,12 @@ export default function HomePage() {
             onPriceChange={setPrice}
             onSortChange={setSort}
           />
-          <p className="text-text-dim text-sm">
-            {filteredPlaces.length}{" "}
-            {filteredPlaces.length === 1 ? "lugar" : "lugares"} encontrados
-          </p>
         </div>
 
-        {/* Places Grid */}
+        {/* Places grid */}
         <PlaceGrid
           places={filteredPlaces}
-          emptyMessage="Ningún lugar coincide con tus filtros. Intenta ajustar tu búsqueda."
+          emptyMessage="Ningún lugar coincide con tus filtros."
         />
       </div>
     </div>
