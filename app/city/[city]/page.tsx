@@ -18,6 +18,16 @@ const citySlugMap: Record<string, string> = {
   "santa-marta": "Santa Marta",
   barranquilla: "Barranquilla",
   chia: "Chía",
+  salento: "Salento",
+  "villa-de-leyva": "Villa de Leyva",
+  popayan: "Popayán",
+  "san-andres": "San Andrés",
+  barichara: "Barichara",
+  "san-gil": "San Gil",
+  manizales: "Manizales",
+  pereira: "Pereira",
+  bucaramanga: "Bucaramanga",
+  leticia: "Leticia",
 };
 
 interface CityPageProps {
