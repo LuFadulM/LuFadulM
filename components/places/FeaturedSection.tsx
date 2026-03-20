@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Place } from "@/lib/types";
 import { formatRating } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface FeaturedSectionProps {
   places: Place[];
@@ -23,7 +26,7 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-function FeaturedHero({ place }: { place: Place }) {
+function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editorialPick: string; reviews: string }) {
   return (
     <Link href={`/places/${place.slug}`} className="block group col-span-2 row-span-2">
       <article
@@ -43,16 +46,13 @@ function FeaturedHero({ place }: { place: Place }) {
           <div className="absolute inset-0" style={{ background: "#111110" }} />
         )}
 
-        {/* Heavy gradient overlay */}
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.1) 100%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.1) 100%)",
           }}
         />
 
-        {/* Top label */}
         <div className="absolute top-5 left-5">
           <span
             style={{
@@ -67,11 +67,10 @@ function FeaturedHero({ place }: { place: Place }) {
               display: "inline-block",
             }}
           >
-            Editorial Pick
+            {editorialPick}
           </span>
         </div>
 
-        {/* Bottom content */}
         <div className="absolute bottom-0 left-0 right-0 p-7">
           <p
             style={{
@@ -86,10 +85,7 @@ function FeaturedHero({ place }: { place: Place }) {
             {place.neighborhood ? `${place.neighborhood} · ` : ""}
             {place.city}
           </p>
-          <h3
-            className="font-serif text-white mb-3"
-            style={{ fontSize: "28px", lineHeight: "1.2" }}
-          >
+          <h3 className="font-serif text-white mb-3" style={{ fontSize: "28px", lineHeight: "1.2" }}>
             {place.name}
           </h3>
           {place.description && (
@@ -113,7 +109,7 @@ function FeaturedHero({ place }: { place: Place }) {
               {formatRating(place.avg_rating)}
             </span>
             <span style={{ color: "rgba(212,208,200,0.35)", fontSize: "12px" }}>
-              {place.review_count} reseñas
+              {place.review_count} {reviews}
             </span>
           </div>
         </div>
@@ -125,7 +121,10 @@ function FeaturedHero({ place }: { place: Place }) {
 function FeaturedSmall({ place, index }: { place: Place; index: number }) {
   return (
     <Link href={`/places/${place.slug}`} className="block group">
-      <article className="card-hover relative overflow-hidden border border-[rgba(255,255,255,0.04)] h-full" style={{ minHeight: "200px" }}>
+      <article
+        className="card-hover relative overflow-hidden border border-[rgba(255,255,255,0.04)] h-full"
+        style={{ minHeight: "200px" }}
+      >
         {place.cover_image_url ? (
           <Image
             src={place.cover_image_url}
@@ -142,16 +141,12 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)",
           }}
         />
 
         <div className="absolute bottom-0 left-0 right-0 p-4">
-          <h3
-            className="font-serif text-white leading-tight mb-1"
-            style={{ fontSize: "15px" }}
-          >
+          <h3 className="font-serif text-white leading-tight mb-1" style={{ fontSize: "15px" }}>
             {place.name}
           </h3>
           <p
@@ -166,16 +161,8 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
           </p>
         </div>
 
-        {/* Index number */}
         <div className="absolute top-3 right-3">
-          <span
-            style={{
-              fontSize: "10px",
-              letterSpacing: "0.1em",
-              color: "rgba(200,164,78,0.6)",
-              fontWeight: 600,
-            }}
-          >
+          <span style={{ fontSize: "10px", letterSpacing: "0.1em", color: "rgba(200,164,78,0.6)", fontWeight: 600 }}>
             0{index + 2}
           </span>
         </div>
@@ -185,18 +172,18 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
 }
 
 export default function FeaturedSection({ places }: FeaturedSectionProps) {
+  const { t } = useLanguage();
   if (places.length === 0) return null;
 
   const [hero, ...rest] = places;
 
   return (
     <section className="mb-20">
-      {/* Section header */}
       <div className="flex items-end justify-between mb-8 pb-4 border-b border-[rgba(255,255,255,0.04)]">
         <div>
-          <p className="label-micro mb-3">Selección</p>
+          <p className="label-micro mb-3">{t.featured.sectionLabel}</p>
           <h2 className="text-3xl font-serif" style={{ color: "#D4D0C8" }}>
-            Lugares Destacados
+            {t.featured.sectionTitle}
           </h2>
         </div>
         <Link
@@ -208,21 +195,20 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
             color: "#C8A44E",
             fontWeight: 500,
           }}
-          className="transition-colors duration-200"
+          className="transition-colors duration-200 whitespace-nowrap"
         >
-          Ver todos →
+          {t.featured.viewAll}
         </Link>
       </div>
 
-      {/* Magazine-style grid */}
-      <div
-        className="grid grid-cols-1 md:grid-cols-3"
-        style={{ gap: "2px" }}
-      >
-        {/* Hero — left 2/3 */}
-        {hero && <FeaturedHero place={hero} />}
-
-        {/* Side cards — right 1/3 */}
+      <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "2px" }}>
+        {hero && (
+          <FeaturedHero
+            place={hero}
+            editorialPick={t.featured.editorialPick}
+            reviews={t.featured.reviews}
+          />
+        )}
         <div className="flex flex-col" style={{ gap: "2px" }}>
           {rest.slice(0, 2).map((place, i) => (
             <FeaturedSmall key={place.id} place={place} index={i} />

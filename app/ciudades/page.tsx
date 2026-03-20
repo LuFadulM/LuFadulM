@@ -1,7 +1,8 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-
-export const metadata = { title: "Ciudades — Descubre Colombia" };
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const CITIES = [
   { slug: "bogota", name: "Bogotá", region: "Cundinamarca" },
@@ -13,22 +14,19 @@ const CITIES = [
 ];
 
 export default function CiudadesPage() {
-  return (
-    <main className="max-w-7xl mx-auto px-6 py-20">
-      <p className="label-micro mb-6" style={{ color: "#C8A44E" }}>
-        Colombia
-      </p>
-      <h1
-        className="font-serif mb-4"
-        style={{ fontSize: "clamp(36px, 5vw, 64px)", color: "#D4D0C8" }}
-      >
-        Ciudades
-      </h1>
-      <div
-        style={{ width: "40px", height: "1px", background: "rgba(200,164,78,0.4)", marginBottom: "40px" }}
-      />
+  const { t } = useLanguage();
+  const p = t.pages.ciudades;
 
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
+  return (
+    <main className="max-w-7xl mx-auto px-6 py-16 sm:py-20">
+      <p className="label-micro mb-6" style={{ color: "#C8A44E" }}>{p.label}</p>
+      <h1 className="font-serif mb-4" style={{ fontSize: "clamp(36px, 5vw, 64px)", color: "#D4D0C8" }}>
+        {p.title}
+      </h1>
+      <div style={{ width: "40px", height: "1px", background: "rgba(200,164,78,0.4)", marginBottom: "40px" }} />
+
+      <ul
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
         style={{ background: "rgba(255,255,255,0.04)" }}
       >
         {CITIES.map((city, i) => (
@@ -63,7 +61,7 @@ export default function CiudadesPage() {
                     color: "#C8A44E",
                   }}
                 >
-                  Explorar →
+                  {p.explore}
                 </span>
               </div>
             </Link>

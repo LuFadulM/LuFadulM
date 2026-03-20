@@ -9,12 +9,14 @@ import FilterBar from "@/components/search/FilterBar";
 import PlaceGrid from "@/components/places/PlaceGrid";
 import FeaturedSection from "@/components/places/FeaturedSection";
 import CategoryGrid from "@/components/categories/CategoryGrid";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type CategoryFilter = Category | "All";
 
 const CITIES = ["Bogotá", "Medellín", "Cartagena", "Cali", "Santa Marta", "Barranquilla"];
 
 export default function HomePage() {
+  const { t } = useLanguage();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<CategoryFilter>("All");
   const [city, setCity] = useState<FilterCity>("All");
@@ -98,7 +100,7 @@ export default function HomePage() {
                 className="label-micro mb-8"
                 style={{ color: "#C8A44E" }}
               >
-                La guía editorial de Colombia
+                {t.hero.label}
               </p>
 
               {/* Big serif headline */}
@@ -106,10 +108,10 @@ export default function HomePage() {
                 className="font-serif leading-none mb-8"
                 style={{ fontSize: "clamp(52px, 7vw, 88px)", color: "#D4D0C8" }}
               >
-                Descubre
+                {t.hero.title}
                 <br />
                 <span style={{ color: "#C8A44E", fontStyle: "italic" }}>
-                  Colombia.
+                  {t.hero.titleAccent}
                 </span>
               </h1>
 
@@ -133,15 +135,14 @@ export default function HomePage() {
                   marginBottom: "40px",
                 }}
               >
-                Tu guía editorial para descubrir lo mejor de Colombia —
-                gastronomía, cultura, naturaleza y experiencias únicas.
+                {t.hero.subtitle}
               </p>
 
               {/* Search */}
               <div className="mb-8">
                 <SearchBar
                   large
-                  placeholder="Busca lugares, cocinas, ciudades..."
+                  placeholder={t.hero.searchPlaceholder}
                   onSearch={setSearch}
                 />
               </div>
@@ -150,7 +151,7 @@ export default function HomePage() {
 
             {/* Right — city index */}
             <div className="hidden md:flex flex-col justify-center pl-16">
-              <p className="label-micro mb-6">Ciudades destacadas</p>
+              <p className="label-micro mb-6">{t.hero.featuredCities}</p>
               <ul>
                 {CITIES.map((c, i) => (
                   <li key={c}>
@@ -216,7 +217,7 @@ export default function HomePage() {
               }}
             >
               {filteredPlaces.length}{" "}
-              {filteredPlaces.length === 1 ? "lugar" : "lugares"}
+              {filteredPlaces.length === 1 ? t.results.place : t.results.places}
             </p>
           </div>
           <FilterBar

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { FilterCity, FilterPrice, SortOption } from "@/lib/types";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface FilterBarProps {
   city: FilterCity;
@@ -62,6 +63,8 @@ export default function FilterBar({
   onPriceChange,
   onSortChange,
 }: FilterBarProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-wrap items-center gap-2">
       <span
@@ -74,7 +77,7 @@ export default function FilterBar({
           marginRight: "4px",
         }}
       >
-        Filtrar
+        {t.filter.label}
       </span>
 
       {/* City */}
@@ -86,7 +89,7 @@ export default function FilterBar({
       >
         {cities.map((c) => (
           <option key={c} value={c} style={{ background: "#111110" }}>
-            {c === "All" ? "Todas las ciudades" : c}
+            {c === "All" ? t.filter.allCities : c}
           </option>
         ))}
       </select>
@@ -100,7 +103,7 @@ export default function FilterBar({
       >
         {prices.map((p) => (
           <option key={p} value={p} style={{ background: "#111110" }}>
-            {p === "All" ? "Todos los precios" : p}
+            {p === "All" ? t.filter.allPrices : p}
           </option>
         ))}
       </select>
@@ -112,11 +115,9 @@ export default function FilterBar({
         style={selectStyle}
         aria-label="Ordenar por"
       >
-        {sorts.map((s) => (
-          <option key={s} value={s} style={{ background: "#111110" }}>
-            {s === "Rating" ? "Mejor valorados" : s === "Newest" ? "Más recientes" : "Más reseñados"}
-          </option>
-        ))}
+        <option value="Rating" style={{ background: "#111110" }}>{t.filter.sortRating}</option>
+        <option value="Newest" style={{ background: "#111110" }}>{t.filter.sortNewest}</option>
+        <option value="Most Reviewed" style={{ background: "#111110" }}>{t.filter.sortReviewed}</option>
       </select>
     </div>
   );

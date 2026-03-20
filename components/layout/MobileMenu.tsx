@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -11,38 +12,40 @@ interface MobileMenuProps {
   onSignOut: () => void;
 }
 
-const navSections = [
-  {
-    label: "Descubre",
-    links: [
-      { href: "/", label: "Explorar" },
-      { href: "/actividades", label: "Actividades" },
-      { href: "/mapa", label: "Mapa" },
-      { href: "/saved", label: "Guardados" },
-    ],
-  },
-  {
-    label: "Ciudades",
-    links: [
-      { href: "/ciudades", label: "Todas las ciudades" },
-      { href: "/city/bogota", label: "Bogotá" },
-      { href: "/city/medellin", label: "Medellín" },
-      { href: "/city/cartagena", label: "Cartagena" },
-      { href: "/city/cali", label: "Cali" },
-      { href: "/city/santa-marta", label: "Santa Marta" },
-      { href: "/city/barranquilla", label: "Barranquilla" },
-    ],
-  },
-  {
-    label: "Info",
-    links: [
-      { href: "/blog", label: "Blog" },
-      { href: "/about", label: "Nosotros" },
-    ],
-  },
-];
-
 export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileMenuProps) {
+  const { t } = useLanguage();
+
+  const navSections = [
+    {
+      label: t.mobile.discover,
+      links: [
+        { href: "/", label: t.nav.explore },
+        { href: "/actividades", label: t.nav.activities },
+        { href: "/mapa", label: t.nav.map },
+        { href: "/saved", label: t.nav.saved },
+      ],
+    },
+    {
+      label: t.mobile.cities,
+      links: [
+        { href: "/ciudades", label: t.mobile.allCities },
+        { href: "/city/bogota", label: "Bogotá" },
+        { href: "/city/medellin", label: "Medellín" },
+        { href: "/city/cartagena", label: "Cartagena" },
+        { href: "/city/cali", label: "Cali" },
+        { href: "/city/santa-marta", label: "Santa Marta" },
+        { href: "/city/barranquilla", label: "Barranquilla" },
+      ],
+    },
+    {
+      label: t.mobile.info,
+      links: [
+        { href: "/blog", label: t.nav.blog },
+        { href: "/about", label: t.nav.about },
+      ],
+    },
+  ];
+
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -51,7 +54,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 md:hidden">
+    <div className="fixed inset-0 z-50 lg:hidden">
       {/* Backdrop */}
       <div
         className="absolute inset-0"
@@ -163,7 +166,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                   color: "#706D64",
                 }}
               >
-                Salir
+                {t.nav.signout}
               </button>
             </>
           ) : (
@@ -180,7 +183,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                   color: "#D4D0C8",
                 }}
               >
-                Acceder
+                {t.nav.login}
               </Link>
               <Link
                 href="/auth/signup"
@@ -194,7 +197,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                   color: "#0A0A09",
                 }}
               >
-                Registrarse
+                {t.nav.signup}
               </Link>
             </>
           )}
