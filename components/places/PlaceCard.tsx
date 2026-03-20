@@ -1,8 +1,11 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Place } from "@/lib/types";
 import { formatRating } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PlaceCardProps {
   place: Place;
@@ -10,7 +13,7 @@ interface PlaceCardProps {
 
 function Stars({ rating }: { rating: number }) {
   return (
-    <span aria-label={`${rating} de 5 estrellas`}>
+    <span aria-label={`${rating} / 5`}>
       {Array.from({ length: 5 }, (_, i) => (
         <span
           key={i}
@@ -23,22 +26,14 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-const categoryLabel: Record<string, string> = {
-  Restaurants: "Gastronomía",
-  Cafés: "Café",
-  Bars: "Noche",
-  Hotels: "Hoteles",
-  Attractions: "Cultura",
-  Nightlife: "Vida Activa",
-};
-
 export default function PlaceCard({ place }: PlaceCardProps) {
-  const label = categoryLabel[place.category] ?? place.category;
+  const { t } = useLanguage();
+  const label = t.placeCard[place.category as keyof typeof t.placeCard] ?? place.category;
 
   return (
     <Link href={`/places/${place.slug}`} className="block group">
       <article className="card-hover bg-bg-card border border-[rgba(255,255,255,0.04)] overflow-hidden h-full">
-        {/* Image — 66% of card */}
+        {/* Image */}
         <div className="relative overflow-hidden bg-bg-surface" style={{ aspectRatio: "3/2" }}>
           {place.cover_image_url ? (
             <Image
@@ -50,16 +45,11 @@ export default function PlaceCard({ place }: PlaceCardProps) {
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
           ) : (
-            <div
-              className="w-full h-full"
-              style={{ background: "#111110" }}
-            />
+            <div className="w-full h-full" style={{ background: "#111110" }} />
           )}
 
-          {/* Overlay gradient */}
           <div className="absolute inset-0 img-overlay" />
 
-          {/* Top — featured badge */}
           {place.is_featured && (
             <div className="absolute top-3 left-3">
               <span
@@ -75,12 +65,11 @@ export default function PlaceCard({ place }: PlaceCardProps) {
                   display: "inline-block",
                 }}
               >
-                Destacado
+                {t.placeCard.featured}
               </span>
             </div>
           )}
 
-          {/* Price */}
           {place.price_level && (
             <div className="absolute top-3 right-3">
               <span
@@ -98,12 +87,8 @@ export default function PlaceCard({ place }: PlaceCardProps) {
             </div>
           )}
 
-          {/* Bottom — name + location */}
           <div className="absolute bottom-0 left-0 right-0 p-4">
-            <h3
-              className="font-serif text-white leading-tight mb-1"
-              style={{ fontSize: "16px" }}
-            >
+            <h3 className="font-serif text-white leading-tight mb-1" style={{ fontSize: "16px" }}>
               {place.name}
             </h3>
             <p
@@ -119,13 +104,7 @@ export default function PlaceCard({ place }: PlaceCardProps) {
             </p>
             <div className="flex items-center gap-2">
               <Stars rating={place.avg_rating} />
-              <span
-                style={{
-                  color: "rgba(212,208,200,0.9)",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                }}
-              >
+              <span style={{ color: "rgba(212,208,200,0.9)", fontSize: "11px", fontWeight: 500 }}>
                 {formatRating(place.avg_rating)}
               </span>
               <span style={{ color: "rgba(212,208,200,0.4)", fontSize: "11px" }}>
@@ -135,7 +114,7 @@ export default function PlaceCard({ place }: PlaceCardProps) {
           </div>
         </div>
 
-        {/* Bottom strip — category + tags */}
+        {/* Bottom strip */}
         <div
           className="px-4 py-3 flex items-center justify-between"
           style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}

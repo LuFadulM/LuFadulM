@@ -6,12 +6,15 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { User } from "@supabase/supabase-js";
 import MobileMenu from "./MobileMenu";
+import { useLanguage } from "@/contexts/LanguageContext";
+import type { Locale } from "@/lib/i18n";
 
 export default function Header() {
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const { t, locale, setLocale } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -37,6 +40,15 @@ export default function Header() {
     router.refresh();
   };
 
+  const navItems = [
+    { href: "/", label: t.nav.explore },
+    { href: "/ciudades", label: t.nav.cities },
+    { href: "/actividades", label: t.nav.activities },
+    { href: "/mapa", label: t.nav.map },
+    { href: "/blog", label: t.nav.blog },
+    { href: "/about", label: t.nav.about },
+  ];
+
   return (
     <>
       <header
@@ -46,7 +58,7 @@ export default function Header() {
             : "bg-transparent"
         }`}
       >
-        {/* Top bar — thin editorial stripe */}
+        {/* Top bar */}
         {!scrolled && (
           <div className="border-b border-[rgba(255,255,255,0.04)]">
             <div className="max-w-7xl mx-auto px-6 h-7 flex items-center justify-between">
@@ -59,7 +71,7 @@ export default function Header() {
                   fontWeight: 600,
                 }}
               >
-                Colombia · Gastronomía · Cultura · Experiencias
+                {t.topbar.tagline}
               </span>
               <span
                 style={{
@@ -70,54 +82,74 @@ export default function Header() {
                   fontWeight: 600,
                 }}
               >
-                Bogotá · Medellín · Cartagena · Cali
+                {t.topbar.cities}
               </span>
             </div>
           </div>
         )}
 
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
           {/* Logo */}
           <Link
             href="/"
-            className="text-gold text-2xl font-serif tracking-tight hover:text-gold-hover transition-colors duration-200"
+            className="text-gold text-2xl font-serif tracking-tight hover:text-gold-hover transition-colors duration-200 shrink-0"
             style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic" }}
           >
             hyex
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-0">
-            {[
-              { href: "/", label: "Explorar" },
-              { href: "/city/bogota", label: "Ciudades" },
-              { href: "/saved", label: "Guardados" },
-            ].map((item) => (
+          <nav className="hidden lg:flex items-center gap-0 flex-1 justify-center">
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-5 py-2 transition-colors duration-200"
+                className="px-3 xl:px-4 py-2 transition-colors duration-200 whitespace-nowrap"
                 style={{
-                  fontSize: "11px",
+                  fontSize: "10px",
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
                   fontWeight: 500,
                   color: "#706D64",
                 }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "#D4D0C8")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "#706D64")
-                }
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#706D64")}
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Right — lang switcher + auth */}
+          <div className="hidden lg:flex items-center gap-4 shrink-0">
+            {/* Language toggle */}
+            <div className="flex items-center" style={{ gap: "1px" }}>
+              {(["es", "en"] as Locale[]).map((l, i) => (
+                <React.Fragment key={l}>
+                  <button
+                    onClick={() => setLocale(l)}
+                    style={{
+                      fontSize: "10px",
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      fontWeight: locale === l ? 600 : 400,
+                      color: locale === l ? "#C8A44E" : "#4A4843",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: "2px 4px",
+                      transition: "color 0.2s",
+                    }}
+                  >
+                    {l.toUpperCase()}
+                  </button>
+                  {i === 0 && (
+                    <span style={{ color: "#2A2A28", fontSize: "10px" }}>·</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+
             {user ? (
               <>
                 <Link
@@ -133,11 +165,11 @@ export default function Header() {
                 >
                   {user.user_metadata?.display_name ??
                     user.email?.split("@")[0] ??
-                    "Perfil"}
+                    t.nav.explore}
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="px-5 py-2 border border-[rgba(255,255,255,0.06)] transition-all duration-200 hover:border-[rgba(200,164,78,0.3)]"
+                  className="px-4 py-2 border border-[rgba(255,255,255,0.06)] transition-all duration-200 hover:border-[rgba(200,164,78,0.3)]"
                   style={{
                     fontSize: "11px",
                     letterSpacing: "0.14em",
@@ -146,7 +178,7 @@ export default function Header() {
                     color: "#706D64",
                   }}
                 >
-                  Salir
+                  {t.nav.signout}
                 </button>
               </>
             ) : (
@@ -162,11 +194,11 @@ export default function Header() {
                     color: "#706D64",
                   }}
                 >
-                  Acceder
+                  {t.nav.login}
                 </Link>
                 <Link
                   href="/auth/signup"
-                  className="px-5 py-2.5 bg-gold text-bg transition-all duration-200 hover:bg-gold-hover"
+                  className="px-4 py-2.5 bg-gold transition-all duration-200 hover:bg-gold-hover"
                   style={{
                     fontSize: "11px",
                     letterSpacing: "0.14em",
@@ -175,30 +207,57 @@ export default function Header() {
                     color: "#0A0A09",
                   }}
                 >
-                  Registrarse
+                  {t.nav.signup}
                 </Link>
               </>
             )}
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="md:hidden p-2 transition-colors duration-200"
-            style={{ color: "#706D64" }}
-            onClick={() => setMobileOpen(true)}
-            aria-label="Abrir menú"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
+          {/* Mobile right — lang + hamburger */}
+          <div className="lg:hidden flex items-center gap-3">
+            <div className="flex items-center" style={{ gap: "1px" }}>
+              {(["es", "en"] as Locale[]).map((l, i) => (
+                <React.Fragment key={l}>
+                  <button
+                    onClick={() => setLocale(l)}
+                    style={{
+                      fontSize: "10px",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      fontWeight: locale === l ? 600 : 400,
+                      color: locale === l ? "#C8A44E" : "#4A4843",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: "2px 3px",
+                    }}
+                  >
+                    {l.toUpperCase()}
+                  </button>
+                  {i === 0 && (
+                    <span style={{ color: "#2A2A28", fontSize: "10px" }}>·</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+            <button
+              className="p-2 transition-colors duration-200"
+              style={{ color: "#706D64" }}
+              onClick={() => setMobileOpen(true)}
+              aria-label="Abrir menú"
             >
-              <path d="M3 8h18M3 16h18" />
-            </svg>
-          </button>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <path d="M3 8h18M3 16h18" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
