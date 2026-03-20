@@ -61,7 +61,7 @@ export default function PlaceCard({ place }: PlaceCardProps) {
             <div className="flex flex-wrap gap-1.5">
               {place.is_featured && (
                 <span className="px-2 py-0.5 rounded text-xs font-semibold bg-coral text-white border border-coral/50">
-                  Featured
+                  Destacado
                 </span>
               )}
             </div>
