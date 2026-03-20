@@ -133,8 +133,8 @@ export default function HomePage() {
                   marginBottom: "40px",
                 }}
               >
-                Restaurantes, cafés, bares, hoteles y experiencias culturales
-                en las ciudades más vibrantes del país.
+                Tu guía editorial para descubrir lo mejor de Colombia —
+                gastronomía, cultura, naturaleza y experiencias únicas.
               </p>
 
               {/* Search */}

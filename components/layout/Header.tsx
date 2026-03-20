@@ -90,13 +90,16 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-0">
             {[
               { href: "/", label: "Explorar" },
-              { href: "/city/bogota", label: "Ciudades" },
-              { href: "/saved", label: "Guardados" },
+              { href: "/ciudades", label: "Ciudades" },
+              { href: "/actividades", label: "Actividades" },
+              { href: "/mapa", label: "Mapa" },
+              { href: "/blog", label: "Blog" },
+              { href: "/about", label: "Nosotros" },
             ].map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-5 py-2 transition-colors duration-200"
+                className="px-4 py-2 transition-colors duration-200"
                 style={{
                   fontSize: "11px",
                   letterSpacing: "0.14em",
