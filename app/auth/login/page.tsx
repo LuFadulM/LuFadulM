@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { createClient } from "@/lib/supabase/client";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email"),
@@ -14,6 +16,7 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,12 +32,17 @@ export default function LoginPage() {
     setIsLoading(true);
     setError(null);
     try {
-      // In production, this would call Supabase auth
-      console.log("Login:", data);
-      await new Promise((r) => setTimeout(r, 1000));
-      // redirect to homepage
-    } catch {
-      setError("Invalid email or password. Please try again.");
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+      if (authError) throw authError;
+      router.push("/");
+      router.refresh();
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Invalid email or password. Please try again.";
+      setError(message);
     } finally {
       setIsLoading(false);
     }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { createClient } from "@/lib/supabase/client";
 
 const signupSchema = z
   .object({
@@ -37,12 +38,20 @@ export default function SignupPage() {
     setIsLoading(true);
     setError(null);
     try {
-      // In production, this would call Supabase auth
-      console.log("Signup:", data);
-      await new Promise((r) => setTimeout(r, 1000));
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: { display_name: data.display_name },
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      if (authError) throw authError;
       setSuccess(true);
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setError(message);
     } finally {
       setIsLoading(false);
     }

@@ -2,17 +2,38 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import type { User } from "@supabase/supabase-js";
 import MobileMenu from "./MobileMenu";
 
 export default function Header() {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/");
+    router.refresh();
+  };
 
   return (
     <>
@@ -56,18 +77,37 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/auth/login"
-              className="px-4 py-2 text-sm text-text-muted hover:text-text transition-colors"
-            >
-              Iniciar sesión
-            </Link>
-            <Link
-              href="/auth/signup"
-              className="px-4 py-2.5 text-sm bg-coral text-white rounded-btn hover:bg-coral-hover transition-colors font-medium"
-            >
-              Registrarse
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  href="/profile"
+                  className="px-4 py-2 text-sm text-text-muted hover:text-text transition-colors"
+                >
+                  {user.user_metadata?.display_name ?? user.email?.split("@")[0] ?? "Profile"}
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="px-4 py-2.5 text-sm border border-[rgba(242,237,232,0.14)] text-text-muted rounded-btn hover:text-text hover:bg-bg-card transition-colors font-medium"
+                >
+                  Salir
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="px-4 py-2 text-sm text-text-muted hover:text-text transition-colors"
+                >
+                  Iniciar sesión
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="px-4 py-2.5 text-sm bg-coral text-white rounded-btn hover:bg-coral-hover transition-colors font-medium"
+                >
+                  Registrarse
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Hamburger */}
@@ -83,7 +123,7 @@ export default function Header() {
         </div>
       </header>
 
-      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} user={user} onSignOut={handleSignOut} />
     </>
   );
 }

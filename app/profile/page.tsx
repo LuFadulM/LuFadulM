@@ -1,17 +1,18 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Profile",
   description: "Your descubre profile",
 };
 
-export default function ProfilePage() {
-  // In production this would check Supabase auth and load profile
-  const isAuthenticated = false;
+export default async function ProfilePage() {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  if (!isAuthenticated) {
+  if (!user) {
     return (
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
         <div className="max-w-md mx-auto text-center">
@@ -54,40 +55,78 @@ export default function ProfilePage() {
     );
   }
 
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
+
+  const { data: reviews } = await supabase
+    .from("reviews")
+    .select("*, place:places(name, slug)")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
+
+  const { count: savedCount } = await supabase
+    .from("saved_places")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", user.id);
+
+  const displayName = profile?.display_name ?? user.email?.split("@")[0] ?? "User";
+  const memberSince = new Date(user.created_at).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
       {/* Profile Header */}
       <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-6 mb-6">
         <div className="flex items-start gap-5">
           <div className="w-16 h-16 rounded-full bg-bg-surface border border-[rgba(242,237,232,0.14)] flex items-center justify-center text-xl font-serif text-text-muted flex-shrink-0">
-            U
+            {displayName[0]?.toUpperCase() ?? "U"}
           </div>
           <div className="flex-1 min-w-0">
-            <h1 className="text-2xl font-serif text-text mb-1">Username</h1>
-            <p className="text-text-muted text-sm mb-3">Member since January 2024</p>
+            <h1 className="text-2xl font-serif text-text mb-1">{displayName}</h1>
+            <p className="text-text-muted text-sm mb-3">Member since {memberSince}</p>
             <div className="flex flex-wrap gap-4 text-sm text-text-dim">
-              <span>0 reviews</span>
-              <span>0 saved places</span>
+              <span>{reviews?.length ?? 0} reviews</span>
+              <span>{savedCount ?? 0} saved places</span>
             </div>
           </div>
-          <Link
-            href="/profile/edit"
-            className="flex-shrink-0 px-4 py-2 text-sm border border-[rgba(242,237,232,0.14)] rounded-btn text-text-muted hover:text-text hover:bg-bg-surface transition-colors"
-          >
-            Edit Profile
-          </Link>
         </div>
       </div>
 
       {/* Reviews */}
       <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-6">
         <h2 className="text-xl font-serif text-text mb-4">Your Reviews</h2>
-        <p className="text-text-muted text-sm">
-          You haven&apos;t written any reviews yet.{" "}
-          <Link href="/" className="text-coral hover:text-coral-hover transition-colors">
-            Explore places →
-          </Link>
-        </p>
+        {!reviews?.length ? (
+          <p className="text-text-muted text-sm">
+            You haven&apos;t written any reviews yet.{" "}
+            <Link href="/" className="text-coral hover:text-coral-hover transition-colors">
+              Explore places →
+            </Link>
+          </p>
+        ) : (
+          <div className="space-y-4">
+            {reviews.map((review) => (
+              <div key={review.id} className="border-t border-[rgba(242,237,232,0.07)] pt-4 first:border-0 first:pt-0">
+                <div className="flex items-center justify-between mb-1">
+                  <Link
+                    href={`/places/${review.place?.slug}`}
+                    className="font-medium text-text hover:text-coral transition-colors"
+                  >
+                    {review.place?.name}
+                  </Link>
+                  <span className="text-gold text-sm">{"★".repeat(review.rating)}</span>
+                </div>
+                {review.text && (
+                  <p className="text-text-muted text-sm">{review.text}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
