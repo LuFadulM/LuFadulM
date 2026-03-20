@@ -81,11 +81,6 @@ export default function HomePage() {
   const showFeatured =
     !search && category === "All" && city === "All" && price === "All";
 
-  const uniqueCities = useMemo(
-    () => new Set(MOCK_PLACES.map((p) => p.city)).size,
-    []
-  );
-
   return (
     <div>
       {/* ── HERO ────────────────────────────────────────────────────── */}
@@ -151,50 +146,6 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* Stats */}
-              <div className="flex items-center gap-8">
-                <div>
-                  <p
-                    className="font-serif"
-                    style={{ fontSize: "28px", color: "#D4D0C8", lineHeight: 1 }}
-                  >
-                    {MOCK_PLACES.length}
-                  </p>
-                  <p className="label-micro mt-1">Lugares</p>
-                </div>
-                <div
-                  style={{
-                    width: "1px",
-                    height: "32px",
-                    background: "rgba(255,255,255,0.06)",
-                  }}
-                />
-                <div>
-                  <p
-                    className="font-serif"
-                    style={{ fontSize: "28px", color: "#D4D0C8", lineHeight: 1 }}
-                  >
-                    {uniqueCities}
-                  </p>
-                  <p className="label-micro mt-1">Ciudades</p>
-                </div>
-                <div
-                  style={{
-                    width: "1px",
-                    height: "32px",
-                    background: "rgba(255,255,255,0.06)",
-                  }}
-                />
-                <div>
-                  <p
-                    className="font-serif"
-                    style={{ fontSize: "28px", color: "#D4D0C8", lineHeight: 1 }}
-                  >
-                    6
-                  </p>
-                  <p className="label-micro mt-1">Categorías</p>
-                </div>
-              </div>
             </div>
 
             {/* Right — city index */}
