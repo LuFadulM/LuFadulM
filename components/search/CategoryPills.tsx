@@ -6,14 +6,14 @@ import Pill from "@/components/ui/Pill";
 
 type CategoryFilter = Category | "All";
 
-const categories: CategoryFilter[] = [
-  "All",
-  "Restaurants",
-  "Cafés",
-  "Bars",
-  "Hotels",
-  "Attractions",
-  "Nightlife",
+const categories: { value: CategoryFilter; label: string }[] = [
+  { value: "All", label: "Todos" },
+  { value: "Restaurants", label: "Restaurantes" },
+  { value: "Cafés", label: "Cafés" },
+  { value: "Attractions", label: "Atracciones" },
+  { value: "Hotels", label: "Hoteles" },
+  { value: "Bars", label: "Bares" },
+  { value: "Nightlife", label: "Vida Nocturna" },
 ];
 
 interface CategoryPillsProps {
@@ -26,10 +26,10 @@ export default function CategoryPills({ active, onChange }: CategoryPillsProps) 
     <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
       {categories.map((cat) => (
         <Pill
-          key={cat}
-          label={cat}
-          active={active === cat}
-          onClick={() => onChange(cat)}
+          key={cat.value}
+          label={cat.label}
+          active={active === cat.value}
+          onClick={() => onChange(cat.value)}
         />
       ))}
     </div>

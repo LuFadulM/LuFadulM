@@ -30,7 +30,7 @@ function FeaturedCard({ place }: { place: Place }) {
           {/* Featured badge */}
           <div className="absolute top-3 left-3">
             <span className="px-2.5 py-1 rounded text-xs font-semibold bg-coral text-white">
-              Featured
+              Destacado
             </span>
           </div>
 
@@ -71,7 +71,7 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
   return (
     <section className="mb-14">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-serif text-text">Featured Places</h2>
+        <h2 className="text-2xl font-serif text-text">Lugares Destacados</h2>
         <Link
           href="/?featured=true"
           className="text-sm text-coral hover:text-coral-hover transition-colors"
