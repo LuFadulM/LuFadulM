@@ -9,7 +9,7 @@ A dark editorial platform for exploring restaurants, cafés, bars, hotels, and a
 ## Features
 
 - **Browse & filter** places by city, category, price, and rating
-- **33 curated places** across 16 Colombian cities — from Bogotá and Medellín to Salento, Barichara, and the Amazon
+- **33 curated places** across 17 Colombian cities — from Bogotá and Medellín to Salento, Barichara, and the Amazon
 - **Place detail pages** with descriptions, hours, contact info, and reviews
 - **User auth** — sign up, log in, and log out via Supabase Auth with email confirmation
 - **Save places** — authenticated users can bookmark favorites
@@ -120,7 +120,7 @@ descubre/
 ## Cities Covered
 
 **Principal cities**
-Bogotá · Medellín · Cali · Barranquilla · Bucaramanga · Manizales · Pereira
+Bogotá · Medellín · Cali · Barranquilla · Bucaramanga · Manizales · Pereira · Chía
 
 **Caribbean coast**
 Cartagena · Santa Marta · San Andrés
@@ -141,6 +141,8 @@ Salento · Villa de Leyva · Popayán · Barichara · San Gil · Leticia
 | `saved_places` | Bookmarked places per user |
 
 Row Level Security is enabled on all tables. Users can only modify their own data.
+
+> **Note:** `supabase/seed.sql` contains 16 sample places across 7 cities. The full dataset in `app/data/places.ts` has 33 places across 17 cities and is used as the app's primary data source.
 
 ---
 
