@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
@@ -11,41 +13,54 @@ const cities = [
 ];
 
 const categories = [
-  { href: "/?category=Restaurants", label: "Restaurantes" },
+  { href: "/?category=Restaurants", label: "Gastronomía" },
   { href: "/?category=Cafés", label: "Cafés" },
-  { href: "/?category=Bars", label: "Bares" },
-  { href: "/?category=Hotels", label: "Hoteles" },
-  { href: "/?category=Attractions", label: "Atracciones" },
-  { href: "/?category=Nightlife", label: "Vida Nocturna" },
+  { href: "/?category=Bars", label: "Noche" },
+  { href: "/?category=Hotels", label: "Hoteles & Viajes" },
+  { href: "/?category=Attractions", label: "Cultura" },
+  { href: "/?category=Nightlife", label: "Vida Activa" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[rgba(242,237,232,0.07)] mt-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <Link href="/" className="text-coral text-2xl font-serif block mb-3">
-              descubre
+    <footer className="border-t border-[rgba(255,255,255,0.04)] mt-24">
+      {/* Top section */}
+      <div className="max-w-7xl mx-auto px-6 pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+          {/* Brand — large editorial */}
+          <div className="md:col-span-5">
+            <Link
+              href="/"
+              className="text-gold text-5xl font-serif block mb-6"
+              style={{ fontStyle: "italic", fontFamily: "'Playfair Display', serif" }}
+            >
+              hyex
             </Link>
-            <p className="text-text-muted text-sm leading-relaxed">
-              Discover Colombia&apos;s best places. Restaurants, cafés, bars, hotels, and
-              attractions across the country&apos;s most vibrant cities.
+            <p
+              style={{ color: "#706D64", fontSize: "13px", lineHeight: "1.7", fontWeight: 300 }}
+            >
+              La guía editorial de Colombia. Descubrimos los mejores restaurantes,
+              cafés, bares, hoteles y experiencias culturales en las ciudades más
+              vibrantes del país.
             </p>
           </div>
 
           {/* Cities */}
-          <div>
-            <h3 className="text-text text-sm font-semibold uppercase tracking-wider mb-4">
-              Ciudades
-            </h3>
-            <ul className="space-y-2">
+          <div className="md:col-span-3">
+            <p className="label-micro mb-6">Ciudades</p>
+            <ul className="space-y-3">
               {cities.map((city) => (
                 <li key={city.href}>
                   <Link
                     href={city.href}
-                    className="text-text-muted text-sm hover:text-text transition-colors"
+                    className="transition-colors duration-200"
+                    style={{
+                      color: "#706D64",
+                      fontSize: "13px",
+                      fontWeight: 300,
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#706D64")}
                   >
                     {city.label}
                   </Link>
@@ -55,16 +70,21 @@ export default function Footer() {
           </div>
 
           {/* Categories */}
-          <div>
-            <h3 className="text-text text-sm font-semibold uppercase tracking-wider mb-4">
-              Categorías
-            </h3>
-            <ul className="space-y-2">
+          <div className="md:col-span-4">
+            <p className="label-micro mb-6">Categorías</p>
+            <ul className="space-y-3">
               {categories.map((cat) => (
                 <li key={cat.href}>
                   <Link
                     href={cat.href}
-                    className="text-text-muted text-sm hover:text-text transition-colors"
+                    className="transition-colors duration-200"
+                    style={{
+                      color: "#706D64",
+                      fontSize: "13px",
+                      fontWeight: 300,
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#706D64")}
                   >
                     {cat.label}
                   </Link>
@@ -72,45 +92,38 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
-          {/* About */}
-          <div>
-            <h3 className="text-text text-sm font-semibold uppercase tracking-wider mb-4">
-              Descubre
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/auth/signup" className="text-text-muted text-sm hover:text-text transition-colors">
-                  Crear cuenta
-                </Link>
-              </li>
-              <li>
-                <Link href="/auth/login" className="text-text-muted text-sm hover:text-text transition-colors">
-                  Iniciar sesión
-                </Link>
-              </li>
-              <li>
-                <Link href="/saved" className="text-text-muted text-sm hover:text-text transition-colors">
-                  Mis guardados
-                </Link>
-              </li>
-              <li>
-                <Link href="/profile" className="text-text-muted text-sm hover:text-text transition-colors">
-                  Mi perfil
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-[rgba(242,237,232,0.07)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-text-dim text-xs">
-            &copy; {new Date().getFullYear()} descubre. Hecho con amor en Colombia.
+        <div
+          className="border-t border-[rgba(255,255,255,0.04)] pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+        >
+          <p style={{ color: "#3A3835", fontSize: "11px", letterSpacing: "0.1em" }}>
+            © {new Date().getFullYear()} hyex. Hecho en Colombia.
           </p>
-          <p className="text-text-dim text-xs">
-            Descubriendo lo mejor de Colombia, un lugar a la vez.
-          </p>
+          <div className="flex items-center gap-6">
+            {[
+              { href: "/auth/signup", label: "Crear cuenta" },
+              { href: "/auth/login", label: "Acceder" },
+              { href: "/saved", label: "Guardados" },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                style={{
+                  color: "#3A3835",
+                  fontSize: "11px",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+                className="transition-colors duration-200"
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#706D64")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#3A3835")}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

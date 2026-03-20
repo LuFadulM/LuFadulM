@@ -5,27 +5,27 @@ import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "descubre — Discover Colombia",
-    template: "%s | descubre",
+    default: "hyex — Descubre Colombia",
+    template: "%s | hyex",
   },
   description:
-    "Discover Colombia's best restaurants, cafés, bars, hotels, and attractions. Your guide to experiencing the best of Bogotá, Medellín, Cartagena, Cali, and beyond.",
+    "La guía editorial de Colombia. Los mejores restaurantes, cafés, bares, hoteles y experiencias en Bogotá, Medellín, Cartagena, Cali y más.",
   keywords: [
     "Colombia",
-    "travel",
-    "restaurants",
+    "restaurantes",
     "Bogotá",
     "Medellín",
     "Cartagena",
     "Cali",
     "cafés",
-    "bars",
-    "hotels",
+    "bares",
+    "hoteles",
+    "gastronomía",
   ],
   openGraph: {
     type: "website",
-    locale: "en_US",
-    siteName: "descubre",
+    locale: "es_CO",
+    siteName: "hyex",
   },
 };
 
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className="bg-bg text-text font-sans min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>

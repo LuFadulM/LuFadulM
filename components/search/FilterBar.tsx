@@ -35,8 +35,24 @@ const cities: FilterCity[] = [
 const prices: FilterPrice[] = ["All", "$", "$$", "$$$", "$$$$"];
 const sorts: SortOption[] = ["Rating", "Newest", "Most Reviewed"];
 
-const selectClass =
-  "bg-bg-card border border-[rgba(242,237,232,0.07)] text-text-muted text-sm rounded-btn px-3 py-2 focus:outline-none focus:border-coral transition-colors cursor-pointer hover:border-[rgba(242,237,232,0.14)]";
+const selectStyle: React.CSSProperties = {
+  background: "#111110",
+  border: "1px solid rgba(255,255,255,0.06)",
+  color: "#706D64",
+  fontSize: "10px",
+  letterSpacing: "0.12em",
+  textTransform: "uppercase",
+  fontWeight: 500,
+  padding: "8px 12px",
+  cursor: "pointer",
+  outline: "none",
+  appearance: "none" as const,
+  WebkitAppearance: "none" as const,
+  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234A4843' stroke-width='1.5'/%3E%3C/svg%3E")`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "right 10px center",
+  paddingRight: "28px",
+};
 
 export default function FilterBar({
   city,
@@ -47,19 +63,30 @@ export default function FilterBar({
   onSortChange,
 }: FilterBarProps) {
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      <span className="text-xs text-text-dim uppercase tracking-wider">Filter:</span>
+    <div className="flex flex-wrap items-center gap-2">
+      <span
+        style={{
+          fontSize: "9px",
+          letterSpacing: "0.2em",
+          color: "#3A3835",
+          textTransform: "uppercase",
+          fontWeight: 600,
+          marginRight: "4px",
+        }}
+      >
+        Filtrar
+      </span>
 
       {/* City */}
       <select
         value={city}
         onChange={(e) => onCityChange(e.target.value as FilterCity)}
-        className={selectClass}
-        aria-label="Filter by city"
+        style={selectStyle}
+        aria-label="Filtrar por ciudad"
       >
         {cities.map((c) => (
-          <option key={c} value={c} className="bg-bg-card">
-            {c === "All" ? "All Cities" : c}
+          <option key={c} value={c} style={{ background: "#111110" }}>
+            {c === "All" ? "Todas las ciudades" : c}
           </option>
         ))}
       </select>
@@ -68,12 +95,12 @@ export default function FilterBar({
       <select
         value={price}
         onChange={(e) => onPriceChange(e.target.value as FilterPrice)}
-        className={selectClass}
-        aria-label="Filter by price"
+        style={selectStyle}
+        aria-label="Filtrar por precio"
       >
         {prices.map((p) => (
-          <option key={p} value={p} className="bg-bg-card">
-            {p === "All" ? "All Prices" : p}
+          <option key={p} value={p} style={{ background: "#111110" }}>
+            {p === "All" ? "Todos los precios" : p}
           </option>
         ))}
       </select>
@@ -82,12 +109,12 @@ export default function FilterBar({
       <select
         value={sort}
         onChange={(e) => onSortChange(e.target.value as SortOption)}
-        className={selectClass}
-        aria-label="Sort by"
+        style={selectStyle}
+        aria-label="Ordenar por"
       >
         {sorts.map((s) => (
-          <option key={s} value={s} className="bg-bg-card">
-            Sort: {s}
+          <option key={s} value={s} style={{ background: "#111110" }}>
+            {s === "Rating" ? "Mejor valorados" : s === "Newest" ? "Más recientes" : "Más reseñados"}
           </option>
         ))}
       </select>

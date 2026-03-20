@@ -10,7 +10,7 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({
-  placeholder = "Search places, cities, cuisines...",
+  placeholder = "Busca lugares, cocinas, experiencias...",
   onSearch,
   defaultValue = "",
   large = false,
@@ -31,14 +31,17 @@ export default function SearchBar({
     <form onSubmit={handleSubmit} className="relative w-full">
       <div className="relative">
         {/* Search icon */}
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-text-dim">
+        <div
+          className="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none"
+          style={{ color: "#4A4843" }}
+        >
           <svg
-            width={large ? 22 : 18}
-            height={large ? 22 : 18}
+            width={large ? 18 : 16}
+            height={large ? 18 : 16}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="1.5"
           >
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
@@ -50,14 +53,19 @@ export default function SearchBar({
           value={query}
           onChange={handleChange}
           placeholder={placeholder}
-          className={`
-            w-full bg-bg-card border border-[rgba(242,237,232,0.07)]
-            rounded-btn text-text placeholder-text-dim
-            focus:outline-none focus:border-coral transition-colors
-            ${large ? "pl-12 pr-5 py-4 text-base" : "pl-10 pr-4 py-2.5 text-sm"}
-          `}
+          className="w-full bg-bg-card border border-[rgba(255,255,255,0.06)] text-text placeholder-text-tertiary focus:outline-none focus-gold transition-all duration-200"
+          style={{
+            paddingLeft: large ? "52px" : "44px",
+            paddingRight: "20px",
+            paddingTop: large ? "18px" : "12px",
+            paddingBottom: large ? "18px" : "12px",
+            fontSize: large ? "15px" : "13px",
+            fontWeight: 300,
+            letterSpacing: "0.02em",
+          }}
         />
 
+        {/* Clear button */}
         {query && (
           <button
             type="button"
@@ -65,10 +73,18 @@ export default function SearchBar({
               setQuery("");
               onSearch?.("");
             }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-text-dim hover:text-text transition-colors"
-            aria-label="Clear search"
+            className="absolute right-4 top-1/2 -translate-y-1/2 transition-colors duration-200"
+            style={{ color: "#4A4843" }}
+            aria-label="Limpiar búsqueda"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
