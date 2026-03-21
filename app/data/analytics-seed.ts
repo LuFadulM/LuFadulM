@@ -1,23 +1,23 @@
 /**
  * Mock analytics seed — 30 days of realistic data for each featured placement.
- * Replaces Supabase featured_analytics query until DB is connected.
- * Today = 2026-03-21
+ * Today = 2026-03-21 | Range = 2026-02-20 → 2026-03-21
  */
 
 export interface DailyRecord {
-  date: string; // "YYYY-MM-DD"
+  date: string;
   placementId: string;
   impressions: number;
   card_clicks: number;
   profile_views: number;
   saves: number;
+  shares: number;
   website_clicks: number;
   instagram_clicks: number;
   phone_clicks: number;
   directions_clicks: number;
 }
 
-/** Deterministic pseudo-random 0–1 from a seed integer */
+/** Deterministic pseudo-random 0–1 */
 function pr(seed: number): number {
   const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
   return x - Math.floor(x);
@@ -49,12 +49,14 @@ function generateSeries(): DailyRecord[] {
       const ctrVar = 0.78 + pr(d * 19 + pi * 11 + 5) * 0.44;
       const card_clicks = Math.max(0, Math.round(impressions * baseCtr * ctrVar));
 
-      const profile_views  = Math.round(card_clicks * (0.6 + pr(d * 13 + pi * 3 + 1) * 0.3));
-      const saves           = Math.round(card_clicks * (0.1 + pr(d * 11 + pi * 5 + 2) * 0.12));
-      const website_clicks  = Math.round(card_clicks * (0.18 + pr(d * 17 + pi * 9 + 3) * 0.16));
-      const instagram_clicks= Math.round(card_clicks * (0.14 + pr(d * 23 + pi * 2 + 4) * 0.14));
-      const phone_clicks    = Math.round(card_clicks * (0.06 + pr(d * 29 + pi * 4 + 6) * 0.08));
-      const directions_clicks = Math.round(card_clicks * (0.1 + pr(d * 37 + pi * 6 + 7) * 0.1));
+      const pv = 0.6 + pr(d * 13 + pi * 3 + 1) * 0.2; // 60–80% of clicks
+      const profile_views    = Math.round(card_clicks * pv);
+      const saves            = Math.round(profile_views * (0.05 + pr(d * 11 + pi * 5 + 2) * 0.1));   // 5–15%
+      const shares           = Math.round(profile_views * (0.02 + pr(d * 41 + pi * 3 + 8) * 0.06));  // 2–8%
+      const website_clicks   = Math.round(profile_views * (0.05 + pr(d * 17 + pi * 9 + 3) * 0.1));   // 5–15%
+      const instagram_clicks = Math.round(profile_views * (0.08 + pr(d * 23 + pi * 2 + 4) * 0.1));   // 8–18%
+      const phone_clicks     = Math.round(profile_views * (0.03 + pr(d * 29 + pi * 4 + 6) * 0.07));  // 3–10%
+      const directions_clicks= Math.round(profile_views * (0.10 + pr(d * 37 + pi * 6 + 7) * 0.10));  // 10–20%
 
       records.push({
         date: dateStr,
@@ -63,6 +65,7 @@ function generateSeries(): DailyRecord[] {
         card_clicks,
         profile_views,
         saves,
+        shares,
         website_clicks,
         instagram_clicks,
         phone_clicks,

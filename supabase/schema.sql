@@ -379,39 +379,41 @@ $$ language plpgsql;
 -- ANALYTICS RPC FUNCTIONS
 -- ============================================================
 
--- Aggregate daily analytics per placement (used by Business Insights Dashboard)
+-- Aggregated totals for a single place (used by Business Insights Dashboard detail page)
 create or replace function get_place_analytics_summary(
-  p_placement_ids uuid[],
-  p_start_date    date default (current_date - interval '30 days'),
-  p_end_date      date default current_date
+  p_place_id   uuid,
+  p_start_date timestamptz,
+  p_end_date   timestamptz
 )
-returns table (
-  placement_id      uuid,
-  date              date,
-  impressions       bigint,
-  card_clicks       bigint,
-  profile_views     bigint,
-  saves             bigint,
-  website_clicks    bigint,
-  instagram_clicks  bigint,
-  phone_clicks      bigint,
-  directions_clicks bigint
-) language sql stable as $$
-  select
-    a.placement_id,
-    a.created_at::date                                                              as date,
-    count(*) filter (where a.event_type = 'impression')                             as impressions,
-    count(*) filter (where a.event_type = 'card_click')                             as card_clicks,
-    count(*) filter (where a.event_type = 'profile_view')                           as profile_views,
-    count(*) filter (where a.event_type = 'save')                                   as saves,
-    count(*) filter (where a.event_type = 'website_click')                          as website_clicks,
-    count(*) filter (where a.event_type = 'instagram_click')                        as instagram_clicks,
-    count(*) filter (where a.event_type = 'phone_click')                            as phone_clicks,
-    count(*) filter (where a.event_type = 'directions_click')                       as directions_clicks
-  from public.featured_analytics a
-  where
-    a.placement_id = any(p_placement_ids)
-    and a.created_at::date between p_start_date and p_end_date
-  group by a.placement_id, a.created_at::date
-  order by a.placement_id, date;
-$$;
+returns json as $$
+declare
+  result json;
+begin
+  select json_build_object(
+    'impressions',        count(*) filter (where event_type = 'impression'),
+    'card_clicks',        count(*) filter (where event_type = 'card_click'),
+    'profile_views',      count(*) filter (where event_type = 'profile_view'),
+    'saves',              count(*) filter (where event_type = 'save'),
+    'shares',             count(*) filter (where event_type = 'share'),
+    'directions_clicks',  count(*) filter (where event_type = 'directions_click'),
+    'website_clicks',     count(*) filter (where event_type = 'website_click'),
+    'instagram_clicks',   count(*) filter (where event_type = 'instagram_click'),
+    'phone_clicks',       count(*) filter (where event_type = 'phone_click')
+  ) into result
+  from public.featured_analytics
+  where place_id = p_place_id
+    and created_at >= p_start_date
+    and created_at <= p_end_date;
+  return result;
+end;
+$$ language plpgsql;
+
+-- Daily breakdown for line chart (used by Business Insights Dashboard detail page)
+-- select date_trunc('day', created_at)::date as date,
+--   count(*) filter (where event_type = 'impression')   as impressions,
+--   count(*) filter (where event_type = 'card_click')   as clicks,
+--   count(*) filter (where event_type = 'profile_view') as profile_views
+-- from featured_analytics
+-- where place_id = $1 and created_at >= $2 and created_at <= $3
+-- group by date_trunc('day', created_at)::date
+-- order by date asc;
