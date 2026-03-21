@@ -65,7 +65,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
       {/* Drawer */}
       <div
         className="absolute top-0 right-0 bottom-0 w-72 flex flex-col animate-slide-up"
-        style={{ background: "#111110", borderLeft: "1px solid rgba(255,255,255,0.04)" }}
+        style={{ background: "#0A0A0A", borderLeft: "1px solid rgba(255,255,255,0.05)" }}
       >
         {/* Header */}
         <div
@@ -85,7 +85,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
           <button
             onClick={onClose}
             className="p-2 transition-colors duration-200"
-            style={{ color: "#4A4843" }}
+            style={{ color: "#888888" }}
             aria-label="Cerrar menú"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -105,7 +105,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#3A3835",
+                  color: "#555555",
                 }}
               >
                 {section.label}
@@ -121,11 +121,11 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#706D64",
-                    borderBottom: "1px solid rgba(255,255,255,0.03)",
+                    color: "#AFAFAF",
+                    borderBottom: "1px solid rgba(255,255,255,0.04)",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#706D64")}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#AFAFAF")}
                 >
                   {link.label}
                 </Link>
@@ -194,7 +194,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#0A0A09",
+                  color: "#000000",
                 }}
               >
                 {t.nav.signup}

@@ -72,7 +72,7 @@ export default function AboutPage() {
       {/* ═══════════════════════════════════════════════
           HERO
       ═══════════════════════════════════════════════ */}
-      <section style={{ background: "#0A0A09" }}>
+      <section style={{ background: "radial-gradient(ellipse at 15% 55%, rgba(212,175,55,0.06) 0%, transparent 55%), #0A0A09" }}>
         <div className="max-w-7xl mx-auto px-6 pt-20 sm:pt-28 pb-20 sm:pb-24">
           <p className="label-micro mb-8" style={{ color: "#C8A44E" }}>
             {p.hero.eyebrow}
@@ -82,14 +82,20 @@ export default function AboutPage() {
             className="font-serif"
             style={{
               fontSize: "clamp(38px, 6vw, 80px)",
-              color: "#D4D0C8",
+              color: "#F5F5F5",
               lineHeight: 1.05,
               maxWidth: "880px",
               marginBottom: "32px",
             }}
           >
             {p.hero.headline}{" "}
-            <em style={{ color: "#C8A44E", fontStyle: "italic" }}>
+            <em style={{
+              fontStyle: "italic",
+              background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>
               {p.hero.headlineAccent}
             </em>
           </h1>
@@ -100,7 +106,7 @@ export default function AboutPage() {
             style={{
               ...BODY,
               fontSize: "16px",
-              color: "#706D64",
+              color: "#AFAFAF",
               maxWidth: "460px",
               lineHeight: "1.8",
             }}

@@ -96,7 +96,10 @@ export default function HomePage() {
       {/* ── HERO ────────────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden"
-        style={{ background: "#0A0A09", borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+        style={{
+          background: "radial-gradient(ellipse at 20% 60%, rgba(212,175,55,0.06) 0%, transparent 55%), #0A0A09",
+          borderBottom: "1px solid rgba(255,255,255,0.04)",
+        }}
       >
         <div className="max-w-7xl mx-auto px-6">
           {/* Main hero grid */}
@@ -106,7 +109,7 @@ export default function HomePage() {
               {/* Micro label */}
               <p
                 className="label-micro mb-8"
-                style={{ color: "#C8A44E" }}
+                style={{ color: "#D4AF37" }}
               >
                 {t.hero.label}
               </p>
@@ -114,11 +117,17 @@ export default function HomePage() {
               {/* Big serif headline */}
               <h1
                 className="font-serif leading-none mb-8"
-                style={{ fontSize: "clamp(52px, 7vw, 88px)", color: "#D4D0C8" }}
+                style={{ fontSize: "clamp(52px, 7vw, 88px)", color: "#F5F5F5" }}
               >
                 {t.hero.title}
                 <br />
-                <span style={{ color: "#C8A44E", fontStyle: "italic" }}>
+                <span style={{
+                  fontStyle: "italic",
+                  background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>
                   {t.hero.titleAccent}
                 </span>
               </h1>
@@ -135,7 +144,7 @@ export default function HomePage() {
 
               <p
                 style={{
-                  color: "#706D64",
+                  color: "#AFAFAF",
                   fontSize: "14px",
                   lineHeight: "1.8",
                   fontWeight: 300,
@@ -170,9 +179,9 @@ export default function HomePage() {
                     >
                       <span
                         className="font-serif transition-colors duration-200"
-                        style={{ fontSize: "20px", color: "#3A3835" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = "#3A3835")}
+                        style={{ fontSize: "20px", color: "#555555" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
                       >
                         {c}
                       </span>
@@ -180,7 +189,7 @@ export default function HomePage() {
                         style={{
                           fontSize: "10px",
                           letterSpacing: "0.12em",
-                          color: "#3A3835",
+                          color: "#555555",
                           fontWeight: 600,
                         }}
                       >
@@ -222,7 +231,7 @@ export default function HomePage() {
                 fontSize: "10px",
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                color: "#4A4843",
+                color: "#888888",
                 fontWeight: 500,
                 whiteSpace: "nowrap",
               }}

@@ -38,7 +38,7 @@ export default function Footer() {
             >
               hyex
             </Link>
-            <p style={{ color: "#706D64", fontSize: "13px", lineHeight: "1.7", fontWeight: 300 }}>
+            <p style={{ color: "#AFAFAF", fontSize: "13px", lineHeight: "1.7", fontWeight: 300 }}>
               {t.footer.tagline}
             </p>
           </div>
@@ -52,9 +52,9 @@ export default function Footer() {
                   <Link
                     href={city.href}
                     className="transition-colors duration-200"
-                    style={{ color: "#706D64", fontSize: "13px", fontWeight: 300 }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#706D64")}
+                    style={{ color: "#AFAFAF", fontSize: "13px", fontWeight: 300 }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#AFAFAF")}
                   >
                     {city.label}
                   </Link>
@@ -72,9 +72,9 @@ export default function Footer() {
                   <Link
                     href={cat.href}
                     className="transition-colors duration-200"
-                    style={{ color: "#706D64", fontSize: "13px", fontWeight: 300 }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#706D64")}
+                    style={{ color: "#AFAFAF", fontSize: "13px", fontWeight: 300 }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#AFAFAF")}
                   >
                     {t.footer.categoryLabels[cat.key]}
                   </Link>
@@ -86,7 +86,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-[rgba(255,255,255,0.04)] pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p style={{ color: "#3A3835", fontSize: "11px", letterSpacing: "0.1em" }}>
+          <p style={{ color: "#555555", fontSize: "11px", letterSpacing: "0.1em" }}>
             © {new Date().getFullYear()} hyex. {t.footer.copyright}
           </p>
           <div className="flex items-center gap-6 flex-wrap">
@@ -99,14 +99,14 @@ export default function Footer() {
                 key={item.href}
                 href={item.href}
                 style={{
-                  color: "#3A3835",
+                  color: "#555555",
                   fontSize: "11px",
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                 }}
                 className="transition-colors duration-200"
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#706D64")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#3A3835")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#AFAFAF")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
               >
                 {item.label}
               </Link>

@@ -33,7 +33,7 @@ export default function SearchBar({
         {/* Search icon */}
         <div
           className="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none"
-          style={{ color: "#4A4843" }}
+          style={{ color: "#888888" }}
         >
           <svg
             width={large ? 18 : 16}
@@ -53,7 +53,7 @@ export default function SearchBar({
           value={query}
           onChange={handleChange}
           placeholder={placeholder}
-          className="w-full bg-bg-card border border-[rgba(255,255,255,0.06)] text-text placeholder-text-tertiary focus:outline-none focus-gold transition-all duration-200"
+          className="w-full bg-bg-surface border border-[rgba(255,255,255,0.12)] text-text placeholder-text-tertiary focus:outline-none focus-gold transition-all duration-200"
           style={{
             paddingLeft: large ? "52px" : "44px",
             paddingRight: "20px",
@@ -74,7 +74,7 @@ export default function SearchBar({
               onSearch?.("");
             }}
             className="absolute right-4 top-1/2 -translate-y-1/2 transition-colors duration-200"
-            style={{ color: "#4A4843" }}
+            style={{ color: "#888888" }}
             aria-label="Limpiar búsqueda"
           >
             <svg
