@@ -374,3 +374,44 @@ begin
   where is_active = true and end_at < now();
 end;
 $$ language plpgsql;
+
+-- ============================================================
+-- ANALYTICS RPC FUNCTIONS
+-- ============================================================
+
+-- Aggregate daily analytics per placement (used by Business Insights Dashboard)
+create or replace function get_place_analytics_summary(
+  p_placement_ids uuid[],
+  p_start_date    date default (current_date - interval '30 days'),
+  p_end_date      date default current_date
+)
+returns table (
+  placement_id      uuid,
+  date              date,
+  impressions       bigint,
+  card_clicks       bigint,
+  profile_views     bigint,
+  saves             bigint,
+  website_clicks    bigint,
+  instagram_clicks  bigint,
+  phone_clicks      bigint,
+  directions_clicks bigint
+) language sql stable as $$
+  select
+    a.placement_id,
+    a.created_at::date                                                              as date,
+    count(*) filter (where a.event_type = 'impression')                             as impressions,
+    count(*) filter (where a.event_type = 'card_click')                             as card_clicks,
+    count(*) filter (where a.event_type = 'profile_view')                           as profile_views,
+    count(*) filter (where a.event_type = 'save')                                   as saves,
+    count(*) filter (where a.event_type = 'website_click')                          as website_clicks,
+    count(*) filter (where a.event_type = 'instagram_click')                        as instagram_clicks,
+    count(*) filter (where a.event_type = 'phone_click')                            as phone_clicks,
+    count(*) filter (where a.event_type = 'directions_click')                       as directions_clicks
+  from public.featured_analytics a
+  where
+    a.placement_id = any(p_placement_ids)
+    and a.created_at::date between p_start_date and p_end_date
+  group by a.placement_id, a.created_at::date
+  order by a.placement_id, date;
+$$;

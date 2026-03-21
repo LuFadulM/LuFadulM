@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { MOCK_FEATURED_PLACEMENTS } from "@/app/data/featured";
 import type { User } from "@supabase/supabase-js";
@@ -72,22 +73,39 @@ export default function AdminFeaturedPage() {
             Placements destacados
           </h1>
         </div>
-        <button
-          onClick={() => setShowAddForm(!showAddForm)}
-          style={{
-            fontSize: "10px",
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
-            fontWeight: 600,
-            color: "#0A0A09",
-            background: "#C8A44E",
-            border: "none",
-            padding: "10px 20px",
-            cursor: "pointer",
-          }}
-        >
-          + Nuevo placement
-        </button>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/admin/insights"
+            style={{
+              fontSize: "10px",
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              fontWeight: 600,
+              color: "#706D64",
+              border: "1px solid rgba(255,255,255,0.08)",
+              padding: "10px 20px",
+            }}
+            className="hover:text-[#D4D0C8] hover:border-[rgba(255,255,255,0.14)] transition-all duration-200"
+          >
+            Ver insights →
+          </Link>
+          <button
+            onClick={() => setShowAddForm(!showAddForm)}
+            style={{
+              fontSize: "10px",
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              fontWeight: 600,
+              color: "#0A0A09",
+              background: "#C8A44E",
+              border: "none",
+              padding: "10px 20px",
+              cursor: "pointer",
+            }}
+          >
+            + Nuevo placement
+          </button>
+        </div>
       </div>
 
       {/* Summary stats */}
@@ -216,7 +234,7 @@ export default function AdminFeaturedPage() {
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <div className="flex gap-3">
+                  <div className="flex gap-3 items-center">
                     <button
                       style={{ fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#706D64", background: "none", border: "none", cursor: "pointer", padding: 0 }}
                       className="hover:text-[#D4D0C8] transition-colors"
@@ -229,6 +247,13 @@ export default function AdminFeaturedPage() {
                     >
                       {fp.is_active ? "Desactivar" : "Activar"}
                     </button>
+                    <Link
+                      href={`/admin/insights/${fp.id}`}
+                      style={{ fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C8A44E", whiteSpace: "nowrap" }}
+                      className="hover:text-[#D4B05A] transition-colors"
+                    >
+                      Ver insights →
+                    </Link>
                   </div>
                 </td>
               </tr>
