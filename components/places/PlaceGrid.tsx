@@ -1,11 +1,12 @@
 import React from "react";
-import { Place } from "@/lib/types";
+import { Place, RankedPlace, AnalyticsSurface } from "@/lib/types";
 import PlaceCard from "./PlaceCard";
 
 interface PlaceGridProps {
-  places: Place[];
+  places: (Place | RankedPlace)[];
   isLoading?: boolean;
   emptyMessage?: string;
+  surface?: AnalyticsSurface;
 }
 
 function SkeletonCard() {
@@ -19,20 +20,20 @@ function SkeletonCard() {
   );
 }
 
+function isRanked(place: Place | RankedPlace): place is RankedPlace {
+  return "isFeaturedPlacement" in place;
+}
+
 export default function PlaceGrid({
   places,
   isLoading = false,
   emptyMessage = "Ningún lugar encontrado.",
+  surface = "homepage",
 }: PlaceGridProps) {
   if (isLoading) {
     return (
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-        style={{ gap: "2px" }}
-      >
-        {Array.from({ length: 6 }).map((_, i) => (
-          <SkeletonCard key={i} />
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style={{ gap: "2px" }}>
+        {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
       </div>
     );
   }
@@ -40,27 +41,11 @@ export default function PlaceGrid({
   if (places.length === 0) {
     return (
       <div className="py-24 text-center">
-        <svg
-          width="32"
-          height="32"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          style={{ color: "#3A3835", margin: "0 auto 16px" }}
-        >
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.35-4.35" />
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"
+          style={{ color: "#3A3835", margin: "0 auto 16px" }}>
+          <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
         </svg>
-        <p
-          style={{
-            color: "#4A4843",
-            fontSize: "12px",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            fontWeight: 500,
-          }}
-        >
+        <p style={{ color: "#4A4843", fontSize: "12px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500 }}>
           {emptyMessage}
         </p>
       </div>
@@ -68,13 +53,20 @@ export default function PlaceGrid({
   }
 
   return (
-    <div
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-      style={{ gap: "2px" }}
-    >
-      {places.map((place) => (
-        <PlaceCard key={place.id} place={place} />
-      ))}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style={{ gap: "2px" }}>
+      {places.map((place) => {
+        const ranked = isRanked(place) ? place : null;
+        return (
+          <PlaceCard
+            key={place.id}
+            place={place}
+            isFeaturedPlacement={ranked?.isFeaturedPlacement}
+            featuredLabelText={ranked?.featuredLabelText}
+            placementId={ranked?.placementId}
+            surface={surface}
+          />
+        );
+      })}
     </div>
   );
 }
