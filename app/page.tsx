@@ -9,7 +9,9 @@ import FilterBar from "@/components/search/FilterBar";
 import PlaceGrid from "@/components/places/PlaceGrid";
 import FeaturedSection from "@/components/places/FeaturedSection";
 import CategoryGrid from "@/components/categories/CategoryGrid";
+import SpotlightSection from "@/components/places/SpotlightSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { rankPlacesWithFeatured } from "@/lib/ranking";
 
 type CategoryFilter = Category | "All";
 
@@ -29,13 +31,28 @@ export default function HomePage() {
     if (cat) setCategory(cat as CategoryFilter);
   }, []);
 
+  // Ranked places with featured placement boosts
+  const allRanked = useMemo(() => rankPlacesWithFeatured(MOCK_PLACES), []);
+
+  // Spotlight: top homepage_featured placement
+  const spotlightPlace = useMemo(
+    () => allRanked.find((p) => p.isFeaturedPlacement) ?? null,
+    [allRanked]
+  );
+
   const featuredPlaces = useMemo(
     () => MOCK_PLACES.filter((p) => p.is_featured),
     []
   );
 
   const filteredPlaces = useMemo(() => {
-    let places = [...MOCK_PLACES];
+    // Use ranked list as base when sort=Rating, raw list otherwise
+    let places = sort === "Rating"
+      ? rankPlacesWithFeatured(MOCK_PLACES, {
+          city: city !== "All" ? city : undefined,
+          category: category !== "All" ? category : undefined,
+        })
+      : [...MOCK_PLACES];
 
     if (search) {
       const q = search.toLowerCase();
@@ -45,7 +62,7 @@ export default function HomePage() {
           p.city.toLowerCase().includes(q) ||
           p.neighborhood?.toLowerCase().includes(q) ||
           p.category.toLowerCase().includes(q) ||
-          p.tags.some((t) => t.toLowerCase().includes(q)) ||
+          p.tags.some((tag) => tag.toLowerCase().includes(q)) ||
           p.description?.toLowerCase().includes(q)
       );
     }
@@ -62,23 +79,14 @@ export default function HomePage() {
       places = places.filter((p) => p.price_level === price);
     }
 
-    switch (sort) {
-      case "Rating":
-        places.sort((a, b) => b.avg_rating - a.avg_rating);
-        break;
-      case "Newest":
-        places.sort(
-          (a, b) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-        break;
-      case "Most Reviewed":
-        places.sort((a, b) => b.review_count - a.review_count);
-        break;
+    if (sort === "Newest") {
+      places.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    } else if (sort === "Most Reviewed") {
+      places.sort((a, b) => b.review_count - a.review_count);
     }
 
     return places;
-  }, [search, category, city, price, sort]);
+  }, [search, category, city, price, sort, allRanked]);
 
   const showFeatured =
     !search && category === "All" && city === "All" && price === "All";
@@ -197,6 +205,9 @@ export default function HomePage() {
           />
         )}
 
+        {/* Spotlight — top featured placement */}
+        {showFeatured && spotlightPlace && <SpotlightSection place={spotlightPlace} />}
+
         {/* Featured editorial section */}
         {showFeatured && <FeaturedSection places={featuredPlaces} />}
 
@@ -234,6 +245,7 @@ export default function HomePage() {
         <PlaceGrid
           places={filteredPlaces}
           emptyMessage="Ningún lugar coincide con tus filtros."
+          surface="homepage"
         />
       </div>
     </div>

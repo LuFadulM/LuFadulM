@@ -307,3 +307,70 @@ create policy "Users can save places"
 create policy "Users can unsave places"
   on public.saved_places for delete
   using (auth.uid() = user_id);
+
+-- ============================================================
+-- FEATURED PLACEMENTS — Monetization system
+-- ============================================================
+
+alter table public.places add column if not exists owner_email text;
+alter table public.places add column if not exists owner_phone text;
+
+create table public.featured_placements (
+  id uuid primary key default gen_random_uuid(),
+  place_id uuid references public.places(id) on delete cascade not null,
+  city text,
+  category text,
+  placement_type text not null check (placement_type in ('category_top', 'city_spotlight', 'homepage_featured', 'curated_list', 'search_boost')),
+  label_text text default 'Destacado',
+  is_active boolean default false,
+  start_at timestamptz not null,
+  end_at timestamptz not null,
+  payment_status text default 'pending' check (payment_status in ('pending', 'paid', 'expired', 'cancelled')),
+  plan_type text default 'monthly' check (plan_type in ('monthly', 'quarterly', 'founding_partner', 'custom')),
+  price_paid numeric(10,2),
+  rank_priority integer default 1 check (rank_priority between 1 and 10),
+  notes text,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table public.featured_analytics (
+  id uuid primary key default gen_random_uuid(),
+  placement_id uuid references public.featured_placements(id) on delete cascade,
+  place_id uuid references public.places(id) on delete cascade not null,
+  event_type text not null check (event_type in ('impression', 'card_click', 'profile_view', 'save', 'share', 'directions_click', 'website_click', 'instagram_click', 'phone_click')),
+  surface text check (surface in ('homepage', 'category_page', 'city_page', 'search_results', 'curated_list')),
+  user_id uuid references public.profiles(id),
+  created_at timestamptz default now()
+);
+
+-- Indexes
+create index idx_featured_active on public.featured_placements(is_active, start_at, end_at) where is_active = true;
+create index idx_featured_place on public.featured_placements(place_id);
+create index idx_featured_city on public.featured_placements(city) where is_active = true;
+create index idx_featured_category on public.featured_placements(category) where is_active = true;
+create index idx_analytics_placement on public.featured_analytics(placement_id, created_at desc);
+create index idx_analytics_place on public.featured_analytics(place_id, event_type);
+
+-- RLS
+alter table public.featured_placements enable row level security;
+create policy "Public read active placements" on public.featured_placements
+  for select using (is_active = true and now() between start_at and end_at);
+create policy "Admin full access to placements" on public.featured_placements
+  for all using (auth.jwt() ->> 'role' = 'admin');
+
+alter table public.featured_analytics enable row level security;
+create policy "Anyone can insert analytics" on public.featured_analytics
+  for insert with check (true);
+create policy "Admin read analytics" on public.featured_analytics
+  for select using (auth.jwt() ->> 'role' = 'admin');
+
+-- Auto-deactivate expired placements
+create or replace function deactivate_expired_placements()
+returns void as $$
+begin
+  update public.featured_placements
+  set is_active = false, payment_status = 'expired', updated_at = now()
+  where is_active = true and end_at < now();
+end;
+$$ language plpgsql;

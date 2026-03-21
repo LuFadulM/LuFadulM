@@ -87,6 +87,57 @@ export interface SavedPlace {
   place?: Place;
 }
 
+export type PlacementType = "category_top" | "city_spotlight" | "homepage_featured" | "curated_list" | "search_boost";
+export type PaymentStatus = "pending" | "paid" | "expired" | "cancelled";
+export type PlanType = "monthly" | "quarterly" | "founding_partner" | "custom";
+
+export interface FeaturedPlacement {
+  id: string;
+  place_id: string;
+  place_slug?: string; // used in mock/seed data for easy lookup
+  city?: string | null;
+  category?: string | null;
+  placement_type: PlacementType;
+  label_text: string;
+  is_active: boolean;
+  start_at: string;
+  end_at: string;
+  payment_status: PaymentStatus;
+  plan_type: PlanType;
+  price_paid?: number | null;
+  rank_priority: number; // 1–10
+  notes?: string | null;
+  created_at: string;
+  updated_at: string;
+  place?: Place; // joined
+}
+
+export interface RankedPlace extends Place {
+  rankScore: number;
+  isFeaturedPlacement: boolean;
+  featuredLabelText?: string;
+  featuredPriority?: number;
+  placementId?: string;
+}
+
+export type AnalyticsEventType =
+  | "impression"
+  | "card_click"
+  | "profile_view"
+  | "save"
+  | "share"
+  | "directions_click"
+  | "website_click"
+  | "instagram_click"
+  | "phone_click";
+
+export type AnalyticsSurface =
+  | "homepage"
+  | "category_page"
+  | "city_page"
+  | "search_results"
+  | "curated_list";
+
 export type FilterCity =
   | "All"
   | "Bogotá"

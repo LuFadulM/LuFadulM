@@ -1,11 +1,16 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Place, Review } from "@/lib/types";
 import { formatRating } from "@/lib/utils";
 import StarRating from "@/components/reviews/StarRating";
-import Badge from "@/components/ui/Badge";
 import ReviewList from "@/components/reviews/ReviewList";
 import WriteReview from "@/components/reviews/WriteReview";
+import FeaturedBadge from "@/components/ui/FeaturedBadge";
+import { trackFeaturedEvent } from "@/lib/analytics";
+import { MOCK_FEATURED_PLACEMENTS } from "@/app/data/featured";
 
 interface PlaceDetailProps {
   place: Place;
@@ -13,15 +18,41 @@ interface PlaceDetailProps {
   isAuthenticated?: boolean;
 }
 
-export default function PlaceDetail({
-  place,
-  reviews = [],
-  isAuthenticated = false,
-}: PlaceDetailProps) {
+export default function PlaceDetail({ place, reviews = [], isAuthenticated = false }: PlaceDetailProps) {
+  // Find active featured placement for this place
+  const placement = MOCK_FEATURED_PLACEMENTS.find((fp) => fp.place_slug === place.slug && fp.is_active);
+
+  // Track profile_view on mount
+  useEffect(() => {
+    if (placement) {
+      trackFeaturedEvent({
+        placementId: placement.id,
+        placeId: place.id,
+        eventType: "profile_view",
+        surface: "homepage",
+      });
+    }
+  }, [placement, place.id]);
+
+  const trackClick = (eventType: "website_click" | "instagram_click" | "phone_click" | "directions_click") => {
+    if (placement) {
+      trackFeaturedEvent({ placementId: placement.id, placeId: place.id, eventType, surface: "homepage" });
+    }
+  };
+
+  const categoryLabel: Record<string, string> = {
+    Restaurants: "Gastronomía",
+    Cafés: "Café",
+    Bars: "Noche",
+    Hotels: "Hoteles",
+    Attractions: "Cultura",
+    Nightlife: "Vida Activa",
+  };
+
   return (
     <div>
       {/* Cover Image */}
-      <div className="relative h-64 sm:h-80 md:h-96 bg-bg-surface">
+      <div className="relative h-64 sm:h-80 md:h-[420px] bg-bg-surface">
         {place.cover_image_url ? (
           <Image
             src={place.cover_image_url}
@@ -34,52 +65,90 @@ export default function PlaceDetail({
         ) : (
           <div className="w-full h-full bg-bg-surface" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/30 to-transparent" />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(10,10,9,0.95) 0%, rgba(10,10,9,0.4) 50%, rgba(10,10,9,0.1) 100%)" }}
+        />
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 -mt-20 relative z-10">
+      <div className="max-w-5xl mx-auto px-6 -mt-24 relative z-10 pb-20">
         {/* Header card */}
-        <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-6 mb-6">
-          <div className="flex flex-wrap items-start gap-3 mb-3">
-            <Badge label={place.category} color="coral" />
+        <div
+          className="mb-8 p-8"
+          style={{
+            background: "#111110",
+            border: placement ? "1px solid rgba(200,164,78,0.15)" : "1px solid rgba(255,255,255,0.06)",
+            borderTop: placement ? "2px solid rgba(200,164,78,0.3)" : "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <span
+              style={{
+                fontSize: "9px",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#C8A44E",
+                fontWeight: 600,
+              }}
+            >
+              {categoryLabel[place.category] ?? place.category}
+            </span>
             {place.price_level && (
-              <Badge label={place.price_level} color="neutral" />
+              <span style={{
+                fontSize: "10px",
+                color: "#706D64",
+                letterSpacing: "0.06em",
+                borderLeft: "1px solid rgba(255,255,255,0.08)",
+                paddingLeft: "10px",
+              }}>
+                {place.price_level}
+              </span>
             )}
-            {place.is_featured && (
-              <Badge label="Featured" color="gold" />
+            {placement && (
+              <div style={{ marginLeft: "auto" }}>
+                <FeaturedBadge label={placement.label_text} />
+              </div>
             )}
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-serif text-text mb-1">
+          <h1 className="font-serif mb-2" style={{ fontSize: "clamp(28px, 4vw, 48px)", color: "#D4D0C8", lineHeight: 1.1 }}>
             {place.name}
           </h1>
 
-          <p className="text-text-muted mb-4">
-            {place.neighborhood ? `${place.neighborhood}, ` : ""}
-            {place.city}
+          <p style={{ color: "#706D64", fontSize: "13px", marginBottom: "20px" }}>
+            {place.neighborhood ? `${place.neighborhood}, ` : ""}{place.city}, Colombia
           </p>
 
-          {/* Rating summary */}
+          {/* Rating */}
           <div className="flex items-center gap-3">
-            <span className="text-4xl font-serif text-text">
+            <span className="font-serif" style={{ fontSize: "36px", color: "#D4D0C8", lineHeight: 1 }}>
               {formatRating(place.avg_rating)}
             </span>
             <div>
               <StarRating rating={place.avg_rating} size="lg" />
-              <p className="text-xs text-text-muted mt-0.5">
-                {place.review_count} {place.review_count === 1 ? "review" : "reviews"}
+              <p style={{ fontSize: "11px", color: "#706D64", marginTop: "2px" }}>
+                {place.review_count} {place.review_count === 1 ? "reseña" : "reseñas"}
               </p>
             </div>
           </div>
 
           {/* Tags */}
           {place.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-4">
+            <div className="flex flex-wrap gap-2 mt-5">
               {place.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-pill text-xs text-text-muted border border-[rgba(242,237,232,0.07)] bg-bg-surface"
+                  style={{
+                    fontSize: "9px",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    color: "#4A4843",
+                    fontWeight: 500,
+                    border: "1px solid rgba(255,255,255,0.04)",
+                    padding: "4px 10px",
+                    background: "#0D0D0C",
+                  }}
                 >
                   {tag}
                 </span>
@@ -89,131 +158,221 @@ export default function PlaceDetail({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {/* Description */}
+          {/* Main column */}
           <div className="md:col-span-2 space-y-6">
             {place.description && (
-              <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-6">
-                <h2 className="text-lg font-serif text-text mb-3">About</h2>
-                <p className="text-text-muted text-sm leading-relaxed">
+              <div style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.06)", padding: "24px" }}>
+                <h2 className="font-serif mb-4" style={{ fontSize: "20px", color: "#D4D0C8" }}>
+                  Sobre este lugar
+                </h2>
+                <p style={{ color: "#706D64", fontSize: "14px", lineHeight: "1.8", fontWeight: 300 }}>
                   {place.description}
                 </p>
               </div>
             )}
 
-            {/* Reviews */}
-            <div>
-              <ReviewList reviews={reviews} />
-            </div>
+            <ReviewList reviews={reviews} />
 
-            {/* Write Review */}
             {isAuthenticated ? (
               <WriteReview placeId={place.id} />
             ) : (
-              <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-5 text-center">
-                <p className="text-text-muted text-sm mb-3">
-                  Sign in to write a review
+              <div
+                style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.06)", padding: "20px", textAlign: "center" }}
+              >
+                <p style={{ color: "#706D64", fontSize: "13px", marginBottom: "12px" }}>
+                  Inicia sesión para escribir una reseña
                 </p>
-                <a
+                <Link
                   href="/auth/login"
-                  className="inline-flex items-center px-4 py-2 bg-coral text-white text-sm rounded-btn hover:bg-coral-hover transition-colors"
+                  style={{
+                    display: "inline-block",
+                    fontSize: "10px",
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    fontWeight: 600,
+                    color: "#0A0A09",
+                    background: "#C8A44E",
+                    padding: "10px 20px",
+                  }}
                 >
-                  Sign In
-                </a>
+                  Acceder
+                </Link>
               </div>
             )}
           </div>
 
-          {/* Info sidebar */}
+          {/* Sidebar */}
           <div className="space-y-4">
-            {/* Contact info */}
-            <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-5 space-y-4">
-              <h3 className="text-base font-serif text-text">Info</h3>
-
-              {place.hours && (
-                <div className="flex gap-3">
-                  <svg className="w-4 h-4 text-text-dim flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
-                  </svg>
-                  <div>
-                    <p className="text-xs text-text-dim mb-0.5">Hours</p>
-                    <p className="text-sm text-text-muted">{place.hours}</p>
+            <div style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.06)", padding: "20px" }}>
+              <h3 className="font-serif mb-5" style={{ fontSize: "16px", color: "#D4D0C8" }}>
+                Información
+              </h3>
+              <div className="space-y-4">
+                {place.hours && (
+                  <InfoRow icon="clock" label="Horario" value={place.hours} />
+                )}
+                {place.address && (
+                  <InfoRow icon="pin" label="Dirección" value={place.address} />
+                )}
+                {place.phone && (
+                  <div className="flex gap-3">
+                    <ClockIcon type="phone" />
+                    <div>
+                      <p style={{ fontSize: "10px", color: "#4A4843", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Teléfono</p>
+                      <a
+                        href={`tel:${place.phone}`}
+                        onClick={() => trackClick("phone_click")}
+                        style={{ fontSize: "13px", color: "#706D64" }}
+                        className="hover:text-[#D4D0C8] transition-colors"
+                      >
+                        {place.phone}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {place.address && (
-                <div className="flex gap-3">
-                  <svg className="w-4 h-4 text-text-dim flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                  <div>
-                    <p className="text-xs text-text-dim mb-0.5">Address</p>
-                    <p className="text-sm text-text-muted">{place.address}</p>
+                )}
+                {place.website && (
+                  <div className="flex gap-3">
+                    <ClockIcon type="web" />
+                    <div>
+                      <p style={{ fontSize: "10px", color: "#4A4843", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Sitio web</p>
+                      <a
+                        href={place.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackClick("website_click")}
+                        style={{ fontSize: "13px", color: "#C8A44E" }}
+                        className="hover:text-[#D4B05A] transition-colors break-all"
+                      >
+                        {place.website.replace(/^https?:\/\//, "")}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {place.phone && (
-                <div className="flex gap-3">
-                  <svg className="w-4 h-4 text-text-dim flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.8 1.5h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
-                  <div>
-                    <p className="text-xs text-text-dim mb-0.5">Phone</p>
-                    <a href={`tel:${place.phone}`} className="text-sm text-text-muted hover:text-coral transition-colors">
-                      {place.phone}
-                    </a>
+                )}
+                {place.instagram && (
+                  <div className="flex gap-3">
+                    <ClockIcon type="instagram" />
+                    <div>
+                      <p style={{ fontSize: "10px", color: "#4A4843", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Instagram</p>
+                      <a
+                        href={`https://instagram.com/${place.instagram.replace("@", "")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackClick("instagram_click")}
+                        style={{ fontSize: "13px", color: "#C8A44E" }}
+                        className="hover:text-[#D4B05A] transition-colors"
+                      >
+                        {place.instagram}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              {place.website && (
-                <div className="flex gap-3">
-                  <svg className="w-4 h-4 text-text-dim flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="2" y1="12" x2="22" y2="12" />
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                  </svg>
-                  <div>
-                    <p className="text-xs text-text-dim mb-0.5">Website</p>
-                    <a
-                      href={place.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-coral hover:text-coral-hover transition-colors break-all"
-                    >
-                      {place.website.replace(/^https?:\/\//, "")}
-                    </a>
-                  </div>
-                </div>
-              )}
-
-              {place.instagram && (
-                <div className="flex gap-3">
-                  <svg className="w-4 h-4 text-text-dim flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <rect x="2" y="2" width="20" height="20" rx="5" />
-                    <circle cx="12" cy="12" r="4" />
-                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-                  </svg>
-                  <div>
-                    <p className="text-xs text-text-dim mb-0.5">Instagram</p>
-                    <a
-                      href={`https://instagram.com/${place.instagram.replace("@", "")}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-coral hover:text-coral-hover transition-colors"
-                    >
-                      {place.instagram}
-                    </a>
-                  </div>
-                </div>
-              )}
+                {place.address && (
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(place.address + ", " + place.city + ", Colombia")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackClick("directions_click")}
+                    className="block w-full text-center mt-4 transition-all duration-200 hover:border-[rgba(200,164,78,0.3)]"
+                    style={{
+                      fontSize: "10px",
+                      letterSpacing: "0.16em",
+                      textTransform: "uppercase",
+                      fontWeight: 500,
+                      color: "#706D64",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      padding: "10px",
+                    }}
+                  >
+                    Cómo llegar →
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Business claim CTA */}
+        {!place.is_claimed && (
+          <div
+            className="mt-8 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+            style={{
+              background: "#0D0D0C",
+              border: "1px solid rgba(255,255,255,0.04)",
+              borderLeft: "2px solid rgba(200,164,78,0.2)",
+            }}
+          >
+            <div>
+              <p style={{ fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C8A44E", fontWeight: 600, marginBottom: "6px" }}>
+                ¿Es tu negocio?
+              </p>
+              <p style={{ fontSize: "13px", color: "#706D64", fontWeight: 300, lineHeight: "1.6" }}>
+                Reclama este perfil para responder reseñas y gestionar tu presencia en Hyex.
+              </p>
+            </div>
+            <a
+              href={`mailto:hola@hyex.co?subject=Reclamo de perfil: ${encodeURIComponent(place.name)}&body=Nombre del negocio: ${encodeURIComponent(place.name)}%0ANombre del propietario: %0AEmail: %0ATeléfono: %0APrueba de propiedad: `}
+              className="shrink-0 transition-all duration-200"
+              style={{
+                fontSize: "10px",
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                fontWeight: 600,
+                color: "#0A0A09",
+                background: "#C8A44E",
+                padding: "10px 20px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Reclamar perfil
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );
+}
+
+function InfoRow({ icon, label, value }: { icon: string; label: string; value: string }) {
+  return (
+    <div className="flex gap-3">
+      <ClockIcon type={icon} />
+      <div>
+        <p style={{ fontSize: "10px", color: "#4A4843", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>{label}</p>
+        <p style={{ fontSize: "13px", color: "#706D64" }}>{value}</p>
+      </div>
+    </div>
+  );
+}
+
+function ClockIcon({ type }: { type: string }) {
+  const style = { color: "#3A3835", flexShrink: 0, marginTop: "2px" };
+  if (type === "clock") return (
+    <svg style={style} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />
+    </svg>
+  );
+  if (type === "pin") return (
+    <svg style={style} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+  if (type === "phone") return (
+    <svg style={style} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.8 1.5h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+  if (type === "web") return (
+    <svg style={style} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+  );
+  if (type === "instagram") return (
+    <svg style={style} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+    </svg>
+  );
+  return null;
 }
