@@ -67,7 +67,7 @@ export default function Header() {
                   fontSize: "9px",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "#4A4843",
+                  color: "#666666",
                   fontWeight: 600,
                 }}
               >
@@ -78,7 +78,7 @@ export default function Header() {
                   fontSize: "9px",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "#4A4843",
+                  color: "#666666",
                   fontWeight: 600,
                 }}
               >
@@ -110,10 +110,10 @@ export default function Header() {
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  color: "#706D64",
+                  color: "#AFAFAF",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#706D64")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#AFAFAF")}
               >
                 {item.label}
               </Link>
@@ -133,7 +133,7 @@ export default function Header() {
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
                       fontWeight: locale === l ? 600 : 400,
-                      color: locale === l ? "#C8A44E" : "#4A4843",
+                      color: locale === l ? "#D4AF37" : "#666666",
                       background: "none",
                       border: "none",
                       cursor: "pointer",
@@ -144,7 +144,7 @@ export default function Header() {
                     {l.toUpperCase()}
                   </button>
                   {i === 0 && (
-                    <span style={{ color: "#2A2A28", fontSize: "10px" }}>·</span>
+                    <span style={{ color: "#3A3A3A", fontSize: "10px" }}>·</span>
                   )}
                 </React.Fragment>
               ))}
@@ -160,7 +160,7 @@ export default function Header() {
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#706D64",
+                    color: "#AFAFAF",
                   }}
                 >
                   {user.user_metadata?.display_name ??
@@ -169,13 +169,13 @@ export default function Header() {
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="px-4 py-2 border border-[rgba(255,255,255,0.06)] transition-all duration-200 hover:border-[rgba(200,164,78,0.3)]"
+                  className="px-4 py-2 border border-[rgba(255,255,255,0.06)] transition-all duration-200 hover:border-[rgba(212,175,55,0.3)]"
                   style={{
                     fontSize: "11px",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#706D64",
+                    color: "#AFAFAF",
                   }}
                 >
                   {t.nav.signout}
@@ -191,7 +191,7 @@ export default function Header() {
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#706D64",
+                    color: "#AFAFAF",
                   }}
                 >
                   {t.nav.login}
@@ -204,7 +204,7 @@ export default function Header() {
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 600,
-                    color: "#0A0A09",
+                    color: "#000000",
                   }}
                 >
                   {t.nav.signup}
@@ -225,7 +225,7 @@ export default function Header() {
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
                       fontWeight: locale === l ? 600 : 400,
-                      color: locale === l ? "#C8A44E" : "#4A4843",
+                      color: locale === l ? "#D4AF37" : "#666666",
                       background: "none",
                       border: "none",
                       cursor: "pointer",
@@ -235,14 +235,14 @@ export default function Header() {
                     {l.toUpperCase()}
                   </button>
                   {i === 0 && (
-                    <span style={{ color: "#2A2A28", fontSize: "10px" }}>·</span>
+                    <span style={{ color: "#3A3A3A", fontSize: "10px" }}>·</span>
                   )}
                 </React.Fragment>
               ))}
             </div>
             <button
               className="p-2 transition-colors duration-200"
-              style={{ color: "#706D64" }}
+              style={{ color: "#AFAFAF" }}
               onClick={() => setMobileOpen(true)}
               aria-label="Abrir menú"
             >

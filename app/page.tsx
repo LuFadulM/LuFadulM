@@ -109,7 +109,7 @@ export default function HomePage() {
               {/* Micro label */}
               <p
                 className="label-micro mb-8"
-                style={{ color: "#C8A44E" }}
+                style={{ color: "#D4AF37" }}
               >
                 {t.hero.label}
               </p>
@@ -179,9 +179,9 @@ export default function HomePage() {
                     >
                       <span
                         className="font-serif transition-colors duration-200"
-                        style={{ fontSize: "20px", color: "#3A3835" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = "#D4D0C8")}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = "#3A3835")}
+                        style={{ fontSize: "20px", color: "#555555" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
                       >
                         {c}
                       </span>
@@ -189,7 +189,7 @@ export default function HomePage() {
                         style={{
                           fontSize: "10px",
                           letterSpacing: "0.12em",
-                          color: "#3A3835",
+                          color: "#555555",
                           fontWeight: 600,
                         }}
                       >
@@ -231,7 +231,7 @@ export default function HomePage() {
                 fontSize: "10px",
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                color: "#4A4843",
+                color: "#888888",
                 fontWeight: 500,
                 whiteSpace: "nowrap",
               }}
