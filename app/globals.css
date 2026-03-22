@@ -77,11 +77,13 @@
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.38);
+    color: rgba(255, 255, 255, 0.35);
     background: rgba(255, 255, 255, 0.05);
     padding: 3px 9px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-weight: 500;
+    white-space: nowrap;
   }
 
   /* Focus ring */
