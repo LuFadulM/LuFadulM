@@ -174,27 +174,45 @@ export default function HomePage() {
                   <li key={c}>
                     <button
                       onClick={() => setCity(c as FilterCity)}
-                      className="w-full text-left py-4 border-b border-[rgba(255,255,255,0.04)] group transition-all duration-200"
-                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
+                      className="w-full text-left group relative border-b border-[rgba(255,255,255,0.04)] transition-all duration-200"
+                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 0 18px 16px", cursor: "pointer" }}
                     >
+                      {/* Left accent line — subtle default, full gold on hover */}
+                      <div
+                        className="absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-250 group-hover:opacity-100"
+                        style={{ background: "#D4AF37", opacity: 0.1 }}
+                      />
+
+                      {/* Row hover glow */}
+                      <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                        style={{
+                          background: "linear-gradient(90deg, rgba(212,175,55,0.04) 0%, rgba(212,175,55,0.01) 40%, transparent 70%)",
+                        }}
+                      />
+
+                      {/* City name */}
                       <span
-                        className="font-serif transition-colors duration-200"
-                        style={{ fontSize: "20px", color: "#555555" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = "#555555")}
+                        className="font-serif transition-colors duration-200 group-hover:text-white relative"
+                        style={{ fontSize: "20px", color: "#686868" }}
                       >
                         {c}
                       </span>
-                      <span
-                        style={{
-                          fontSize: "10px",
-                          letterSpacing: "0.12em",
-                          color: "#555555",
-                          fontWeight: 600,
-                        }}
-                      >
-                        0{i + 1}
-                      </span>
+
+                      {/* Right: index + arrow */}
+                      <div className="flex items-center gap-3 relative">
+                        <span
+                          style={{ fontSize: "10px", letterSpacing: "0.12em", color: "#333333", fontWeight: 600 }}
+                        >
+                          0{i + 1}
+                        </span>
+                        <span
+                          className="transition-all duration-200 group-hover:text-[#D4AF37] group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+                          style={{ color: "#D4AF37", fontSize: "12px", display: "inline-block" }}
+                        >
+                          →
+                        </span>
+                      </div>
                     </button>
                   </li>
                 ))}
