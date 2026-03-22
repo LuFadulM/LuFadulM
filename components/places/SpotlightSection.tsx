@@ -42,10 +42,10 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
 
       <Link href={`/places/${place.slug}`} className="block group" onClick={handleClick}>
         <article
-          className="card-hover relative overflow-hidden"
+          className="card-hover card-rounded relative overflow-hidden"
           style={{
-            border: "1px solid rgba(200,164,78,0.12)",
-            borderTop: "2px solid rgba(200,164,78,0.3)",
+            background: "#111111",
+            border: "1px solid rgba(255,255,255,0.04)",
             minHeight: "360px",
           }}
         >
@@ -80,7 +80,7 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
               fontSize: "10px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "rgba(212,208,200,0.5)",
+              color: "#A0A0A0",
               marginBottom: "12px",
               fontWeight: 500,
             }}>

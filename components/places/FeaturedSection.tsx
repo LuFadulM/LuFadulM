@@ -30,15 +30,19 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
   return (
     <Link href={`/places/${place.slug}`} className="block group col-span-2 row-span-2">
       <article
-        className="card-hover relative overflow-hidden h-full border border-[rgba(255,255,255,0.04)]"
-        style={{ minHeight: "420px" }}
+        className="card-hover card-rounded relative overflow-hidden h-full"
+        style={{
+          minHeight: "460px",
+          background: "#111111",
+          border: "1px solid rgba(255,255,255,0.04)",
+        }}
       >
         {place.cover_image_url ? (
           <Image
             src={place.cover_image_url}
             alt={place.name}
             fill
-            className="object-cover transition-transform duration-700"
+            className="object-cover group-hover:scale-105"
             style={{ transition: "transform 0.7s cubic-bezier(.2,0,.2,1)" }}
             sizes="(max-width: 640px) 100vw, 60vw"
           />
@@ -46,13 +50,15 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
           <div className="absolute inset-0" style={{ background: "#111110" }} />
         )}
 
+        {/* Strong bottom gradient for readability */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.1) 100%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.08) 100%)",
           }}
         />
 
+        {/* Editorial Pick badge — top left */}
         <div className="absolute top-5 left-5">
           <span
             style={{
@@ -61,8 +67,8 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
               textTransform: "uppercase",
               fontWeight: 600,
               color: "#C8A44E",
-              background: "rgba(200,164,78,0.12)",
-              border: "1px solid rgba(200,164,78,0.25)",
+              background: "rgba(200,164,78,0.06)",
+              border: "1px solid rgba(200,164,78,0.3)",
               padding: "4px 10px",
               display: "inline-block",
             }}
@@ -71,32 +77,33 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
           </span>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-7">
+        {/* Content — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-8">
           <p
             style={{
               fontSize: "9px",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "rgba(212,208,200,0.5)",
-              marginBottom: "10px",
+              color: "#A0A0A0",
+              marginBottom: "12px",
               fontWeight: 500,
             }}
           >
             {place.neighborhood ? `${place.neighborhood} · ` : ""}
             {place.city}
           </p>
-          <h3 className="font-serif text-white mb-3" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+          <h3 className="font-serif text-white mb-4" style={{ fontSize: "30px", lineHeight: "1.2" }}>
             {place.name}
           </h3>
           {place.description && (
             <p
               style={{
-                color: "rgba(212,208,200,0.6)",
+                color: "rgba(242,237,232,0.55)",
                 fontSize: "13px",
-                lineHeight: "1.6",
+                lineHeight: "1.65",
                 fontWeight: 300,
-                maxWidth: "400px",
-                marginBottom: "14px",
+                maxWidth: "420px",
+                marginBottom: "16px",
               }}
               className="line-clamp-2"
             >
@@ -105,10 +112,10 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
           )}
           <div className="flex items-center gap-3">
             <Stars rating={place.avg_rating} />
-            <span style={{ color: "rgba(212,208,200,0.8)", fontSize: "12px", fontWeight: 500 }}>
+            <span style={{ color: "rgba(242,237,232,0.85)", fontSize: "12px", fontWeight: 500 }}>
               {formatRating(place.avg_rating)}
             </span>
-            <span style={{ color: "rgba(212,208,200,0.35)", fontSize: "12px" }}>
+            <span style={{ color: "rgba(242,237,232,0.3)", fontSize: "12px" }}>
               {place.review_count} {reviews}
             </span>
           </div>
@@ -122,15 +129,19 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
   return (
     <Link href={`/places/${place.slug}`} className="block group">
       <article
-        className="card-hover relative overflow-hidden border border-[rgba(255,255,255,0.04)] h-full"
-        style={{ minHeight: "200px" }}
+        className="card-hover card-rounded relative overflow-hidden h-full"
+        style={{
+          minHeight: "220px",
+          background: "#111111",
+          border: "1px solid rgba(255,255,255,0.04)",
+        }}
       >
         {place.cover_image_url ? (
           <Image
             src={place.cover_image_url}
             alt={place.name}
             fill
-            className="object-cover transition-transform duration-700"
+            className="object-cover group-hover:scale-105"
             style={{ transition: "transform 0.7s cubic-bezier(.2,0,.2,1)" }}
             sizes="(max-width: 640px) 100vw, 30vw"
           />
@@ -141,17 +152,25 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)",
           }}
         />
 
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <h3 className="font-serif text-white leading-tight mb-1" style={{ fontSize: "15px" }}>
+        {/* Number index — top right */}
+        <div className="absolute top-4 right-4">
+          <span style={{ fontSize: "10px", letterSpacing: "0.12em", color: "rgba(200,164,78,0.5)", fontWeight: 600 }}>
+            0{index + 2}
+          </span>
+        </div>
+
+        {/* Content — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <h3 className="font-serif text-white leading-tight mb-1" style={{ fontSize: "16px" }}>
             {place.name}
           </h3>
           <p
             style={{
-              color: "rgba(212,208,200,0.5)",
+              color: "#A0A0A0",
               fontSize: "10px",
               letterSpacing: "0.1em",
               textTransform: "uppercase",
@@ -159,12 +178,6 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
           >
             {place.city}
           </p>
-        </div>
-
-        <div className="absolute top-3 right-3">
-          <span style={{ fontSize: "10px", letterSpacing: "0.1em", color: "rgba(200,164,78,0.6)", fontWeight: 600 }}>
-            0{index + 2}
-          </span>
         </div>
       </article>
     </Link>
@@ -178,8 +191,8 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
   const [hero, ...rest] = places;
 
   return (
-    <section className="mb-20">
-      <div className="flex items-end justify-between mb-8 pb-4 border-b border-[rgba(255,255,255,0.04)]">
+    <section className="mb-24">
+      <div className="flex items-end justify-between mb-10 pb-4 border-b border-[rgba(255,255,255,0.04)]">
         <div>
           <p className="label-micro mb-3">{t.featured.sectionLabel}</p>
           <h2 className="text-3xl font-serif" style={{ color: "#D4D0C8" }}>
@@ -195,13 +208,13 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
             color: "#C8A44E",
             fontWeight: 500,
           }}
-          className="transition-colors duration-200 whitespace-nowrap"
+          className="transition-opacity duration-200 hover:opacity-70 whitespace-nowrap"
         >
           {t.featured.viewAll}
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "2px" }}>
+      <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "16px" }}>
         {hero && (
           <FeaturedHero
             place={hero}
@@ -209,7 +222,7 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
             reviews={t.featured.reviews}
           />
         )}
-        <div className="flex flex-col" style={{ gap: "2px" }}>
+        <div className="flex flex-col" style={{ gap: "16px" }}>
           {rest.slice(0, 2).map((place, i) => (
             <FeaturedSmall key={place.id} place={place} index={i} />
           ))}

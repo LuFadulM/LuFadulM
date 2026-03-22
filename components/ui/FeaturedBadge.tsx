@@ -2,6 +2,7 @@ import React from "react";
 
 interface FeaturedBadgeProps {
   label?: string;
+  variant?: "gold" | "tendencia";
 }
 
 /**
@@ -9,7 +10,20 @@ interface FeaturedBadgeProps {
  * Intentionally subtle — feels like curation, not advertising.
  * Never use "Publicidad", "Anuncio", or "Patrocinado".
  */
-export default function FeaturedBadge({ label = "Destacado" }: FeaturedBadgeProps) {
+export default function FeaturedBadge({ label = "Destacado", variant = "gold" }: FeaturedBadgeProps) {
+  const styles =
+    variant === "tendencia"
+      ? {
+          color: "rgba(255, 122, 122, 0.95)",
+          background: "rgba(255, 122, 122, 0.08)",
+          border: "1px solid rgba(255, 122, 122, 0.2)",
+        }
+      : {
+          color: "#C8A44E",
+          background: "rgba(200, 164, 78, 0.06)",
+          border: "1px solid rgba(200, 164, 78, 0.3)",
+        };
+
   return (
     <span
       style={{
@@ -19,10 +33,8 @@ export default function FeaturedBadge({ label = "Destacado" }: FeaturedBadgeProp
         textTransform: "uppercase",
         fontWeight: 600,
         fontFamily: "'Sora', system-ui, sans-serif",
-        color: "#C8A44E",
-        background: "rgba(200,164,78,0.06)",
-        border: "1px solid rgba(200,164,78,0.25)",
-        padding: "3px 8px",
+        padding: "3px 9px",
+        ...styles,
       }}
     >
       {label}
