@@ -31,7 +31,7 @@ function Stars({ rating }: { rating: number }) {
 export default function PlaceCard({
   place,
   isFeaturedPlacement = false,
-  featuredLabelText = "Destacado",
+  featuredLabelText = "Premium",
   placementId,
   surface = "homepage",
 }: PlaceCardProps) {
@@ -40,7 +40,6 @@ export default function PlaceCard({
   const impressionTracked = useRef(false);
   const label = t.placeCard[place.category as keyof typeof t.placeCard] ?? place.category;
 
-  // Track impression when card enters viewport
   useEffect(() => {
     if (!placementId || impressionTracked.current) return;
     const el = cardRef.current;
@@ -65,31 +64,29 @@ export default function PlaceCard({
     }
   };
 
-  const showFeatured = isFeaturedPlacement || place.is_featured;
-  const badgeLabel = isFeaturedPlacement ? featuredLabelText : "Destacado";
+  // Badge logic: paid placements → Premium (gold), organically featured → Tendencia (coral)
+  const badgeVariant = isFeaturedPlacement ? "gold" : "tendencia";
+  const badgeLabel = isFeaturedPlacement ? (featuredLabelText || "Premium") : "Tendencia";
+  const showBadge = isFeaturedPlacement || place.is_featured;
 
   return (
     <div ref={cardRef}>
       <Link href={`/places/${place.slug}`} className="block group" onClick={handleClick}>
         <article
-          className="card-hover bg-bg-card overflow-hidden h-full"
+          className="card-hover card-rounded overflow-hidden h-full"
           style={{
-            border: isFeaturedPlacement
-              ? "1px solid rgba(200,164,78,0.12)"
-              : "1px solid rgba(255,255,255,0.04)",
-            borderTop: isFeaturedPlacement
-              ? "1px solid rgba(200,164,78,0.2)"
-              : "1px solid rgba(255,255,255,0.04)",
+            background: "#111111",
+            border: "1px solid rgba(255,255,255,0.04)",
           }}
         >
           {/* Image */}
-          <div className="relative overflow-hidden bg-bg-surface" style={{ aspectRatio: "3/2" }}>
+          <div className="relative overflow-hidden card-rounded" style={{ aspectRatio: "3/2" }}>
             {place.cover_image_url ? (
               <Image
                 src={place.cover_image_url}
                 alt={place.name}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-103"
+                className="object-cover group-hover:scale-105"
                 style={{ transition: "transform 0.7s cubic-bezier(.2,0,.2,1)" }}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
@@ -99,10 +96,10 @@ export default function PlaceCard({
 
             <div className="absolute inset-0 img-overlay" />
 
-            {/* Featured badge — top left */}
-            {showFeatured && (
+            {/* Badge — top left */}
+            {showBadge && (
               <div className="absolute top-3 left-3">
-                <FeaturedBadge label={badgeLabel} />
+                <FeaturedBadge label={badgeLabel} variant={badgeVariant} />
               </div>
             )}
 
@@ -112,8 +109,8 @@ export default function PlaceCard({
                 <span style={{
                   fontSize: "10px",
                   letterSpacing: "0.06em",
-                  color: "rgba(212,208,200,0.7)",
-                  background: "rgba(0,0,0,0.5)",
+                  color: "rgba(212,208,200,0.6)",
+                  background: "rgba(0,0,0,0.45)",
                   padding: "2px 7px",
                   display: "inline-block",
                 }}>
@@ -124,18 +121,18 @@ export default function PlaceCard({
 
             {/* Name + location overlay */}
             <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="font-serif text-white leading-tight mb-1" style={{ fontSize: "16px" }}>
+              <h3 className="font-serif text-white leading-tight mb-1" style={{ fontSize: "17px" }}>
                 {place.name}
               </h3>
-              <p style={{ color: "rgba(212,208,200,0.6)", fontSize: "11px", letterSpacing: "0.06em", marginBottom: "6px" }}>
+              <p style={{ color: "#A0A0A0", fontSize: "11px", letterSpacing: "0.05em", marginBottom: "6px" }}>
                 {place.neighborhood ? `${place.neighborhood} · ` : ""}{place.city}
               </p>
               <div className="flex items-center gap-2">
                 <Stars rating={place.avg_rating} />
-                <span style={{ color: "rgba(212,208,200,0.9)", fontSize: "11px", fontWeight: 500 }}>
+                <span style={{ color: "rgba(242,242,242,0.85)", fontSize: "11px", fontWeight: 500 }}>
                   {formatRating(place.avg_rating)}
                 </span>
-                <span style={{ color: "rgba(212,208,200,0.4)", fontSize: "11px" }}>
+                <span style={{ color: "rgba(242,242,242,0.35)", fontSize: "11px" }}>
                   ({place.review_count})
                 </span>
               </div>
@@ -151,21 +148,15 @@ export default function PlaceCard({
               fontSize: "9px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: isFeaturedPlacement ? "#C8A44E" : "#C8A44E",
+              color: "rgba(200,164,78,0.7)",
               fontWeight: 600,
             }}>
               {label}
             </span>
             {place.tags.length > 0 && (
-              <div className="flex gap-2">
+              <div className="flex gap-1">
                 {place.tags.slice(0, 2).map((tag) => (
-                  <span key={tag} style={{
-                    fontSize: "9px",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "#4A4843",
-                    fontWeight: 500,
-                  }}>
+                  <span key={tag} className="tag-pill">
                     {tag}
                   </span>
                 ))}
