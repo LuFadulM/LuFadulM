@@ -54,7 +54,7 @@
 }
 
 @layer components {
-  /* Card hover — premium scale + gold glow */
+  /* ─── Card hover — original ──────────────────────────────────── */
   .card-hover {
     transition: box-shadow 0.35s cubic-bezier(.2,0,.2,1),
                 transform 0.35s cubic-bezier(.2,0,.2,1);
@@ -66,12 +66,83 @@
     transform: scale(1.03);
   }
 
-  /* Rounded card corners — overrides the global border-radius: 0 reset */
+  /* ─── Atmosphere card — for discovery sections ───────────────── */
+  .atmo-card {
+    transition: transform 0.55s cubic-bezier(0.2, 0, 0.2, 1),
+                box-shadow 0.55s cubic-bezier(0.2, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .atmo-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 40px 80px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(212, 175, 55, 0.10),
+      0 0 60px rgba(212, 175, 55, 0.04);
+  }
+
+  .atmo-card .atmo-image {
+    transition: transform 0.75s cubic-bezier(0.2, 0, 0.2, 1);
+  }
+
+  .atmo-card:hover .atmo-image {
+    transform: scale(1.06);
+  }
+
+  .atmo-card .atmo-cta {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .atmo-card:hover .atmo-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .atmo-card .atmo-overlay {
+    transition: opacity 0.4s ease;
+  }
+
+  .atmo-card:hover .atmo-overlay {
+    opacity: 1.15;
+  }
+
+  /* ─── Event card ─────────────────────────────────────────────── */
+  .event-card {
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.2, 0, 0.2, 1),
+                border-color 0.3s ease;
+  }
+
+  .event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.12);
+    border-color: rgba(212, 175, 55, 0.16) !important;
+  }
+
+  .event-card .event-image {
+    transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+  }
+
+  .event-card:hover .event-image {
+    transform: scale(1.08);
+  }
+
+  /* ─── Rounded card corners ───────────────────────────────────── */
   .card-rounded {
     border-radius: 12px !important;
   }
 
-  /* Neutral pill tag */
+  .card-rounded-lg {
+    border-radius: 16px !important;
+  }
+
+  .card-rounded-sm {
+    border-radius: 8px !important;
+  }
+
+  /* ─── Neutral pill tag ───────────────────────────────────────── */
   .tag-pill {
     border-radius: 100px !important;
     font-size: 9px;
@@ -86,13 +157,13 @@
     white-space: nowrap;
   }
 
-  /* Focus ring */
+  /* ─── Focus ring ─────────────────────────────────────────────── */
   .focus-gold:focus {
     outline: none;
     box-shadow: 0 0 0 1px #D4AF37;
   }
 
-  /* Hide scrollbar */
+  /* ─── Hide scrollbar ─────────────────────────────────────────── */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -102,7 +173,7 @@
     display: none;
   }
 
-  /* Micro label */
+  /* ─── Micro label ────────────────────────────────────────────── */
   .label-micro {
     font-family: 'Sora', system-ui, sans-serif;
     font-size: 9px;
@@ -112,7 +183,7 @@
     color: #888888;
   }
 
-  /* Gold star */
+  /* ─── Stars ──────────────────────────────────────────────────── */
   .star-filled {
     color: #D4AF37;
   }
@@ -121,13 +192,13 @@
     color: #333333;
   }
 
-  /* Section divider line */
+  /* ─── Section divider ────────────────────────────────────────── */
   .divider-line {
     height: 1px;
     background: rgba(255, 255, 255, 0.05);
   }
 
-  /* Image overlay gradient — stronger for readability */
+  /* ─── Image overlay gradient ─────────────────────────────────── */
   .img-overlay {
     background: linear-gradient(
       to top,
@@ -135,5 +206,176 @@
       rgba(0, 0, 0, 0.45) 45%,
       rgba(0, 0, 0, 0) 100%
     );
+  }
+
+  /* ─── Discovery section header ───────────────────────────────── */
+  .discovery-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  /* ─── Gold line accent before section label ──────────────────── */
+  .section-label-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .section-label-bar::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: rgba(212, 175, 55, 0.55);
+    flex-shrink: 0;
+  }
+
+  /* ─── Horizontal scroll row ──────────────────────────────────── */
+  .scroll-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-row-item {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  /* ─── Reveal animations ──────────────────────────────────────── */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+  }
+
+  /* ─── Gem badge ──────────────────────────────────────────────── */
+  .gem-badge {
+    border-radius: 100px !important;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    padding: 3px 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ─── Now badge ──────────────────────────────────────────────── */
+  .now-badge {
+    border-radius: 100px !important;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    backdrop-filter: blur(4px);
+  }
+
+  .now-badge.nuevo {
+    color: #7EC8A4;
+    background: rgba(126, 200, 164, 0.1);
+    border: 1px solid rgba(126, 200, 164, 0.25);
+  }
+
+  .now-badge.popular {
+    color: #E08F6A;
+    background: rgba(224, 143, 106, 0.1);
+    border: 1px solid rgba(224, 143, 106, 0.25);
+  }
+
+  .now-badge.tendencia {
+    color: #C88AE0;
+    background: rgba(200, 138, 224, 0.1);
+    border: 1px solid rgba(200, 138, 224, 0.25);
+  }
+
+  .now-badge.local {
+    color: #8AB4E0;
+    background: rgba(138, 180, 224, 0.1);
+    border: 1px solid rgba(138, 180, 224, 0.25);
+  }
+
+  /* ─── Moment tag ─────────────────────────────────────────────── */
+  .moment-tag {
+    border-radius: 100px !important;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(212, 175, 55, 0.7);
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 2px 9px;
+    display: inline-block;
+  }
+
+  /* ─── Hover gold underline link ──────────────────────────────── */
+  .link-gold {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(212, 175, 55, 0.7);
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .link-gold:hover {
+    color: #D4AF37;
+  }
+
+  /* ─── Pulse dot (live indicator) ─────────────────────────────── */
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .pulse-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50% !important;
+    background: #7EC8A4;
+    animation: pulse-dot 2s ease-in-out infinite;
+    display: inline-block;
   }
 }
