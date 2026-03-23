@@ -138,6 +138,22 @@ export type AnalyticsSurface =
   | "search_results"
   | "curated_list";
 
+export type PlaceTier = "iconic" | "hidden_gem" | "solid_pick";
+export type PlaceStatus = "approved" | "candidate" | "watchlist" | "rejected";
+export type PlaceConfidence = "high" | "medium" | "low";
+
+export interface CuratedPlace extends Place {
+  subcategory?: string;
+  short_description?: string;
+  hyex_score?: number;
+  tier?: PlaceTier;
+  why_hyex?: string;
+  editorial_notes?: string;
+  status?: PlaceStatus;
+  confidence?: PlaceConfidence;
+  source_urls?: string[];
+}
+
 export type FilterCity =
   | "All"
   | "Bogotá"
