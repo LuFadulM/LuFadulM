@@ -30,16 +30,7 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
   };
 
   return (
-    <section className="mb-20">
-      <div className="flex items-end justify-between mb-8 pb-4 border-b border-[rgba(255,255,255,0.04)]">
-        <div>
-          <p className="label-micro mb-3">Spotlight</p>
-          <h2 className="text-3xl font-serif" style={{ color: "#D4D0C8" }}>
-            En foco
-          </h2>
-        </div>
-      </div>
-
+    <section>
       <Link href={`/places/${place.slug}`} className="block group" onClick={handleClick}>
         <article
           className="card-hover card-rounded relative overflow-hidden"
