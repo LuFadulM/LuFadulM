@@ -19,10 +19,20 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
     {
       label: t.mobile.discover,
       links: [
-        { href: "/", label: t.nav.explore },
-        { href: "/actividades", label: t.nav.activities },
+        { href: "/", label: "Explorar" },
         { href: "/mapa", label: t.nav.map },
         { href: "/saved", label: t.nav.saved },
+      ],
+    },
+    {
+      label: "Actividades",
+      links: [
+        { href: "/?category=Restaurants", label: "Restaurantes" },
+        { href: "/?category=Cafés",        label: "Cafés" },
+        { href: "/?category=Bars",         label: "Bares" },
+        { href: "/?category=Nightlife",    label: "Vida Nocturna" },
+        { href: "/?category=Hotels",       label: "Hoteles" },
+        { href: "/?category=Attractions",  label: "Atracciones" },
       ],
     },
     {
@@ -40,8 +50,8 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
     {
       label: t.mobile.info,
       links: [
-        { href: "/blog", label: t.nav.blog },
-        { href: "/about", label: t.nav.about },
+        { href: "/about",    label: "Nosotros" },
+        { href: "/magazine", label: "Magazine" },
       ],
     },
   ];

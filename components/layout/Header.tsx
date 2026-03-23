@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -8,6 +8,165 @@ import type { User } from "@supabase/supabase-js";
 import MobileMenu from "./MobileMenu";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { Locale } from "@/lib/i18n";
+
+const ACTIVIDADES_ITEMS = [
+  { label: "Restaurantes",   href: "/?category=Restaurants" },
+  { label: "Cafés",          href: "/?category=Cafés" },
+  { label: "Bares",          href: "/?category=Bars" },
+  { label: "Vida Nocturna",  href: "/?category=Nightlife" },
+  { label: "Hoteles",        href: "/?category=Hotels" },
+  { label: "Atracciones",    href: "/?category=Attractions" },
+];
+
+const NAV_LINK_STYLE: React.CSSProperties = {
+  fontSize: "10px",
+  letterSpacing: "0.14em",
+  textTransform: "uppercase",
+  fontWeight: 500,
+  color: "#AFAFAF",
+};
+
+function NavLink({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="px-3 xl:px-4 py-2 transition-colors duration-200 whitespace-nowrap"
+      style={NAV_LINK_STYLE}
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
+      onMouseLeave={(e) => (e.currentTarget.style.color = "#AFAFAF")}
+    >
+      {label}
+    </Link>
+  );
+}
+
+function ActividadesDropdown() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Close on outside click
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [open]);
+
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      {/* Trigger */}
+      <button
+        className="px-3 xl:px-4 py-2 flex items-center gap-1.5 transition-colors duration-200 whitespace-nowrap"
+        style={{
+          ...NAV_LINK_STYLE,
+          color: open ? "#FFFFFF" : "#AFAFAF",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        Actividades
+        <svg
+          width="9"
+          height="9"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          style={{
+            transition: "transform 0.2s ease",
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            marginTop: "1px",
+          }}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {/* Dropdown panel */}
+      {open && (
+        <div
+          className="absolute top-full left-1/2 pt-3"
+          style={{ transform: "translateX(-50%)", minWidth: "180px", zIndex: 50 }}
+        >
+          {/* Arrow */}
+          <div
+            style={{
+              position: "absolute",
+              top: "8px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: 0,
+              height: 0,
+              borderLeft: "6px solid transparent",
+              borderRight: "6px solid transparent",
+              borderBottom: "6px solid rgba(255,255,255,0.06)",
+            }}
+          />
+          <div
+            style={{
+              background: "#0E0E0E",
+              border: "1px solid rgba(255,255,255,0.07)",
+              boxShadow: "0 24px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.04)",
+              overflow: "hidden",
+              marginTop: "6px",
+            }}
+          >
+            {ACTIVIDADES_ITEMS.map((item, i) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between px-5 py-3 transition-all duration-150 group"
+                style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.13em",
+                  textTransform: "uppercase",
+                  fontWeight: 500,
+                  color: "#888888",
+                  borderBottom:
+                    i < ACTIVIDADES_ITEMS.length - 1
+                      ? "1px solid rgba(255,255,255,0.04)"
+                      : "none",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#F5F5F5";
+                  e.currentTarget.style.background = "rgba(212,175,55,0.04)";
+                  e.currentTarget.style.paddingLeft = "22px";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "#888888";
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.paddingLeft = "20px";
+                }}
+              >
+                {item.label}
+                <span
+                  style={{
+                    color: "rgba(212,175,55,0.4)",
+                    fontSize: "11px",
+                    opacity: 0,
+                    transition: "opacity 0.15s ease",
+                  }}
+                  className="group-hover:opacity-100"
+                >
+                  →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Header() {
   const router = useRouter();
@@ -39,15 +198,6 @@ export default function Header() {
     router.push("/");
     router.refresh();
   };
-
-  const navItems = [
-    { href: "/", label: t.nav.explore },
-    { href: "/ciudades", label: t.nav.cities },
-    { href: "/actividades", label: t.nav.activities },
-    { href: "/mapa", label: t.nav.map },
-    { href: "/blog", label: t.nav.blog },
-    { href: "/about", label: t.nav.about },
-  ];
 
   return (
     <>
@@ -100,24 +250,12 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-0 flex-1 justify-center">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="px-3 xl:px-4 py-2 transition-colors duration-200 whitespace-nowrap"
-                style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  fontWeight: 500,
-                  color: "#AFAFAF",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#AFAFAF")}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <NavLink href="/"           label="Explorar" />
+            <NavLink href="/ciudades"   label="Ciudades" />
+            <ActividadesDropdown />
+            <NavLink href="/mapa"       label="Mapa" />
+            <NavLink href="/about"      label="Nosotros" />
+            <NavLink href="/magazine"   label="Magazine" />
           </nav>
 
           {/* Right — lang switcher + auth */}
