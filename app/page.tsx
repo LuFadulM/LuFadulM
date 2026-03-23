@@ -9,6 +9,7 @@ import FilterBar from "@/components/search/FilterBar";
 import PlaceGrid from "@/components/places/PlaceGrid";
 import FeaturedSection from "@/components/places/FeaturedSection";
 import SpotlightSection from "@/components/places/SpotlightSection";
+import ColombiaMap from "@/components/discovery/ColombiaMap";
 import HoySection from "@/components/discovery/HoySection";
 import JoyasSection from "@/components/discovery/JoyasSection";
 import PlanesSection from "@/components/discovery/PlanesSection";
@@ -19,7 +20,6 @@ import { useEffect } from "react";
 
 type CategoryFilter = Category | "All";
 
-const CITIES = ["Bogotá", "Medellín", "Cartagena", "Cali", "Santa Marta", "Barranquilla"];
 
 export default function HomePage() {
   const { t } = useLanguage();
@@ -155,66 +155,12 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right — city index */}
-            <div className="hidden md:flex flex-col justify-center pl-16">
-              <p className="label-micro mb-6">{t.hero.featuredCities}</p>
-              <ul>
-                {CITIES.map((c, i) => (
-                  <li key={c}>
-                    <button
-                      onClick={() => setCity(c as FilterCity)}
-                      className="w-full text-left group relative border-b border-[rgba(255,255,255,0.04)] transition-all duration-200"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        padding: "18px 0 18px 16px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <div
-                        className="absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-250 group-hover:opacity-100"
-                        style={{ background: "#D4AF37", opacity: 0.1 }}
-                      />
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                        style={{
-                          background:
-                            "linear-gradient(90deg, rgba(212,175,55,0.04) 0%, rgba(212,175,55,0.01) 40%, transparent 70%)",
-                        }}
-                      />
-                      <span
-                        className="font-serif transition-colors duration-200 group-hover:text-white relative"
-                        style={{ fontSize: "20px", color: "#686868" }}
-                      >
-                        {c}
-                      </span>
-                      <div className="flex items-center gap-3 relative">
-                        <span
-                          style={{
-                            fontSize: "10px",
-                            letterSpacing: "0.12em",
-                            color: "#333333",
-                            fontWeight: 600,
-                          }}
-                        >
-                          0{i + 1}
-                        </span>
-                        <span
-                          className="transition-all duration-200 group-hover:text-[#D4AF37] group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
-                          style={{
-                            color: "#D4AF37",
-                            fontSize: "12px",
-                            display: "inline-block",
-                          }}
-                        >
-                          →
-                        </span>
-                      </div>
-                    </button>
-                  </li>
-                ))}
-              </ul>
+            {/* Right — Colombia map */}
+            <div className="hidden md:flex flex-col items-center justify-center pl-8">
+              <ColombiaMap
+                onCitySelect={(c) => setCity(c as FilterCity)}
+                selectedCity={city !== "All" ? city : undefined}
+              />
             </div>
           </div>
         </div>
