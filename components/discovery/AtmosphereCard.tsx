@@ -64,7 +64,7 @@ export default function AtmosphereCard({
           className="absolute inset-0 atmo-overlay pointer-events-none"
           style={{
             background:
-              "linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.6) 45%, rgba(0,0,0,0.1) 100%)",
+              "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.2) 70%, transparent 100%)",
           }}
         />
 
@@ -77,9 +77,10 @@ export default function AtmosphereCard({
                 fontSize: "9px",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "rgba(255,255,255,0.45)",
+                color: "rgba(255,255,255,0.65)",
                 fontWeight: 500,
                 fontFamily: "'Sora', system-ui, sans-serif",
+                textShadow: "0 1px 6px rgba(0,0,0,0.8)",
               }}
             >
               {location}
@@ -103,11 +104,23 @@ export default function AtmosphereCard({
         </div>
 
         {/* ── Bottom content ── */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col gap-2">
+        <div
+          className="absolute bottom-0 left-0 right-0 flex flex-col gap-2"
+          style={{
+            padding: "20px",
+            background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
+            backdropFilter: "blur(2px)",
+            WebkitBackdropFilter: "blur(2px)",
+          }}
+        >
           {/* Name */}
           <h3
             className="font-serif text-white leading-tight"
-            style={{ fontSize: "clamp(17px, 2.2vw, 22px)" }}
+            style={{
+              fontSize: "clamp(17px, 2.2vw, 22px)",
+              fontWeight: 700,
+              textShadow: "0 1px 12px rgba(0,0,0,0.9), 0 2px 24px rgba(0,0,0,0.7)",
+            }}
           >
             {place.name}
           </h3>
@@ -117,11 +130,12 @@ export default function AtmosphereCard({
             <p
               style={{
                 fontSize: "12px",
-                lineHeight: "1.6",
-                color: "rgba(242,237,232,0.5)",
-                fontWeight: 300,
+                lineHeight: "1.65",
+                color: "rgba(242,237,232,0.82)",
+                fontWeight: 400,
                 fontStyle: "italic",
                 fontFamily: "'Playfair Display', Georgia, serif",
+                textShadow: "0 1px 8px rgba(0,0,0,0.8)",
               }}
             >
               {copy}

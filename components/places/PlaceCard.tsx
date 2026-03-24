@@ -129,7 +129,7 @@ export default function PlaceCard({
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)",
+                  "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)",
               }}
             />
 
@@ -164,7 +164,7 @@ export default function PlaceCard({
             {/* Name */}
             <h3
               className="font-serif text-white leading-snug mb-2 transition-colors duration-200 group-hover:text-[#F5F0E8]"
-              style={{ fontSize: "15px", fontWeight: 400 }}
+              style={{ fontSize: "15px", fontWeight: 600 }}
             >
               {place.name}
             </h3>
@@ -175,8 +175,8 @@ export default function PlaceCard({
                 className="mb-3 line-clamp-2"
                 style={{
                   fontSize: "11px",
-                  lineHeight: "1.6",
-                  color: "rgba(242,237,232,0.52)",
+                  lineHeight: "1.65",
+                  color: "rgba(242,237,232,0.76)",
                   fontStyle: "italic",
                   fontFamily: "'Playfair Display', Georgia, serif",
                   fontWeight: 400,
