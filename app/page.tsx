@@ -13,7 +13,9 @@ import HoySection from "@/components/discovery/HoySection";
 import JoyasSection from "@/components/discovery/JoyasSection";
 import PlanesSection from "@/components/discovery/PlanesSection";
 import AhoraSection from "@/components/discovery/AhoraSection";
+import ExperienciasSection from "@/components/discovery/ExperienciasSection";
 import ReviewsSection from "@/components/reviews/ReviewsSection";
+import { MOCK_EVENTS } from "./data/events";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { rankPlacesWithFeatured } from "@/lib/ranking";
 import { useEffect } from "react";
@@ -192,6 +194,9 @@ export default function HomePage() {
 
           {/* ── PEQUEÑOS PLANES ──────────────────────────────────────── */}
           <PlanesSection places={MOCK_PLACES} />
+
+          {/* ── EXPERIENCIAS ─────────────────────────────────────────── */}
+          <ExperienciasSection events={MOCK_EVENTS} />
 
           {/* ── LO QUE ESTÁ PASANDO ──────────────────────────────────── */}
           <AhoraSection places={MOCK_PLACES} />
