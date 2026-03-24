@@ -89,7 +89,7 @@ function NowCard({ place, index }: NowCardProps) {
           {/* Name */}
           <h3
             className="font-serif leading-snug transition-colors duration-200 group-hover:text-white mb-1"
-            style={{ fontSize: "15px", color: "#D2CEBC" }}
+            style={{ fontSize: "15px", color: "#EDEAE2", fontWeight: 600 }}
           >
             {place.name}
           </h3>
@@ -99,7 +99,7 @@ function NowCard({ place, index }: NowCardProps) {
             style={{
               fontSize: "10px",
               letterSpacing: "0.08em",
-              color: "rgba(255,255,255,0.30)",
+              color: "rgba(255,255,255,0.52)",
               fontFamily: "'Sora', system-ui, sans-serif",
               fontWeight: 400,
             }}
@@ -107,7 +107,7 @@ function NowCard({ place, index }: NowCardProps) {
             {place.neighborhood ? `${place.neighborhood} · ` : ""}
             {place.city}
             {place.category ? (
-              <span style={{ color: "rgba(255,255,255,0.16)", marginLeft: "6px" }}>
+              <span style={{ color: "rgba(255,255,255,0.30)", marginLeft: "6px" }}>
                 · {place.category === "Restaurants" ? "Restaurante" : place.category === "Attractions" ? "Atracción" : place.category}
               </span>
             ) : null}
