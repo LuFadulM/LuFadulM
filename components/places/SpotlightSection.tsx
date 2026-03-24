@@ -7,19 +7,10 @@ import { RankedPlace } from "@/lib/types";
 import { formatRating } from "@/lib/utils";
 import FeaturedBadge from "@/components/ui/FeaturedBadge";
 import { trackFeaturedEvent } from "@/lib/analytics";
+import RatingDisplay from "@/components/ui/RatingDisplay";
 
 interface SpotlightSectionProps {
   place: RankedPlace;
-}
-
-function Stars({ rating }: { rating: number }) {
-  return (
-    <span>
-      {Array.from({ length: 5 }, (_, i) => (
-        <span key={i} style={{ color: i < Math.round(rating) ? "#C8A44E" : "#2A2A28", fontSize: "13px" }}>★</span>
-      ))}
-    </span>
-  );
 }
 
 export default function SpotlightSection({ place }: SpotlightSectionProps) {
@@ -101,7 +92,7 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <Stars rating={place.avg_rating} />
+                <RatingDisplay rating={place.avg_rating} mode="stars" size="md" />
                 <span style={{ color: "rgba(212,208,200,0.9)", fontSize: "13px", fontWeight: 500 }}>
                   {formatRating(place.avg_rating)}
                 </span>

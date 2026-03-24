@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Place } from "@/lib/types";
+import CardBadge from "@/components/ui/CardBadge";
 
 interface AhoraSectionProps {
   places: Place[];
@@ -11,11 +12,11 @@ interface AhoraSectionProps {
 
 type NowBadgeType = "nuevo" | "popular" | "tendencia" | "local";
 
-const NOW_BADGE_LABELS: Record<NowBadgeType, string> = {
-  nuevo: "Nuevo",
-  popular: "Muy solicitado",
-  tendencia: "En tendencia",
-  local: "Favorito local",
+const NOW_BADGE_CONFIG: Record<NowBadgeType, { label: string; variant: "live" | "status" | "editorial" }> = {
+  nuevo: { label: "Nuevo", variant: "live" },
+  popular: { label: "Muy solicitado", variant: "status" },
+  tendencia: { label: "En tendencia", variant: "status" },
+  local: { label: "Favorito local", variant: "editorial" },
 };
 
 function getBadge(place: Place): NowBadgeType {
@@ -34,7 +35,7 @@ interface NowCardProps {
 
 function NowCard({ place, index }: NowCardProps) {
   const badge = getBadge(place);
-  const label = NOW_BADGE_LABELS[badge];
+  const { label, variant } = NOW_BADGE_CONFIG[badge];
 
   return (
     <Link href={`/places/${place.slug}`} className="block group">
@@ -80,12 +81,9 @@ function NowCard({ place, index }: NowCardProps) {
         {/* Content */}
         <div className="flex-1 min-w-0">
           {/* Badge */}
-          <span className={`now-badge ${badge} mb-2 inline-flex`}>
-            {badge === "nuevo" && (
-              <span className="pulse-dot" />
-            )}
-            {label}
-          </span>
+          <div className="mb-2">
+            <CardBadge label={label} variant={variant} />
+          </div>
 
           {/* Name */}
           <h3

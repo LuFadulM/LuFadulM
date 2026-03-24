@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Place } from "@/lib/types";
+import CardBadge from "@/components/ui/CardBadge";
 
 interface PlanesSectionProps {
   places: Place[];
@@ -13,33 +14,7 @@ interface PlanCard {
   place: Place;
   planTitle: string;
   planMoment: string;
-  momentColor: string;
-  momentBg: string;
-  momentBorder: string;
 }
-
-const MOMENT_STYLES: Record<string, { color: string; bg: string; border: string }> = {
-  "Mañana": {
-    color: "#C8A44E",
-    bg: "rgba(200,164,78,0.1)",
-    border: "rgba(200,164,78,0.22)",
-  },
-  "Tarde": {
-    color: "#E08F6A",
-    bg: "rgba(224,143,106,0.1)",
-    border: "rgba(224,143,106,0.22)",
-  },
-  "Noche": {
-    color: "#A07AE0",
-    bg: "rgba(160,122,224,0.1)",
-    border: "rgba(160,122,224,0.22)",
-  },
-  "Fin de semana": {
-    color: "#5CC9AD",
-    bg: "rgba(92,201,173,0.1)",
-    border: "rgba(92,201,173,0.22)",
-  },
-};
 
 function derivePlan(place: Place): { planTitle: string; planMoment: string } {
   if (place.category === "Cafés") {
@@ -83,15 +58,7 @@ function derivePlan(place: Place): { planTitle: string; planMoment: string } {
 export default function PlanesSection({ places }: PlanesSectionProps) {
   const plans: PlanCard[] = places.slice(0, 7).map((place) => {
     const { planTitle, planMoment } = derivePlan(place);
-    const momentStyle = MOMENT_STYLES[planMoment] ?? MOMENT_STYLES["Tarde"];
-    return {
-      place,
-      planTitle,
-      planMoment,
-      momentColor: momentStyle.color,
-      momentBg: momentStyle.bg,
-      momentBorder: momentStyle.border,
-    };
+    return { place, planTitle, planMoment };
   });
 
   if (plans.length === 0) return null;
@@ -125,7 +92,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
 
       {/* ── Horizontal scroll ── */}
       <div className="scroll-row">
-        {plans.map(({ place, planTitle, planMoment, momentColor, momentBg, momentBorder }) => (
+        {plans.map(({ place, planTitle, planMoment }) => (
           <div
             key={place.id}
             className="scroll-row-item"
@@ -133,7 +100,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
           >
             <Link href={`/places/${place.slug}`} className="block group">
               <article
-                className="event-card card-rounded overflow-hidden"
+                className="atmo-card card-rounded-lg overflow-hidden"
                 style={{
                   background: "#111111",
                   border: "1px solid rgba(255,255,255,0.05)",
@@ -149,7 +116,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
                       src={place.cover_image_url}
                       alt={place.name}
                       fill
-                      className="object-cover event-image"
+                      className="object-cover atmo-image"
                       sizes="(max-width: 640px) 60vw, 25vw"
                     />
                   ) : (
@@ -167,17 +134,9 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
                 {/* Content */}
                 <div className="p-4">
                   {/* Moment badge */}
-                  <span
-                    className="tag-pill mb-3 inline-block"
-                    style={{
-                      color: momentColor,
-                      background: momentBg,
-                      border: `1px solid ${momentBorder}`,
-                      borderRadius: "100px !important",
-                    }}
-                  >
-                    {planMoment}
-                  </span>
+                  <div className="mb-3">
+                    <CardBadge label={planMoment} variant="moment" />
+                  </div>
 
                   {/* Plan title */}
                   <p
