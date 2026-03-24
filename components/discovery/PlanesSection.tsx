@@ -282,8 +282,8 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
                       style={{
                         fontSize: "14px",
                         lineHeight: "1.5",
-                        color: "#D8D4CC",
-                        fontWeight: 400,
+                        color: "#FFFFFF",
+                        fontWeight: 600,
                         marginBottom: "8px",
                       }}
                     >
@@ -294,7 +294,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
                         fontSize: "10px",
                         letterSpacing: "0.1em",
                         textTransform: "uppercase",
-                        color: "rgba(255,255,255,0.3)",
+                        color: "rgba(255,255,255,0.55)",
                         fontFamily: "'Sora', system-ui, sans-serif",
                         fontWeight: 500,
                       }}

@@ -61,27 +61,33 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
               fontSize: "10px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#A0A0A0",
+              color: "rgba(255,255,255,0.65)",
               marginBottom: "12px",
               fontWeight: 500,
+              textShadow: "0 1px 6px rgba(0,0,0,0.8)",
             }}>
               {place.neighborhood ? `${place.neighborhood} · ` : ""}{place.city}
             </p>
 
             <h3
               className="font-serif text-white mb-4 leading-tight transition-colors duration-300"
-              style={{ fontSize: "clamp(28px, 4vw, 48px)" }}
+              style={{
+                fontSize: "clamp(28px, 4vw, 48px)",
+                fontWeight: 700,
+                textShadow: "0 2px 20px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.5)",
+              }}
             >
               {place.name}
             </h3>
 
             {place.description && (
               <p style={{
-                color: "rgba(212,208,200,0.65)",
+                color: "rgba(212,208,200,0.82)",
                 fontSize: "14px",
                 lineHeight: "1.7",
-                fontWeight: 300,
+                fontWeight: 400,
                 marginBottom: "20px",
+                textShadow: "0 1px 8px rgba(0,0,0,0.7)",
               }}
                 className="line-clamp-3"
               >

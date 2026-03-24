@@ -260,14 +260,14 @@ function EventCard({ event }: { event: HyexEvent }) {
               fontSize: "9px",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.28)",
+              color: "rgba(255,255,255,0.52)",
               fontFamily: "'Sora', system-ui, sans-serif",
               fontWeight: 500,
               marginBottom: "8px",
             }}
           >
             {event.category}
-            <span style={{ color: "rgba(255,255,255,0.14)", margin: "0 6px" }}>·</span>
+            <span style={{ color: "rgba(255,255,255,0.22)", margin: "0 6px" }}>·</span>
             {event.city}
           </p>
 
@@ -276,20 +276,20 @@ function EventCard({ event }: { event: HyexEvent }) {
             className="font-serif leading-snug"
             style={{
               fontSize: "15px",
-              color: "#D8D4CC",
-              fontWeight: 400,
+              color: "#FFFFFF",
+              fontWeight: 600,
               marginBottom: "8px",
             }}
           >
             {event.title}
           </p>
 
-          {/* Editorial angle — italic, subtle */}
+          {/* Editorial angle — italic, readable */}
           <p
             style={{
               fontSize: "11px",
-              lineHeight: "1.6",
-              color: "rgba(242,237,232,0.38)",
+              lineHeight: "1.65",
+              color: "rgba(242,237,232,0.70)",
               fontStyle: "italic",
               fontFamily: "'Playfair Display', Georgia, serif",
               fontWeight: 400,
@@ -310,7 +310,7 @@ function EventCard({ event }: { event: HyexEvent }) {
                     fontSize: "9px",
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.28)",
+                    color: "rgba(255,255,255,0.55)",
                     fontFamily: "'Sora', system-ui, sans-serif",
                     fontWeight: 500,
                     display: "flex",
@@ -339,7 +339,7 @@ function EventCard({ event }: { event: HyexEvent }) {
                   style={{
                     fontSize: "9px",
                     letterSpacing: "0.1em",
-                    color: "rgba(255,255,255,0.28)",
+                    color: "rgba(255,255,255,0.55)",
                     fontFamily: "'Sora', system-ui, sans-serif",
                     fontWeight: 500,
                   }}

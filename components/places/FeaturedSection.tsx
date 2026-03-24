@@ -35,11 +35,11 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
           <div className="absolute inset-0" style={{ background: "#111110" }} />
         )}
 
-        {/* Strong bottom gradient for readability */}
+        {/* Gradient for readability */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.08) 100%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.2) 70%, transparent 100%)",
           }}
         />
 
@@ -64,34 +64,51 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
         </div>
 
         {/* Content — bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-8">
+        <div
+          className="absolute bottom-0 left-0 right-0 p-8"
+          style={{
+            background: "linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%)",
+            backdropFilter: "blur(2px)",
+            WebkitBackdropFilter: "blur(2px)",
+          }}
+        >
           <p
             style={{
               fontSize: "9px",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.45)",
+              color: "rgba(255,255,255,0.65)",
               marginBottom: "10px",
               fontWeight: 500,
+              textShadow: "0 1px 6px rgba(0,0,0,0.8)",
             }}
           >
             {place.neighborhood ? `${place.neighborhood} · ` : ""}
             {place.city}
           </p>
-          <h3 className="font-serif text-white mb-3 transition-colors duration-300 group-hover:text-[#F5F0E8]" style={{ fontSize: "clamp(22px, 3vw, 32px)", lineHeight: "1.15" }}>
+          <h3
+            className="font-serif text-white mb-3 transition-colors duration-300 group-hover:text-[#F5F0E8]"
+            style={{
+              fontSize: "clamp(22px, 3vw, 32px)",
+              lineHeight: "1.15",
+              fontWeight: 700,
+              textShadow: "0 2px 16px rgba(0,0,0,0.9), 0 0 32px rgba(0,0,0,0.6)",
+            }}
+          >
             {place.name}
           </h3>
           {place.description && (
             <p
               style={{
-                color: "rgba(242,237,232,0.50)",
+                color: "rgba(242,237,232,0.80)",
                 fontSize: "13px",
                 lineHeight: "1.65",
-                fontWeight: 300,
+                fontWeight: 400,
                 maxWidth: "420px",
                 marginBottom: "16px",
                 fontStyle: "italic",
                 fontFamily: "'Playfair Display', Georgia, serif",
+                textShadow: "0 1px 8px rgba(0,0,0,0.7)",
               }}
               className="line-clamp-2"
             >
@@ -144,7 +161,7 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.05) 100%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.15) 75%, transparent 100%)",
           }}
         />
 
@@ -167,17 +184,22 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <h3
             className="font-serif text-white leading-tight mb-1 transition-colors duration-200 group-hover:text-[#F5F0E8]"
-            style={{ fontSize: "17px" }}
+            style={{
+              fontSize: "17px",
+              fontWeight: 700,
+              textShadow: "0 1px 10px rgba(0,0,0,0.9)",
+            }}
           >
             {place.name}
           </h3>
           <p
             style={{
-              color: "rgba(255,255,255,0.38)",
+              color: "rgba(255,255,255,0.60)",
               fontSize: "9px",
               letterSpacing: "0.14em",
               textTransform: "uppercase",
               fontFamily: "'Sora', system-ui, sans-serif",
+              textShadow: "0 1px 6px rgba(0,0,0,0.8)",
             }}
           >
             {place.neighborhood ? `${place.neighborhood} · ` : ""}{place.city}
