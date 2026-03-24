@@ -175,10 +175,10 @@ export default function ReviewsSection() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div
+                  className="card-rounded-sm"
                   style={{
                     width: "28px",
                     height: "28px",
-                    borderRadius: "50% !important",
                     background: "rgba(212,175,55,0.08)",
                     border: "1px solid rgba(212,175,55,0.15)",
                     display: "flex",
@@ -218,6 +218,8 @@ export default function ReviewsSection() {
 
               <button
                 onClick={() => toggleLike(review.id)}
+                aria-label={liked.has(review.id) ? "Quitar útil" : "Marcar como útil"}
+                aria-pressed={liked.has(review.id)}
                 className="flex items-center gap-1.5 transition-colors duration-200"
                 style={{ color: liked.has(review.id) ? "#C8A44E" : "rgba(255,255,255,0.20)" }}
               >
@@ -250,32 +252,31 @@ export default function ReviewsSection() {
 
       {/* CTA row */}
       <div
-        className="flex items-center justify-between mt-4 px-5 py-3"
-        style={{
-          border: "1px solid rgba(255,255,255,0.04)",
-          borderTop: "none",
-        }}
+        className="flex items-center justify-between mt-6 pt-5"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
       >
         <p
           style={{
-            fontSize: "10px",
-            color: "rgba(255,255,255,0.20)",
-            letterSpacing: "0.08em",
+            fontSize: "11px",
+            color: "rgba(255,255,255,0.22)",
+            letterSpacing: "0.02em",
             fontFamily: "'Sora', system-ui, sans-serif",
+            fontWeight: 300,
           }}
         >
           ¿Visitaste un lugar? Comparte tu experiencia.
         </p>
         <Link
           href="/reviews/new"
-          className="transition-all duration-200"
+          className="flex items-center gap-1.5 transition-colors duration-200"
           style={{
             fontSize: "9px",
-            letterSpacing: "0.18em",
+            letterSpacing: "0.16em",
             textTransform: "uppercase",
             fontWeight: 600,
             color: "#C8A44E",
             fontFamily: "'Sora', system-ui, sans-serif",
+            whiteSpace: "nowrap",
           }}
           onMouseEnter={(e) =>
             ((e.currentTarget as HTMLElement).style.color = "#D4AF37")
@@ -284,7 +285,8 @@ export default function ReviewsSection() {
             ((e.currentTarget as HTMLElement).style.color = "#C8A44E")
           }
         >
-          Escribir review →
+          Escribir review
+          <span aria-hidden="true">→</span>
         </Link>
       </div>
     </section>

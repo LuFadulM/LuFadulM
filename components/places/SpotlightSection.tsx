@@ -24,11 +24,11 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
     <section>
       <Link href={`/places/${place.slug}`} className="block group" onClick={handleClick}>
         <article
-          className="card-hover card-rounded relative overflow-hidden"
+          className="atmo-card card-rounded-lg relative overflow-hidden"
           style={{
             background: "#111111",
-            border: "1px solid rgba(255,255,255,0.04)",
-            minHeight: "360px",
+            border: "1px solid rgba(255,255,255,0.05)",
+            minHeight: "380px",
           }}
         >
           {place.cover_image_url ? (
@@ -36,19 +36,18 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
               src={place.cover_image_url}
               alt={place.name}
               fill
-              className="object-cover transition-transform duration-700"
-              style={{ transition: "transform 0.7s cubic-bezier(.2,0,.2,1)" }}
+              className="object-cover atmo-image"
               sizes="100vw"
             />
           ) : (
             <div className="absolute inset-0" style={{ background: "#111110" }} />
           )}
 
-          {/* Gradient */}
+          {/* Gradient — stronger left side for text legibility */}
           <div
             className="absolute inset-0"
             style={{
-              background: "linear-gradient(105deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.15) 100%)",
+              background: "linear-gradient(105deg, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.68) 45%, rgba(0,0,0,0.12) 100%)",
             }}
           />
 
@@ -93,10 +92,10 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <RatingDisplay rating={place.avg_rating} mode="stars" size="md" />
-                <span style={{ color: "rgba(212,208,200,0.9)", fontSize: "13px", fontWeight: 500 }}>
+                <span aria-hidden="true" style={{ color: "rgba(212,208,200,0.9)", fontSize: "13px", fontWeight: 500 }}>
                   {formatRating(place.avg_rating)}
                 </span>
-                <span style={{ color: "rgba(212,208,200,0.4)", fontSize: "12px" }}>
+                <span aria-hidden="true" style={{ color: "rgba(212,208,200,0.38)", fontSize: "12px" }}>
                   ({place.review_count})
                 </span>
               </div>
@@ -113,16 +112,30 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
               )}
             </div>
 
-            <div className="mt-6">
+            <div className="atmo-cta mt-6 flex items-center gap-2">
               <span style={{
-                fontSize: "11px",
+                fontSize: "10px",
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
-                fontWeight: 500,
-                color: "#C8A44E",
+                fontWeight: 600,
+                color: "#D4AF37",
+                fontFamily: "'Sora', system-ui, sans-serif",
               }}>
-                Ver perfil →
+                Ver perfil
               </span>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#D4AF37"
+                strokeWidth="2"
+                className="transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
             </div>
           </div>
         </article>

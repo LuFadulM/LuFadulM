@@ -16,11 +16,11 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
   return (
     <Link href={`/places/${place.slug}`} className="block group col-span-2 row-span-2">
       <article
-        className="card-hover card-rounded relative overflow-hidden h-full"
+        className="atmo-card card-rounded-lg relative overflow-hidden h-full"
         style={{
           minHeight: "460px",
           background: "#111111",
-          border: "1px solid rgba(255,255,255,0.04)",
+          border: "1px solid rgba(255,255,255,0.05)",
         }}
       >
         {place.cover_image_url ? (
@@ -28,8 +28,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
             src={place.cover_image_url}
             alt={place.name}
             fill
-            className="object-cover group-hover:scale-105"
-            style={{ transition: "transform 0.7s cubic-bezier(.2,0,.2,1)" }}
+            className="object-cover atmo-image"
             sizes="(max-width: 640px) 100vw, 60vw"
           />
         ) : (
@@ -48,15 +47,16 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
         <div className="absolute top-5 left-5">
           <span
             style={{
-              fontSize: "9px",
+              fontSize: "8px",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              fontWeight: 600,
+              fontWeight: 700,
               color: "#C8A44E",
-              background: "rgba(200,164,78,0.06)",
-              border: "1px solid rgba(200,164,78,0.3)",
+              background: "rgba(200,164,78,0.08)",
+              border: "1px solid rgba(200,164,78,0.22)",
               padding: "4px 10px",
               display: "inline-block",
+              backdropFilter: "blur(4px)",
             }}
           >
             {editorialPick}
@@ -70,39 +70,46 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
               fontSize: "9px",
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#A0A0A0",
-              marginBottom: "12px",
+              color: "rgba(255,255,255,0.45)",
+              marginBottom: "10px",
               fontWeight: 500,
             }}
           >
             {place.neighborhood ? `${place.neighborhood} · ` : ""}
             {place.city}
           </p>
-          <h3 className="font-serif text-white mb-4" style={{ fontSize: "30px", lineHeight: "1.2" }}>
+          <h3 className="font-serif text-white mb-3 transition-colors duration-300 group-hover:text-[#F5F0E8]" style={{ fontSize: "clamp(22px, 3vw, 32px)", lineHeight: "1.15" }}>
             {place.name}
           </h3>
           {place.description && (
             <p
               style={{
-                color: "rgba(242,237,232,0.55)",
+                color: "rgba(242,237,232,0.50)",
                 fontSize: "13px",
                 lineHeight: "1.65",
                 fontWeight: 300,
                 maxWidth: "420px",
                 marginBottom: "16px",
+                fontStyle: "italic",
+                fontFamily: "'Playfair Display', Georgia, serif",
               }}
               className="line-clamp-2"
             >
               {place.description}
             </p>
           )}
-          <div className="flex items-center gap-3">
-            <RatingDisplay rating={place.avg_rating} mode="stars" />
-            <span style={{ color: "rgba(242,237,232,0.85)", fontSize: "12px", fontWeight: 500 }}>
-              {formatRating(place.avg_rating)}
-            </span>
-            <span style={{ color: "rgba(242,237,232,0.3)", fontSize: "12px" }}>
-              {place.review_count} {reviews}
+          <div className="atmo-cta flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <RatingDisplay rating={place.avg_rating} mode="stars" />
+              <span style={{ color: "rgba(242,237,232,0.85)", fontSize: "12px", fontWeight: 500 }}>
+                {formatRating(place.avg_rating)}
+              </span>
+              <span style={{ color: "rgba(242,237,232,0.3)", fontSize: "12px" }}>
+                {place.review_count} {reviews}
+              </span>
+            </div>
+            <span style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: 600, color: "#D4AF37", fontFamily: "'Sora', system-ui, sans-serif" }}>
+              Ver lugar <span aria-hidden="true">→</span>
             </span>
           </div>
         </div>
@@ -115,11 +122,11 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
   return (
     <Link href={`/places/${place.slug}`} className="block group">
       <article
-        className="card-hover card-rounded relative overflow-hidden h-full"
+        className="atmo-card card-rounded-lg relative overflow-hidden h-full"
         style={{
-          minHeight: "220px",
+          minHeight: "216px",
           background: "#111111",
-          border: "1px solid rgba(255,255,255,0.04)",
+          border: "1px solid rgba(255,255,255,0.05)",
         }}
       >
         {place.cover_image_url ? (
@@ -127,8 +134,7 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
             src={place.cover_image_url}
             alt={place.name}
             fill
-            className="object-cover group-hover:scale-105"
-            style={{ transition: "transform 0.7s cubic-bezier(.2,0,.2,1)" }}
+            className="object-cover atmo-image"
             sizes="(max-width: 640px) 100vw, 30vw"
           />
         ) : (
@@ -138,31 +144,43 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.05) 100%)",
           }}
         />
 
-        {/* Number index — top right */}
-        <div className="absolute top-4 right-4">
-          <span style={{ fontSize: "10px", letterSpacing: "0.12em", color: "rgba(200,164,78,0.5)", fontWeight: 600 }}>
+        {/* Number index — top left */}
+        <div className="absolute top-4 left-4">
+          <span
+            style={{
+              fontSize: "9px",
+              letterSpacing: "0.16em",
+              color: "rgba(200,164,78,0.45)",
+              fontWeight: 700,
+              fontFamily: "'Sora', system-ui, sans-serif",
+            }}
+          >
             0{index + 2}
           </span>
         </div>
 
         {/* Content — bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-5">
-          <h3 className="font-serif text-white leading-tight mb-1" style={{ fontSize: "16px" }}>
+          <h3
+            className="font-serif text-white leading-tight mb-1 transition-colors duration-200 group-hover:text-[#F5F0E8]"
+            style={{ fontSize: "17px" }}
+          >
             {place.name}
           </h3>
           <p
             style={{
-              color: "#A0A0A0",
-              fontSize: "10px",
-              letterSpacing: "0.1em",
+              color: "rgba(255,255,255,0.38)",
+              fontSize: "9px",
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
+              fontFamily: "'Sora', system-ui, sans-serif",
             }}
           >
-            {place.city}
+            {place.neighborhood ? `${place.neighborhood} · ` : ""}{place.city}
           </p>
         </div>
       </article>

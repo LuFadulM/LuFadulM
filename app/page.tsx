@@ -167,12 +167,6 @@ export default function HomePage() {
           {/* ── FEATURED EDITORIAL ───────────────────────────────────── */}
           <FeaturedSection places={featuredPlaces} />
 
-          {/* ── JOYAS ESCONDIDAS ─────────────────────────────────────── */}
-          <JoyasSection places={MOCK_PLACES} />
-
-          {/* ── PEQUEÑOS PLANES ──────────────────────────────────────── */}
-          <PlanesSection places={MOCK_PLACES} />
-
           {/* ── SPOTLIGHT — top featured placement ───────────────────── */}
           {spotlightPlace && (
             <section className="mb-24">
@@ -193,6 +187,12 @@ export default function HomePage() {
             </section>
           )}
 
+          {/* ── JOYAS ESCONDIDAS ─────────────────────────────────────── */}
+          <JoyasSection places={MOCK_PLACES} />
+
+          {/* ── PEQUEÑOS PLANES ──────────────────────────────────────── */}
+          <PlanesSection places={MOCK_PLACES} />
+
           {/* ── LO QUE ESTÁ PASANDO ──────────────────────────────────── */}
           <AhoraSection places={MOCK_PLACES} />
 
@@ -200,14 +200,8 @@ export default function HomePage() {
           <ReviewsSection />
 
           {/* ── DIVIDER before explore ────────────────────────────────── */}
-          <div
-            id="explore"
-            className="mb-12 pt-4"
-            style={{
-              borderTop: "1px solid rgba(255,255,255,0.04)",
-            }}
-          >
-            <div className="flex items-end justify-between pt-8 mb-2">
+          <div id="explore" className="mb-10 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+            <div className="flex items-end justify-between pt-10 mb-2">
               <div>
                 <div className="section-label-bar">
                   <span className="label-micro">Explorar todo</span>
@@ -219,6 +213,16 @@ export default function HomePage() {
                   Todos los lugares
                 </h2>
               </div>
+              <p
+                style={{
+                  fontSize: "11px",
+                  color: "rgba(255,255,255,0.18)",
+                  fontWeight: 300,
+                  paddingBottom: "4px",
+                }}
+              >
+                {MOCK_PLACES.length} lugares en Colombia
+              </p>
             </div>
           </div>
         </div>
