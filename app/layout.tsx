@@ -38,9 +38,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className="bg-bg text-text font-sans min-h-screen flex flex-col">
+        <a href="#main-content" className="skip-link">
+          Ir al contenido principal
+        </a>
         <LanguageProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1">{children}</main>
           <Footer />
         </LanguageProvider>
       </body>

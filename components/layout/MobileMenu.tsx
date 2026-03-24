@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -14,6 +14,7 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileMenuProps) {
   const { t } = useLanguage();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const navSections = [
     {
@@ -49,15 +50,24 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
+  // Focus the close button when menu opens
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => closeButtonRef.current?.focus(), 50);
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 lg:hidden">
+    <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Menú de navegación">
       {/* Backdrop */}
-      <div
-        className="absolute inset-0"
+      <button
+        className="absolute inset-0 w-full h-full border-0 cursor-default"
         style={{ background: "rgba(0,0,0,0.7)" }}
         onClick={onClose}
+        aria-label="Cerrar menú"
+        tabIndex={-1}
       />
 
       {/* Drawer */}
@@ -71,6 +81,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
           style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
         >
           <span
+            aria-hidden="true"
             style={{
               color: "#C8A44E",
               fontSize: "20px",
@@ -81,23 +92,25 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
             hyex
           </span>
           <button
+            ref={closeButtonRef}
             onClick={onClose}
             className="p-2 transition-colors duration-200"
             style={{ color: "#888888" }}
-            aria-label="Cerrar menú"
+            aria-label="Cerrar menú de navegación"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
         </div>
 
         {/* Nav Sections */}
-        <nav className="flex-1 px-4 py-6 overflow-y-auto">
+        <nav aria-label="Menú móvil" className="flex-1 px-4 py-6 overflow-y-auto">
           {navSections.map((section) => (
             <div key={section.label} className="mb-6">
               <p
                 className="px-4 mb-2"
+                role="presentation"
                 style={{
                   fontSize: "9px",
                   letterSpacing: "0.2em",

@@ -66,7 +66,11 @@ export default function LoginPage() {
         {/* Card */}
         <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-7">
           {error && (
-            <div className="mb-5 px-4 py-3 rounded bg-coral/10 border border-coral/20 text-coral text-sm">
+            <div
+              id="login-error"
+              role="alert"
+              className="mb-5 px-4 py-3 rounded bg-coral/10 border border-coral/20 text-coral text-sm"
+            >
               {error}
             </div>
           )}
@@ -81,11 +85,14 @@ export default function LoginPage() {
                 id="email"
                 type="email"
                 placeholder="you@example.com"
+                autoComplete="email"
+                aria-describedby={errors.email ? "email-error" : undefined}
+                aria-invalid={!!errors.email}
                 className={inputClass}
                 {...register("email")}
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-coral">{errors.email.message}</p>
+                <p id="email-error" role="alert" className="mt-1 text-xs text-coral">{errors.email.message}</p>
               )}
             </div>
 
@@ -95,19 +102,22 @@ export default function LoginPage() {
                 <label className="text-sm text-text-muted" htmlFor="password">
                   Password
                 </label>
-                <a href="#" className="text-xs text-coral hover:text-coral-hover transition-colors">
-                  Forgot password?
-                </a>
+                <Link href="/auth/forgot-password" className="text-xs text-coral hover:text-coral-hover transition-colors">
+                  ¿Olvidaste tu contraseña?
+                </Link>
               </div>
               <input
                 id="password"
                 type="password"
                 placeholder="••••••••"
+                autoComplete="current-password"
+                aria-describedby={errors.password ? "password-error" : undefined}
+                aria-invalid={!!errors.password}
                 className={inputClass}
                 {...register("password")}
               />
               {errors.password && (
-                <p className="mt-1 text-xs text-coral">{errors.password.message}</p>
+                <p id="password-error" role="alert" className="mt-1 text-xs text-coral">{errors.password.message}</p>
               )}
             </div>
 
@@ -115,15 +125,17 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
+              aria-busy={isLoading || undefined}
               className="w-full py-3 bg-coral text-white rounded-btn text-sm font-medium hover:bg-coral-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>
-                  <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                  <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>
-                  Signing in...
+                  <span className="sr-only">Iniciando sesión…</span>
+                  <span aria-hidden="true">Iniciando sesión…</span>
                 </>
               ) : (
                 "Iniciar sesión"

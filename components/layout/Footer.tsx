@@ -44,8 +44,8 @@ export default function Footer() {
           </div>
 
           {/* Cities */}
-          <div className="md:col-span-3">
-            <p className="label-micro mb-6">{t.footer.cities}</p>
+          <nav className="md:col-span-3" aria-label={t.footer.cities}>
+            <h2 className="label-micro mb-6">{t.footer.cities}</h2>
             <ul className="space-y-3">
               {cityLinks.map((city) => (
                 <li key={city.href}>
@@ -61,11 +61,11 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Categories */}
-          <div className="md:col-span-4">
-            <p className="label-micro mb-6">{t.footer.categories}</p>
+          <nav className="md:col-span-4" aria-label={t.footer.categories}>
+            <h2 className="label-micro mb-6">{t.footer.categories}</h2>
             <ul className="space-y-3">
               {categoryKeys.map((cat) => (
                 <li key={cat.href}>
@@ -81,7 +81,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
         {/* Bottom bar */}

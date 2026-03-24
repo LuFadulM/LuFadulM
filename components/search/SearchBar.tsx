@@ -28,12 +28,13 @@ export default function SearchBar({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full">
+    <form onSubmit={handleSubmit} className="relative w-full" role="search">
       <div className="relative">
-        {/* Search icon */}
+        {/* Search icon — decorative */}
         <div
           className="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none"
           style={{ color: "#888888" }}
+          aria-hidden="true"
         >
           <svg
             width={large ? 18 : 16}
@@ -48,11 +49,16 @@ export default function SearchBar({
           </svg>
         </div>
 
+        <label htmlFor="site-search" className="sr-only">
+          Buscar lugares en Colombia
+        </label>
         <input
-          type="text"
+          id="site-search"
+          type="search"
           value={query}
           onChange={handleChange}
           placeholder={placeholder}
+          autoComplete="off"
           className="w-full bg-bg-surface border border-[rgba(255,255,255,0.12)] text-text placeholder-text-tertiary focus:outline-none focus-gold transition-all duration-200"
           style={{
             paddingLeft: large ? "52px" : "44px",
@@ -84,6 +90,7 @@ export default function SearchBar({
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
+              aria-hidden="true"
             >
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
