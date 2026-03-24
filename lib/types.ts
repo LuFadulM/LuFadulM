@@ -154,6 +154,42 @@ export interface CuratedPlace extends Place {
   source_urls?: string[];
 }
 
+// ─── Events / Experiences ──────────────────────────────────────────────────
+
+export type EventType =
+  | "tour"
+  | "experience"
+  | "workshop"
+  | "recurring";
+
+export type EventBucket =
+  | "esta_semana"    // time-sensitive, expires
+  | "planes"         // casual, any day
+  | "experiencias"   // worth-the-trip, curated
+  | "recurrentes";   // weekly/monthly regulars
+
+export interface HyexEvent {
+  id: string;
+  slug: string;
+  title: string;
+  short_description: string;
+  editorial_angle: string;
+  city: string;
+  neighborhood?: string | null;
+  category: string;
+  event_type: EventType;
+  bucket: EventBucket;
+  timing_label: string;       // "Esta semana", "Sábados", "Todo el año"
+  duration_label?: string | null;  // "3h", "Día completo"
+  price_level?: PriceLevel | null;
+  cover_image_url?: string | null;
+  tags: string[];
+  ticket_url?: string | null;
+  is_featured: boolean;
+  status: "active" | "draft" | "archived";
+  created_at: string;
+}
+
 export type FilterCity =
   | "All"
   | "Bogotá"
