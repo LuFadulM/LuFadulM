@@ -78,15 +78,15 @@ const MOCK_REVIEWS = [
   },
 ];
 
-function StarRating({ rating }: { rating: number }) {
+function StarRow({ rating }: { rating: number }) {
   return (
     <div className="flex gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="10" height="10" viewBox="0 0 24 24" fill="none">
+        <svg key={i} width="9" height="9" viewBox="0 0 24 24" fill="none">
           <polygon
             points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-            fill={i < rating ? "#D4AF37" : "rgba(255,255,255,0.1)"}
-            stroke={i < rating ? "#D4AF37" : "rgba(255,255,255,0.08)"}
+            fill={i < rating ? "#C8A44E" : "#252522"}
+            stroke={i < rating ? "#C8A44E" : "#252522"}
             strokeWidth="1"
           />
         </svg>
@@ -132,32 +132,41 @@ export default function ReviewsSection() {
         </Link>
       </div>
 
-      {/* Review grid */}
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
-        style={{ background: "rgba(255,255,255,0.04)" }}
-      >
+      {/* Review grid — 3 cols, gap-4, matching card language */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {MOCK_REVIEWS.map((review) => (
           <article
             key={review.id}
-            style={{ background: "#0A0A09" }}
-            className="p-6 flex flex-col gap-4 group hover:bg-[#0E0E0D] transition-colors duration-200"
+            className="flex flex-col gap-4 transition-all duration-300"
+            style={{
+              background: "#111111",
+              border: "1px solid rgba(255,255,255,0.05)",
+              padding: "20px",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,55,0.10)";
+              (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 40px rgba(0,0,0,0.5)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.05)";
+              (e.currentTarget as HTMLElement).style.boxShadow = "none";
+            }}
           >
-            {/* Place + category */}
+            {/* Place + rating */}
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p
-                  className="font-serif"
-                  style={{ color: "#D4D0C8", fontSize: "15px", lineHeight: 1.3 }}
+                  className="font-serif leading-snug"
+                  style={{ color: "#D4D0C8", fontSize: "15px" }}
                 >
                   {review.place}
                 </p>
                 <p
                   style={{
                     fontSize: "9px",
-                    letterSpacing: "0.16em",
+                    letterSpacing: "0.15em",
                     textTransform: "uppercase",
-                    color: "#555555",
+                    color: "#4A4845",
                     fontWeight: 500,
                     marginTop: "3px",
                   }}
@@ -165,76 +174,96 @@ export default function ReviewsSection() {
                   {review.category} · {review.city}
                 </p>
               </div>
-              <StarRating rating={review.rating} />
+              <StarRow rating={review.rating} />
             </div>
 
-            {/* Divider */}
+            {/* Thin rule */}
             <div style={{ height: "1px", background: "rgba(255,255,255,0.04)" }} />
 
-            {/* Review text */}
+            {/* Review text — italic serif quote */}
             <p
               style={{
-                color: "#8A8580",
-                fontSize: "13px",
+                fontSize: "12px",
                 lineHeight: "1.75",
-                fontWeight: 300,
+                color: "rgba(242,237,232,0.52)",
+                fontStyle: "italic",
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontWeight: 400,
                 flexGrow: 1,
               }}
             >
               "{review.text}"
             </p>
 
-            {/* Footer — author + helpful */}
+            {/* Footer */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                {/* Avatar */}
                 <div
                   style={{
-                    width: "26px",
-                    height: "26px",
-                    borderRadius: "50%",
-                    background: "rgba(212,175,55,0.1)",
+                    width: "28px",
+                    height: "28px",
+                    borderRadius: "50% !important",
+                    background: "rgba(212,175,55,0.08)",
                     border: "1px solid rgba(212,175,55,0.15)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "10px",
                     fontWeight: 600,
-                    color: "#D4AF37",
+                    color: "#C8A44E",
                     flexShrink: 0,
                   }}
                 >
                   {review.avatar}
                 </div>
                 <div>
-                  <p style={{ fontSize: "11px", color: "#5A5550", fontWeight: 500 }}>
+                  <p
+                    style={{
+                      fontSize: "10px",
+                      color: "rgba(255,255,255,0.40)",
+                      fontWeight: 500,
+                      fontFamily: "'Sora', system-ui, sans-serif",
+                    }}
+                  >
                     {review.author}
                   </p>
-                  <p style={{ fontSize: "9px", color: "#3A3A38", letterSpacing: "0.1em" }}>
+                  <p
+                    style={{
+                      fontSize: "9px",
+                      color: "rgba(255,255,255,0.18)",
+                      letterSpacing: "0.08em",
+                      fontFamily: "'Sora', system-ui, sans-serif",
+                    }}
+                  >
                     {review.date}
                   </p>
                 </div>
               </div>
 
-              {/* Helpful */}
               <button
                 onClick={() => toggleLike(review.id)}
-                className="flex items-center gap-1.5 transition-all duration-200"
-                style={{ color: liked.has(review.id) ? "#D4AF37" : "#3A3A38" }}
-                onMouseEnter={(e) => {
-                  if (!liked.has(review.id))
-                    (e.currentTarget as HTMLElement).style.color = "#666666";
-                }}
-                onMouseLeave={(e) => {
-                  if (!liked.has(review.id))
-                    (e.currentTarget as HTMLElement).style.color = "#3A3A38";
-                }}
+                className="flex items-center gap-1.5 transition-colors duration-200"
+                style={{ color: liked.has(review.id) ? "#C8A44E" : "rgba(255,255,255,0.20)" }}
               >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
                   <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z" />
                   <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
                 </svg>
-                <span style={{ fontSize: "9px", letterSpacing: "0.1em", fontWeight: 500 }}>
+                <span
+                  style={{
+                    fontSize: "9px",
+                    letterSpacing: "0.08em",
+                    fontWeight: 500,
+                    fontFamily: "'Sora', system-ui, sans-serif",
+                  }}
+                >
                   {review.helpful + (liked.has(review.id) ? 1 : 0)}
                 </span>
               </button>
@@ -243,38 +272,44 @@ export default function ReviewsSection() {
         ))}
       </div>
 
-      {/* CTA */}
-      <div className="mt-px" style={{ background: "rgba(255,255,255,0.04)" }}>
-        <div
-          className="flex items-center justify-between px-6 py-4"
-          style={{ background: "#0A0A09" }}
+      {/* CTA row */}
+      <div
+        className="flex items-center justify-between mt-4 px-5 py-3"
+        style={{
+          border: "1px solid rgba(255,255,255,0.04)",
+          borderTop: "none",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "10px",
+            color: "rgba(255,255,255,0.20)",
+            letterSpacing: "0.08em",
+            fontFamily: "'Sora', system-ui, sans-serif",
+          }}
         >
-          <p style={{ fontSize: "11px", color: "#444440", letterSpacing: "0.1em" }}>
-            ¿Visitaste un lugar? Comparte tu experiencia.
-          </p>
-          <Link
-            href="/reviews/new"
-            className="px-5 py-2 transition-all duration-200"
-            style={{
-              fontSize: "9px",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              fontWeight: 600,
-              color: "#D4AF37",
-              border: "1px solid rgba(212,175,55,0.2)",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "rgba(212,175,55,0.06)";
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,55,0.4)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "transparent";
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,55,0.2)";
-            }}
-          >
-            Escribir review
-          </Link>
-        </div>
+          ¿Visitaste un lugar? Comparte tu experiencia.
+        </p>
+        <Link
+          href="/reviews/new"
+          className="transition-all duration-200"
+          style={{
+            fontSize: "9px",
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            fontWeight: 600,
+            color: "#C8A44E",
+            fontFamily: "'Sora', system-ui, sans-serif",
+          }}
+          onMouseEnter={(e) =>
+            ((e.currentTarget as HTMLElement).style.color = "#D4AF37")
+          }
+          onMouseLeave={(e) =>
+            ((e.currentTarget as HTMLElement).style.color = "#C8A44E")
+          }
+        >
+          Escribir review →
+        </Link>
       </div>
     </section>
   );

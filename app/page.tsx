@@ -164,6 +164,9 @@ export default function HomePage() {
           {/* ── HOY EN TU CIUDAD ─────────────────────────────────────── */}
           <HoySection places={MOCK_PLACES} />
 
+          {/* ── FEATURED EDITORIAL ───────────────────────────────────── */}
+          <FeaturedSection places={featuredPlaces} />
+
           {/* ── JOYAS ESCONDIDAS ─────────────────────────────────────── */}
           <JoyasSection places={MOCK_PLACES} />
 
@@ -189,9 +192,6 @@ export default function HomePage() {
               <SpotlightSection place={spotlightPlace} />
             </section>
           )}
-
-          {/* ── FEATURED EDITORIAL ───────────────────────────────────── */}
-          <FeaturedSection places={featuredPlaces} />
 
           {/* ── LO QUE ESTÁ PASANDO ──────────────────────────────────── */}
           <AhoraSection places={MOCK_PLACES} />

@@ -39,7 +39,7 @@ function NowCard({ place, index }: NowCardProps) {
   return (
     <Link href={`/places/${place.slug}`} className="block group">
       <article
-        className="flex gap-4 items-start transition-all duration-300"
+        className="flex gap-4 items-start transition-all duration-300 group-hover:pl-2"
         style={{
           padding: "16px 0",
           borderBottom: "1px solid rgba(255,255,255,0.04)",
@@ -62,7 +62,7 @@ function NowCard({ place, index }: NowCardProps) {
         {/* Thumbnail */}
         <div
           className="relative shrink-0 overflow-hidden card-rounded-sm"
-          style={{ width: "72px", height: "72px" }}
+          style={{ width: "80px", height: "80px" }}
         >
           {place.cover_image_url ? (
             <Image
@@ -90,7 +90,7 @@ function NowCard({ place, index }: NowCardProps) {
           {/* Name */}
           <h3
             className="font-serif leading-snug transition-colors duration-200 group-hover:text-white mb-1"
-            style={{ fontSize: "15px", color: "#C8C4BC" }}
+            style={{ fontSize: "15px", color: "#D2CEBC" }}
           >
             {place.name}
           </h3>
@@ -100,7 +100,7 @@ function NowCard({ place, index }: NowCardProps) {
             style={{
               fontSize: "10px",
               letterSpacing: "0.08em",
-              color: "rgba(255,255,255,0.28)",
+              color: "rgba(255,255,255,0.34)",
               fontFamily: "'Sora', system-ui, sans-serif",
               fontWeight: 400,
             }}

@@ -142,7 +142,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
                 {/* Image */}
                 <div
                   className="relative overflow-hidden"
-                  style={{ height: "140px" }}
+                  style={{ height: "180px" }}
                 >
                   {place.cover_image_url ? (
                     <Image
@@ -181,10 +181,11 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
 
                   {/* Plan title */}
                   <p
+                    className="font-serif"
                     style={{
-                      fontSize: "13px",
-                      lineHeight: "1.55",
-                      color: "#D4D0C8",
+                      fontSize: "14px",
+                      lineHeight: "1.5",
+                      color: "#D8D4CC",
                       fontWeight: 400,
                       marginBottom: "8px",
                     }}

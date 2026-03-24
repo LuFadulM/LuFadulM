@@ -270,7 +270,7 @@ export default function PlaceCard({
                 style={{
                   fontSize: "11px",
                   lineHeight: "1.6",
-                  color: "rgba(242,237,232,0.38)",
+                  color: "rgba(242,237,232,0.52)",
                   fontStyle: "italic",
                   fontFamily: "'Playfair Display', Georgia, serif",
                   fontWeight: 400,
@@ -288,7 +288,7 @@ export default function PlaceCard({
                   <span
                     style={{
                       fontSize: "10px",
-                      color: "rgba(212,175,55,0.65)",
+                      color: "rgba(212,175,55,0.85)",
                       fontFamily: "'Sora', system-ui, sans-serif",
                       fontWeight: 500,
                     }}
@@ -302,7 +302,7 @@ export default function PlaceCard({
               {place.price_level && (
                 <span
                   style={{
-                    color: "rgba(255,255,255,0.22)",
+                    color: "rgba(255,255,255,0.32)",
                     fontSize: "10px",
                     letterSpacing: "0.08em",
                     fontFamily: "'Sora', system-ui, sans-serif",
