@@ -1,10 +1,72 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { HyexEvent } from "@/lib/types";
 import CardBadge from "@/components/ui/CardBadge";
+
+// ─── Scroll arrow button (shared) ───────────────────────────────────────────
+
+function ArrowButton({
+  direction,
+  onClick,
+  disabled,
+}: {
+  direction: "left" | "right";
+  onClick: () => void;
+  disabled: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={direction === "left" ? "Ver anteriores" : "Ver más"}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "32px",
+        height: "32px",
+        background: disabled ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",
+        border: `1px solid ${disabled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.12)"}`,
+        borderRadius: "6px",
+        cursor: disabled ? "default" : "pointer",
+        transition: "all 0.2s ease",
+        flexShrink: 0,
+        color: disabled ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.7)",
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled) {
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(212,175,55,0.10)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(212,175,55,0.28)";
+          (e.currentTarget as HTMLButtonElement).style.color = "#D4AF37";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled) {
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.12)";
+          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
+        }
+      }}
+    >
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        aria-hidden="true"
+        style={{ transform: direction === "left" ? "rotate(180deg)" : "rotate(0deg)" }}
+      >
+        <line x1="5" y1="12" x2="19" y2="12" />
+        <polyline points="12 5 19 12 12 19" />
+      </svg>
+    </button>
+  );
+}
 
 interface ExperienciasSectionProps {
   events: HyexEvent[];
@@ -402,8 +464,15 @@ function RecurrenteRow({ event }: { event: HyexEvent }) {
 
 // ─── Main section ────────────────────────────────────────────────────────────
 
+const EXP_CARD_WIDTH = 300;
+const EXP_CARD_GAP = 16;
+const EXP_SCROLL_STEP = (EXP_CARD_WIDTH + EXP_CARD_GAP) * 2;
+
 export default function ExperienciasSection({ events }: ExperienciasSectionProps) {
   const [activeCity, setActiveCity] = useState("Todas");
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   const main = events.filter(
     (e) => (e.bucket === "experiencias" || e.bucket === "planes") &&
@@ -414,6 +483,29 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
     (e) => e.bucket === "recurrentes" &&
     (activeCity === "Todas" || e.city === activeCity)
   );
+
+  const updateScrollState = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener("scroll", updateScrollState, { passive: true });
+    const ro = new ResizeObserver(updateScrollState);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", updateScrollState);
+      ro.disconnect();
+    };
+  }, [updateScrollState, main.length]);
+
+  const scrollLeft = () => scrollRef.current?.scrollBy({ left: -EXP_SCROLL_STEP, behavior: "smooth" });
+  const scrollRight = () => scrollRef.current?.scrollBy({ left: EXP_SCROLL_STEP, behavior: "smooth" });
 
   if (events.length === 0) return null;
 
@@ -432,8 +524,14 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
             Planes que valen el viaje
           </h2>
         </div>
-        <div className="hidden sm:flex items-center gap-3">
-          <CityDropdown value={activeCity} onChange={setActiveCity} />
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:block">
+            <CityDropdown value={activeCity} onChange={setActiveCity} />
+          </div>
+          <div className="flex items-center gap-2">
+            <ArrowButton direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
+            <ArrowButton direction="right" onClick={scrollRight} disabled={!canScrollRight} />
+          </div>
         </div>
       </div>
 
@@ -444,12 +542,72 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
 
       {/* ── Main horizontal scroll ── */}
       {main.length > 0 ? (
-        <div className="scroll-row mb-10">
-          {main.map((event) => (
-            <div key={event.id} className="scroll-row-item">
-              <EventCard event={event} />
-            </div>
-          ))}
+        <div style={{ position: "relative", marginBottom: "40px" }}>
+          <div
+            ref={scrollRef}
+            style={{
+              display: "flex",
+              overflowX: "auto",
+              gap: `${EXP_CARD_GAP}px`,
+              paddingBottom: "8px",
+              paddingRight: "40px",
+              scrollSnapType: "x mandatory",
+              WebkitOverflowScrolling: "touch",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              cursor: "grab",
+            }}
+            onMouseDown={(e) => {
+              const el = scrollRef.current;
+              if (!el) return;
+              el.style.cursor = "grabbing";
+              const startX = e.pageX - el.offsetLeft;
+              const startScroll = el.scrollLeft;
+              const onMove = (ev: MouseEvent) => {
+                el.scrollLeft = startScroll - (ev.pageX - el.offsetLeft - startX);
+              };
+              const onUp = () => {
+                el.style.cursor = "grab";
+                document.removeEventListener("mousemove", onMove);
+                document.removeEventListener("mouseup", onUp);
+              };
+              document.addEventListener("mousemove", onMove);
+              document.addEventListener("mouseup", onUp);
+            }}
+          >
+            {main.map((event) => (
+              <div
+                key={event.id}
+                style={{ width: `${EXP_CARD_WIDTH}px`, flexShrink: 0, scrollSnapAlign: "start" }}
+              >
+                <EventCard event={event} />
+              </div>
+            ))}
+          </div>
+          {/* Right-edge fade */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute", top: 0, right: 0,
+              width: "80px", height: "calc(100% - 8px)",
+              background: "linear-gradient(to right, transparent, #0A0A09 90%)",
+              pointerEvents: "none",
+              opacity: canScrollRight ? 1 : 0,
+              transition: "opacity 0.3s ease",
+            }}
+          />
+          {/* Left-edge fade */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute", top: 0, left: 0,
+              width: "60px", height: "calc(100% - 8px)",
+              background: "linear-gradient(to left, transparent, #0A0A09 90%)",
+              pointerEvents: "none",
+              opacity: canScrollLeft ? 1 : 0,
+              transition: "opacity 0.3s ease",
+            }}
+          />
         </div>
       ) : (
         <div

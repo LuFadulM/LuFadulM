@@ -1,8 +1,70 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Place, Category } from "@/lib/types";
 import AtmosphereCard from "./AtmosphereCard";
+
+// ─── Arrow button ─────────────────────────────────────────────────────────────
+
+function ArrowButton({
+  direction,
+  onClick,
+  disabled,
+}: {
+  direction: "left" | "right";
+  onClick: () => void;
+  disabled: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={direction === "left" ? "Ver anteriores" : "Ver más"}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "32px",
+        height: "32px",
+        background: disabled ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",
+        border: `1px solid ${disabled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.12)"}`,
+        borderRadius: "6px",
+        cursor: disabled ? "default" : "pointer",
+        transition: "all 0.2s ease",
+        flexShrink: 0,
+        color: disabled ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.7)",
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled) {
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(212,175,55,0.10)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(212,175,55,0.28)";
+          (e.currentTarget as HTMLButtonElement).style.color = "#D4AF37";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled) {
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.12)";
+          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
+        }
+      }}
+    >
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        aria-hidden="true"
+        style={{ transform: direction === "left" ? "rotate(180deg)" : "rotate(0deg)" }}
+      >
+        <line x1="5" y1="12" x2="19" y2="12" />
+        <polyline points="12 5 19 12 12 19" />
+      </svg>
+    </button>
+  );
+}
 
 interface HoySectionProps {
   places: Place[];
@@ -247,10 +309,17 @@ function DateFilter({ value, onChange }: { value: string; onChange: (v: string) 
 
 // ─── Main section ──────────────────────────────────────────────────────────
 
+const HOY_CARD_WIDTH = 300;
+const HOY_CARD_GAP = 16;
+const HOY_SCROLL_STEP = (HOY_CARD_WIDTH + HOY_CARD_GAP) * 2;
+
 export default function HoySection({ places }: HoySectionProps) {
   const [activeCity, setActiveCity] = useState("Todas");
   const [activeCategory, setActiveCategory] = useState<string>("Todas");
   const [activeDate, setActiveDate] = useState<string>("");
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   const today = new Date();
   const selectedDate = activeDate ? new Date(activeDate + "T12:00:00") : today;
@@ -259,10 +328,33 @@ export default function HoySection({ places }: HoySectionProps) {
     if (activeCity !== "Todas" && p.city !== activeCity) return false;
     if (activeCategory !== "Todas" && p.category !== activeCategory) return false;
     return true;
-  }).slice(0, 8);
+  }).slice(0, 10);
 
   const cityActive = activeCity !== "Todas";
   const catActive = activeCategory !== "Todas";
+
+  const updateScrollState = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener("scroll", updateScrollState, { passive: true });
+    const ro = new ResizeObserver(updateScrollState);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", updateScrollState);
+      ro.disconnect();
+    };
+  }, [updateScrollState, filtered.length]);
+
+  const scrollLeft = () => scrollRef.current?.scrollBy({ left: -HOY_SCROLL_STEP, behavior: "smooth" });
+  const scrollRight = () => scrollRef.current?.scrollBy({ left: HOY_SCROLL_STEP, behavior: "smooth" });
 
   if (places.length === 0) return null;
 
@@ -281,13 +373,19 @@ export default function HoySection({ places }: HoySectionProps) {
             Hoy en tu ciudad
           </h2>
         </div>
-        <a href="#explore" className="link-gold hidden sm:flex">
-          Ver todo
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </a>
+        <div className="flex items-center gap-3">
+          <a href="#explore" className="link-gold hidden sm:flex">
+            Ver todo
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <div className="flex items-center gap-2">
+            <ArrowButton direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
+            <ArrowButton direction="right" onClick={scrollRight} disabled={!canScrollRight} />
+          </div>
+        </div>
       </div>
 
       {/* ── Filter bar ── */}
@@ -308,7 +406,6 @@ export default function HoySection({ places }: HoySectionProps) {
         />
         <DateFilter value={activeDate} onChange={setActiveDate} />
 
-        {/* Clear all — only when filters are active */}
         {(cityActive || catActive || activeDate) && (
           <button
             onClick={() => { setActiveCity("Todas"); setActiveCategory("Todas"); setActiveDate(""); }}
@@ -335,20 +432,76 @@ export default function HoySection({ places }: HoySectionProps) {
 
       {/* ── Horizontal scroll ── */}
       {filtered.length > 0 ? (
-        <div className="scroll-row">
-          {filtered.map((place) => (
-            <div
-              key={place.id}
-              className="scroll-row-item"
-              style={{ width: "clamp(240px, 30vw, 300px)" }}
-            >
-              <AtmosphereCard
-                place={place}
-                momentTag={getMoment(place, selectedDate)}
-                heightClass="h-[340px]"
-              />
-            </div>
-          ))}
+        <div style={{ position: "relative" }}>
+          <div
+            ref={scrollRef}
+            style={{
+              display: "flex",
+              overflowX: "auto",
+              gap: `${HOY_CARD_GAP}px`,
+              paddingBottom: "8px",
+              paddingRight: "40px",
+              scrollSnapType: "x mandatory",
+              WebkitOverflowScrolling: "touch",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              cursor: "grab",
+            }}
+            onMouseDown={(e) => {
+              const el = scrollRef.current;
+              if (!el) return;
+              el.style.cursor = "grabbing";
+              const startX = e.pageX - el.offsetLeft;
+              const startScroll = el.scrollLeft;
+              const onMove = (ev: MouseEvent) => {
+                el.scrollLeft = startScroll - (ev.pageX - el.offsetLeft - startX);
+              };
+              const onUp = () => {
+                el.style.cursor = "grab";
+                document.removeEventListener("mousemove", onMove);
+                document.removeEventListener("mouseup", onUp);
+              };
+              document.addEventListener("mousemove", onMove);
+              document.addEventListener("mouseup", onUp);
+            }}
+          >
+            {filtered.map((place) => (
+              <div
+                key={place.id}
+                style={{ width: `${HOY_CARD_WIDTH}px`, flexShrink: 0, scrollSnapAlign: "start" }}
+              >
+                <AtmosphereCard
+                  place={place}
+                  momentTag={getMoment(place, selectedDate)}
+                  heightClass="h-[340px]"
+                />
+              </div>
+            ))}
+          </div>
+          {/* Right-edge fade */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute", top: 0, right: 0,
+              width: "80px", height: "calc(100% - 8px)",
+              background: "linear-gradient(to right, transparent, #0A0A09 90%)",
+              pointerEvents: "none",
+              opacity: canScrollRight ? 1 : 0,
+              transition: "opacity 0.3s ease",
+            }}
+          />
+          {/* Left-edge fade */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute", top: 0, left: 0,
+              width: "60px", height: "calc(100% - 8px)",
+              background: "linear-gradient(to left, transparent, #0A0A09 90%)",
+              pointerEvents: "none",
+              opacity: canScrollLeft ? 1 : 0,
+              transition: "opacity 0.3s ease",
+            }}
+          />
         </div>
       ) : (
         <div
