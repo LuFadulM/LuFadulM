@@ -9,11 +9,11 @@ import FilterBar from "@/components/search/FilterBar";
 import PlaceGrid from "@/components/places/PlaceGrid";
 import FeaturedSection from "@/components/places/FeaturedSection";
 import SpotlightSection from "@/components/places/SpotlightSection";
-import ColombiaMap from "@/components/discovery/ColombiaMap";
 import HoySection from "@/components/discovery/HoySection";
 import JoyasSection from "@/components/discovery/JoyasSection";
 import PlanesSection from "@/components/discovery/PlanesSection";
 import AhoraSection from "@/components/discovery/AhoraSection";
+import ReviewsSection from "@/components/reviews/ReviewsSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { rankPlacesWithFeatured } from "@/lib/ranking";
 import { useEffect } from "react";
@@ -98,68 +98,57 @@ export default function HomePage() {
         }}
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 py-20 md:py-28">
-            {/* Left — headline */}
-            <div className="pr-0 md:pr-16 border-r-0 md:border-r md:border-[rgba(255,255,255,0.04)]">
-              <p className="label-micro mb-8" style={{ color: "#D4AF37" }}>
-                {t.hero.label}
-              </p>
+          <div className="py-20 md:py-28 max-w-2xl">
+            <p className="label-micro mb-8" style={{ color: "#D4AF37" }}>
+              {t.hero.label}
+            </p>
 
-              <h1
-                className="font-serif leading-none mb-8"
-                style={{ fontSize: "clamp(52px, 7vw, 88px)", color: "#F5F5F5" }}
-              >
-                {t.hero.title}
-                <br />
-                <span
-                  style={{
-                    fontStyle: "italic",
-                    background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  {t.hero.titleAccent}
-                </span>
-              </h1>
-
-              <div
+            <h1
+              className="font-serif leading-none mb-8"
+              style={{ fontSize: "clamp(52px, 7vw, 88px)", color: "#F5F5F5" }}
+            >
+              {t.hero.title}
+              <br />
+              <span
                 style={{
-                  width: "40px",
-                  height: "1px",
-                  background: "rgba(200,164,78,0.4)",
-                  marginBottom: "24px",
-                }}
-              />
-
-              <p
-                style={{
-                  color: "#AFAFAF",
-                  fontSize: "14px",
-                  lineHeight: "1.8",
-                  fontWeight: 300,
-                  maxWidth: "380px",
-                  marginBottom: "40px",
+                  fontStyle: "italic",
+                  background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
                 }}
               >
-                {t.hero.subtitle}
-              </p>
+                {t.hero.titleAccent}
+              </span>
+            </h1>
 
-              <div className="mb-8">
-                <SearchBar
-                  large
-                  placeholder={t.hero.searchPlaceholder}
-                  onSearch={setSearch}
-                />
-              </div>
-            </div>
+            <div
+              style={{
+                width: "40px",
+                height: "1px",
+                background: "rgba(200,164,78,0.4)",
+                marginBottom: "24px",
+              }}
+            />
 
-            {/* Right — Colombia map */}
-            <div className="hidden md:flex flex-col items-center justify-center pl-8">
-              <ColombiaMap
-                onCitySelect={(c) => setCity(c as FilterCity)}
-                selectedCity={city !== "All" ? city : undefined}
+            <p
+              style={{
+                color: "#AFAFAF",
+                fontSize: "14px",
+                lineHeight: "1.8",
+                fontWeight: 300,
+                maxWidth: "440px",
+                marginBottom: "40px",
+              }}
+            >
+              {t.hero.subtitle}
+            </p>
+
+            <div className="mb-8" style={{ maxWidth: "480px" }}>
+              <SearchBar
+                large
+                placeholder={t.hero.searchPlaceholder}
+                onSearch={setSearch}
               />
             </div>
           </div>
@@ -206,6 +195,9 @@ export default function HomePage() {
 
           {/* ── LO QUE ESTÁ PASANDO ──────────────────────────────────── */}
           <AhoraSection places={MOCK_PLACES} />
+
+          {/* ── REVIEWS ──────────────────────────────────────────────── */}
+          <ReviewsSection />
 
           {/* ── DIVIDER before explore ────────────────────────────────── */}
           <div
