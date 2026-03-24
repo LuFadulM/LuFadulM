@@ -12,18 +12,18 @@ interface PlaceGridProps {
 function SkeletonCard() {
   return (
     <div
-      className="card-rounded overflow-hidden animate-pulse"
-      style={{ background: "#131313", border: "1px solid rgba(255,255,255,0.05)" }}
+      className="card-rounded-lg overflow-hidden animate-pulse"
+      style={{ background: "#111111", border: "1px solid rgba(255,255,255,0.05)" }}
     >
       {/* Image skeleton */}
-      <div style={{ aspectRatio: "16/10", background: "#1A1A18" }} />
+      <div style={{ aspectRatio: "4/3", background: "#181816" }} />
       {/* Content skeleton */}
-      <div className="px-4 pt-3 pb-4">
-        <div style={{ height: "15px", background: "#222", marginBottom: "10px", width: "70%" }} />
-        <div style={{ height: "10px", background: "#1A1A1A", marginBottom: "14px", width: "50%" }} />
+      <div className="px-4 pt-3.5 pb-4">
+        <div style={{ height: "14px", background: "#1E1E1C", marginBottom: "10px", width: "65%" }} />
+        <div style={{ height: "10px", background: "#191917", marginBottom: "16px", width: "45%" }} />
         <div className="flex gap-2">
-          <div style={{ height: "20px", background: "#1E1E1E", width: "70px", borderRadius: "100px" }} />
-          <div style={{ height: "20px", background: "#1A1A1A", width: "55px", borderRadius: "100px" }} />
+          <div style={{ height: "18px", background: "#1C1C1A", width: "64px" }} />
+          <div style={{ height: "18px", background: "#181816", width: "52px" }} />
         </div>
       </div>
     </div>
@@ -55,26 +55,28 @@ export default function PlaceGrid({
 
   if (places.length === 0) {
     return (
-      <div className="py-24 text-center">
+      <div className="py-28 text-center">
         <svg
-          width="32"
-          height="32"
+          width="28"
+          height="28"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1"
-          style={{ color: "#3A3835", margin: "0 auto 16px" }}
+          strokeWidth="1.2"
+          style={{ color: "#2E2C29", margin: "0 auto 20px" }}
+          aria-hidden="true"
         >
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.35-4.35" />
         </svg>
         <p
           style={{
-            color: "#4A4843",
-            fontSize: "12px",
-            letterSpacing: "0.12em",
+            color: "#3E3B38",
+            fontSize: "11px",
+            letterSpacing: "0.14em",
             textTransform: "uppercase",
             fontWeight: 500,
+            fontFamily: "'Sora', system-ui, sans-serif",
           }}
         >
           {emptyMessage}

@@ -220,8 +220,21 @@
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: 28px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+  }
+
+  /* ─── Section spacing tiers ──────────────────────────────────── */
+  .section-gap {
+    margin-bottom: 6rem; /* 96px — standard */
+  }
+
+  .section-gap-lg {
+    margin-bottom: 8rem; /* 128px — before major transitions */
+  }
+
+  .section-gap-sm {
+    margin-bottom: 4rem; /* 64px — tight pairs */
   }
 
   /* ─── Gold line accent before section label ──────────────────── */

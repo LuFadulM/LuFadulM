@@ -49,12 +49,13 @@ function NowCard({ place, index }: NowCardProps) {
         {/* Index */}
         <span
           className="font-serif shrink-0 select-none"
+          aria-hidden="true"
           style={{
-            fontSize: "20px",
-            color: "#1E1E1C",
+            fontSize: "18px",
+            color: "#2E2B28",
             lineHeight: 1,
-            minWidth: "28px",
-            paddingTop: "4px",
+            minWidth: "26px",
+            paddingTop: "5px",
           }}
         >
           {String(index + 1).padStart(2, "0")}
@@ -98,13 +99,18 @@ function NowCard({ place, index }: NowCardProps) {
             style={{
               fontSize: "10px",
               letterSpacing: "0.08em",
-              color: "rgba(255,255,255,0.34)",
+              color: "rgba(255,255,255,0.30)",
               fontFamily: "'Sora', system-ui, sans-serif",
               fontWeight: 400,
             }}
           >
             {place.neighborhood ? `${place.neighborhood} · ` : ""}
             {place.city}
+            {place.category ? (
+              <span style={{ color: "rgba(255,255,255,0.16)", marginLeft: "6px" }}>
+                · {place.category === "Restaurants" ? "Restaurante" : place.category === "Attractions" ? "Atracción" : place.category}
+              </span>
+            ) : null}
           </p>
         </div>
 
@@ -112,8 +118,9 @@ function NowCard({ place, index }: NowCardProps) {
         <div
           className="shrink-0 flex items-center self-center transition-all duration-200 group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
           style={{ color: "#D4AF37" }}
+          aria-hidden="true"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />
           </svg>

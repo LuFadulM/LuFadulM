@@ -109,7 +109,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
                 {/* Image */}
                 <div
                   className="relative overflow-hidden"
-                  style={{ height: "180px" }}
+                  style={{ height: "196px" }}
                 >
                   {place.cover_image_url ? (
                     <Image
