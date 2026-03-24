@@ -63,13 +63,13 @@ export default function SignupPage() {
   if (success) {
     return (
       <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md text-center">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-teal/20 border border-teal/30 flex items-center justify-center">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-teal">
+        <div className="w-full max-w-md text-center" role="status" aria-live="polite">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-teal/20 border border-teal/30 flex items-center justify-center" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-teal" aria-hidden="true">
               <path d="M20 6L9 17l-5-5" />
             </svg>
           </div>
-          <h2 className="text-2xl font-serif text-text mb-2">Check your email</h2>
+          <h2 className="text-2xl font-serif text-text mb-2">Revisa tu email</h2>
           <p className="text-text-muted text-sm mb-6">
             We&apos;ve sent you a confirmation link. Please check your inbox to verify your account.
           </p>
@@ -96,7 +96,11 @@ export default function SignupPage() {
         {/* Card */}
         <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-7">
           {error && (
-            <div className="mb-5 px-4 py-3 rounded bg-coral/10 border border-coral/20 text-coral text-sm">
+            <div
+              id="signup-error"
+              role="alert"
+              className="mb-5 px-4 py-3 rounded bg-coral/10 border border-coral/20 text-coral text-sm"
+            >
               {error}
             </div>
           )}
@@ -105,17 +109,20 @@ export default function SignupPage() {
             {/* Display Name */}
             <div>
               <label className="block text-sm text-text-muted mb-1.5" htmlFor="display_name">
-                Your Name
+                Tu nombre
               </label>
               <input
                 id="display_name"
                 type="text"
                 placeholder="María García"
+                autoComplete="name"
+                aria-describedby={errors.display_name ? "name-error" : undefined}
+                aria-invalid={!!errors.display_name}
                 className={inputClass}
                 {...register("display_name")}
               />
               {errors.display_name && (
-                <p className="mt-1 text-xs text-coral">{errors.display_name.message}</p>
+                <p id="name-error" role="alert" className="mt-1 text-xs text-coral">{errors.display_name.message}</p>
               )}
             </div>
 
@@ -128,45 +135,54 @@ export default function SignupPage() {
                 id="email"
                 type="email"
                 placeholder="you@example.com"
+                autoComplete="email"
+                aria-describedby={errors.email ? "email-error" : undefined}
+                aria-invalid={!!errors.email}
                 className={inputClass}
                 {...register("email")}
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-coral">{errors.email.message}</p>
+                <p id="email-error" role="alert" className="mt-1 text-xs text-coral">{errors.email.message}</p>
               )}
             </div>
 
             {/* Password */}
             <div>
               <label className="block text-sm text-text-muted mb-1.5" htmlFor="password">
-                Password
+                Contraseña
               </label>
               <input
                 id="password"
                 type="password"
                 placeholder="••••••••"
+                autoComplete="new-password"
+                aria-describedby={errors.password ? "password-error" : undefined}
+                aria-invalid={!!errors.password}
                 className={inputClass}
                 {...register("password")}
               />
               {errors.password && (
-                <p className="mt-1 text-xs text-coral">{errors.password.message}</p>
+                <p id="password-error" role="alert" className="mt-1 text-xs text-coral">{errors.password.message}</p>
               )}
             </div>
 
             {/* Confirm Password */}
             <div>
               <label className="block text-sm text-text-muted mb-1.5" htmlFor="confirm_password">
-                Confirm Password
+                Confirmar contraseña
               </label>
               <input
                 id="confirm_password"
                 type="password"
                 placeholder="••••••••"
+                autoComplete="new-password"
+                aria-describedby={errors.confirm_password ? "confirm-error" : undefined}
+                aria-invalid={!!errors.confirm_password}
                 className={inputClass}
                 {...register("confirm_password")}
               />
               {errors.confirm_password && (
-                <p className="mt-1 text-xs text-coral">{errors.confirm_password.message}</p>
+                <p id="confirm-error" role="alert" className="mt-1 text-xs text-coral">{errors.confirm_password.message}</p>
               )}
             </div>
 
@@ -174,15 +190,17 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={isLoading}
+              aria-busy={isLoading || undefined}
               className="w-full py-3 bg-coral text-white rounded-btn text-sm font-medium hover:bg-coral-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>
-                  <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                  <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                   </svg>
-                  Creating account...
+                  <span className="sr-only">Creando cuenta…</span>
+                  <span aria-hidden="true">Creando cuenta…</span>
                 </>
               ) : (
                 "Crear cuenta"
@@ -190,14 +208,14 @@ export default function SignupPage() {
             </button>
 
             <p className="text-xs text-text-dim text-center">
-              By creating an account you agree to our{" "}
-              <a href="#" className="text-coral hover:text-coral-hover transition-colors">
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a href="#" className="text-coral hover:text-coral-hover transition-colors">
-                Privacy Policy
-              </a>
+              Al crear una cuenta aceptas nuestros{" "}
+              <Link href="/legal/terms" className="text-coral hover:text-coral-hover transition-colors">
+                Términos de servicio
+              </Link>{" "}
+              y{" "}
+              <Link href="/legal/privacy" className="text-coral hover:text-coral-hover transition-colors">
+                Política de privacidad
+              </Link>
               .
             </p>
           </form>

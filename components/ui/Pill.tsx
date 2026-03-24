@@ -14,6 +14,7 @@ export default function Pill({ label, active = false, onClick, className }: Pill
   return (
     <button
       onClick={onClick}
+      aria-pressed={active}
       className={cn("transition-all duration-200 whitespace-nowrap border", className)}
       style={{
         padding: "6px 16px",

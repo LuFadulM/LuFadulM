@@ -23,7 +23,7 @@ interface PlaceCardProps {
 
 function StarIcon() {
   return (
-    <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+    <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style={{ flexShrink: 0 }}>
       <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
     </svg>
   );
@@ -189,9 +189,13 @@ export default function PlaceCard({
             {/* Row: rating + price */}
             <div className="flex items-center justify-between mb-3">
               {place.avg_rating > 0 ? (
-                <div className="flex items-center gap-2">
+                <div
+                  className="flex items-center gap-2"
+                  aria-label={`Calificación: ${formatRating(place.avg_rating)} de 5`}
+                >
                   <RatingDisplay rating={place.avg_rating} mode="dots" />
                   <span
+                    aria-hidden="true"
                     style={{
                       fontSize: "10px",
                       color: "rgba(212,175,55,0.85)",
@@ -207,6 +211,7 @@ export default function PlaceCard({
               )}
               {place.price_level && (
                 <span
+                  aria-label={`Nivel de precio: ${place.price_level}`}
                   style={{
                     color: "rgba(255,255,255,0.32)",
                     fontSize: "10px",

@@ -43,15 +43,23 @@ function NavLink({ href, label }: { href: string; label: string }) {
 function ActividadesDropdown() {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
-  // Close on outside click
+  // Close on outside click or Escape
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
+    const keyHandler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setOpen(false); triggerRef.current?.focus(); }
+    };
     document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("keydown", keyHandler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("keydown", keyHandler);
+    };
   }, [open]);
 
   return (
@@ -63,6 +71,10 @@ function ActividadesDropdown() {
     >
       {/* Trigger */}
       <button
+        ref={triggerRef}
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-controls="actividades-menu"
         className="px-3 xl:px-4 py-2 flex items-center gap-1.5 transition-colors duration-200 whitespace-nowrap"
         style={{
           ...NAV_LINK_STYLE,
@@ -71,6 +83,7 @@ function ActividadesDropdown() {
           border: "none",
           cursor: "pointer",
         }}
+        onClick={() => setOpen((v) => !v)}
       >
         Actividades
         <svg
@@ -80,6 +93,7 @@ function ActividadesDropdown() {
           fill="none"
           stroke="currentColor"
           strokeWidth="2.5"
+          aria-hidden="true"
           style={{
             transition: "transform 0.2s ease",
             transform: open ? "rotate(180deg)" : "rotate(0deg)",
@@ -93,11 +107,14 @@ function ActividadesDropdown() {
       {/* Dropdown panel */}
       {open && (
         <div
+          id="actividades-menu"
+          role="menu"
           className="absolute top-full left-1/2 pt-3"
           style={{ transform: "translateX(-50%)", minWidth: "180px", zIndex: 50 }}
         >
           {/* Arrow */}
           <div
+            aria-hidden="true"
             style={{
               position: "absolute",
               top: "8px",
@@ -123,6 +140,7 @@ function ActividadesDropdown() {
               <Link
                 key={item.href}
                 href={item.href}
+                role="menuitem"
                 onClick={() => setOpen(false)}
                 className="flex items-center justify-between px-5 py-3 transition-all duration-150 group"
                 style={{
@@ -149,6 +167,7 @@ function ActividadesDropdown() {
               >
                 {item.label}
                 <span
+                  aria-hidden="true"
                   style={{
                     color: "rgba(212,175,55,0.4)",
                     fontSize: "11px",
@@ -260,11 +279,13 @@ export default function Header() {
           {/* Right — lang switcher + auth */}
           <div className="hidden lg:flex items-center gap-4 shrink-0">
             {/* Language toggle */}
-            <div className="flex items-center" style={{ gap: "1px" }}>
+            <div className="flex items-center" role="group" aria-label="Seleccionar idioma" style={{ gap: "1px" }}>
               {(["es", "en"] as Locale[]).map((l, i) => (
                 <React.Fragment key={l}>
                   <button
                     onClick={() => setLocale(l)}
+                    aria-label={l === "es" ? "Español" : "English"}
+                    aria-pressed={locale === l}
                     style={{
                       fontSize: "10px",
                       letterSpacing: "0.14em",
@@ -281,7 +302,7 @@ export default function Header() {
                     {l.toUpperCase()}
                   </button>
                   {i === 0 && (
-                    <span style={{ color: "#3A3A3A", fontSize: "10px" }}>·</span>
+                    <span aria-hidden="true" style={{ color: "#3A3A3A", fontSize: "10px" }}>·</span>
                   )}
                 </React.Fragment>
               ))}
@@ -352,11 +373,13 @@ export default function Header() {
 
           {/* Mobile right — lang + hamburger */}
           <div className="lg:hidden flex items-center gap-3">
-            <div className="flex items-center" style={{ gap: "1px" }}>
+            <div className="flex items-center" role="group" aria-label="Seleccionar idioma" style={{ gap: "1px" }}>
               {(["es", "en"] as Locale[]).map((l, i) => (
                 <React.Fragment key={l}>
                   <button
                     onClick={() => setLocale(l)}
+                    aria-label={l === "es" ? "Español" : "English"}
+                    aria-pressed={locale === l}
                     style={{
                       fontSize: "10px",
                       letterSpacing: "0.12em",
@@ -372,7 +395,7 @@ export default function Header() {
                     {l.toUpperCase()}
                   </button>
                   {i === 0 && (
-                    <span style={{ color: "#3A3A3A", fontSize: "10px" }}>·</span>
+                    <span aria-hidden="true" style={{ color: "#3A3A3A", fontSize: "10px" }}>·</span>
                   )}
                 </React.Fragment>
               ))}
@@ -381,7 +404,8 @@ export default function Header() {
               className="p-2 transition-colors duration-200"
               style={{ color: "#AFAFAF" }}
               onClick={() => setMobileOpen(true)}
-              aria-label="Abrir menú"
+              aria-label="Abrir menú de navegación"
+              aria-expanded={mobileOpen}
             >
               <svg
                 width="20"
@@ -390,6 +414,7 @@ export default function Header() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
+                aria-hidden="true"
               >
                 <path d="M3 8h18M3 16h18" />
               </svg>

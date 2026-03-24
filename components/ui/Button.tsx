@@ -46,6 +46,7 @@ export default function Button({
         className
       )}
       disabled={disabled || isLoading}
+      aria-busy={isLoading || undefined}
       {...props}
     >
       {isLoading ? (
@@ -55,6 +56,7 @@ export default function Button({
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <circle
               className="opacity-25"
@@ -70,7 +72,8 @@ export default function Button({
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
             />
           </svg>
-          Loading...
+          <span className="sr-only">Cargando…</span>
+          <span aria-hidden="true">{children}</span>
         </>
       ) : (
         children
