@@ -86,7 +86,7 @@ export default function JoyasSection({ places }: JoyasSectionProps) {
         className="mt-6 text-center"
         style={{
           fontSize: "11px",
-          color: "rgba(255,255,255,0.18)",
+          color: "rgba(255,255,255,0.28)",
           fontStyle: "italic",
           fontFamily: "'Playfair Display', Georgia, serif",
           letterSpacing: "0.02em",

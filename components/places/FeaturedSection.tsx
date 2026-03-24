@@ -192,25 +192,26 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
 
   return (
     <section className="mb-24">
-      <div className="flex items-end justify-between mb-10 pb-4 border-b border-[rgba(255,255,255,0.04)]">
+      <div className="discovery-header">
         <div>
-          <p className="label-micro mb-3">{t.featured.sectionLabel}</p>
-          <h2 className="text-3xl font-serif" style={{ color: "#D4D0C8" }}>
+          <div className="section-label-bar">
+            <span className="label-micro">{t.featured.sectionLabel}</span>
+          </div>
+          <h2
+            className="font-serif"
+            style={{ fontSize: "clamp(22px, 3vw, 30px)", color: "#D4D0C8" }}
+          >
             {t.featured.sectionTitle}
           </h2>
         </div>
         <Link
           href="/?featured=true"
-          style={{
-            fontSize: "11px",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#C8A44E",
-            fontWeight: 500,
-          }}
-          className="transition-opacity duration-200 hover:opacity-70 whitespace-nowrap"
+          className="label-micro transition-colors duration-200 hidden sm:block"
+          style={{ color: "#666666" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#D4AF37")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "#666666")}
         >
-          {t.featured.viewAll}
+          {t.featured.viewAll} →
         </Link>
       </div>
 

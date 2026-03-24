@@ -54,16 +54,16 @@
 }
 
 @layer components {
-  /* ─── Card hover — original ──────────────────────────────────── */
+  /* ─── Card hover — image-only zoom + gold glow ───────────────── */
   .card-hover {
-    transition: box-shadow 0.35s cubic-bezier(.2,0,.2,1),
-                transform 0.35s cubic-bezier(.2,0,.2,1);
-    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.08);
+    transition: box-shadow 0.4s cubic-bezier(.2,0,.2,1),
+                border-color 0.4s ease;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35);
   }
 
   .card-hover:hover {
-    box-shadow: 0 24px 60px rgba(212, 175, 55, 0.18), 0 8px 24px rgba(0, 0, 0, 0.5);
-    transform: scale(1.03);
+    box-shadow: 0 28px 64px rgba(0,0,0,0.65), 0 0 0 1px rgba(212,175,55,0.12);
+    border-color: rgba(212,175,55,0.14) !important;
   }
 
   /* ─── Atmosphere card — for discovery sections ───────────────── */
@@ -74,11 +74,11 @@
   }
 
   .atmo-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-3px);
     box-shadow:
-      0 40px 80px rgba(0, 0, 0, 0.7),
-      0 0 0 1px rgba(212, 175, 55, 0.10),
-      0 0 60px rgba(212, 175, 55, 0.04);
+      0 24px 56px rgba(0, 0, 0, 0.65),
+      0 0 0 1px rgba(212, 175, 55, 0.12),
+      0 0 40px rgba(212, 175, 55, 0.04);
   }
 
   .atmo-card .atmo-image {
@@ -148,7 +148,7 @@
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.42);
     background: rgba(255, 255, 255, 0.05);
     padding: 3px 9px;
     display: inline-flex;
