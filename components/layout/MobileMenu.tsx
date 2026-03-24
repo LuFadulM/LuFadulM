@@ -19,9 +19,9 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
     {
       label: t.mobile.discover,
       links: [
-        { href: "/", label: "Explorar" },
-        { href: "/mapa", label: t.nav.map },
-        { href: "/saved", label: t.nav.saved },
+        { href: "/",        label: "Explorar" },
+        { href: "/reviews", label: "Reviews" },
+        { href: "/saved",   label: t.nav.saved },
       ],
     },
     {
@@ -33,18 +33,6 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
         { href: "/?category=Nightlife",    label: "Vida Nocturna" },
         { href: "/?category=Hotels",       label: "Hoteles" },
         { href: "/?category=Attractions",  label: "Atracciones" },
-      ],
-    },
-    {
-      label: t.mobile.cities,
-      links: [
-        { href: "/ciudades", label: t.mobile.allCities },
-        { href: "/city/bogota", label: "Bogotá" },
-        { href: "/city/medellin", label: "Medellín" },
-        { href: "/city/cartagena", label: "Cartagena" },
-        { href: "/city/cali", label: "Cali" },
-        { href: "/city/santa-marta", label: "Santa Marta" },
-        { href: "/city/barranquilla", label: "Barranquilla" },
       ],
     },
     {

@@ -250,12 +250,11 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-0 flex-1 justify-center">
-            <NavLink href="/"           label="Explorar" />
-            <NavLink href="/ciudades"   label="Ciudades" />
+            <NavLink href="/"          label="Explorar" />
             <ActividadesDropdown />
-            <NavLink href="/mapa"       label="Mapa" />
-            <NavLink href="/about"      label="Nosotros" />
-            <NavLink href="/magazine"   label="Magazine" />
+            <NavLink href="/reviews"   label="Reviews" />
+            <NavLink href="/about"     label="Nosotros" />
+            <NavLink href="/magazine"  label="Magazine" />
           </nav>
 
           {/* Right — lang switcher + auth */}
