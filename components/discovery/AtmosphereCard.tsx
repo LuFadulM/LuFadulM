@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Place } from "@/lib/types";
+import CardBadge from "@/components/ui/CardBadge";
 
 interface AtmosphereCardProps {
   place: Place;
@@ -39,7 +40,7 @@ export default function AtmosphereCard({
       <article
         className={`atmo-card card-rounded-lg relative overflow-hidden ${heightClass}`}
         style={{
-          background: "#101010",
+          background: "#111111",
           border: "1px solid rgba(255,255,255,0.05)",
         }}
       >
@@ -87,14 +88,17 @@ export default function AtmosphereCard({
 
           {/* Gem or moment tag */}
           {isGem ? (
-            <span className="gem-badge">
-              <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              Joya
-            </span>
+            <CardBadge
+              label="Joya"
+              variant="editorial"
+              icon={
+                <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              }
+            />
           ) : momentTag ? (
-            <span className="moment-tag">{momentTag}</span>
+            <CardBadge label={momentTag} variant="moment" />
           ) : null}
         </div>
 

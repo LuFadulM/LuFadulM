@@ -8,6 +8,8 @@ import { formatRating } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { trackFeaturedEvent } from "@/lib/analytics";
 import type { AnalyticsSurface } from "@/lib/types";
+import RatingDisplay from "@/components/ui/RatingDisplay";
+import CardBadge from "@/components/ui/CardBadge";
 
 interface PlaceCardProps {
   place: Place;
@@ -27,80 +29,6 @@ function StarIcon() {
   );
 }
 
-function FlameIcon() {
-  return (
-    <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
-      <path d="M12 2C9 7 6 9.5 6 13a6 6 0 0 0 12 0c0-2.5-1.5-5-3-6 0 1.5-.5 2.5-1.5 3.5C14 10 12 2 12 2z" />
-    </svg>
-  );
-}
-
-function LeafIcon() {
-  return (
-    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" style={{ flexShrink: 0 }}>
-      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z" />
-      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-    </svg>
-  );
-}
-
-// ─── Badge config ──────────────────────────────────────────────────────────
-
-type BadgeVariant = "premium" | "tendencia" | "outdoor";
-
-const BADGE_CONFIG: Record<
-  BadgeVariant,
-  { label: string; icon: React.ReactNode; bg: string; color: string; border: string }
-> = {
-  premium: {
-    label: "Premium",
-    icon: <StarIcon />,
-    bg: "rgba(212,175,55,0.14)",
-    color: "#E0C060",
-    border: "rgba(212,175,55,0.35)",
-  },
-  tendencia: {
-    label: "Tendencia",
-    icon: <FlameIcon />,
-    bg: "rgba(215,65,65,0.18)",
-    color: "#FF7575",
-    border: "rgba(215,65,65,0.38)",
-  },
-  outdoor: {
-    label: "Outdoor",
-    icon: <LeafIcon />,
-    bg: "rgba(60,180,110,0.15)",
-    color: "#5CC98A",
-    border: "rgba(60,180,110,0.35)",
-  },
-};
-
-function BadgePill({ variant }: { variant: BadgeVariant }) {
-  const cfg = BADGE_CONFIG[variant];
-  return (
-    <span
-      className="tag-pill"
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "5px",
-        background: cfg.bg,
-        color: cfg.color,
-        border: `1px solid ${cfg.border}`,
-        padding: "3px 10px",
-        fontSize: "8px",
-        fontWeight: 700,
-        letterSpacing: "0.14em",
-        textTransform: "uppercase",
-        backdropFilter: "blur(4px)",
-      }}
-    >
-      {cfg.icon}
-      {cfg.label}
-    </span>
-  );
-}
-
 // ─── Category tag colours ──────────────────────────────────────────────────
 
 const CATEGORY_TAG: Record<string, { color: string; bg: string; border: string }> = {
@@ -111,29 +39,6 @@ const CATEGORY_TAG: Record<string, { color: string; bg: string; border: string }
   Hotels:      { color: "#5CC9AD", bg: "rgba(92,201,173,0.10)", border: "rgba(92,201,173,0.18)" },
   Attractions: { color: "#5CC98A", bg: "rgba(92,201,138,0.10)", border: "rgba(92,201,138,0.18)" },
 };
-
-// ─── Rating dots ───────────────────────────────────────────────────────────
-
-function RatingDots({ rating }: { rating: number }) {
-  const filled = Math.round(rating);
-  return (
-    <span className="flex items-center gap-[3px]" aria-label={`${rating} / 5`}>
-      {Array.from({ length: 5 }, (_, i) => (
-        <span
-          key={i}
-          style={{
-            display: "inline-block",
-            width: "4px",
-            height: "4px",
-            borderRadius: "50% !important",
-            background: i < filled ? "#D4AF37" : "rgba(255,255,255,0.12)",
-            flexShrink: 0,
-          }}
-        />
-      ))}
-    </span>
-  );
-}
 
 // ─── Editorial copy ────────────────────────────────────────────────────────
 
@@ -164,10 +69,11 @@ export default function PlaceCard({
     border: "rgba(255,255,255,0.08)",
   };
 
-  let badge: BadgeVariant | null = null;
-  if (isFeaturedPlacement) badge = "premium";
-  else if (place.is_featured) badge = "tendencia";
-  else if (place.category === "Attractions") badge = "outdoor";
+  type BadgeConfig = { label: string; variant: "editorial" | "status"; icon?: React.ReactNode } | null;
+  let badge: BadgeConfig = null;
+  if (isFeaturedPlacement) badge = { label: "Premium", variant: "editorial", icon: <StarIcon /> };
+  else if (place.is_featured) badge = { label: "Tendencia", variant: "status" };
+  else if (place.category === "Attractions") badge = { label: "Outdoor", variant: "editorial" };
 
   const shortCopy = getShortCopy(place.description);
 
@@ -198,7 +104,7 @@ export default function PlaceCard({
     <div ref={cardRef}>
       <Link href={`/places/${place.slug}`} className="block group" onClick={handleClick}>
         <article
-          className="atmo-card card-rounded overflow-hidden h-full"
+          className="atmo-card card-rounded-lg overflow-hidden h-full"
           style={{
             background: "#111111",
             border: "1px solid rgba(255,255,255,0.05)",
@@ -248,7 +154,7 @@ export default function PlaceCard({
             {/* Badge */}
             {badge && (
               <div className="absolute top-3 right-3">
-                <BadgePill variant={badge} />
+                <CardBadge label={badge.label} variant={badge.variant} icon={badge.icon} />
               </div>
             )}
           </div>
@@ -284,7 +190,7 @@ export default function PlaceCard({
             <div className="flex items-center justify-between mb-3">
               {place.avg_rating > 0 ? (
                 <div className="flex items-center gap-2">
-                  <RatingDots rating={place.avg_rating} />
+                  <RatingDisplay rating={place.avg_rating} mode="dots" />
                   <span
                     style={{
                       fontSize: "10px",

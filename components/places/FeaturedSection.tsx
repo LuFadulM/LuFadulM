@@ -6,24 +6,10 @@ import Image from "next/image";
 import { Place } from "@/lib/types";
 import { formatRating } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import RatingDisplay from "@/components/ui/RatingDisplay";
 
 interface FeaturedSectionProps {
   places: Place[];
-}
-
-function Stars({ rating }: { rating: number }) {
-  return (
-    <span>
-      {Array.from({ length: 5 }, (_, i) => (
-        <span
-          key={i}
-          style={{ color: i < Math.round(rating) ? "#C8A44E" : "#2A2A28", fontSize: "11px" }}
-        >
-          ★
-        </span>
-      ))}
-    </span>
-  );
 }
 
 function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editorialPick: string; reviews: string }) {
@@ -111,7 +97,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
             </p>
           )}
           <div className="flex items-center gap-3">
-            <Stars rating={place.avg_rating} />
+            <RatingDisplay rating={place.avg_rating} mode="stars" />
             <span style={{ color: "rgba(242,237,232,0.85)", fontSize: "12px", fontWeight: 500 }}>
               {formatRating(place.avg_rating)}
             </span>

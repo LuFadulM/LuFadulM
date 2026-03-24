@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import RatingDisplay from "@/components/ui/RatingDisplay";
 
 const MOCK_REVIEWS = [
   {
@@ -78,23 +79,6 @@ const MOCK_REVIEWS = [
   },
 ];
 
-function StarRow({ rating }: { rating: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} width="9" height="9" viewBox="0 0 24 24" fill="none">
-          <polygon
-            points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-            fill={i < rating ? "#C8A44E" : "#252522"}
-            stroke={i < rating ? "#C8A44E" : "#252522"}
-            strokeWidth="1"
-          />
-        </svg>
-      ))}
-    </div>
-  );
-}
-
 export default function ReviewsSection() {
   const [liked, setLiked] = useState<Set<string>>(new Set());
 
@@ -137,19 +121,11 @@ export default function ReviewsSection() {
         {MOCK_REVIEWS.map((review) => (
           <article
             key={review.id}
-            className="flex flex-col gap-4 transition-all duration-300"
+            className="atmo-card card-rounded-lg flex flex-col gap-4"
             style={{
               background: "#111111",
               border: "1px solid rgba(255,255,255,0.05)",
               padding: "20px",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,55,0.10)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 40px rgba(0,0,0,0.5)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.05)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "none";
             }}
           >
             {/* Place + rating */}
@@ -174,7 +150,7 @@ export default function ReviewsSection() {
                   {review.category} · {review.city}
                 </p>
               </div>
-              <StarRow rating={review.rating} />
+              <RatingDisplay rating={review.rating} mode="starsvg" />
             </div>
 
             {/* Thin rule */}
