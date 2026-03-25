@@ -12,7 +12,7 @@ const VARIANT_STYLES: Record<
 > = {
   /** Gold — editorial picks, gems, premium curation */
   editorial: {
-    color: "#C8A44E",
+    color: "#B1987C",
     bg: "rgba(177,152,124,0.08)",
     border: "rgba(177,152,124,0.22)",
   },
@@ -28,11 +28,11 @@ const VARIANT_STYLES: Record<
     bg: "rgba(255,255,255,0.05)",
     border: "rgba(255,255,255,0.10)",
   },
-  /** Green — live / nuevo (only for freshness signal) */
+  /** Sage — live / nuevo (only for freshness signal) */
   live: {
-    color: "#7EC8A4",
-    bg: "rgba(126,200,164,0.10)",
-    border: "rgba(126,200,164,0.25)",
+    color: "#8A9E6A",
+    bg: "rgba(138,158,106,0.10)",
+    border: "rgba(138,158,106,0.25)",
   },
 };
 
@@ -65,7 +65,7 @@ export default function CardBadge({ label, variant = "editorial", icon }: CardBa
             width: "5px",
             height: "5px",
             borderRadius: "50%",
-            background: "#7EC8A4",
+            background: "#8A9E6A",
             flexShrink: 0,
             animation: "pulse-dot 2s ease-in-out infinite",
             display: "inline-block",
