@@ -21,7 +21,7 @@ function RatingDots({ rating, size }: { rating: number; size: "sm" | "md" }) {
             width: px,
             height: px,
             borderRadius: "50%",
-            background: i < filled ? "#D4AF37" : "rgba(255,255,255,0.12)",
+            background: i < filled ? "#B1987C" : "rgba(255,255,255,0.12)",
             flexShrink: 0,
           }}
         />

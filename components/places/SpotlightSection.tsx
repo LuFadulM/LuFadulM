@@ -40,7 +40,7 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
               sizes="100vw"
             />
           ) : (
-            <div className="absolute inset-0" style={{ background: "#111110" }} />
+            <div className="absolute inset-0" style={{ background: "#252219" }} />
           )}
 
           {/* Gradient — stronger left side for text legibility */}
@@ -124,7 +124,7 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
                 fontWeight: 600,
-                color: "#D4AF37",
+                color: "#B1987C",
                 fontFamily: "'Sora', system-ui, sans-serif",
               }}>
                 Ver perfil
@@ -134,7 +134,7 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
                 height="12"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#D4AF37"
+                stroke="#B1987C"
                 strokeWidth="2"
                 className="transition-transform duration-200 group-hover:translate-x-1"
                 aria-hidden="true"

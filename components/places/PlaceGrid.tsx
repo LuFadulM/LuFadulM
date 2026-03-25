@@ -16,14 +16,14 @@ function SkeletonCard() {
       style={{ background: "#111111", border: "1px solid rgba(255,255,255,0.05)" }}
     >
       {/* Image skeleton */}
-      <div style={{ aspectRatio: "4/3", background: "#181816" }} />
+      <div style={{ aspectRatio: "4/3", background: "#302C26" }} />
       {/* Content skeleton */}
       <div className="px-4 pt-3.5 pb-4">
         <div style={{ height: "14px", background: "#1E1E1C", marginBottom: "10px", width: "65%" }} />
         <div style={{ height: "10px", background: "#191917", marginBottom: "16px", width: "45%" }} />
         <div className="flex gap-2">
           <div style={{ height: "18px", background: "#1C1C1A", width: "64px" }} />
-          <div style={{ height: "18px", background: "#181816", width: "52px" }} />
+          <div style={{ height: "18px", background: "#302C26", width: "52px" }} />
         </div>
       </div>
     </div>

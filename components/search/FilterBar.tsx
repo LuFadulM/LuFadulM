@@ -37,7 +37,7 @@ const prices: FilterPrice[] = ["All", "$", "$$", "$$$", "$$$$"];
 const sorts: SortOption[] = ["Rating", "Newest", "Most Reviewed"];
 
 const selectStyle: React.CSSProperties = {
-  background: "#111110",
+  background: "#252219",
   border: "1px solid rgba(255,255,255,0.06)",
   color: "#706D64",
   fontSize: "10px",
@@ -88,7 +88,7 @@ export default function FilterBar({
         aria-label="Filtrar por ciudad"
       >
         {cities.map((c) => (
-          <option key={c} value={c} style={{ background: "#111110" }}>
+          <option key={c} value={c} style={{ background: "#252219" }}>
             {c === "All" ? t.filter.allCities : c}
           </option>
         ))}
@@ -102,7 +102,7 @@ export default function FilterBar({
         aria-label="Filtrar por precio"
       >
         {prices.map((p) => (
-          <option key={p} value={p} style={{ background: "#111110" }}>
+          <option key={p} value={p} style={{ background: "#252219" }}>
             {p === "All" ? t.filter.allPrices : p}
           </option>
         ))}
@@ -115,9 +115,9 @@ export default function FilterBar({
         style={selectStyle}
         aria-label="Ordenar por"
       >
-        <option value="Rating" style={{ background: "#111110" }}>{t.filter.sortRating}</option>
-        <option value="Newest" style={{ background: "#111110" }}>{t.filter.sortNewest}</option>
-        <option value="Most Reviewed" style={{ background: "#111110" }}>{t.filter.sortReviewed}</option>
+        <option value="Rating" style={{ background: "#252219" }}>{t.filter.sortRating}</option>
+        <option value="Newest" style={{ background: "#252219" }}>{t.filter.sortNewest}</option>
+        <option value="Most Reviewed" style={{ background: "#252219" }}>{t.filter.sortReviewed}</option>
       </select>
     </div>
   );

@@ -118,9 +118,9 @@ function FeaturedStory({ story }: { story: Story }) {
           <div style={{ position: "absolute", top: 24, left: 24 }}>
             <span style={{
               fontSize: "8px", letterSpacing: "0.22em", textTransform: "uppercase",
-              fontWeight: 700, color: "#C6A85C",
-              background: "rgba(198,168,92,0.12)",
-              border: "1px solid rgba(198,168,92,0.30)",
+              fontWeight: 700, color: "#B1987C",
+              background: "rgba(177,152,124,0.12)",
+              border: "1px solid rgba(177,152,124,0.30)",
               padding: "4px 10px", backdropFilter: "blur(4px)",
             }}>
               {story.guide}
@@ -132,7 +132,7 @@ function FeaturedStory({ story }: { story: Story }) {
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px" }}>
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
-            color: "#C6A85C", fontWeight: 700,
+            color: "#B1987C", fontWeight: 700,
             fontFamily: "'Sora', system-ui, sans-serif", marginBottom: "12px",
           }}>
             {story.category} · {story.readTime} de lectura
@@ -160,12 +160,12 @@ function FeaturedStory({ story }: { story: Story }) {
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={{
               fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase",
-              fontWeight: 700, color: "#C6A85C",
+              fontWeight: 700, color: "#B1987C",
               fontFamily: "'Sora', system-ui, sans-serif",
             }}>
               Leer historia
             </span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C6A85C" strokeWidth="2"
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#B1987C" strokeWidth="2"
               style={{ transition: "transform 0.3s ease", transform: hovered ? "translateX(4px)" : "translateX(0)" }} aria-hidden="true">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
@@ -186,7 +186,7 @@ function SmallStory({ story }: { story: Story }) {
     <Link href={`/places/${story.place.slug}`} className="block group h-full">
       <article
         style={{
-          background: "#181816",
+          background: "#302C26",
           borderRadius: "14px",
           overflow: "hidden",
           height: "100%",
@@ -228,7 +228,7 @@ function SmallStory({ story }: { story: Story }) {
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "18px 20px 20px" }}>
           <p style={{
             fontSize: "8px", letterSpacing: "0.20em", textTransform: "uppercase",
-            color: "#C6A85C", fontWeight: 700,
+            color: "#B1987C", fontWeight: 700,
             fontFamily: "'Sora', system-ui, sans-serif", marginBottom: "7px",
             textShadow: "0 1px 8px rgba(0,0,0,0.9)",
           }}>
@@ -237,7 +237,7 @@ function SmallStory({ story }: { story: Story }) {
           <h3 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
             fontSize: "17px", fontWeight: 600,
-            color: hovered ? "#C6A85C" : "#F0EBE4",
+            color: hovered ? "#B1987C" : "#F0EBE4",
             lineHeight: "1.28", letterSpacing: "-0.01em",
             transition: "color 0.25s ease",
             textShadow: "0 1px 12px rgba(0,0,0,0.9)",
@@ -271,10 +271,10 @@ export default function MagazineSection({ places }: MagazineSectionProps) {
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#C6A85C", marginBottom: "8px",
+            color: "#B1987C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
             Editorial
           </p>
           <h2 className="font-serif" style={{ fontSize: "clamp(22px, 3vw, 32px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}>

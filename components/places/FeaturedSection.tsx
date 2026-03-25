@@ -32,7 +32,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
             sizes="(max-width: 640px) 100vw, 60vw"
           />
         ) : (
-          <div className="absolute inset-0" style={{ background: "#111110" }} />
+          <div className="absolute inset-0" style={{ background: "#252219" }} />
         )}
 
         {/* Gradient for readability */}
@@ -51,9 +51,9 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               fontWeight: 700,
-              color: "#C8A44E",
-              background: "rgba(200,164,78,0.08)",
-              border: "1px solid rgba(200,164,78,0.22)",
+              color: "#B1987C",
+              background: "rgba(177,152,124,0.08)",
+              border: "1px solid rgba(177,152,124,0.22)",
               padding: "4px 10px",
               display: "inline-block",
               backdropFilter: "blur(4px)",
@@ -124,7 +124,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
                 {place.review_count} {reviews}
               </span>
             </div>
-            <span style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: 600, color: "#D4AF37", fontFamily: "'Sora', system-ui, sans-serif" }}>
+            <span style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: 600, color: "#B1987C", fontFamily: "'Sora', system-ui, sans-serif" }}>
               Ver lugar <span aria-hidden="true">→</span>
             </span>
           </div>
@@ -154,7 +154,7 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
             sizes="(max-width: 640px) 100vw, 30vw"
           />
         ) : (
-          <div className="absolute inset-0" style={{ background: "#111110" }} />
+          <div className="absolute inset-0" style={{ background: "#252219" }} />
         )}
 
         <div
@@ -170,7 +170,7 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
             style={{
               fontSize: "9px",
               letterSpacing: "0.16em",
-              color: "rgba(200,164,78,0.45)",
+              color: "rgba(177,152,124,0.45)",
               fontWeight: 700,
               fontFamily: "'Sora', system-ui, sans-serif",
             }}
@@ -233,7 +233,7 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
           href="/?featured=true"
           className="label-micro transition-colors duration-200 hidden sm:block"
           style={{ color: "rgba(255,255,255,0.30)" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#C6A85C")}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#B1987C")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.30)")}
         >
           {t.featured.viewAll} →

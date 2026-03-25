@@ -71,9 +71,9 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "#C6A85C";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C6A85C";
-          (e.currentTarget as HTMLButtonElement).style.color = "#0A0A09";
+          (e.currentTarget as HTMLButtonElement).style.background = "#B1987C";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "#B1987C";
+          (e.currentTarget as HTMLButtonElement).style.color = "#2A2925";
         }
       }}
       onMouseLeave={(e) => {
@@ -106,7 +106,7 @@ function PlanCardItem({ plan }: { plan: PlanCard }) {
           position: "relative",
           overflow: "hidden",
           borderRadius: "14px",
-          background: "#181816",
+          background: "#302C26",
           border: "1px solid rgba(255,255,255,0.06)",
           transform: hovered ? "translateY(-4px)" : "translateY(0)",
           boxShadow: hovered
@@ -231,10 +231,10 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#C6A85C", marginBottom: "8px",
+            color: "#B1987C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
             Para ti
           </p>
           <h2 className="font-serif" style={{
@@ -298,7 +298,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
         <div aria-hidden="true" style={{
           position: "absolute", top: 0, right: 0,
           width: "100px", height: "calc(100% - 12px)",
-          background: "linear-gradient(to right, transparent, #131312 90%)",
+          background: "linear-gradient(to right, transparent, #2D2922 90%)",
           pointerEvents: "none",
           opacity: canScrollRight ? 1 : 0,
           transition: "opacity 0.3s ease",
@@ -306,7 +306,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
         <div aria-hidden="true" style={{
           position: "absolute", top: 0, left: 0,
           width: "60px", height: "calc(100% - 12px)",
-          background: "linear-gradient(to left, transparent, #131312 90%)",
+          background: "linear-gradient(to left, transparent, #2D2922 90%)",
           pointerEvents: "none",
           opacity: canScrollLeft ? 1 : 0,
           transition: "opacity 0.3s ease",

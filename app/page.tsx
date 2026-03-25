@@ -25,7 +25,7 @@ type CategoryFilter = Category | "All";
 
 // ─── Section wrappers ─────────────────────────────────────────────────────────
 
-function Section({ children, bg = "#0A0A09" }: { children: React.ReactNode; bg?: string }) {
+function Section({ children, bg = "#2A2925" }: { children: React.ReactNode; bg?: string }) {
   return (
     <div style={{ background: bg }}>
       <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
@@ -104,7 +104,7 @@ export default function HomePage() {
   const isExploring = search || category !== "All" || city !== "All" || price !== "All";
 
   return (
-    <div style={{ background: "#0A0A09" }}>
+    <div style={{ background: "#2A2925" }}>
 
       {/* ══════════════════════════════════════════════════════════════════
           HERO — Full-screen, cinematic, dark
@@ -114,7 +114,7 @@ export default function HomePage() {
           minHeight: "92vh",
           display: "flex",
           alignItems: "center",
-          background: "#0A0A09",
+          background: "#2A2925",
           position: "relative",
           overflow: "hidden",
         }}
@@ -136,20 +136,20 @@ export default function HomePage() {
             />
             <div aria-hidden="true" style={{
               position: "absolute", inset: 0,
-              background: "radial-gradient(ellipse at center, transparent 20%, rgba(10,10,9,0.92) 100%)",
+              background: "radial-gradient(ellipse at center, transparent 20%, rgba(42,41,37,0.92) 100%)",
             }} />
           </>
         )}
 
         <div aria-hidden="true" style={{
           position: "absolute", bottom: 0, left: 0, right: 0, height: "180px",
-          background: "linear-gradient(to bottom, transparent, #0A0A09)",
+          background: "linear-gradient(to bottom, transparent, #2A2925)",
           pointerEvents: "none",
         }} />
 
         <div aria-hidden="true" style={{
           position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse at 10% 80%, rgba(198,168,92,0.08) 0%, transparent 50%)",
+          background: "radial-gradient(ellipse at 10% 80%, rgba(177,152,124,0.08) 0%, transparent 50%)",
           pointerEvents: "none",
         }} />
 
@@ -159,10 +159,10 @@ export default function HomePage() {
             <p style={{
               fontSize: "9px", letterSpacing: "0.28em", textTransform: "uppercase",
               fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-              color: "#C6A85C", marginBottom: "28px",
+              color: "#B1987C", marginBottom: "28px",
               display: "flex", alignItems: "center", gap: "10px",
             }}>
-              <span style={{ display: "inline-block", width: "22px", height: "1px", background: "#C6A85C" }} />
+              <span style={{ display: "inline-block", width: "22px", height: "1px", background: "#B1987C" }} />
               {t.hero.label}
             </p>
 
@@ -178,7 +178,7 @@ export default function HomePage() {
               <br />
               <em style={{
                 fontStyle: "italic",
-                background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 60%, #B8903E 100%)",
+                background: "linear-gradient(135deg, #CEAD95 0%, #B1987C 60%, #9A7D65 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -238,9 +238,9 @@ export default function HomePage() {
                     transition: "all 0.2s ease",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(198,168,92,0.14)";
-                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(198,168,92,0.35)";
-                    (e.currentTarget as HTMLButtonElement).style.color = "#C6A85C";
+                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(177,152,124,0.14)";
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(177,152,124,0.35)";
+                    (e.currentTarget as HTMLButtonElement).style.color = "#B1987C";
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.055)";
@@ -261,7 +261,7 @@ export default function HomePage() {
                 { value: "100%", label: "Sin patrocinios" },
               ].map(({ value, label }) => (
                 <div key={label}>
-                  <p className="font-serif" style={{ fontSize: "24px", color: "#C6A85C", fontWeight: 400, lineHeight: 1 }}>
+                  <p className="font-serif" style={{ fontSize: "24px", color: "#B1987C", fontWeight: 400, lineHeight: 1 }}>
                     {value}
                   </p>
                   <p style={{
@@ -297,18 +297,18 @@ export default function HomePage() {
       {!isExploring && (
         <>
           {/* 1 — HOY EN TU CIUDAD */}
-          <Section bg="#0A0A09">
+          <Section bg="#2A2925">
             <HoySection places={MOCK_PLACES} />
           </Section>
 
           {/* 2 — LUGARES DESTACADOS */}
-          <Section bg="#111110">
+          <Section bg="#252219">
             <FeaturedSection places={featuredPlaces} />
           </Section>
 
           {/* 3 — EN FOCO */}
           {spotlightPlace && (
-            <Section bg="#0D0D0C">
+            <Section bg="#2A2925">
               <div style={{
                 display: "flex", alignItems: "flex-end", justifyContent: "space-between",
                 marginBottom: "28px", paddingBottom: "18px",
@@ -318,10 +318,10 @@ export default function HomePage() {
                   <p style={{
                     fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
                     fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-                    color: "#C6A85C", marginBottom: "8px",
+                    color: "#B1987C", marginBottom: "8px",
                     display: "flex", alignItems: "center", gap: "8px",
                   }}>
-                    <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+                    <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
                     En foco
                   </p>
                   <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}>
@@ -334,37 +334,37 @@ export default function HomePage() {
           )}
 
           {/* 4 — EXPERIENCIAS Y EVENTOS */}
-          <Section bg="#111110">
+          <Section bg="#252219">
             <ExperienciasSection events={MOCK_EVENTS} />
           </Section>
 
           {/* 5 — JOYAS ESCONDIDAS */}
-          <Section bg="#0A0A09">
+          <Section bg="#2A2925">
             <JoyasSection places={MOCK_PLACES} />
           </Section>
 
           {/* 6 — PEQUEÑOS PLANES */}
-          <Section bg="#131312">
+          <Section bg="#2D2922">
             <PlanesSection places={MOCK_PLACES} />
           </Section>
 
           {/* 7 — MAGAZINE EDITORIAL */}
-          <Section bg="#0F0F0E">
+          <Section bg="#252219">
             <MagazineSection places={MOCK_PLACES} />
           </Section>
 
           {/* 8 — LO QUE ESTÁ PASANDO AHORA */}
-          <Section bg="#111110">
+          <Section bg="#252219">
             <AhoraSection places={MOCK_PLACES} />
           </Section>
 
           {/* 9 — OPINIONES */}
-          <Section bg="#0A0A09">
+          <Section bg="#2A2925">
             <ReviewsSection />
           </Section>
 
           {/* 10 — EXPLORAR HEADER */}
-          <div style={{ background: "#111110" }}>
+          <div style={{ background: "#252219" }}>
             <div className="max-w-7xl mx-auto px-6 pt-16 pb-4" id="explore">
               <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "40px" }}>
                 <div className="flex items-end justify-between mb-2">
@@ -372,10 +372,10 @@ export default function HomePage() {
                     <p style={{
                       fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
                       fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-                      color: "#C6A85C", marginBottom: "8px",
+                      color: "#B1987C", marginBottom: "8px",
                       display: "flex", alignItems: "center", gap: "8px",
                     }}>
-                      <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+                      <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
                       Explorar todo
                     </p>
                     <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}>
@@ -395,7 +395,7 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════════════
           EXPLORE — filter + grid
       ══════════════════════════════════════════════════════════════════ */}
-      <div style={{ background: "#111110" }}>
+      <div style={{ background: "#252219" }}>
         <div className={`max-w-7xl mx-auto px-6 ${isExploring ? "pt-12" : ""} pb-24`} id={isExploring ? "explore" : undefined}>
           <div className="mb-8 pb-6" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">

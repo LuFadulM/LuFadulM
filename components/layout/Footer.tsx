@@ -34,14 +34,14 @@ export default function Footer() {
           borderBottom: "1px solid rgba(255,255,255,0.04)",
           padding: "80px 0",
           textAlign: "center",
-          background: "radial-gradient(ellipse at 50% 100%, rgba(212,175,55,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse at 50% 100%, rgba(177,152,124,0.04) 0%, transparent 70%)",
         }}
       >
         <div
           style={{
             width: "32px",
             height: "1px",
-            background: "rgba(212,175,55,0.35)",
+            background: "rgba(177,152,124,0.35)",
             margin: "0 auto 36px",
           }}
         />
@@ -65,7 +65,7 @@ export default function Footer() {
           style={{
             width: "32px",
             height: "1px",
-            background: "rgba(212,175,55,0.35)",
+            background: "rgba(177,152,124,0.35)",
             margin: "36px auto 0",
           }}
         />
@@ -83,7 +83,7 @@ export default function Footer() {
                 fontFamily: "'Playfair Display', serif",
                 fontStyle: "italic",
                 fontSize: "48px",
-                color: "#D4AF37",
+                color: "#B1987C",
                 display: "block",
                 marginBottom: "20px",
                 lineHeight: 1,
@@ -111,7 +111,7 @@ export default function Footer() {
               style={{
                 width: "24px",
                 height: "1px",
-                background: "rgba(212,175,55,0.30)",
+                background: "rgba(177,152,124,0.30)",
               }}
             />
           </div>
@@ -216,7 +216,7 @@ export default function Footer() {
                   fontWeight: 500,
                 }}
                 className="transition-colors duration-200"
-                onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(212,175,55,0.7)")}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(177,152,124,0.7)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.22)")}
               >
                 {item.label}

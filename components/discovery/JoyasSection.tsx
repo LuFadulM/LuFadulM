@@ -28,10 +28,10 @@ export default function JoyasSection({ places }: JoyasSectionProps) {
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#C6A85C", marginBottom: "8px",
+            color: "#B1987C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
             Solo para locales
           </p>
           <h2 className="font-serif" style={{

@@ -38,7 +38,7 @@ export default function PlaceCard({
   const impressionTracked = useRef(false);
   const [hovered, setHovered] = useState(false);
 
-  const catCfg = CATEGORY_TAG[place.category] ?? { color: "#C6A85C", bg: "rgba(198,168,92,0.18)", label: place.category };
+  const catCfg = CATEGORY_TAG[place.category] ?? { color: "#B1987C", bg: "rgba(198,168,92,0.18)", label: place.category };
   const loc = [place.neighborhood, place.city].filter(Boolean).join(" · ");
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function PlaceCard({
             position: "relative",
             overflow: "hidden",
             borderRadius: "14px",
-            background: "#141413",
+            background: "#2F2C26",
             border: "1px solid rgba(255,255,255,0.06)",
             height: "100%",
             display: "flex",
@@ -126,7 +126,7 @@ export default function PlaceCard({
                 <span style={{
                   fontSize: "8px", letterSpacing: "0.14em", textTransform: "uppercase",
                   fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-                  color: "#0A0A09", background: "#C6A85C",
+                  color: "#2A2925", background: "#B1987C",
                   padding: "3px 9px", borderRadius: "100px",
                 }}>
                   Destacado
@@ -139,14 +139,14 @@ export default function PlaceCard({
           <div style={{
             padding: "16px 18px 20px",
             flex: 1, display: "flex", flexDirection: "column",
-            background: "#141413",
+            background: "#2F2C26",
           }}>
             {/* Name */}
             <h3 style={{
               fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: "17px",
               fontWeight: 600,
-              color: hovered ? "#C6A85C" : "#EDE9E2",
+              color: hovered ? "#B1987C" : "#EDE9E2",
               lineHeight: "1.3",
               marginBottom: "5px",
               letterSpacing: "-0.01em",
@@ -181,7 +181,7 @@ export default function PlaceCard({
                   <div style={{ display: "flex", gap: "2px" }}>
                     {[1, 2, 3, 4, 5].map((s) => (
                       <svg key={s} width="11" height="11" viewBox="0 0 24 24"
-                        fill={s <= Math.round(place.avg_rating) ? "#C6A85C" : "rgba(255,255,255,0.12)"}
+                        fill={s <= Math.round(place.avg_rating) ? "#B1987C" : "rgba(255,255,255,0.12)"}
                         aria-hidden="true">
                         <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                       </svg>

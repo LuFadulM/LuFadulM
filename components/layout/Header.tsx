@@ -98,9 +98,9 @@ function ActividadesDropdown() {
             borderBottom: "6px solid rgba(255,255,255,0.05)",
           }} />
           <div style={{
-            background: "#141413",
+            background: "#2F2C26",
             border: "1px solid rgba(255,255,255,0.08)",
-            boxShadow: "0 24px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(198,168,92,0.04)",
+            boxShadow: "0 24px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(177,152,124,0.04)",
             overflow: "hidden", marginTop: "6px",
           }}>
             {ACTIVIDADES_ITEMS.map((item, i) => (
@@ -119,7 +119,7 @@ function ActividadesDropdown() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = "#F0EBE4";
-                  e.currentTarget.style.background = "rgba(198,168,92,0.05)";
+                  e.currentTarget.style.background = "rgba(177,152,124,0.05)";
                   e.currentTarget.style.paddingLeft = "22px";
                 }}
                 onMouseLeave={(e) => {
@@ -130,7 +130,7 @@ function ActividadesDropdown() {
               >
                 {item.label}
                 <span aria-hidden="true" style={{
-                  color: "rgba(198,168,92,0.5)", fontSize: "11px",
+                  color: "rgba(177,152,124,0.5)", fontSize: "11px",
                   opacity: 0, transition: "opacity 0.15s ease",
                 }} className="group-hover:opacity-100">
                   →
@@ -215,10 +215,10 @@ export default function Header() {
             style={{
               fontFamily: "'Playfair Display', serif",
               fontStyle: "italic",
-              color: "#C6A85C",
+              color: "#B1987C",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#D4AF37")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#C6A85C")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#CEAD95")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#B1987C")}
           >
             hyex
           </Link>
@@ -245,7 +245,7 @@ export default function Header() {
                     style={{
                       fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase",
                       fontWeight: locale === l ? 600 : 400,
-                      color: locale === l ? "#C6A85C" : "rgba(200,196,188,0.40)",
+                      color: locale === l ? "#B1987C" : "rgba(200,196,188,0.40)",
                       background: "none", border: "none", cursor: "pointer",
                       padding: "2px 4px", transition: "color 0.2s",
                     }}
@@ -276,7 +276,7 @@ export default function Header() {
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="px-4 py-2 border border-[rgba(255,255,255,0.07)] transition-all duration-200 hover:border-[rgba(198,168,92,0.35)]"
+                  className="px-4 py-2 border border-[rgba(255,255,255,0.07)] transition-all duration-200 hover:border-[rgba(177,152,124,0.35)]"
                   style={{
                     fontSize: "11px", letterSpacing: "0.14em",
                     textTransform: "uppercase", fontWeight: 500,
@@ -307,10 +307,10 @@ export default function Header() {
                   style={{
                     fontSize: "11px", letterSpacing: "0.14em",
                     textTransform: "uppercase", fontWeight: 600,
-                    color: "#0A0A09", background: "#C6A85C",
+                    color: "#2A2925", background: "#B1987C",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "#D4AF37")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "#C6A85C")}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = "#CEAD95")}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = "#B1987C")}
                 >
                   {t.nav.signup}
                 </Link>
@@ -328,7 +328,7 @@ export default function Header() {
                     style={{
                       fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase",
                       fontWeight: locale === l ? 600 : 400,
-                      color: locale === l ? "#C6A85C" : "rgba(200,196,188,0.40)",
+                      color: locale === l ? "#B1987C" : "rgba(200,196,188,0.40)",
                       background: "none", border: "none", cursor: "pointer", padding: "2px 3px",
                     }}
                   >

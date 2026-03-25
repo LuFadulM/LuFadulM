@@ -56,9 +56,9 @@ function FilterPill({
         padding: "7px 16px",
         fontSize: "10px", letterSpacing: "0.10em", textTransform: "uppercase",
         fontWeight: 600, fontFamily: "'Sora', system-ui, sans-serif",
-        background: active ? "#C6A85C" : "rgba(255,255,255,0.07)",
-        color: active ? "#0A0A09" : "rgba(255,255,255,0.65)",
-        border: active ? "1px solid #C6A85C" : "1px solid rgba(255,255,255,0.09)",
+        background: active ? "#B1987C" : "rgba(255,255,255,0.07)",
+        color: active ? "#2A2925" :"rgba(255,255,255,0.65)",
+        border: active ? "1px solid #B1987C" : "1px solid rgba(255,255,255,0.09)",
         borderRadius: "100px",
         cursor: "pointer",
         transition: "all 0.2s ease",
@@ -107,7 +107,7 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
           fontSize: "10px", letterSpacing: "0.10em", textTransform: "uppercase",
           fontWeight: 600, fontFamily: "'Sora', system-ui, sans-serif",
           background: isActive ? "rgba(198,168,92,0.15)" : "rgba(255,255,255,0.07)",
-          color: isActive ? "#C6A85C" : "rgba(255,255,255,0.65)",
+          color: isActive ? "#B1987C" : "rgba(255,255,255,0.65)",
           border: isActive ? "1px solid rgba(198,168,92,0.40)" : "1px solid rgba(255,255,255,0.09)",
           borderRadius: "100px",
           cursor: "pointer",
@@ -144,7 +144,7 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
                   fontSize: "11px", letterSpacing: "0.06em",
                   fontFamily: "'Sora', system-ui, sans-serif",
                   fontWeight: sel ? 600 : 400,
-                  color: sel ? "#C6A85C" : "rgba(255,255,255,0.65)",
+                  color: sel ? "#B1987C" : "rgba(255,255,255,0.65)",
                   background: sel ? "rgba(198,168,92,0.10)" : "transparent",
                   border: "none", borderRadius: "7px", cursor: "pointer", textAlign: "left",
                   transition: "background 0.15s",
@@ -153,7 +153,7 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
                 onMouseLeave={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}
               >
                 {city}
-                {sel && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#C6A85C" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>}
+                {sel && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#B1987C" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>}
               </button>
             );
           })}
@@ -183,9 +183,9 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "#C6A85C";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C6A85C";
-          (e.currentTarget as HTMLButtonElement).style.color = "#0A0A09";
+          (e.currentTarget as HTMLButtonElement).style.background = "#B1987C";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "#B1987C";
+          (e.currentTarget as HTMLButtonElement).style.color = "#2A2925";
         }
       }}
       onMouseLeave={(e) => {
@@ -260,10 +260,10 @@ export default function HoySection({ places }: HoySectionProps) {
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#C6A85C", marginBottom: "8px",
+            color: "#B1987C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
             Descubre
           </p>
           <h2 className="font-serif" style={{
@@ -362,7 +362,7 @@ export default function HoySection({ places }: HoySectionProps) {
           <div aria-hidden="true" style={{
             position: "absolute", top: 0, right: 0,
             width: "100px", height: "calc(100% - 12px)",
-            background: "linear-gradient(to right, transparent, #0A0A09 90%)",
+            background: "linear-gradient(to right, transparent, #2A2925 90%)",
             pointerEvents: "none",
             opacity: canScrollRight ? 1 : 0,
             transition: "opacity 0.3s ease",
@@ -370,7 +370,7 @@ export default function HoySection({ places }: HoySectionProps) {
           <div aria-hidden="true" style={{
             position: "absolute", top: 0, left: 0,
             width: "60px", height: "calc(100% - 12px)",
-            background: "linear-gradient(to left, transparent, #0A0A09 90%)",
+            background: "linear-gradient(to left, transparent, #2A2925 90%)",
             pointerEvents: "none",
             opacity: canScrollLeft ? 1 : 0,
             transition: "opacity 0.3s ease",

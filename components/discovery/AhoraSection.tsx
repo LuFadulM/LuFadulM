@@ -117,7 +117,7 @@ function NowCard({ place, index }: NowCardProps) {
         {/* Arrow */}
         <div
           className="shrink-0 flex items-center self-center transition-all duration-200 group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
-          style={{ color: "#D4AF37" }}
+          style={{ color: "#B1987C" }}
           aria-hidden="true"
         >
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

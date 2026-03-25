@@ -10,29 +10,29 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "#000000",
-          card: "#0A0A0A",
-          surface: "#111111",
-          hover: "#141414",
+          DEFAULT: "#2A2925",
+          card: "#252219",
+          surface: "#2D2922",
+          hover: "#33302A",
         },
         text: {
-          DEFAULT: "#F2F2F2",
-          secondary: "#AFAFAF",
+          DEFAULT: "#DFDCD5",
+          secondary: "#B8B3AA",
           tertiary: "#888888",
           dim: "#555555",
-          inactive: "#333333",
+          inactive: "#3E3A33",
         },
         gold: {
-          DEFAULT: "#D4AF37",
-          hover: "#F1D27A",
-          deep: "#B8962E",
+          DEFAULT: "#B1987C",
+          hover: "#CEAD95",
+          deep: "#9A7D65",
         },
         success: "#5A8F6E",
         border: {
           DEFAULT: "rgba(255,255,255,0.05)",
           subtle: "rgba(255,255,255,0.08)",
           hover: "rgba(255,255,255,0.14)",
-          gold: "rgba(212,175,55,0.2)",
+          gold: "rgba(177,152,124,0.2)",
         },
       },
       fontFamily: {
