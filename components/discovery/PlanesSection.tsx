@@ -37,13 +37,13 @@ function derivePlan(place: Place): { planTitle: string; planMoment: string; mome
   };
   if (place.category === "Attractions") return {
     planTitle: `Explorar ${place.name} con tiempo`,
-    planMoment: "Fin de semana", momentColor: "#3CC9AD",
-    momentBg: "rgba(60,201,173,0.18)", emoji: "🧭",
+    planMoment: "Fin de semana", momentColor: "#8A9E6A",
+    momentBg: "rgba(138,158,106,0.18)", emoji: "🧭",
   };
   if (place.category === "Hotels") return {
     planTitle: `Quedarse en ${place.city} sin apuros`,
-    planMoment: "Escapada", momentColor: "#3CC9AD",
-    momentBg: "rgba(60,201,173,0.18)", emoji: "🌙",
+    planMoment: "Escapada", momentColor: "#8A9E6A",
+    momentBg: "rgba(138,158,106,0.18)", emoji: "🌙",
   };
   const isLunch = place.tags.some((t) => t.includes("lunch") || t.includes("almuerzo"));
   return {

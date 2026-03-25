@@ -14,6 +14,8 @@ const config: Config = {
           card: "#252219",
           surface: "#2D2922",
           hover: "#33302A",
+          olive: "#363A28",
+          "olive-light": "#3A3E2C",
         },
         text: {
           DEFAULT: "#DFDCD5",
@@ -26,6 +28,12 @@ const config: Config = {
           DEFAULT: "#B1987C",
           hover: "#CEAD95",
           deep: "#9A7D65",
+        },
+        sage: {
+          DEFAULT: "#8A9E6A",
+          light: "#A4B882",
+          deep: "#647A48",
+          muted: "#5C6B45",
         },
         success: "#5A8F6E",
         border: {

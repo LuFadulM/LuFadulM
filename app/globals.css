@@ -345,9 +345,9 @@
   }
 
   .now-badge.nuevo {
-    color: #7EC8A4;
-    background: rgba(126, 200, 164, 0.1);
-    border: 1px solid rgba(126, 200, 164, 0.25);
+    color: #8A9E6A;
+    background: rgba(138, 158, 106, 0.1);
+    border: 1px solid rgba(138, 158, 106, 0.25);
   }
 
   .now-badge.popular {
@@ -446,7 +446,7 @@
     width: 5px;
     height: 5px;
     border-radius: 50% !important;
-    background: #7EC8A4;
+    background: #8A9E6A;
     animation: pulse-dot 2s ease-in-out infinite;
     display: inline-block;
   }

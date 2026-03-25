@@ -23,8 +23,8 @@ const CATEGORY_TAG: Record<string, { color: string; bg: string; label: string }>
   Bars:        { color: "#E2925B", bg: "rgba(226,146,91,0.18)", label: "Bar" },
   Nightlife:   { color: "#B09FE8", bg: "rgba(176,159,232,0.18)", label: "Vida nocturna" },
   Cafés:       { color: "#D4A03C", bg: "rgba(212,160,60,0.18)", label: "Café" },
-  Hotels:      { color: "#3CC9AD", bg: "rgba(60,201,173,0.18)", label: "Hotel" },
-  Attractions: { color: "#3CC9AD", bg: "rgba(60,201,173,0.18)", label: "Atracción" },
+  Hotels:      { color: "#8A9E6A", bg: "rgba(138,158,106,0.18)", label: "Hotel" },
+  Attractions: { color: "#8A9E6A", bg: "rgba(138,158,106,0.18)", label: "Atracción" },
 };
 
 export default function PlaceCard({

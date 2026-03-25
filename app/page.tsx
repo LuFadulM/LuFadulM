@@ -142,8 +142,8 @@ export default function HomePage() {
         )}
 
         <div aria-hidden="true" style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, height: "180px",
-          background: "linear-gradient(to bottom, transparent, #2A2925)",
+          position: "absolute", bottom: 0, left: 0, right: 0, height: "80px",
+          background: "linear-gradient(to bottom, transparent, rgba(42,41,37,0.6))",
           pointerEvents: "none",
         }} />
 
@@ -204,13 +204,13 @@ export default function HomePage() {
             {/* Category quick-access pills */}
             <div className="flex flex-wrap gap-2 mt-8">
               {[
-                { label: "Restaurantes", emoji: "🍽" },
-                { label: "Cafés", emoji: "☕" },
-                { label: "Aventuras", emoji: "🧗" },
-                { label: "Cultura", emoji: "🎭" },
-                { label: "Naturaleza", emoji: "🌿" },
-                { label: "Estadías", emoji: "🏨" },
-              ].map(({ label, emoji }) => (
+                { label: "Restaurantes", emoji: "🍽", hoverBg: "rgba(177,152,124,0.14)", hoverBorder: "rgba(177,152,124,0.35)", hoverColor: "#B1987C" },
+                { label: "Cafés", emoji: "☕", hoverBg: "rgba(177,152,124,0.14)", hoverBorder: "rgba(177,152,124,0.35)", hoverColor: "#B1987C" },
+                { label: "Aventuras", emoji: "🧗", hoverBg: "rgba(138,158,106,0.18)", hoverBorder: "rgba(138,158,106,0.4)", hoverColor: "#8A9E6A" },
+                { label: "Cultura", emoji: "🎭", hoverBg: "rgba(177,152,124,0.14)", hoverBorder: "rgba(177,152,124,0.35)", hoverColor: "#B1987C" },
+                { label: "Naturaleza", emoji: "🌿", hoverBg: "rgba(100,122,72,0.22)", hoverBorder: "rgba(100,122,72,0.45)", hoverColor: "#8A9E6A" },
+                { label: "Estadías", emoji: "🏨", hoverBg: "rgba(177,152,124,0.14)", hoverBorder: "rgba(177,152,124,0.35)", hoverColor: "#B1987C" },
+              ].map(({ label, emoji, hoverBg, hoverBorder, hoverColor }) => (
                 <button
                   key={label}
                   onClick={() => {
@@ -230,7 +230,7 @@ export default function HomePage() {
                     padding: "6px 13px",
                     fontSize: "10px", letterSpacing: "0.08em",
                     fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 500,
-                    color: "rgba(240,235,228,0.62)",
+                    color: "rgba(223,220,213,0.62)",
                     background: "rgba(255,255,255,0.055)",
                     border: "1px solid rgba(255,255,255,0.09)",
                     borderRadius: "100px",
@@ -238,14 +238,14 @@ export default function HomePage() {
                     transition: "all 0.2s ease",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(177,152,124,0.14)";
-                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(177,152,124,0.35)";
-                    (e.currentTarget as HTMLButtonElement).style.color = "#B1987C";
+                    (e.currentTarget as HTMLButtonElement).style.background = hoverBg;
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = hoverBorder;
+                    (e.currentTarget as HTMLButtonElement).style.color = hoverColor;
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.055)";
                     (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.09)";
-                    (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,235,228,0.62)";
+                    (e.currentTarget as HTMLButtonElement).style.color = "rgba(223,220,213,0.62)";
                   }}
                 >
                   <span>{emoji}</span> {label}
@@ -254,24 +254,29 @@ export default function HomePage() {
             </div>
 
             {/* Stats */}
-            <div className="flex items-center gap-8 mt-10" style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "24px" }}>
+            <div className="flex items-center gap-10 mt-10">
               {[
                 { value: `${MOCK_PLACES.length}+`, label: "Lugares curados" },
                 { value: "6", label: "Ciudades" },
                 { value: "100%", label: "Sin patrocinios" },
-              ].map(({ value, label }) => (
-                <div key={label}>
-                  <p className="font-serif" style={{ fontSize: "24px", color: "#B1987C", fontWeight: 400, lineHeight: 1 }}>
-                    {value}
-                  </p>
-                  <p style={{
-                    fontSize: "9px", letterSpacing: "0.14em", textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.30)",
-                    fontFamily: "'Sora', system-ui, sans-serif",
-                    fontWeight: 500, marginTop: "6px",
-                  }}>
-                    {label}
-                  </p>
+              ].map(({ value, label }, i) => (
+                <div key={label} style={{ display: "flex", alignItems: "center", gap: i < 2 ? "0" : "0" }}>
+                  <div>
+                    <p className="font-serif" style={{ fontSize: "26px", color: "#DFDCD5", fontWeight: 400, lineHeight: 1 }}>
+                      {value}
+                    </p>
+                    <p style={{
+                      fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase",
+                      color: "rgba(223,220,213,0.38)",
+                      fontFamily: "'Sora', system-ui, sans-serif",
+                      fontWeight: 500, marginTop: "7px",
+                    }}>
+                      {label}
+                    </p>
+                  </div>
+                  {i < 2 && (
+                    <span style={{ display: "inline-block", width: "1px", height: "28px", background: "rgba(177,152,124,0.2)", marginLeft: "40px" }} />
+                  )}
                 </div>
               ))}
             </div>
@@ -302,7 +307,7 @@ export default function HomePage() {
           </Section>
 
           {/* 2 — LUGARES DESTACADOS */}
-          <Section bg="#252219">
+          <Section bg="#363A28">
             <FeaturedSection places={featuredPlaces} />
           </Section>
 
@@ -334,7 +339,7 @@ export default function HomePage() {
           )}
 
           {/* 4 — EXPERIENCIAS Y EVENTOS */}
-          <Section bg="#252219">
+          <Section bg="#363A28">
             <ExperienciasSection events={MOCK_EVENTS} />
           </Section>
 
@@ -344,7 +349,7 @@ export default function HomePage() {
           </Section>
 
           {/* 6 — PEQUEÑOS PLANES */}
-          <Section bg="#2D2922">
+          <Section bg="#3A3E2C">
             <PlanesSection places={MOCK_PLACES} />
           </Section>
 
@@ -354,7 +359,7 @@ export default function HomePage() {
           </Section>
 
           {/* 8 — LO QUE ESTÁ PASANDO AHORA */}
-          <Section bg="#252219">
+          <Section bg="#363A28">
             <AhoraSection places={MOCK_PLACES} />
           </Section>
 
