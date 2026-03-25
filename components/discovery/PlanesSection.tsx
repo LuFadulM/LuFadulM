@@ -17,44 +17,30 @@ interface PlanCard {
 }
 
 function derivePlan(place: Place): { planTitle: string; planMoment: string } {
+  const loc = place.neighborhood ?? place.city;
   if (place.category === "Cafés") {
-    return {
-      planTitle: `Café de especialidad en ${place.neighborhood ?? place.city}`,
-      planMoment: "Mañana",
-    };
+    return { planTitle: `El café de la mañana en ${loc}`, planMoment: "Mañana" };
   }
   if (place.category === "Bars") {
-    return {
-      planTitle: `Tragos y conversación en ${place.neighborhood ?? place.city}`,
-      planMoment: "Tarde",
-    };
+    return { planTitle: `Tragos con vista en ${loc}`, planMoment: "Tarde" };
   }
   if (place.category === "Nightlife") {
-    return {
-      planTitle: `La noche empieza en ${place.neighborhood ?? place.city}`,
-      planMoment: "Noche",
-    };
+    return { planTitle: `La noche empieza en ${loc}`, planMoment: "Noche" };
   }
   if (place.category === "Attractions") {
-    return {
-      planTitle: `Explorar ${place.name} con tiempo`,
-      planMoment: "Fin de semana",
-    };
+    return { planTitle: `Explorar ${place.name} con tiempo`, planMoment: "Fin de semana" };
   }
   if (place.category === "Hotels") {
-    return {
-      planTitle: `Quedarse en ${place.city} sin apuros`,
-      planMoment: "Fin de semana",
-    };
+    return { planTitle: `Quedarse en ${place.city} sin apuros`, planMoment: "Fin de semana" };
   }
   const isLunch = place.tags.some((t) => t.includes("lunch") || t.includes("almuerzo"));
   return {
-    planTitle: `${isLunch ? "Almuerzo" : "Cena"} en ${place.neighborhood ?? place.city}`,
+    planTitle: `${isLunch ? "Un buen almuerzo" : "Cena de altura"} en ${loc}`,
     planMoment: isLunch ? "Tarde" : "Noche",
   };
 }
 
-// ─── Scroll arrow button ─────────────────────────────────────────────────────
+// ─── Scroll arrow ─────────────────────────────────────────────────────────────
 
 function ArrowButton({
   direction,
@@ -107,9 +93,7 @@ function ArrowButton({
         stroke="currentColor"
         strokeWidth="2.5"
         aria-hidden="true"
-        style={{
-          transform: direction === "left" ? "rotate(180deg)" : "rotate(0deg)",
-        }}
+        style={{ transform: direction === "left" ? "rotate(180deg)" : "rotate(0deg)" }}
       >
         <line x1="5" y1="12" x2="19" y2="12" />
         <polyline points="12 5 19 12 12 19" />
@@ -118,11 +102,97 @@ function ArrowButton({
   );
 }
 
+// ─── Plan card — full-overlay cinematic ───────────────────────────────────────
+
+function PlanCard({ plan }: { plan: PlanCard }) {
+  const { place, planTitle, planMoment } = plan;
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <Link href={`/places/${place.slug}`} className="block">
+      <article
+        className="card-rounded-lg relative overflow-hidden"
+        style={{
+          width: "260px",
+          height: "340px",
+          background: "#111",
+          border: "1px solid rgba(255,255,255,0.05)",
+          transform: hovered ? "translateY(-4px)" : "translateY(0)",
+          boxShadow: hovered
+            ? "0 24px 56px rgba(0,0,0,0.65), 0 0 0 1px rgba(212,175,55,0.10)"
+            : "0 4px 20px rgba(0,0,0,0.3)",
+          transition: "transform 0.45s cubic-bezier(0.23,1,0.32,1), box-shadow 0.45s ease",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {/* Full image */}
+        {place.cover_image_url && (
+          <Image
+            src={place.cover_image_url}
+            alt={place.name}
+            fill
+            className="object-cover"
+            style={{
+              transform: hovered ? "scale(1.07)" : "scale(1)",
+              transition: "transform 0.75s cubic-bezier(0.23,1,0.32,1)",
+            }}
+            sizes="(max-width: 640px) 70vw, 22vw"
+            draggable={false}
+          />
+        )}
+
+        {/* Gradient overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.60) 42%, rgba(0,0,0,0.10) 75%, transparent 100%)",
+          }}
+        />
+
+        {/* Moment badge — top right */}
+        <div className="absolute top-4 right-4">
+          <CardBadge label={planMoment} variant="moment" />
+        </div>
+
+        {/* Content — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <h3
+            className="font-serif text-white leading-tight mb-2"
+            style={{
+              fontSize: "16px",
+              fontWeight: 700,
+              textShadow: "0 1px 12px rgba(0,0,0,0.95), 0 2px 24px rgba(0,0,0,0.8)",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            {planTitle}
+          </h3>
+          <p
+            style={{
+              fontSize: "9px",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.48)",
+              fontFamily: "'Sora', system-ui, sans-serif",
+              fontWeight: 500,
+              textShadow: "0 1px 8px rgba(0,0,0,0.9)",
+            }}
+          >
+            {place.name}
+          </p>
+        </div>
+      </article>
+    </Link>
+  );
+}
+
 // ─── Main section ─────────────────────────────────────────────────────────────
 
-const CARD_WIDTH = 260; // px — used for scroll step
-const CARD_GAP = 16;
-const SCROLL_STEP = (CARD_WIDTH + CARD_GAP) * 2; // scroll 2 cards at a time
+const CARD_WIDTH = 260;
+const CARD_GAP = 14;
+const SCROLL_STEP = (CARD_WIDTH + CARD_GAP) * 2;
 
 export default function PlanesSection({ places }: PlanesSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -154,17 +224,13 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
     };
   }, [updateScrollState]);
 
-  const scrollLeft = () => {
-    scrollRef.current?.scrollBy({ left: -SCROLL_STEP, behavior: "smooth" });
-  };
-  const scrollRight = () => {
-    scrollRef.current?.scrollBy({ left: SCROLL_STEP, behavior: "smooth" });
-  };
+  const scrollLeft = () => scrollRef.current?.scrollBy({ left: -SCROLL_STEP, behavior: "smooth" });
+  const scrollRight = () => scrollRef.current?.scrollBy({ left: SCROLL_STEP, behavior: "smooth" });
 
   if (plans.length === 0) return null;
 
   return (
-    <section className="mb-24">
+    <section className="mb-32">
       {/* ── Header ── */}
       <div className="discovery-header">
         <div>
@@ -178,19 +244,18 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
             Pequeños planes
           </h2>
         </div>
-
         <div className="flex items-center gap-3">
           <p
-            className="hidden sm:block"
+            className="hidden sm:block font-serif"
             style={{
-              fontSize: "12px",
+              fontSize: "13px",
               color: "rgba(255,255,255,0.22)",
-              fontWeight: 300,
+              fontStyle: "italic",
+              fontWeight: 400,
             }}
           >
             ¿Qué hacer hoy?
           </p>
-          {/* Navigation arrows */}
           <div className="flex items-center gap-2">
             <ArrowButton direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
             <ArrowButton direction="right" onClick={scrollRight} disabled={!canScrollRight} />
@@ -198,7 +263,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
         </div>
       </div>
 
-      {/* ── Scroll container with right-edge fade ── */}
+      {/* ── Scroll row ── */}
       <div style={{ position: "relative" }}>
         <div
           ref={scrollRef}
@@ -232,107 +297,34 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
             document.addEventListener("mouseup", onUp);
           }}
         >
-          {plans.map(({ place, planTitle, planMoment }) => (
+          {plans.map((plan) => (
             <div
-              key={place.id}
-              style={{
-                width: `${CARD_WIDTH}px`,
-                flexShrink: 0,
-                scrollSnapAlign: "start",
-              }}
+              key={plan.place.id}
+              style={{ flexShrink: 0, scrollSnapAlign: "start" }}
             >
-              <Link href={`/places/${place.slug}`} className="block group">
-                <article
-                  className="atmo-card card-rounded-lg overflow-hidden"
-                  style={{
-                    background: "#111111",
-                    border: "1px solid rgba(255,255,255,0.05)",
-                  }}
-                >
-                  {/* Image */}
-                  <div className="relative overflow-hidden" style={{ height: "196px" }}>
-                    {place.cover_image_url ? (
-                      <Image
-                        src={place.cover_image_url}
-                        alt={place.name}
-                        fill
-                        className="object-cover atmo-image"
-                        sizes="(max-width: 640px) 70vw, 25vw"
-                        draggable={false}
-                      />
-                    ) : (
-                      <div className="absolute inset-0" style={{ background: "#1A1A18" }} />
-                    )}
-                    <div
-                      className="absolute inset-0 pointer-events-none"
-                      style={{
-                        background:
-                          "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%)",
-                      }}
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-4">
-                    <div className="mb-3">
-                      <CardBadge label={planMoment} variant="moment" />
-                    </div>
-                    <p
-                      className="font-serif"
-                      style={{
-                        fontSize: "14px",
-                        lineHeight: "1.5",
-                        color: "#FFFFFF",
-                        fontWeight: 600,
-                        marginBottom: "8px",
-                      }}
-                    >
-                      {planTitle}
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "10px",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        color: "rgba(255,255,255,0.55)",
-                        fontFamily: "'Sora', system-ui, sans-serif",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {place.name}
-                    </p>
-                  </div>
-                </article>
-              </Link>
+              <PlanCard plan={plan} />
             </div>
           ))}
         </div>
 
-        {/* Right-edge fade — signals more content */}
+        {/* Right fade */}
         <div
           aria-hidden="true"
           style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            width: "80px",
-            height: "calc(100% - 8px)",
+            position: "absolute", top: 0, right: 0,
+            width: "100px", height: "calc(100% - 8px)",
             background: "linear-gradient(to right, transparent, #0A0A09 90%)",
             pointerEvents: "none",
             opacity: canScrollRight ? 1 : 0,
             transition: "opacity 0.3s ease",
           }}
         />
-
-        {/* Left-edge fade */}
+        {/* Left fade */}
         <div
           aria-hidden="true"
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "60px",
-            height: "calc(100% - 8px)",
+            position: "absolute", top: 0, left: 0,
+            width: "70px", height: "calc(100% - 8px)",
             background: "linear-gradient(to left, transparent, #0A0A09 90%)",
             pointerEvents: "none",
             opacity: canScrollLeft ? 1 : 0,

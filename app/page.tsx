@@ -14,6 +14,8 @@ import JoyasSection from "@/components/discovery/JoyasSection";
 import PlanesSection from "@/components/discovery/PlanesSection";
 import AhoraSection from "@/components/discovery/AhoraSection";
 import ExperienciasSection from "@/components/discovery/ExperienciasSection";
+import MagazineSection from "@/components/discovery/MagazineSection";
+import EditorialBreak from "@/components/discovery/EditorialBreak";
 import ReviewsSection from "@/components/reviews/ReviewsSection";
 import { MOCK_EVENTS } from "./data/events";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -21,7 +23,6 @@ import { rankPlacesWithFeatured } from "@/lib/ranking";
 import { useEffect } from "react";
 
 type CategoryFilter = Category | "All";
-
 
 export default function HomePage() {
   const { t } = useLanguage();
@@ -47,6 +48,12 @@ export default function HomePage() {
   const featuredPlaces = useMemo(
     () => MOCK_PLACES.filter((p) => p.is_featured),
     []
+  );
+
+  // Top featured place used as hero background
+  const heroImage = useMemo(
+    () => featuredPlaces.find((p) => p.cover_image_url)?.cover_image_url ?? null,
+    [featuredPlaces]
   );
 
   const filteredPlaces = useMemo(() => {
@@ -88,33 +95,91 @@ export default function HomePage() {
 
   return (
     <div>
+
       {/* ══════════════════════════════════════════════════════════════════
-          HERO — Keep exactly as-is: dark editorial, Descubre Colombia
+          HERO — Full-screen, immersive, editorial
       ══════════════════════════════════════════════════════════════════ */}
       <section
         className="relative overflow-hidden"
         style={{
-          background:
-            "radial-gradient(ellipse at 20% 60%, rgba(212,175,55,0.06) 0%, transparent 55%), #0A0A09",
-          borderBottom: "1px solid rgba(255,255,255,0.04)",
+          minHeight: "92vh",
+          display: "flex",
+          alignItems: "center",
+          background: "#0A0A09",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="py-20 md:py-28 max-w-2xl">
-            <p className="label-micro mb-8" style={{ color: "#D4AF37" }}>
+        {/* Hero background image */}
+        {heroImage && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={heroImage}
+              alt=""
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center 35%",
+                opacity: 0.28,
+                filter: "saturate(0.7) brightness(0.85)",
+              }}
+            />
+            {/* Edge vignette */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "radial-gradient(ellipse at center, transparent 30%, rgba(10,10,9,0.85) 100%)",
+              }}
+            />
+          </>
+        )}
+
+        {/* Ambient gold glow — bottom left */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse at 15% 75%, rgba(212,175,55,0.07) 0%, transparent 55%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Content */}
+        <div className="max-w-7xl mx-auto px-6 w-full relative" style={{ zIndex: 10 }}>
+          <div style={{ maxWidth: "600px", paddingTop: "clamp(60px, 8vh, 100px)", paddingBottom: "clamp(60px, 8vh, 100px)" }}>
+
+            {/* Label */}
+            <p
+              className="label-micro"
+              style={{ color: "#D4AF37", marginBottom: "28px" }}
+            >
               {t.hero.label}
             </p>
 
+            {/* Title */}
             <h1
-              className="font-serif leading-none mb-8"
-              style={{ fontSize: "clamp(52px, 7vw, 88px)", color: "#F5F5F5" }}
+              className="font-serif leading-none"
+              style={{
+                fontSize: "clamp(52px, 7.5vw, 96px)",
+                color: "#F5F5F5",
+                marginBottom: "20px",
+                letterSpacing: "-0.02em",
+              }}
             >
               {t.hero.title}
               <br />
               <span
                 style={{
                   fontStyle: "italic",
-                  background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 100%)",
+                  background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 60%, #B8903E 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -124,54 +189,116 @@ export default function HomePage() {
               </span>
             </h1>
 
+            {/* Gold rule */}
             <div
               style={{
-                width: "40px",
+                width: "48px",
                 height: "1px",
-                background: "rgba(200,164,78,0.4)",
-                marginBottom: "24px",
+                background: "rgba(200,164,78,0.45)",
+                marginBottom: "28px",
               }}
             />
 
+            {/* Subtitle */}
             <p
               style={{
-                color: "#AFAFAF",
-                fontSize: "14px",
-                lineHeight: "1.8",
+                color: "rgba(200,196,188,0.72)",
+                fontSize: "15px",
+                lineHeight: "1.75",
                 fontWeight: 300,
-                maxWidth: "440px",
-                marginBottom: "40px",
+                maxWidth: "420px",
+                marginBottom: "44px",
               }}
             >
               {t.hero.subtitle}
             </p>
 
-            <div className="mb-8" style={{ maxWidth: "480px" }}>
+            {/* Search */}
+            <div style={{ maxWidth: "500px" }}>
               <SearchBar
                 large
                 placeholder={t.hero.searchPlaceholder}
                 onSearch={setSearch}
               />
             </div>
+
+            {/* Quick stats — editorial detail */}
+            <div
+              className="flex items-center gap-6 mt-10"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px" }}
+            >
+              {[
+                { value: `${MOCK_PLACES.length}+`, label: "Lugares curados" },
+                { value: "6", label: "Ciudades" },
+                { value: "100%", label: "Selección editorial" },
+              ].map(({ value, label }) => (
+                <div key={label}>
+                  <p
+                    className="font-serif"
+                    style={{ fontSize: "20px", color: "#D4AF37", fontWeight: 400, lineHeight: 1 }}
+                  >
+                    {value}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "9px",
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "rgba(255,255,255,0.30)",
+                      fontFamily: "'Sora', system-ui, sans-serif",
+                      fontWeight: 500,
+                      marginTop: "5px",
+                    }}
+                  >
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div
+          className="absolute"
+          style={{
+            bottom: "36px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "8px",
+            opacity: 0.35,
+          }}
+          aria-hidden="true"
+        >
+          <div
+            style={{
+              width: "1px",
+              height: "40px",
+              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.6))",
+              animation: "scrollPulse 2s ease-in-out infinite",
+            }}
+          />
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          DISCOVERY PLATFORM — shown when not actively searching/filtering
+          DISCOVERY SECTIONS
       ══════════════════════════════════════════════════════════════════ */}
       {!isExploring && (
-        <div className="max-w-7xl mx-auto px-6 pt-20">
+        <div className="max-w-7xl mx-auto px-6 pt-24">
 
-          {/* ── HOY EN TU CIUDAD ─────────────────────────────────────── */}
+          {/* 1 — HOY EN TU CIUDAD */}
           <HoySection places={MOCK_PLACES} />
 
-          {/* ── FEATURED EDITORIAL ───────────────────────────────────── */}
+          {/* 2 — LUGARES DESTACADOS (editorial grid) */}
           <FeaturedSection places={featuredPlaces} />
 
-          {/* ── SPOTLIGHT — top featured placement ───────────────────── */}
+          {/* 3 — EN FOCO (spotlight) */}
           {spotlightPlace && (
-            <section className="mb-24">
+            <section className="mb-32">
               <div className="discovery-header">
                 <div>
                   <div className="section-label-bar">
@@ -189,23 +316,42 @@ export default function HomePage() {
             </section>
           )}
 
-          {/* ── JOYAS ESCONDIDAS ─────────────────────────────────────── */}
-          <JoyasSection places={MOCK_PLACES} />
+          {/* ── Editorial breathing space ── */}
+          <EditorialBreak
+            quote="Cada rincón de Colombia tiene una historia que merece ser contada"
+            sub="Descubre · Curaduría editorial"
+          />
 
-          {/* ── PEQUEÑOS PLANES ──────────────────────────────────────── */}
-          <PlanesSection places={MOCK_PLACES} />
-
-          {/* ── EXPERIENCIAS ─────────────────────────────────────────── */}
+          {/* 4 — PLANES QUE VALEN EL VIAJE (experiences) */}
           <ExperienciasSection events={MOCK_EVENTS} />
 
-          {/* ── LO QUE ESTÁ PASANDO ──────────────────────────────────── */}
+          {/* 5 — JOYAS ESCONDIDAS */}
+          <JoyasSection places={MOCK_PLACES} />
+
+          {/* 6 — PEQUEÑOS PLANES */}
+          <PlanesSection places={MOCK_PLACES} />
+
+          {/* ── Second editorial break ── */}
+          <EditorialBreak
+            quote="El mejor restaurante de Bogotá es el que descubriste tú primero"
+            sub="Colombia · Gastronomía local"
+          />
+
+          {/* 7 — MAGAZINE / HISTORIAS */}
+          <MagazineSection places={MOCK_PLACES} />
+
+          {/* 8 — LO QUE ESTÁ PASANDO */}
           <AhoraSection places={MOCK_PLACES} />
 
-          {/* ── REVIEWS ──────────────────────────────────────────────── */}
+          {/* 9 — REVIEWS */}
           <ReviewsSection />
 
-          {/* ── DIVIDER before explore ────────────────────────────────── */}
-          <div id="explore" className="mb-10 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+          {/* ── Divider before explore ── */}
+          <div
+            id="explore"
+            className="mb-10 pt-4"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}
+          >
             <div className="flex items-end justify-between pt-10 mb-2">
               <div>
                 <div className="section-label-bar">
@@ -237,8 +383,6 @@ export default function HomePage() {
           EXPLORE — filter bar + place grid
       ══════════════════════════════════════════════════════════════════ */}
       <div className={`max-w-7xl mx-auto px-6 ${isExploring ? "pt-12" : ""} pb-24`}>
-
-        {/* Filter + pills bar */}
         <div className="mb-8 pb-6 border-b border-[rgba(255,255,255,0.04)]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
             <CategoryPills active={category} onChange={setCategory} />
@@ -267,7 +411,6 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Places grid */}
         <PlaceGrid
           places={filteredPlaces}
           emptyMessage="Ningún lugar coincide con tus filtros."
