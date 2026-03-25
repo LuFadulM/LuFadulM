@@ -18,7 +18,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
       <article
         className="atmo-card card-rounded-lg relative overflow-hidden h-full"
         style={{
-          minHeight: "460px",
+          minHeight: "540px",
           background: "#111111",
           border: "1px solid rgba(255,255,255,0.05)",
         }}
@@ -100,15 +100,14 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
           {place.description && (
             <p
               style={{
-                color: "rgba(242,237,232,0.80)",
-                fontSize: "13px",
+                color: "rgba(255,255,255,0.78)",
+                fontSize: "14px",
                 lineHeight: "1.65",
                 fontWeight: 400,
-                maxWidth: "420px",
-                marginBottom: "16px",
-                fontStyle: "italic",
-                fontFamily: "'Playfair Display', Georgia, serif",
-                textShadow: "0 1px 8px rgba(0,0,0,0.7)",
+                maxWidth: "440px",
+                marginBottom: "20px",
+                fontFamily: "'Sora', system-ui, sans-serif",
+                textShadow: "0 1px 8px rgba(0,0,0,0.8)",
               }}
               className="line-clamp-2"
             >
@@ -217,7 +216,7 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
   const [hero, ...rest] = places;
 
   return (
-    <section className="mb-24">
+    <section className="mb-32">
       <div className="discovery-header">
         <div>
           <div className="section-label-bar">
