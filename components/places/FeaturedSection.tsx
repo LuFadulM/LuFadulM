@@ -121,7 +121,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
               <span style={{ color: "rgba(242,237,232,0.85)", fontSize: "12px", fontWeight: 500 }}>
                 {formatRating(place.avg_rating)}
               </span>
-              <span style={{ color: "rgba(242,237,232,0.3)", fontSize: "12px" }}>
+              <span style={{ color: "rgba(242,237,232,0.52)", fontSize: "12px" }}>
                 {place.review_count} {reviews}
               </span>
             </div>
