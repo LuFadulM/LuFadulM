@@ -23,19 +23,9 @@ import { useEffect } from "react";
 
 type CategoryFilter = Category | "All";
 
-// ─── Section wrapper helpers ──────────────────────────────────────────────────
+// ─── Section wrappers ─────────────────────────────────────────────────────────
 
-function LightSection({ children, bg = "#F7F5F2" }: { children: React.ReactNode; bg?: string }) {
-  return (
-    <div style={{ background: bg }}>
-      <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function DarkSection({ children, bg = "#0E0E0C" }: { children: React.ReactNode; bg?: string }) {
+function Section({ children, bg = "#2A2925" }: { children: React.ReactNode; bg?: string }) {
   return (
     <div style={{ background: bg }}>
       <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
@@ -114,22 +104,21 @@ export default function HomePage() {
   const isExploring = search || category !== "All" || city !== "All" || price !== "All";
 
   return (
-    <div style={{ background: "#F7F5F2" }}>
+    <div style={{ background: "#2A2925" }}>
 
       {/* ══════════════════════════════════════════════════════════════════
-          HERO — Full-screen dark, cinematic, minimal
+          HERO — Full-screen, cinematic, dark
       ══════════════════════════════════════════════════════════════════ */}
       <section
         style={{
           minHeight: "92vh",
           display: "flex",
           alignItems: "center",
-          background: "#0A0A09",
+          background: "#2A2925",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Hero background image */}
         {heroImage && (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -141,101 +130,145 @@ export default function HomePage() {
                 position: "absolute", inset: 0,
                 width: "100%", height: "100%",
                 objectFit: "cover", objectPosition: "center 35%",
-                opacity: 0.32,
-                filter: "saturate(0.75) brightness(0.8)",
+                opacity: 0.35,
+                filter: "saturate(0.65) brightness(0.85)",
               }}
             />
-            <div
-              aria-hidden="true"
-              style={{
-                position: "absolute", inset: 0,
-                background: "radial-gradient(ellipse at center, transparent 25%, rgba(10,10,9,0.88) 100%)",
-              }}
-            />
+            <div aria-hidden="true" style={{
+              position: "absolute", inset: 0,
+              background: "radial-gradient(ellipse at center, transparent 20%, rgba(42,41,37,0.92) 100%)",
+            }} />
           </>
         )}
 
-        {/* Bottom fade into light section */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute", bottom: 0, left: 0, right: 0,
-            height: "120px",
-            background: "linear-gradient(to bottom, transparent, rgba(10,10,9,0.7))",
-            pointerEvents: "none",
-          }}
-        />
-
-        {/* Ambient gold glow */}
         <div aria-hidden="true" style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse at 15% 75%, rgba(198,168,92,0.07) 0%, transparent 55%)",
+          position: "absolute", bottom: 0, left: 0, right: 0, height: "180px",
+          background: "linear-gradient(to bottom, transparent, #2A2925)",
           pointerEvents: "none",
         }} />
 
-        {/* Content */}
-        <div className="max-w-7xl mx-auto px-6 w-full relative" style={{ zIndex: 10 }}>
-          <div style={{ maxWidth: "640px", padding: "clamp(60px,8vh,100px) 0" }}>
+        <div aria-hidden="true" style={{
+          position: "absolute", inset: 0,
+          background: "radial-gradient(ellipse at 10% 80%, rgba(177,152,124,0.08) 0%, transparent 50%)",
+          pointerEvents: "none",
+        }} />
 
-            <p className="label-micro" style={{ color: "#C6A85C", marginBottom: "24px" }}>
+        <div className="max-w-7xl mx-auto px-6 w-full relative" style={{ zIndex: 10 }}>
+          <div style={{ maxWidth: "680px", padding: "clamp(60px,8vh,100px) 0" }}>
+
+            <p style={{
+              fontSize: "9px", letterSpacing: "0.28em", textTransform: "uppercase",
+              fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
+              color: "#B1987C", marginBottom: "28px",
+              display: "flex", alignItems: "center", gap: "10px",
+            }}>
+              <span style={{ display: "inline-block", width: "22px", height: "1px", background: "#B1987C" }} />
               {t.hero.label}
             </p>
 
-            <h1
-              className="font-serif leading-none"
-              style={{
-                fontSize: "clamp(52px, 7.5vw, 96px)",
-                color: "#F5F5F5",
-                marginBottom: "18px",
-                letterSpacing: "-0.025em",
-              }}
-            >
+            <h1 className="font-serif" style={{
+              fontSize: "clamp(48px, 7vw, 88px)",
+              color: "#F0EBE4",
+              marginBottom: "20px",
+              letterSpacing: "-0.03em",
+              lineHeight: "1.05",
+              fontWeight: 400,
+            }}>
               {t.hero.title}
               <br />
-              <span style={{
+              <em style={{
                 fontStyle: "italic",
-                background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 60%, #B8903E 100%)",
+                background: "linear-gradient(135deg, #CEAD95 0%, #B1987C 60%, #9A7D65 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
                 {t.hero.titleAccent}
-              </span>
+              </em>
             </h1>
 
-            <div style={{ width: "48px", height: "1px", background: "rgba(198,168,92,0.45)", marginBottom: "24px" }} />
-
             <p style={{
-              color: "rgba(200,196,188,0.70)",
-              fontSize: "15px", lineHeight: "1.75",
-              fontWeight: 300, maxWidth: "400px",
+              color: "rgba(220,215,207,0.72)",
+              fontSize: "16px", lineHeight: "1.8",
+              fontWeight: 300, maxWidth: "440px",
               marginBottom: "40px",
+              fontFamily: "'Sora', system-ui, sans-serif",
             }}>
               {t.hero.subtitle}
             </p>
 
-            <div style={{ maxWidth: "500px" }}>
+            <div style={{ maxWidth: "520px" }}>
               <SearchBar large placeholder={t.hero.searchPlaceholder} onSearch={setSearch} />
             </div>
 
+            {/* Category quick-access pills */}
+            <div className="flex flex-wrap gap-2 mt-8">
+              {[
+                { label: "Restaurantes", emoji: "🍽" },
+                { label: "Cafés", emoji: "☕" },
+                { label: "Aventuras", emoji: "🧗" },
+                { label: "Cultura", emoji: "🎭" },
+                { label: "Naturaleza", emoji: "🌿" },
+                { label: "Estadías", emoji: "🏨" },
+              ].map(({ label, emoji }) => (
+                <button
+                  key={label}
+                  onClick={() => {
+                    const map: Record<string, CategoryFilter> = {
+                      Restaurantes: "Restaurants",
+                      Cafés: "Cafés",
+                      Estadías: "Hotels",
+                      Cultura: "Attractions",
+                      Aventuras: "Attractions",
+                      Naturaleza: "Attractions",
+                    };
+                    setCategory(map[label] ?? "All");
+                    document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "5px",
+                    padding: "6px 13px",
+                    fontSize: "10px", letterSpacing: "0.08em",
+                    fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 500,
+                    color: "rgba(240,235,228,0.62)",
+                    background: "rgba(255,255,255,0.055)",
+                    border: "1px solid rgba(255,255,255,0.09)",
+                    borderRadius: "100px",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(177,152,124,0.14)";
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(177,152,124,0.35)";
+                    (e.currentTarget as HTMLButtonElement).style.color = "#B1987C";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.055)";
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.09)";
+                    (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,235,228,0.62)";
+                  }}
+                >
+                  <span>{emoji}</span> {label}
+                </button>
+              ))}
+            </div>
+
             {/* Stats */}
-            <div
-              className="flex items-center gap-8 mt-10"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "24px" }}
-            >
+            <div className="flex items-center gap-8 mt-10" style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "24px" }}>
               {[
                 { value: `${MOCK_PLACES.length}+`, label: "Lugares curados" },
                 { value: "6", label: "Ciudades" },
-                { value: "100%", label: "Editorial" },
+                { value: "100%", label: "Sin patrocinios" },
               ].map(({ value, label }) => (
                 <div key={label}>
-                  <p className="font-serif" style={{ fontSize: "22px", color: "#C6A85C", fontWeight: 400, lineHeight: 1 }}>
+                  <p className="font-serif" style={{ fontSize: "24px", color: "#B1987C", fontWeight: 400, lineHeight: 1 }}>
                     {value}
                   </p>
                   <p style={{
                     fontSize: "9px", letterSpacing: "0.14em", textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.28)", fontFamily: "'Sora', system-ui, sans-serif",
-                    fontWeight: 500, marginTop: "5px",
+                    color: "rgba(255,255,255,0.30)",
+                    fontFamily: "'Sora', system-ui, sans-serif",
+                    fontWeight: 500, marginTop: "6px",
                   }}>
                     {label}
                   </p>
@@ -252,30 +285,30 @@ export default function HomePage() {
           opacity: 0.4, animation: "scrollPulse 2.2s ease-in-out infinite",
         }} aria-hidden="true">
           <div style={{
-            width: "1px", height: "40px",
+            width: "1px", height: "44px",
             background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.6))",
           }} />
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          DISCOVERY SECTIONS (light + dark alternating)
+          DISCOVERY SECTIONS — all dark, slight bg variation for rhythm
       ══════════════════════════════════════════════════════════════════ */}
       {!isExploring && (
         <>
-          {/* 1 — HOY EN TU CIUDAD — warm light */}
-          <LightSection bg="#F7F5F2">
+          {/* 1 — HOY EN TU CIUDAD */}
+          <Section bg="#2A2925">
             <HoySection places={MOCK_PLACES} />
-          </LightSection>
+          </Section>
 
-          {/* 2 — LUGARES DESTACADOS — white */}
-          <LightSection bg="#FFFFFF">
+          {/* 2 — LUGARES DESTACADOS */}
+          <Section bg="#252219">
             <FeaturedSection places={featuredPlaces} />
-          </LightSection>
+          </Section>
 
-          {/* 3 — EN FOCO (spotlight) — dark cinematic */}
+          {/* 3 — EN FOCO */}
           {spotlightPlace && (
-            <DarkSection>
+            <Section bg="#2A2925">
               <div style={{
                 display: "flex", alignItems: "flex-end", justifyContent: "space-between",
                 marginBottom: "28px", paddingBottom: "18px",
@@ -285,71 +318,71 @@ export default function HomePage() {
                   <p style={{
                     fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
                     fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-                    color: "#C6A85C", marginBottom: "8px",
+                    color: "#B1987C", marginBottom: "8px",
                     display: "flex", alignItems: "center", gap: "8px",
                   }}>
-                    <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+                    <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
                     En foco
                   </p>
-                  <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#E8E4DC" }}>
+                  <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}>
                     Lugares que valen la pena
                   </h2>
                 </div>
               </div>
               <SpotlightSection place={spotlightPlace} />
-            </DarkSection>
+            </Section>
           )}
 
-          {/* 4 — EXPERIENCIAS — dark cinematic */}
-          <DarkSection bg="#111110">
+          {/* 4 — EXPERIENCIAS Y EVENTOS */}
+          <Section bg="#252219">
             <ExperienciasSection events={MOCK_EVENTS} />
-          </DarkSection>
+          </Section>
 
-          {/* 5 — JOYAS ESCONDIDAS — warm editorial */}
-          <LightSection bg="#EFEAE4">
+          {/* 5 — JOYAS ESCONDIDAS */}
+          <Section bg="#2A2925">
             <JoyasSection places={MOCK_PLACES} />
-          </LightSection>
+          </Section>
 
-          {/* 6 — PEQUEÑOS PLANES — white */}
-          <LightSection bg="#FFFFFF">
+          {/* 6 — PEQUEÑOS PLANES */}
+          <Section bg="#2D2922">
             <PlanesSection places={MOCK_PLACES} />
-          </LightSection>
+          </Section>
 
-          {/* 7 — MAGAZINE — light editorial */}
-          <LightSection bg="#F7F5F2">
+          {/* 7 — MAGAZINE EDITORIAL */}
+          <Section bg="#252219">
             <MagazineSection places={MOCK_PLACES} />
-          </LightSection>
+          </Section>
 
-          {/* 8 — LO QUE ESTÁ PASANDO — dark */}
-          <DarkSection>
+          {/* 8 — LO QUE ESTÁ PASANDO AHORA */}
+          <Section bg="#252219">
             <AhoraSection places={MOCK_PLACES} />
-          </DarkSection>
+          </Section>
 
-          {/* 9 — REVIEWS — warm light */}
-          <LightSection bg="#FAFAF8">
+          {/* 9 — OPINIONES */}
+          <Section bg="#2A2925">
             <ReviewsSection />
-          </LightSection>
+          </Section>
 
-          {/* 10 — EXPLORE HEADER — white */}
-          <div style={{ background: "#FFFFFF" }}>
+          {/* 10 — EXPLORAR HEADER */}
+          <div style={{ background: "#252219" }}>
             <div className="max-w-7xl mx-auto px-6 pt-16 pb-4" id="explore">
-              <div style={{ borderTop: "1px solid rgba(28,28,28,0.06)", paddingTop: "40px" }}>
+              <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "40px" }}>
                 <div className="flex items-end justify-between mb-2">
                   <div>
                     <p style={{
                       fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
                       fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-                      color: "#C6A85C", marginBottom: "8px",
+                      color: "#B1987C", marginBottom: "8px",
                       display: "flex", alignItems: "center", gap: "8px",
                     }}>
-                      <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+                      <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
                       Explorar todo
                     </p>
-                    <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#1C1C1C", letterSpacing: "-0.02em" }}>
+                    <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}>
                       Todos los lugares
                     </h2>
                   </div>
-                  <p style={{ fontSize: "11px", color: "#9A9087", fontWeight: 300 }}>
+                  <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.32)", fontWeight: 300, fontFamily: "'Sora', system-ui, sans-serif" }}>
                     {MOCK_PLACES.length} lugares en Colombia
                   </p>
                 </div>
@@ -360,19 +393,16 @@ export default function HomePage() {
       )}
 
       {/* ══════════════════════════════════════════════════════════════════
-          EXPLORE — filter + grid on white
+          EXPLORE — filter + grid
       ══════════════════════════════════════════════════════════════════ */}
-      <div style={{ background: "#FFFFFF" }}>
-        <div className={`max-w-7xl mx-auto px-6 ${isExploring ? "pt-12" : ""} pb-24`}>
-          <div
-            className="mb-8 pb-6"
-            style={{ borderBottom: "1px solid rgba(28,28,28,0.08)" }}
-          >
+      <div style={{ background: "#252219" }}>
+        <div className={`max-w-7xl mx-auto px-6 ${isExploring ? "pt-12" : ""} pb-24`} id={isExploring ? "explore" : undefined}>
+          <div className="mb-8 pb-6" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
               <CategoryPills active={category} onChange={setCategory} />
               <p style={{
                 fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase",
-                color: "#9A9087", fontWeight: 500, whiteSpace: "nowrap",
+                color: "rgba(255,255,255,0.30)", fontWeight: 500, whiteSpace: "nowrap",
                 fontFamily: "'Sora', system-ui, sans-serif",
               }}>
                 {filteredPlaces.length}{" "}

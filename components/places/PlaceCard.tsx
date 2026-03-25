@@ -17,21 +17,15 @@ interface PlaceCardProps {
   surface?: AnalyticsSurface;
 }
 
-// Category system for light backgrounds
-const CATEGORY_TAG: Record<string, { text: string; bg: string; label: string }> = {
-  Restaurants: { text: "#B84A36", bg: "rgba(184,74,54,0.10)", label: "Restaurante" },
-  Bars:        { text: "#B84A36", bg: "rgba(184,74,54,0.10)", label: "Bar" },
-  Nightlife:   { text: "#7050B8", bg: "rgba(112,80,184,0.10)", label: "Vida nocturna" },
-  Cafés:       { text: "#8C6820", bg: "rgba(140,104,32,0.10)", label: "Café" },
-  Hotels:      { text: "#1E7262", bg: "rgba(30,114,98,0.10)", label: "Hotel" },
-  Attractions: { text: "#27734A", bg: "rgba(39,115,74,0.10)", label: "Atracción" },
+// Category colors for dark overlay cards
+const CATEGORY_TAG: Record<string, { color: string; bg: string; label: string }> = {
+  Restaurants: { color: "#E2925B", bg: "rgba(226,146,91,0.18)", label: "Restaurante" },
+  Bars:        { color: "#E2925B", bg: "rgba(226,146,91,0.18)", label: "Bar" },
+  Nightlife:   { color: "#B09FE8", bg: "rgba(176,159,232,0.18)", label: "Vida nocturna" },
+  Cafés:       { color: "#D4A03C", bg: "rgba(212,160,60,0.18)", label: "Café" },
+  Hotels:      { color: "#3CC9AD", bg: "rgba(60,201,173,0.18)", label: "Hotel" },
+  Attractions: { color: "#3CC9AD", bg: "rgba(60,201,173,0.18)", label: "Atracción" },
 };
-
-function getShortCopy(description: string | null | undefined): string {
-  if (!description) return "";
-  const first = description.split(/\.\s+/)[0]?.trim() ?? "";
-  return first.length > 90 ? first.slice(0, 87) + "…" : first;
-}
 
 export default function PlaceCard({
   place,
@@ -44,8 +38,7 @@ export default function PlaceCard({
   const impressionTracked = useRef(false);
   const [hovered, setHovered] = useState(false);
 
-  const catCfg = CATEGORY_TAG[place.category] ?? { text: "#6A6A6A", bg: "rgba(0,0,0,0.06)", label: place.category };
-  const shortCopy = getShortCopy(place.description);
+  const catCfg = CATEGORY_TAG[place.category] ?? { color: "#B1987C", bg: "rgba(198,168,92,0.18)", label: place.category };
   const loc = [place.neighborhood, place.city].filter(Boolean).join(" · ");
 
   useEffect(() => {
@@ -76,17 +69,19 @@ export default function PlaceCard({
       <Link href={`/places/${place.slug}`} className="block h-full" onClick={handleClick}>
         <article
           style={{
-            background: "#FFFFFF",
-            borderRadius: "14px",
+            position: "relative",
             overflow: "hidden",
+            borderRadius: "14px",
+            background: "#2F2C26",
+            border: "1px solid rgba(255,255,255,0.06)",
             height: "100%",
             display: "flex",
             flexDirection: "column",
-            boxShadow: hovered
-              ? "0 16px 48px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)"
-              : "0 2px 14px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.04)",
             transform: hovered ? "translateY(-4px)" : "translateY(0)",
-            transition: "box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.23,1,0.32,1)",
+            boxShadow: hovered
+              ? "0 20px 50px rgba(0,0,0,0.55), 0 4px 16px rgba(0,0,0,0.35)"
+              : "0 4px 20px rgba(0,0,0,0.25)",
+            transition: "transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease",
           }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
@@ -100,14 +95,30 @@ export default function PlaceCard({
                 fill
                 className="object-cover"
                 style={{
-                  transform: hovered ? "scale(1.05)" : "scale(1)",
+                  transform: hovered ? "scale(1.06)" : "scale(1)",
                   transition: "transform 0.65s cubic-bezier(0.23,1,0.32,1)",
                 }}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
             ) : (
-              <div style={{ position: "absolute", inset: 0, background: "#F0EDE8" }} />
+              <div style={{ position: "absolute", inset: 0, background: "#1C1C1A" }} />
             )}
+
+            {/* Category badge — top left */}
+            <div style={{ position: "absolute", top: 12, left: 12 }}>
+              <span style={{
+                fontSize: "8px", letterSpacing: "0.14em", textTransform: "uppercase",
+                fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
+                color: catCfg.color,
+                background: catCfg.bg,
+                border: `1px solid ${catCfg.color}40`,
+                padding: "3px 9px", borderRadius: "100px",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+              }}>
+                {catCfg.label}
+              </span>
+            </div>
 
             {/* Premium badge */}
             {isFeaturedPlacement && (
@@ -115,89 +126,87 @@ export default function PlaceCard({
                 <span style={{
                   fontSize: "8px", letterSpacing: "0.14em", textTransform: "uppercase",
                   fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-                  color: "#FFFFFF", background: "#C6A85C",
+                  color: "#2A2925", background: "#B1987C",
                   padding: "3px 9px", borderRadius: "100px",
                 }}>
-                  Premium
+                  Destacado
                 </span>
               </div>
             )}
           </div>
 
           {/* ── Content ── */}
-          <div style={{ padding: "14px 16px 18px", flex: 1, display: "flex", flexDirection: "column" }}>
-            {/* Category pill */}
-            <div style={{ marginBottom: "8px" }}>
-              <span style={{
-                fontSize: "8px", letterSpacing: "0.16em", textTransform: "uppercase",
-                fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-                color: catCfg.text, background: catCfg.bg,
-                padding: "3px 8px", borderRadius: "100px",
-              }}>
-                {catCfg.label}
-              </span>
-            </div>
-
+          <div style={{
+            padding: "16px 18px 20px",
+            flex: 1, display: "flex", flexDirection: "column",
+            background: "#2F2C26",
+          }}>
             {/* Name */}
-            <h3
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontSize: "16px",
-                fontWeight: 600,
-                color: hovered ? "#C6A85C" : "#1C1C1C",
-                lineHeight: "1.32",
-                marginBottom: "4px",
-                letterSpacing: "-0.01em",
-                transition: "color 0.2s ease",
-              }}
-            >
+            <h3 style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontSize: "17px",
+              fontWeight: 600,
+              color: hovered ? "#B1987C" : "#EDE9E2",
+              lineHeight: "1.3",
+              marginBottom: "5px",
+              letterSpacing: "-0.01em",
+              transition: "color 0.25s ease",
+            }}>
               {place.name}
             </h3>
 
             {/* Location */}
             {loc && (
               <p style={{
-                fontSize: "11px", color: "#8A8680",
+                fontSize: "11px",
+                color: "rgba(255,255,255,0.45)",
                 fontFamily: "'Sora', system-ui, sans-serif",
-                fontWeight: 400, marginBottom: "8px",
+                fontWeight: 400,
+                marginBottom: "10px",
+                letterSpacing: "0.02em",
               }}>
                 {loc}
               </p>
             )}
 
-            {/* Short copy */}
-            {shortCopy && (
-              <p
-                className="line-clamp-2"
-                style={{
-                  fontSize: "12px", lineHeight: "1.6",
-                  color: "#6A6A6A", fontWeight: 400,
-                  marginBottom: "12px", flex: 1,
-                }}
-              >
-                {shortCopy}
-              </p>
-            )}
-
-            {/* Rating + price */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto" }}>
+            {/* Rating + price row */}
+            <div style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              marginTop: "auto",
+              paddingTop: "10px",
+              borderTop: "1px solid rgba(255,255,255,0.06)",
+            }}>
               {place.avg_rating > 0 ? (
                 <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                   <div style={{ display: "flex", gap: "2px" }}>
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <svg key={s} width="10" height="10" viewBox="0 0 24 24"
-                        fill={s <= Math.round(place.avg_rating) ? "#C6A85C" : "#DDD8D0"} aria-hidden="true">
+                      <svg key={s} width="11" height="11" viewBox="0 0 24 24"
+                        fill={s <= Math.round(place.avg_rating) ? "#B1987C" : "rgba(255,255,255,0.12)"}
+                        aria-hidden="true">
                         <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                       </svg>
                     ))}
                   </div>
-                  <span style={{ fontSize: "11px", fontWeight: 500, color: "#8A8680", fontFamily: "'Sora', system-ui, sans-serif" }}>
+                  <span style={{
+                    fontSize: "12px", fontWeight: 500,
+                    color: "rgba(255,255,255,0.55)",
+                    fontFamily: "'Sora', system-ui, sans-serif",
+                  }}>
                     {formatRating(place.avg_rating)}
+                    {place.review_count > 0 && (
+                      <span style={{ color: "rgba(255,255,255,0.28)", fontWeight: 400 }}> ({place.review_count})</span>
+                    )}
                   </span>
                 </div>
               ) : <span />}
               {place.price_level && (
-                <span style={{ fontSize: "11px", color: "#B0ABA4", fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 500 }}>
+                <span style={{
+                  fontSize: "11px",
+                  color: "rgba(255,255,255,0.35)",
+                  fontFamily: "'Sora', system-ui, sans-serif",
+                  fontWeight: 500,
+                  letterSpacing: "0.06em",
+                }}>
                   {place.price_level}
                 </span>
               )}

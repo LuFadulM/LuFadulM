@@ -38,9 +38,9 @@ function ArrowButton({
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(212,175,55,0.10)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(212,175,55,0.28)";
-          (e.currentTarget as HTMLButtonElement).style.color = "#D4AF37";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(177,152,124,0.10)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(177,152,124,0.28)";
+          (e.currentTarget as HTMLButtonElement).style.color = "#B1987C";
         }
       }}
       onMouseLeave={(e) => {
@@ -105,9 +105,9 @@ function CityDropdown({ value, onChange }: { value: string; onChange: (v: string
           textTransform: "uppercase",
           fontWeight: 500,
           fontFamily: "'Sora', system-ui, sans-serif",
-          background: isActive ? "rgba(212,175,55,0.10)" : "rgba(255,255,255,0.04)",
-          color: isActive ? "#D4AF37" : "rgba(255,255,255,0.45)",
-          border: isActive ? "1px solid rgba(212,175,55,0.28)" : "1px solid rgba(255,255,255,0.07)",
+          background: isActive ? "rgba(177,152,124,0.10)" : "rgba(255,255,255,0.04)",
+          color: isActive ? "#B1987C" : "rgba(255,255,255,0.45)",
+          border: isActive ? "1px solid rgba(177,152,124,0.28)" : "1px solid rgba(255,255,255,0.07)",
           borderRadius: "6px",
           cursor: "pointer",
           transition: "all 0.2s ease",
@@ -152,8 +152,8 @@ function CityDropdown({ value, onChange }: { value: string; onChange: (v: string
                   width: "100%", padding: "8px 12px", fontSize: "11px",
                   letterSpacing: "0.08em", fontFamily: "'Sora', system-ui, sans-serif",
                   fontWeight: isSel ? 500 : 400,
-                  color: isSel ? "#D4AF37" : "rgba(255,255,255,0.6)",
-                  background: isSel ? "rgba(212,175,55,0.08)" : "transparent",
+                  color: isSel ? "#B1987C" : "rgba(255,255,255,0.6)",
+                  background: isSel ? "rgba(177,152,124,0.08)" : "transparent",
                   border: "none", borderRadius: "4px", cursor: "pointer", textAlign: "left",
                   transition: "background 0.15s, color 0.15s",
                 }}
@@ -162,7 +162,7 @@ function CityDropdown({ value, onChange }: { value: string; onChange: (v: string
               >
                 {city}
                 {isSel && (
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2.5" aria-hidden="true">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#B1987C" strokeWidth="2.5" aria-hidden="true">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 )}
@@ -191,7 +191,7 @@ function EventCard({ event }: { event: HyexEvent }) {
           border: "1px solid rgba(255,255,255,0.05)",
           transform: hovered ? "translateY(-5px)" : "translateY(0)",
           boxShadow: hovered
-            ? "0 28px 60px rgba(0,0,0,0.70), 0 0 0 1px rgba(212,175,55,0.10)"
+            ? "0 28px 60px rgba(0,0,0,0.70), 0 0 0 1px rgba(177,152,124,0.10)"
             : "0 4px 20px rgba(0,0,0,0.3)",
           transition: "transform 0.45s cubic-bezier(0.23,1,0.32,1), box-shadow 0.45s ease",
         }}
@@ -214,7 +214,7 @@ function EventCard({ event }: { event: HyexEvent }) {
         ) : (
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #151512 0%, #1A1A16 50%, #111110 100%)" }}
+            style={{ background: "linear-gradient(135deg, #2A2925 0%, #2D2922 50%, #252219 100%)" }}
           />
         )}
 
@@ -305,7 +305,7 @@ function EventCard({ event }: { event: HyexEvent }) {
                 </span>
               )}
               {event.price_level && (
-                <span style={{ fontSize: "9px", letterSpacing: "0.1em", color: "rgba(212,175,55,0.65)", fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 600 }}>
+                <span style={{ fontSize: "9px", letterSpacing: "0.1em", color: "rgba(177,152,124,0.65)", fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 600 }}>
                   {event.price_level}
                 </span>
               )}
@@ -316,7 +316,7 @@ function EventCard({ event }: { event: HyexEvent }) {
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#D4AF37",
+                  color: "#B1987C",
                   fontFamily: "'Sora', system-ui, sans-serif",
                   opacity: hovered ? 1 : 0,
                   transform: hovered ? "translateX(0)" : "translateX(-4px)",
@@ -347,8 +347,8 @@ function RecurrenteRow({ event }: { event: HyexEvent }) {
           style={{
             width: "40px",
             height: "40px",
-            background: "rgba(212,175,55,0.05)",
-            border: "1px solid rgba(212,175,55,0.12)",
+            background: "rgba(177,152,124,0.05)",
+            border: "1px solid rgba(177,152,124,0.12)",
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8A44E" strokeWidth="1.5" aria-hidden="true">
@@ -383,7 +383,7 @@ function RecurrenteRow({ event }: { event: HyexEvent }) {
 
         <div
           className="shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-0.5"
-          style={{ color: "#D4AF37" }}
+          style={{ color: "#B1987C" }}
           aria-hidden="true"
         >
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -524,7 +524,7 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
             style={{
               position: "absolute", top: 0, right: 0,
               width: "100px", height: "calc(100% - 8px)",
-              background: "linear-gradient(to right, transparent, #0A0A09 90%)",
+              background: "linear-gradient(to right, transparent, #2A2925 90%)",
               pointerEvents: "none",
               opacity: canScrollRight ? 1 : 0,
               transition: "opacity 0.3s ease",
@@ -535,7 +535,7 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
             style={{
               position: "absolute", top: 0, left: 0,
               width: "70px", height: "calc(100% - 8px)",
-              background: "linear-gradient(to left, transparent, #0A0A09 90%)",
+              background: "linear-gradient(to left, transparent, #2A2925 90%)",
               pointerEvents: "none",
               opacity: canScrollLeft ? 1 : 0,
               transition: "opacity 0.3s ease",

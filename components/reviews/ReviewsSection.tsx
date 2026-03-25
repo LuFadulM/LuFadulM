@@ -109,7 +109,7 @@ export default function ReviewsSection() {
           href="/reviews"
           className="label-micro transition-colors duration-200 hidden sm:block"
           style={{ color: "#666666" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#D4AF37")}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#B1987C")}
           onMouseLeave={(e) => (e.currentTarget.style.color = "#666666")}
         >
           Ver todas →
@@ -179,8 +179,8 @@ export default function ReviewsSection() {
                   style={{
                     width: "28px",
                     height: "28px",
-                    background: "rgba(212,175,55,0.08)",
-                    border: "1px solid rgba(212,175,55,0.15)",
+                    background: "rgba(177,152,124,0.08)",
+                    border: "1px solid rgba(177,152,124,0.15)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -279,7 +279,7 @@ export default function ReviewsSection() {
             whiteSpace: "nowrap",
           }}
           onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.color = "#D4AF37")
+            ((e.currentTarget as HTMLElement).style.color = "#B1987C")
           }
           onMouseLeave={(e) =>
             ((e.currentTarget as HTMLElement).style.color = "#C8A44E")

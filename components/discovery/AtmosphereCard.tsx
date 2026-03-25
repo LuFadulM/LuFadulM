@@ -203,7 +203,7 @@ export default function AtmosphereCard({
                     style={{
                       fontSize: "9px",
                       letterSpacing: "0.12em",
-                      color: "rgba(212,175,55,0.75)",
+                      color: "rgba(177,152,124,0.75)",
                       fontFamily: "'Sora', system-ui, sans-serif",
                       fontWeight: 600,
                       textShadow: "0 1px 6px rgba(0,0,0,0.8)",
@@ -232,7 +232,7 @@ export default function AtmosphereCard({
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#D4AF37",
+                  color: "#B1987C",
                   fontFamily: "'Sora', system-ui, sans-serif",
                   textShadow: "0 1px 8px rgba(0,0,0,0.8)",
                 }}

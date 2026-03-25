@@ -13,14 +13,14 @@ const VARIANT_STYLES: Record<
   /** Gold — editorial picks, gems, premium curation */
   editorial: {
     color: "#C8A44E",
-    bg: "rgba(200,164,78,0.08)",
-    border: "rgba(200,164,78,0.22)",
+    bg: "rgba(177,152,124,0.08)",
+    border: "rgba(177,152,124,0.22)",
   },
   /** Warm amber — time-of-day / moment tags (unified, no per-moment hue) */
   moment: {
-    color: "rgba(212,175,55,0.75)",
-    bg: "rgba(212,175,55,0.06)",
-    border: "rgba(212,175,55,0.15)",
+    color: "rgba(177,152,124,0.75)",
+    bg: "rgba(177,152,124,0.06)",
+    border: "rgba(177,152,124,0.15)",
   },
   /** Muted white — trending / popular status (subdued, not distracting) */
   status: {

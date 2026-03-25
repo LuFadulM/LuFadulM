@@ -23,7 +23,7 @@ export default function EditorialBreak({ quote, sub }: EditorialBreakProps) {
         style={{
           width: "32px",
           height: "1px",
-          background: "rgba(212,175,55,0.40)",
+          background: "rgba(177,152,124,0.40)",
           margin: "0 auto 36px",
         }}
       />
@@ -52,7 +52,7 @@ export default function EditorialBreak({ quote, sub }: EditorialBreakProps) {
             fontSize: "8px",
             letterSpacing: "0.24em",
             textTransform: "uppercase",
-            color: "rgba(212,175,55,0.50)",
+            color: "rgba(177,152,124,0.50)",
             fontFamily: "'Sora', system-ui, sans-serif",
             fontWeight: 600,
             marginTop: "20px",
@@ -67,7 +67,7 @@ export default function EditorialBreak({ quote, sub }: EditorialBreakProps) {
         style={{
           width: "32px",
           height: "1px",
-          background: "rgba(212,175,55,0.40)",
+          background: "rgba(177,152,124,0.40)",
           margin: "36px auto 0",
         }}
       />

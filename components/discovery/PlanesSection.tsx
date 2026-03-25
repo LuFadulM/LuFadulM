@@ -14,20 +14,42 @@ interface PlanCard {
   planTitle: string;
   planMoment: string;
   momentColor: string;
+  momentBg: string;
+  emoji: string;
 }
 
-function derivePlan(place: Place): { planTitle: string; planMoment: string; momentColor: string } {
+function derivePlan(place: Place): { planTitle: string; planMoment: string; momentColor: string; momentBg: string; emoji: string } {
   const loc = place.neighborhood ?? place.city;
-  if (place.category === "Cafés") return { planTitle: `El café de la mañana en ${loc}`, planMoment: "Mañana", momentColor: "#8C6820" };
-  if (place.category === "Bars") return { planTitle: `Tragos con vista en ${loc}`, planMoment: "Tarde", momentColor: "#B84A36" };
-  if (place.category === "Nightlife") return { planTitle: `La noche empieza en ${loc}`, planMoment: "Noche", momentColor: "#7050B8" };
-  if (place.category === "Attractions") return { planTitle: `Explorar ${place.name} con tiempo`, planMoment: "Fin de semana", momentColor: "#27734A" };
-  if (place.category === "Hotels") return { planTitle: `Quedarse en ${place.city} sin apuros`, planMoment: "Fin de semana", momentColor: "#1E7262" };
+  if (place.category === "Cafés") return {
+    planTitle: `El café de la mañana en ${loc}`,
+    planMoment: "Mañana", momentColor: "#D4A03C",
+    momentBg: "rgba(212,160,60,0.18)", emoji: "☕",
+  };
+  if (place.category === "Bars") return {
+    planTitle: `Tragos con vista en ${loc}`,
+    planMoment: "Tarde", momentColor: "#E2725B",
+    momentBg: "rgba(226,114,91,0.18)", emoji: "🍻",
+  };
+  if (place.category === "Nightlife") return {
+    planTitle: `La noche empieza en ${loc}`,
+    planMoment: "Noche", momentColor: "#9B7BDE",
+    momentBg: "rgba(155,123,222,0.18)", emoji: "🌙",
+  };
+  if (place.category === "Attractions") return {
+    planTitle: `Explorar ${place.name} con tiempo`,
+    planMoment: "Fin de semana", momentColor: "#3CC9AD",
+    momentBg: "rgba(60,201,173,0.18)", emoji: "🧭",
+  };
+  if (place.category === "Hotels") return {
+    planTitle: `Quedarse en ${place.city} sin apuros`,
+    planMoment: "Escapada", momentColor: "#3CC9AD",
+    momentBg: "rgba(60,201,173,0.18)", emoji: "🌙",
+  };
   const isLunch = place.tags.some((t) => t.includes("lunch") || t.includes("almuerzo"));
   return {
     planTitle: `${isLunch ? "Un buen almuerzo" : "Cena de altura"} en ${loc}`,
-    planMoment: isLunch ? "Tarde" : "Noche",
-    momentColor: "#B84A36",
+    planMoment: isLunch ? "Mediodía" : "Noche",
+    momentColor: "#E2725B", momentBg: "rgba(226,114,91,0.18)", emoji: "🍽",
   };
 }
 
@@ -40,24 +62,25 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
       style={{
         display: "flex", alignItems: "center", justifyContent: "center",
         width: "34px", height: "34px",
-        background: disabled ? "rgba(0,0,0,0.03)" : "#FFFFFF",
-        border: `1px solid ${disabled ? "rgba(0,0,0,0.06)" : "rgba(0,0,0,0.12)"}`,
-        borderRadius: "50%", cursor: disabled ? "default" : "pointer",
-        transition: "all 0.2s ease", color: disabled ? "rgba(0,0,0,0.20)" : "#3C3C3C",
-        boxShadow: disabled ? "none" : "0 2px 8px rgba(0,0,0,0.08)",
+        background: disabled ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.08)",
+        border: `1px solid ${disabled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.12)"}`,
+        borderRadius: "50%",
+        cursor: disabled ? "default" : "pointer",
+        transition: "all 0.2s ease",
+        color: disabled ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.65)",
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "#C6A85C";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C6A85C";
-          (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF";
+          (e.currentTarget as HTMLButtonElement).style.background = "#B1987C";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "#B1987C";
+          (e.currentTarget as HTMLButtonElement).style.color = "#2A2925";
         }
       }}
       onMouseLeave={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "#FFFFFF";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,0,0,0.12)";
-          (e.currentTarget as HTMLButtonElement).style.color = "#3C3C3C";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.08)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.12)";
+          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.65)";
         }
       }}
     >
@@ -72,73 +95,90 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
 
 function PlanCardItem({ plan }: { plan: PlanCard }) {
   const [hovered, setHovered] = useState(false);
-  const { place, planTitle, planMoment, momentColor } = plan;
+  const { place, planTitle, planMoment, momentColor, momentBg, emoji } = plan;
 
   return (
     <Link href={`/places/${place.slug}`} className="block">
       <article
         style={{
-          width: "240px",
-          background: "#FFFFFF",
-          borderRadius: "14px",
+          width: "250px",
+          height: "300px",
+          position: "relative",
           overflow: "hidden",
+          borderRadius: "14px",
+          background: "#302C26",
+          border: "1px solid rgba(255,255,255,0.06)",
+          transform: hovered ? "translateY(-4px)" : "translateY(0)",
           boxShadow: hovered
-            ? "0 16px 40px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)"
-            : "0 2px 12px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.04)",
-          transform: hovered ? "translateY(-3px)" : "translateY(0)",
-          transition: "box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.23,1,0.32,1)",
+            ? "0 20px 50px rgba(0,0,0,0.6), 0 6px 20px rgba(0,0,0,0.4)"
+            : "0 4px 20px rgba(0,0,0,0.35)",
+          transition: "transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease",
+          cursor: "pointer",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
         {/* Image */}
-        <div style={{ position: "relative", height: "160px", overflow: "hidden" }}>
-          {place.cover_image_url ? (
-            <Image
-              src={place.cover_image_url}
-              alt={place.name}
-              fill
-              className="object-cover"
-              style={{
-                transform: hovered ? "scale(1.07)" : "scale(1)",
-                transition: "transform 0.65s cubic-bezier(0.23,1,0.32,1)",
-              }}
-              sizes="(max-width: 640px) 70vw, 22vw"
-              draggable={false}
-            />
-          ) : (
-            <div style={{ position: "absolute", inset: 0, background: "#F0EDE8" }} />
-          )}
+        {place.cover_image_url && (
+          <Image
+            src={place.cover_image_url}
+            alt={place.name}
+            fill
+            className="object-cover"
+            style={{
+              transform: hovered ? "scale(1.07)" : "scale(1)",
+              transition: "transform 0.7s cubic-bezier(0.23,1,0.32,1)",
+            }}
+            sizes="250px"
+          />
+        )}
+
+        {/* Overlay gradient — darker at top and bottom */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.10) 45%, rgba(0,0,0,0.80) 100%)",
+        }} />
+
+        {/* Moment pill — top */}
+        <div style={{ position: "absolute", top: "14px", left: "14px" }}>
+          <span style={{
+            display: "inline-flex", alignItems: "center", gap: "4px",
+            padding: "4px 10px",
+            fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase",
+            fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
+            color: momentColor,
+            background: momentBg,
+            border: `1px solid ${momentColor}40`,
+            borderRadius: "100px",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+          }}>
+            {emoji} {planMoment}
+          </span>
         </div>
 
-        {/* Content */}
-        <div style={{ padding: "12px 14px 16px" }}>
-          {/* Moment tag */}
-          <span style={{
-            fontSize: "8px", letterSpacing: "0.14em", textTransform: "uppercase",
-            fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: momentColor, display: "block", marginBottom: "7px",
-          }}>
-            {planMoment}
-          </span>
-
-          {/* Plan title */}
+        {/* Content — bottom */}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "16px 16px 18px" }}>
           <h3 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: "14px", fontWeight: 600,
-            color: "#1C1C1C", lineHeight: "1.35",
-            marginBottom: "5px", letterSpacing: "-0.01em",
+            fontSize: "15px",
+            fontWeight: 600,
+            color: "#F0EBE4",
+            lineHeight: "1.35",
+            marginBottom: "6px",
+            letterSpacing: "-0.01em",
+            textShadow: "0 1px 12px rgba(0,0,0,0.9)",
           }}>
             {planTitle}
           </h3>
-
-          {/* Place name */}
           <p style={{
-            fontSize: "10px", color: "#9A9087",
+            fontSize: "10px",
+            color: "rgba(255,255,255,0.52)",
             fontFamily: "'Sora', system-ui, sans-serif",
-            fontWeight: 500, letterSpacing: "0.04em",
+            letterSpacing: "0.06em",
+            textShadow: "0 1px 8px rgba(0,0,0,0.8)",
           }}>
-            {place.name}
+            {place.city}
           </p>
         </div>
       </article>
@@ -146,8 +186,8 @@ function PlanCardItem({ plan }: { plan: PlanCard }) {
   );
 }
 
-const CARD_WIDTH = 240;
-const CARD_GAP = 14;
+const CARD_WIDTH = 250;
+const CARD_GAP = 16;
 const SCROLL_STEP = (CARD_WIDTH + CARD_GAP) * 2;
 
 export default function PlanesSection({ places }: PlanesSectionProps) {
@@ -155,10 +195,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
-  const plans: PlanCard[] = places.slice(0, 10).map((place) => {
-    const { planTitle, planMoment, momentColor } = derivePlan(place);
-    return { place, planTitle, planMoment, momentColor };
-  });
+  const plans: PlanCard[] = places.slice(0, 10).map((p) => ({ place: p, ...derivePlan(p) }));
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
@@ -184,46 +221,56 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
 
   return (
     <section>
-      {/* Header */}
+      {/* ── Header ── */}
       <div style={{
         display: "flex", alignItems: "flex-end", justifyContent: "space-between",
         marginBottom: "24px", paddingBottom: "20px",
-        borderBottom: "1px solid rgba(28,28,28,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}>
         <div>
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#C6A85C", marginBottom: "8px",
+            color: "#B1987C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
-            Inspiración
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
+            Para ti
           </p>
-          <h2 className="font-serif" style={{ fontSize: "clamp(22px, 3vw, 32px)", color: "#1C1C1C", fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <h2 className="font-serif" style={{
+            fontSize: "clamp(22px, 3vw, 32px)",
+            color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em",
+          }}>
             Pequeños planes
           </h2>
-        </div>
-        <div className="flex items-center gap-3">
-          <p className="hidden sm:block font-serif" style={{ fontSize: "13px", color: "#9A9087", fontStyle: "italic" }}>
-            ¿Qué hacer hoy?
+          <p style={{
+            fontSize: "13px", color: "rgba(220,215,207,0.52)",
+            fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 300, marginTop: "6px",
+          }}>
+            Momentos que vale la pena vivir
           </p>
-          <div style={{ display: "flex", gap: "8px" }}>
-            <ArrowBtn direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
-            <ArrowBtn direction="right" onClick={scrollRight} disabled={!canScrollRight} />
-          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <ArrowBtn direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
+          <ArrowBtn direction="right" onClick={scrollRight} disabled={!canScrollRight} />
         </div>
       </div>
 
-      {/* Scroll row */}
+      {/* ── Scroll row ── */}
       <div style={{ position: "relative" }}>
         <div
           ref={scrollRef}
           style={{
-            display: "flex", overflowX: "auto",
-            gap: `${CARD_GAP}px`, paddingBottom: "12px", paddingRight: "40px",
-            scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch",
-            scrollbarWidth: "none", msOverflowStyle: "none", cursor: "grab",
+            display: "flex",
+            overflowX: "auto",
+            gap: `${CARD_GAP}px`,
+            paddingBottom: "12px",
+            paddingRight: "48px",
+            scrollSnapType: "x mandatory",
+            WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            cursor: "grab",
           }}
           onMouseDown={(e) => {
             const el = scrollRef.current;
@@ -247,17 +294,22 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
             </div>
           ))}
         </div>
+        {/* Dark edge fades */}
         <div aria-hidden="true" style={{
           position: "absolute", top: 0, right: 0,
-          width: "90px", height: "calc(100% - 12px)",
-          background: "linear-gradient(to right, transparent, #FFFFFF 90%)",
-          pointerEvents: "none", opacity: canScrollRight ? 1 : 0, transition: "opacity 0.3s ease",
+          width: "100px", height: "calc(100% - 12px)",
+          background: "linear-gradient(to right, transparent, #2D2922 90%)",
+          pointerEvents: "none",
+          opacity: canScrollRight ? 1 : 0,
+          transition: "opacity 0.3s ease",
         }} />
         <div aria-hidden="true" style={{
           position: "absolute", top: 0, left: 0,
           width: "60px", height: "calc(100% - 12px)",
-          background: "linear-gradient(to left, transparent, #FFFFFF 90%)",
-          pointerEvents: "none", opacity: canScrollLeft ? 1 : 0, transition: "opacity 0.3s ease",
+          background: "linear-gradient(to left, transparent, #2D2922 90%)",
+          pointerEvents: "none",
+          opacity: canScrollLeft ? 1 : 0,
+          transition: "opacity 0.3s ease",
         }} />
       </div>
     </section>
