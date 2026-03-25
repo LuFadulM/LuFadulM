@@ -297,6 +297,22 @@
     animation: slide-up 0.6s cubic-bezier(0.2, 0, 0.2, 1) forwards;
   }
 
+  /* ─── Hero scroll pulse ─────────────────────────────────── */
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.35; transform: translateY(0); }
+    50%       { opacity: 0.75; transform: translateY(7px); }
+  }
+
+  /* ─── Magazine image hover zoom ─────────────────────────── */
+  .magazine-featured:hover img {
+    transform: scale(1.05) !important;
+  }
+
+  /* ─── Section spacing — editorial ───────────────────────── */
+  .section-gap-xl {
+    margin-bottom: 10rem; /* 160px — major section transitions */
+  }
+
   /* ─── Gem badge ──────────────────────────────────────────────── */
   .gem-badge {
     border-radius: 100px !important;
