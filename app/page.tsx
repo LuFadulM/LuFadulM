@@ -61,11 +61,6 @@ export default function HomePage() {
     []
   );
 
-  const heroImage = useMemo(
-    () => featuredPlaces.find((p) => p.cover_image_url)?.cover_image_url ?? null,
-    [featuredPlaces]
-  );
-
   const filteredPlaces = useMemo(() => {
     let places =
       sort === "Rating"
@@ -119,27 +114,68 @@ export default function HomePage() {
           overflow: "hidden",
         }}
       >
-        {heroImage && (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={heroImage}
-              alt=""
-              aria-hidden="true"
-              style={{
-                position: "absolute", inset: 0,
-                width: "100%", height: "100%",
-                objectFit: "cover", objectPosition: "center 35%",
-                opacity: 0.35,
-                filter: "saturate(0.65) brightness(0.85)",
-              }}
+        {/* ── Abstract editorial background ──────────────────────── */}
+
+        {/* 1. Deep warm gradient — adds cinematic depth */}
+        <div aria-hidden="true" style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "radial-gradient(ellipse at 22% 52%, #38342E 0%, #2E2B26 30%, #252219 65%, #1A1916 100%)",
+        }} />
+
+        {/* 2. Grain / noise texture — cinematic film feel */}
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
+          <defs>
+            <filter id="hero-grain" x="0%" y="0%" width="100%" height="100%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.72 0.68" numOctaves="4" seed="12" stitchTiles="stitch" result="noise" />
+              <feColorMatrix type="saturate" values="0" />
+            </filter>
+          </defs>
+          <rect width="100%" height="100%" filter="url(#hero-grain)" opacity="0.055" />
+        </svg>
+
+        {/* 3. Monuma vertical grid lines */}
+        <svg aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
+          {[16.66, 33.33, 50, 66.66, 83.33].map((pct) => (
+            <line key={pct}
+              x1={`${pct}%`} y1="0" x2={`${pct}%`} y2="100%"
+              stroke="rgba(177,152,124,0.09)" strokeWidth="0.5"
             />
-            <div aria-hidden="true" style={{
-              position: "absolute", inset: 0,
-              background: "radial-gradient(ellipse at center, transparent 20%, rgba(42,41,37,0.92) 100%)",
-            }} />
-          </>
-        )}
+          ))}
+          <line x1="0" y1="100%" x2="100%" y2="100%" stroke="rgba(177,152,124,0.06)" strokeWidth="0.5" />
+        </svg>
+
+        {/* 4. Topographic rings — right side, suggests exploration / cartography */}
+        <svg aria-hidden="true" style={{
+          position: "absolute", right: "-60px", top: "50%",
+          transform: "translateY(-50%)",
+          width: "580px", height: "580px", pointerEvents: "none",
+        }}>
+          {[60, 120, 180, 240, 300, 360, 420, 480].map((r, i) => (
+            <circle key={r} cx="480" cy="290" r={r} fill="none"
+              stroke="rgba(177,152,124,1)" strokeWidth="0.5"
+              opacity={Math.max(0.03, 0.22 - i * 0.025)}
+            />
+          ))}
+        </svg>
+
+        {/* 5. Subtle diagonal scan lines — adds editorial texture */}
+        <div aria-hidden="true" style={{
+          position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.018,
+          backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(223,220,213,1) 3px, rgba(223,220,213,1) 4px)",
+        }} />
+
+        {/* 6. Bronze ambient glow — upper right warm light */}
+        <div aria-hidden="true" style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "radial-gradient(ellipse at 80% 15%, rgba(177,152,124,0.11) 0%, transparent 52%)",
+        }} />
+
+        {/* 7. Olive glow — lower left, grounds the composition */}
+        <div aria-hidden="true" style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "radial-gradient(ellipse at 5% 90%, rgba(54,58,40,0.5) 0%, transparent 42%)",
+        }} />
 
         <div aria-hidden="true" style={{
           position: "absolute", bottom: 0, left: 0, right: 0, height: "80px",
@@ -147,11 +183,6 @@ export default function HomePage() {
           pointerEvents: "none",
         }} />
 
-        <div aria-hidden="true" style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse at 10% 80%, rgba(177,152,124,0.08) 0%, transparent 50%)",
-          pointerEvents: "none",
-        }} />
 
         <div className="max-w-7xl mx-auto px-6 w-full relative" style={{ zIndex: 10 }}>
           <div style={{ maxWidth: "680px", padding: "clamp(60px,8vh,100px) 0" }}>
