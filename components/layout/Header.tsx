@@ -18,34 +18,36 @@ const ACTIVIDADES_ITEMS = [
   { label: "Atracciones",    href: "/?category=Attractions" },
 ];
 
-const NAV_LINK_STYLE: React.CSSProperties = {
-  fontSize: "10px",
-  letterSpacing: "0.14em",
-  textTransform: "uppercase",
-  fontWeight: 500,
-  color: "#AFAFAF",
-};
-
-function NavLink({ href, label }: { href: string; label: string }) {
+function NavLink({ href, label, scrolled }: { href: string; label: string; scrolled: boolean }) {
+  const base = scrolled ? "#6A6A6A" : "#AFAFAF";
+  const hover = scrolled ? "#1C1C1C" : "#FFFFFF";
   return (
     <Link
       href={href}
       className="px-3 xl:px-4 py-2 transition-colors duration-200 whitespace-nowrap"
-      style={NAV_LINK_STYLE}
-      onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
-      onMouseLeave={(e) => (e.currentTarget.style.color = "#AFAFAF")}
+      style={{
+        fontSize: "10px",
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        fontWeight: 500,
+        color: base,
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.color = hover)}
+      onMouseLeave={(e) => (e.currentTarget.style.color = base)}
     >
       {label}
     </Link>
   );
 }
 
-function ActividadesDropdown() {
+function ActividadesDropdown({ scrolled }: { scrolled: boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  // Close on outside click or Escape
+  const base = scrolled ? "#6A6A6A" : "#AFAFAF";
+  const active = scrolled ? "#1C1C1C" : "#FFFFFF";
+
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
@@ -69,7 +71,6 @@ function ActividadesDropdown() {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      {/* Trigger */}
       <button
         ref={triggerRef}
         aria-haspopup="true"
@@ -77,8 +78,11 @@ function ActividadesDropdown() {
         aria-controls="actividades-menu"
         className="px-3 xl:px-4 py-2 flex items-center gap-1.5 transition-colors duration-200 whitespace-nowrap"
         style={{
-          ...NAV_LINK_STYLE,
-          color: open ? "#FFFFFF" : "#AFAFAF",
+          fontSize: "10px",
+          letterSpacing: "0.14em",
+          textTransform: "uppercase",
+          fontWeight: 500,
+          color: open ? active : base,
           background: "none",
           border: "none",
           cursor: "pointer",
@@ -104,7 +108,6 @@ function ActividadesDropdown() {
         </svg>
       </button>
 
-      {/* Dropdown panel */}
       {open && (
         <div
           id="actividades-menu"
@@ -124,14 +127,20 @@ function ActividadesDropdown() {
               height: 0,
               borderLeft: "6px solid transparent",
               borderRight: "6px solid transparent",
-              borderBottom: "6px solid rgba(255,255,255,0.06)",
+              borderBottom: scrolled
+                ? "6px solid rgba(0,0,0,0.06)"
+                : "6px solid rgba(255,255,255,0.06)",
             }}
           />
           <div
             style={{
-              background: "#0E0E0E",
-              border: "1px solid rgba(255,255,255,0.07)",
-              boxShadow: "0 24px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.04)",
+              background: scrolled ? "#FFFFFF" : "#0E0E0E",
+              border: scrolled
+                ? "1px solid rgba(0,0,0,0.08)"
+                : "1px solid rgba(255,255,255,0.07)",
+              boxShadow: scrolled
+                ? "0 16px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04)"
+                : "0 24px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.04)",
               overflow: "hidden",
               marginTop: "6px",
             }}
@@ -148,19 +157,23 @@ function ActividadesDropdown() {
                   letterSpacing: "0.13em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  color: "#888888",
+                  color: scrolled ? "#8A8680" : "#888888",
                   borderBottom:
                     i < ACTIVIDADES_ITEMS.length - 1
-                      ? "1px solid rgba(255,255,255,0.04)"
+                      ? scrolled
+                        ? "1px solid rgba(0,0,0,0.05)"
+                        : "1px solid rgba(255,255,255,0.04)"
                       : "none",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#F5F5F5";
-                  e.currentTarget.style.background = "rgba(212,175,55,0.04)";
+                  e.currentTarget.style.color = scrolled ? "#1C1C1C" : "#F5F5F5";
+                  e.currentTarget.style.background = scrolled
+                    ? "rgba(198,168,92,0.06)"
+                    : "rgba(212,175,55,0.04)";
                   e.currentTarget.style.paddingLeft = "22px";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "#888888";
+                  e.currentTarget.style.color = scrolled ? "#8A8680" : "#888888";
                   e.currentTarget.style.background = "transparent";
                   e.currentTarget.style.paddingLeft = "20px";
                 }}
@@ -169,7 +182,7 @@ function ActividadesDropdown() {
                 <span
                   aria-hidden="true"
                   style={{
-                    color: "rgba(212,175,55,0.4)",
+                    color: "rgba(198,168,92,0.6)",
                     fontSize: "11px",
                     opacity: 0,
                     transition: "opacity 0.15s ease",
@@ -218,16 +231,23 @@ export default function Header() {
     router.refresh();
   };
 
+  const navTextColor = scrolled ? "#6A6A6A" : "#AFAFAF";
+  const navHoverColor = scrolled ? "#1C1C1C" : "#FFFFFF";
+
   return (
     <>
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          scrolled
-            ? "bg-bg/95 backdrop-blur-sm border-b border-[rgba(255,255,255,0.04)]"
-            : "bg-transparent"
-        }`}
+        className="sticky top-0 z-40 transition-all duration-300"
+        style={{
+          background: scrolled ? "rgba(255,255,255,0.97)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
+          borderBottom: scrolled
+            ? "1px solid rgba(0,0,0,0.07)"
+            : "none",
+        }}
       >
-        {/* Top bar */}
+        {/* Top bar — only visible when not scrolled (dark hero state) */}
         {!scrolled && (
           <div className="border-b border-[rgba(255,255,255,0.04)]">
             <div className="max-w-7xl mx-auto px-6 h-7 flex items-center justify-between">
@@ -261,19 +281,23 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-gold text-2xl font-serif tracking-tight hover:text-gold-hover transition-colors duration-200 shrink-0"
-            style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic" }}
+            className="text-2xl font-serif tracking-tight shrink-0 transition-colors duration-300"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontStyle: "italic",
+              color: "#C6A85C",
+            }}
           >
             hyex
           </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-0 flex-1 justify-center">
-            <NavLink href="/"          label="Explorar" />
-            <ActividadesDropdown />
-            <NavLink href="/reviews"   label="Reviews" />
-            <NavLink href="/about"     label="Nosotros" />
-            <NavLink href="/magazine"  label="Magazine" />
+            <NavLink href="/"         label="Explorar"  scrolled={scrolled} />
+            <ActividadesDropdown scrolled={scrolled} />
+            <NavLink href="/reviews"  label="Reviews"   scrolled={scrolled} />
+            <NavLink href="/about"    label="Nosotros"  scrolled={scrolled} />
+            <NavLink href="/magazine" label="Magazine"  scrolled={scrolled} />
           </nav>
 
           {/* Right — lang switcher + auth */}
@@ -291,7 +315,7 @@ export default function Header() {
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
                       fontWeight: locale === l ? 600 : 400,
-                      color: locale === l ? "#D4AF37" : "#666666",
+                      color: locale === l ? "#C6A85C" : navTextColor,
                       background: "none",
                       border: "none",
                       cursor: "pointer",
@@ -302,7 +326,7 @@ export default function Header() {
                     {l.toUpperCase()}
                   </button>
                   {i === 0 && (
-                    <span aria-hidden="true" style={{ color: "#3A3A3A", fontSize: "10px" }}>·</span>
+                    <span aria-hidden="true" style={{ color: scrolled ? "#CCCCCC" : "#3A3A3A", fontSize: "10px" }}>·</span>
                   )}
                 </React.Fragment>
               ))}
@@ -318,8 +342,10 @@ export default function Header() {
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#AFAFAF",
+                    color: navTextColor,
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = navHoverColor)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = navTextColor)}
                 >
                   {user.user_metadata?.display_name ??
                     user.email?.split("@")[0] ??
@@ -327,13 +353,28 @@ export default function Header() {
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="px-4 py-2 border border-[rgba(255,255,255,0.06)] transition-all duration-200 hover:border-[rgba(212,175,55,0.3)]"
+                  className="px-4 py-2 transition-all duration-200"
                   style={{
                     fontSize: "11px",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#AFAFAF",
+                    color: navTextColor,
+                    background: "none",
+                    border: scrolled
+                      ? "1px solid rgba(0,0,0,0.12)"
+                      : "1px solid rgba(255,255,255,0.06)",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(198,168,92,0.5)";
+                    (e.currentTarget as HTMLButtonElement).style.color = "#C6A85C";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = scrolled
+                      ? "rgba(0,0,0,0.12)"
+                      : "rgba(255,255,255,0.06)";
+                    (e.currentTarget as HTMLButtonElement).style.color = navTextColor;
                   }}
                 >
                   {t.nav.signout}
@@ -349,20 +390,23 @@ export default function Header() {
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#AFAFAF",
+                    color: navTextColor,
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = navHoverColor)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = navTextColor)}
                 >
                   {t.nav.login}
                 </Link>
                 <Link
                   href="/auth/signup"
-                  className="px-4 py-2.5 bg-gold transition-all duration-200 hover:bg-gold-hover"
+                  className="px-4 py-2.5 transition-all duration-200 hover:bg-gold-hover"
                   style={{
                     fontSize: "11px",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 600,
                     color: "#000000",
+                    background: "#C6A85C",
                   }}
                 >
                   {t.nav.signup}
@@ -385,7 +429,7 @@ export default function Header() {
                       letterSpacing: "0.12em",
                       textTransform: "uppercase",
                       fontWeight: locale === l ? 600 : 400,
-                      color: locale === l ? "#D4AF37" : "#666666",
+                      color: locale === l ? "#C6A85C" : navTextColor,
                       background: "none",
                       border: "none",
                       cursor: "pointer",
@@ -395,14 +439,14 @@ export default function Header() {
                     {l.toUpperCase()}
                   </button>
                   {i === 0 && (
-                    <span aria-hidden="true" style={{ color: "#3A3A3A", fontSize: "10px" }}>·</span>
+                    <span aria-hidden="true" style={{ color: scrolled ? "#CCCCCC" : "#3A3A3A", fontSize: "10px" }}>·</span>
                   )}
                 </React.Fragment>
               ))}
             </div>
             <button
               className="p-2 transition-colors duration-200"
-              style={{ color: "#AFAFAF" }}
+              style={{ color: navTextColor }}
               onClick={() => setMobileOpen(true)}
               aria-label="Abrir menú de navegación"
               aria-expanded={mobileOpen}

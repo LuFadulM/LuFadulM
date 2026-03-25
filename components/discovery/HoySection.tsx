@@ -2,69 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Place, Category } from "@/lib/types";
-import AtmosphereCard from "./AtmosphereCard";
-
-// ─── Arrow button ─────────────────────────────────────────────────────────────
-
-function ArrowButton({
-  direction,
-  onClick,
-  disabled,
-}: {
-  direction: "left" | "right";
-  onClick: () => void;
-  disabled: boolean;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      aria-label={direction === "left" ? "Ver anteriores" : "Ver más"}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "32px",
-        height: "32px",
-        background: disabled ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",
-        border: `1px solid ${disabled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.12)"}`,
-        borderRadius: "6px",
-        cursor: disabled ? "default" : "pointer",
-        transition: "all 0.2s ease",
-        flexShrink: 0,
-        color: disabled ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.7)",
-      }}
-      onMouseEnter={(e) => {
-        if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(212,175,55,0.10)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(212,175,55,0.28)";
-          (e.currentTarget as HTMLButtonElement).style.color = "#D4AF37";
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.12)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
-        }
-      }}
-    >
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        aria-hidden="true"
-        style={{ transform: direction === "left" ? "rotate(180deg)" : "rotate(0deg)" }}
-      >
-        <line x1="5" y1="12" x2="19" y2="12" />
-        <polyline points="12 5 19 12 12 19" />
-      </svg>
-    </button>
-  );
-}
+import DiscoverCard from "./DiscoverCard";
 
 interface HoySectionProps {
   places: Place[];
@@ -82,9 +20,8 @@ const CATEGORIES: { label: string; value: Category | "Todas" }[] = [
   { label: "Atracciones", value: "Attractions" },
 ];
 
-// Day-aware moment tag
 function getMoment(place: Place, date: Date): string {
-  const day = date.getDay(); // 0=Sun 6=Sat
+  const day = date.getDay();
   const isWeekend = day === 0 || day === 6;
   if (place.category === "Cafés") return isWeekend ? "Este fin" : "Esta mañana";
   if (place.category === "Nightlife") return "Esta noche";
@@ -96,18 +33,7 @@ function getMoment(place: Place, date: Date): string {
   return isWeekend ? "Este fin" : "Para hoy";
 }
 
-function formatDateLabel(date: Date): string {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
-  const diffDays = Math.round((d.getTime() - today.getTime()) / 86400000);
-  if (diffDays === 0) return "Hoy";
-  if (diffDays === 1) return "Mañana";
-  return date.toLocaleDateString("es-CO", { weekday: "short", day: "numeric", month: "short" });
-}
-
-// ─── Generic dropdown ──────────────────────────────────────────────────────
+// ─── Light dropdown ───────────────────────────────────────────────────────────
 
 interface DropdownProps {
   label: string;
@@ -139,38 +65,32 @@ function FilterDropdown({ label, value, options, onChange, isActive }: DropdownP
         style={{
           display: "inline-flex",
           alignItems: "center",
-          gap: "6px",
+          gap: "5px",
           padding: "7px 14px",
           fontSize: "10px",
-          letterSpacing: "0.12em",
+          letterSpacing: "0.10em",
           textTransform: "uppercase",
-          fontWeight: 500,
+          fontWeight: 600,
           fontFamily: "'Sora', system-ui, sans-serif",
-          background: isActive ? "rgba(212,175,55,0.10)" : "rgba(255,255,255,0.04)",
-          color: isActive ? "#D4AF37" : "rgba(255,255,255,0.45)",
-          border: isActive
-            ? "1px solid rgba(212,175,55,0.28)"
-            : "1px solid rgba(255,255,255,0.07)",
-          borderRadius: "6px",
+          background: isActive ? "#C6A85C" : "#FFFFFF",
+          color: isActive ? "#FFFFFF" : "#4A4642",
+          border: isActive ? "1px solid #C6A85C" : "1px solid rgba(28,28,28,0.14)",
+          borderRadius: "100px",
           cursor: "pointer",
           transition: "all 0.2s ease",
           whiteSpace: "nowrap",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
         }}
       >
         {displayLabel}
         <svg
-          width="10"
-          height="10"
+          width="9"
+          height="9"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth="2.5"
-          style={{
-            transition: "transform 0.2s ease",
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
-            opacity: 0.6,
-            flexShrink: 0,
-          }}
+          style={{ transition: "transform 0.2s ease", transform: open ? "rotate(180deg)" : "rotate(0deg)", opacity: 0.7 }}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
@@ -184,11 +104,11 @@ function FilterDropdown({ label, value, options, onChange, isActive }: DropdownP
             left: 0,
             zIndex: 50,
             minWidth: "160px",
-            background: "#141414",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "8px",
+            background: "#FFFFFF",
+            border: "1px solid rgba(28,28,28,0.10)",
+            borderRadius: "12px",
             padding: "6px",
-            boxShadow: "0 20px 48px rgba(0,0,0,0.7)",
+            boxShadow: "0 16px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06)",
           }}
         >
           {options.map((opt) => {
@@ -198,33 +118,22 @@ function FilterDropdown({ label, value, options, onChange, isActive }: DropdownP
                 key={opt.value}
                 onClick={() => { onChange(opt.value); setOpen(false); }}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  padding: "8px 12px",
-                  fontSize: "11px",
-                  letterSpacing: "0.08em",
+                  display: "flex", alignItems: "center", justifyContent: "space-between",
+                  width: "100%", padding: "8px 12px",
+                  fontSize: "11px", letterSpacing: "0.06em",
                   fontFamily: "'Sora', system-ui, sans-serif",
-                  fontWeight: isSel ? 500 : 400,
-                  color: isSel ? "#D4AF37" : "rgba(255,255,255,0.6)",
-                  background: isSel ? "rgba(212,175,55,0.08)" : "transparent",
-                  border: "none",
-                  borderRadius: "4px",
-                  cursor: "pointer",
-                  textAlign: "left",
-                  transition: "background 0.15s, color 0.15s",
+                  fontWeight: isSel ? 600 : 400,
+                  color: isSel ? "#C6A85C" : "#3C3C3C",
+                  background: isSel ? "rgba(198,168,92,0.08)" : "transparent",
+                  border: "none", borderRadius: "7px", cursor: "pointer", textAlign: "left",
+                  transition: "background 0.15s",
                 }}
-                onMouseEnter={(e) => {
-                  if (!isSel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)";
-                }}
-                onMouseLeave={(e) => {
-                  if (!isSel) (e.currentTarget as HTMLButtonElement).style.background = "transparent";
-                }}
+                onMouseEnter={(e) => { if (!isSel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.04)"; }}
+                onMouseLeave={(e) => { if (!isSel) (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}
               >
                 {opt.label}
                 {isSel && (
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2.5">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#C6A85C" strokeWidth="2.5">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 )}
@@ -237,101 +146,69 @@ function FilterDropdown({ label, value, options, onChange, isActive }: DropdownP
   );
 }
 
-// ─── Date picker button ────────────────────────────────────────────────────
+// ─── Light arrow button ───────────────────────────────────────────────────────
 
-function DateFilter({ value, onChange }: { value: string; onChange: (v: string) => void }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const today = new Date();
-  const selectedDate = value ? new Date(value + "T12:00:00") : today;
-  const label = formatDateLabel(selectedDate);
-  const isActive = value !== "" && value !== today.toISOString().slice(0, 10);
-
+function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right"; onClick: () => void; disabled: boolean }) {
   return (
-    <div style={{ position: "relative", flexShrink: 0 }}>
-      <button
-        onClick={() => inputRef.current?.showPicker?.()}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "6px",
-          padding: "7px 14px",
-          fontSize: "10px",
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-          fontWeight: 500,
-          fontFamily: "'Sora', system-ui, sans-serif",
-          background: isActive ? "rgba(212,175,55,0.10)" : "rgba(255,255,255,0.04)",
-          color: isActive ? "#D4AF37" : "rgba(255,255,255,0.45)",
-          border: isActive
-            ? "1px solid rgba(212,175,55,0.28)"
-            : "1px solid rgba(255,255,255,0.07)",
-          borderRadius: "6px",
-          cursor: "pointer",
-          transition: "all 0.2s ease",
-          whiteSpace: "nowrap",
-        }}
-      >
-        <svg
-          width="11"
-          height="11"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          style={{ opacity: 0.7, flexShrink: 0 }}
-        >
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-          <line x1="16" y1="2" x2="16" y2="6" />
-          <line x1="8" y1="2" x2="8" y2="6" />
-          <line x1="3" y1="10" x2="21" y2="10" />
-        </svg>
-        {label}
-      </button>
-      <input
-        ref={inputRef}
-        type="date"
-        value={value || today.toISOString().slice(0, 10)}
-        min={today.toISOString().slice(0, 10)}
-        onChange={(e) => onChange(e.target.value)}
-        style={{
-          position: "absolute",
-          opacity: 0,
-          pointerEvents: "none",
-          width: "1px",
-          height: "1px",
-          top: 0,
-          left: 0,
-        }}
-      />
-    </div>
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={direction === "left" ? "Ver anteriores" : "Ver más"}
+      style={{
+        display: "flex", alignItems: "center", justifyContent: "center",
+        width: "34px", height: "34px",
+        background: disabled ? "rgba(0,0,0,0.03)" : "#FFFFFF",
+        border: `1px solid ${disabled ? "rgba(0,0,0,0.06)" : "rgba(0,0,0,0.12)"}`,
+        borderRadius: "50%",
+        cursor: disabled ? "default" : "pointer",
+        transition: "all 0.2s ease",
+        color: disabled ? "rgba(0,0,0,0.20)" : "#3C3C3C",
+        boxShadow: disabled ? "none" : "0 2px 8px rgba(0,0,0,0.08)",
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled) {
+          (e.currentTarget as HTMLButtonElement).style.background = "#C6A85C";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C6A85C";
+          (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled) {
+          (e.currentTarget as HTMLButtonElement).style.background = "#FFFFFF";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,0,0,0.12)";
+          (e.currentTarget as HTMLButtonElement).style.color = "#3C3C3C";
+        }
+      }}
+    >
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"
+        style={{ transform: direction === "left" ? "rotate(180deg)" : "rotate(0deg)" }}>
+        <line x1="5" y1="12" x2="19" y2="12" />
+        <polyline points="12 5 19 12 12 19" />
+      </svg>
+    </button>
   );
 }
 
-// ─── Main section ──────────────────────────────────────────────────────────
+// ─── Main section ─────────────────────────────────────────────────────────────
 
-const HOY_CARD_WIDTH = 300;
+const HOY_CARD_WIDTH = 280;
 const HOY_CARD_GAP = 16;
 const HOY_SCROLL_STEP = (HOY_CARD_WIDTH + HOY_CARD_GAP) * 2;
 
 export default function HoySection({ places }: HoySectionProps) {
   const [activeCity, setActiveCity] = useState("Todas");
   const [activeCategory, setActiveCategory] = useState<string>("Todas");
-  const [activeDate, setActiveDate] = useState<string>("");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const today = new Date();
-  const selectedDate = activeDate ? new Date(activeDate + "T12:00:00") : today;
 
   const filtered = places.filter((p) => {
     if (activeCity !== "Todas" && p.city !== activeCity) return false;
     if (activeCategory !== "Todas" && p.category !== activeCategory) return false;
     return true;
   }).slice(0, 10);
-
-  const cityActive = activeCity !== "Todas";
-  const catActive = activeCategory !== "Todas";
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
@@ -347,10 +224,7 @@ export default function HoySection({ places }: HoySectionProps) {
     el.addEventListener("scroll", updateScrollState, { passive: true });
     const ro = new ResizeObserver(updateScrollState);
     ro.observe(el);
-    return () => {
-      el.removeEventListener("scroll", updateScrollState);
-      ro.disconnect();
-    };
+    return () => { el.removeEventListener("scroll", updateScrollState); ro.disconnect(); };
   }, [updateScrollState, filtered.length]);
 
   const scrollLeft = () => scrollRef.current?.scrollBy({ left: -HOY_SCROLL_STEP, behavior: "smooth" });
@@ -358,38 +232,51 @@ export default function HoySection({ places }: HoySectionProps) {
 
   if (places.length === 0) return null;
 
+  const cityActive = activeCity !== "Todas";
+  const catActive = activeCategory !== "Todas";
+
   return (
-    <section className="mb-24">
+    <section>
       {/* ── Header ── */}
-      <div className="discovery-header">
+      <div
+        style={{
+          display: "flex", alignItems: "flex-end", justifyContent: "space-between",
+          marginBottom: "24px", paddingBottom: "20px",
+          borderBottom: "1px solid rgba(28,28,28,0.08)",
+        }}
+      >
         <div>
-          <div className="section-label-bar">
-            <span className="label-micro">Descubre</span>
-          </div>
+          <p
+            style={{
+              fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
+              fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
+              color: "#C6A85C", marginBottom: "8px",
+              display: "flex", alignItems: "center", gap: "8px",
+            }}
+          >
+            <span
+              style={{
+                display: "inline-block", width: "18px", height: "1px",
+                background: "#C6A85C", verticalAlign: "middle",
+              }}
+            />
+            Descubre
+          </p>
           <h2
             className="font-serif"
-            style={{ fontSize: "clamp(22px, 3vw, 30px)", color: "#D4D0C8" }}
+            style={{ fontSize: "clamp(22px, 3vw, 32px)", color: "#1C1C1C", fontWeight: 400, letterSpacing: "-0.02em" }}
           >
             Hoy en tu ciudad
           </h2>
         </div>
-        <div className="flex items-center gap-3">
-          <a href="#explore" className="link-gold hidden sm:flex">
-            Ver todo
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </a>
-          <div className="flex items-center gap-2">
-            <ArrowButton direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
-            <ArrowButton direction="right" onClick={scrollRight} disabled={!canScrollRight} />
-          </div>
+        <div className="flex items-center gap-2">
+          <ArrowBtn direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
+          <ArrowBtn direction="right" onClick={scrollRight} disabled={!canScrollRight} />
         </div>
       </div>
 
-      {/* ── Filter bar ── */}
-      <div className="flex items-center gap-2 mb-8 flex-wrap">
+      {/* ── Filters ── */}
+      <div className="flex items-center gap-2 flex-wrap mb-8">
         <FilterDropdown
           label="Ciudad"
           value={activeCity}
@@ -404,33 +291,24 @@ export default function HoySection({ places }: HoySectionProps) {
           onChange={setActiveCategory}
           isActive={catActive}
         />
-        <DateFilter value={activeDate} onChange={setActiveDate} />
-
-        {(cityActive || catActive || activeDate) && (
+        {(cityActive || catActive) && (
           <button
-            onClick={() => { setActiveCity("Todas"); setActiveCategory("Todas"); setActiveDate(""); }}
+            onClick={() => { setActiveCity("Todas"); setActiveCategory("Todas"); }}
             style={{
-              fontSize: "9px",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              fontFamily: "'Sora', system-ui, sans-serif",
-              fontWeight: 500,
-              color: "rgba(255,255,255,0.28)",
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              padding: "4px 8px",
-              transition: "color 0.2s",
+              fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase",
+              fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 500,
+              color: "#9A9087", background: "transparent", border: "none",
+              cursor: "pointer", padding: "4px 8px", transition: "color 0.2s",
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.55)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.28)"; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#1C1C1C"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#9A9087"; }}
           >
             Limpiar
           </button>
         )}
       </div>
 
-      {/* ── Horizontal scroll ── */}
+      {/* ── Scroll row ── */}
       {filtered.length > 0 ? (
         <div style={{ position: "relative" }}>
           <div
@@ -439,7 +317,7 @@ export default function HoySection({ places }: HoySectionProps) {
               display: "flex",
               overflowX: "auto",
               gap: `${HOY_CARD_GAP}px`,
-              paddingBottom: "8px",
+              paddingBottom: "12px",
               paddingRight: "40px",
               scrollSnapType: "x mandatory",
               WebkitOverflowScrolling: "touch",
@@ -453,9 +331,7 @@ export default function HoySection({ places }: HoySectionProps) {
               el.style.cursor = "grabbing";
               const startX = e.pageX - el.offsetLeft;
               const startScroll = el.scrollLeft;
-              const onMove = (ev: MouseEvent) => {
-                el.scrollLeft = startScroll - (ev.pageX - el.offsetLeft - startX);
-              };
+              const onMove = (ev: MouseEvent) => { el.scrollLeft = startScroll - (ev.pageX - el.offsetLeft - startX); };
               const onUp = () => {
                 el.style.cursor = "grab";
                 document.removeEventListener("mousemove", onMove);
@@ -470,49 +346,33 @@ export default function HoySection({ places }: HoySectionProps) {
                 key={place.id}
                 style={{ width: `${HOY_CARD_WIDTH}px`, flexShrink: 0, scrollSnapAlign: "start" }}
               >
-                <AtmosphereCard
+                <DiscoverCard
                   place={place}
-                  momentTag={getMoment(place, selectedDate)}
-                  heightClass="h-[340px]"
+                  momentTag={getMoment(place, today)}
                 />
               </div>
             ))}
           </div>
-          {/* Right-edge fade */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute", top: 0, right: 0,
-              width: "80px", height: "calc(100% - 8px)",
-              background: "linear-gradient(to right, transparent, #0A0A09 90%)",
-              pointerEvents: "none",
-              opacity: canScrollRight ? 1 : 0,
-              transition: "opacity 0.3s ease",
-            }}
-          />
-          {/* Left-edge fade */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute", top: 0, left: 0,
-              width: "60px", height: "calc(100% - 8px)",
-              background: "linear-gradient(to left, transparent, #0A0A09 90%)",
-              pointerEvents: "none",
-              opacity: canScrollLeft ? 1 : 0,
-              transition: "opacity 0.3s ease",
-            }}
-          />
+          {/* Right fade — uses light bg color */}
+          <div aria-hidden="true" style={{
+            position: "absolute", top: 0, right: 0,
+            width: "90px", height: "calc(100% - 12px)",
+            background: "linear-gradient(to right, transparent, #F7F5F2 90%)",
+            pointerEvents: "none",
+            opacity: canScrollRight ? 1 : 0,
+            transition: "opacity 0.3s ease",
+          }} />
+          <div aria-hidden="true" style={{
+            position: "absolute", top: 0, left: 0,
+            width: "60px", height: "calc(100% - 12px)",
+            background: "linear-gradient(to left, transparent, #F7F5F2 90%)",
+            pointerEvents: "none",
+            opacity: canScrollLeft ? 1 : 0,
+            transition: "opacity 0.3s ease",
+          }} />
         </div>
       ) : (
-        <div
-          style={{
-            padding: "48px 0",
-            textAlign: "center",
-            color: "rgba(255,255,255,0.22)",
-            fontSize: "13px",
-            fontWeight: 300,
-          }}
-        >
+        <div style={{ padding: "48px 0", textAlign: "center", color: "#9A9087", fontSize: "13px", fontWeight: 300 }}>
           Sin resultados para estos filtros.
         </div>
       )}

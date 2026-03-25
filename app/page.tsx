@@ -15,7 +15,6 @@ import PlanesSection from "@/components/discovery/PlanesSection";
 import AhoraSection from "@/components/discovery/AhoraSection";
 import ExperienciasSection from "@/components/discovery/ExperienciasSection";
 import MagazineSection from "@/components/discovery/MagazineSection";
-import EditorialBreak from "@/components/discovery/EditorialBreak";
 import ReviewsSection from "@/components/reviews/ReviewsSection";
 import { MOCK_EVENTS } from "./data/events";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -23,6 +22,28 @@ import { rankPlacesWithFeatured } from "@/lib/ranking";
 import { useEffect } from "react";
 
 type CategoryFilter = Category | "All";
+
+// ─── Section wrapper helpers ──────────────────────────────────────────────────
+
+function LightSection({ children, bg = "#F7F5F2" }: { children: React.ReactNode; bg?: string }) {
+  return (
+    <div style={{ background: bg }}>
+      <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function DarkSection({ children, bg = "#0E0E0C" }: { children: React.ReactNode; bg?: string }) {
+  return (
+    <div style={{ background: bg }}>
+      <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   const { t } = useLanguage();
@@ -50,7 +71,6 @@ export default function HomePage() {
     []
   );
 
-  // Top featured place used as hero background
   const heroImage = useMemo(
     () => featuredPlaces.find((p) => p.cover_image_url)?.cover_image_url ?? null,
     [featuredPlaces]
@@ -94,18 +114,19 @@ export default function HomePage() {
   const isExploring = search || category !== "All" || city !== "All" || price !== "All";
 
   return (
-    <div>
+    <div style={{ background: "#F7F5F2" }}>
 
       {/* ══════════════════════════════════════════════════════════════════
-          HERO — Full-screen, immersive, editorial
+          HERO — Full-screen dark, cinematic, minimal
       ══════════════════════════════════════════════════════════════════ */}
       <section
-        className="relative overflow-hidden"
         style={{
           minHeight: "92vh",
           display: "flex",
           alignItems: "center",
           background: "#0A0A09",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
         {/* Hero background image */}
@@ -117,139 +138,105 @@ export default function HomePage() {
               alt=""
               aria-hidden="true"
               style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center 35%",
-                opacity: 0.28,
-                filter: "saturate(0.7) brightness(0.85)",
+                position: "absolute", inset: 0,
+                width: "100%", height: "100%",
+                objectFit: "cover", objectPosition: "center 35%",
+                opacity: 0.32,
+                filter: "saturate(0.75) brightness(0.8)",
               }}
             />
-            {/* Edge vignette */}
             <div
               aria-hidden="true"
               style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "radial-gradient(ellipse at center, transparent 30%, rgba(10,10,9,0.85) 100%)",
+                position: "absolute", inset: 0,
+                background: "radial-gradient(ellipse at center, transparent 25%, rgba(10,10,9,0.88) 100%)",
               }}
             />
           </>
         )}
 
-        {/* Ambient gold glow — bottom left */}
+        {/* Bottom fade into light section */}
         <div
           aria-hidden="true"
           style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(ellipse at 15% 75%, rgba(212,175,55,0.07) 0%, transparent 55%)",
+            position: "absolute", bottom: 0, left: 0, right: 0,
+            height: "120px",
+            background: "linear-gradient(to bottom, transparent, rgba(10,10,9,0.7))",
             pointerEvents: "none",
           }}
         />
 
+        {/* Ambient gold glow */}
+        <div aria-hidden="true" style={{
+          position: "absolute", inset: 0,
+          background: "radial-gradient(ellipse at 15% 75%, rgba(198,168,92,0.07) 0%, transparent 55%)",
+          pointerEvents: "none",
+        }} />
+
         {/* Content */}
         <div className="max-w-7xl mx-auto px-6 w-full relative" style={{ zIndex: 10 }}>
-          <div style={{ maxWidth: "600px", paddingTop: "clamp(60px, 8vh, 100px)", paddingBottom: "clamp(60px, 8vh, 100px)" }}>
+          <div style={{ maxWidth: "640px", padding: "clamp(60px,8vh,100px) 0" }}>
 
-            {/* Label */}
-            <p
-              className="label-micro"
-              style={{ color: "#D4AF37", marginBottom: "28px" }}
-            >
+            <p className="label-micro" style={{ color: "#C6A85C", marginBottom: "24px" }}>
               {t.hero.label}
             </p>
 
-            {/* Title */}
             <h1
               className="font-serif leading-none"
               style={{
                 fontSize: "clamp(52px, 7.5vw, 96px)",
                 color: "#F5F5F5",
-                marginBottom: "20px",
-                letterSpacing: "-0.02em",
+                marginBottom: "18px",
+                letterSpacing: "-0.025em",
               }}
             >
               {t.hero.title}
               <br />
-              <span
-                style={{
-                  fontStyle: "italic",
-                  background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 60%, #B8903E 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <span style={{
+                fontStyle: "italic",
+                background: "linear-gradient(135deg, #D4AF37 0%, #C8A44E 60%, #B8903E 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
                 {t.hero.titleAccent}
               </span>
             </h1>
 
-            {/* Gold rule */}
-            <div
-              style={{
-                width: "48px",
-                height: "1px",
-                background: "rgba(200,164,78,0.45)",
-                marginBottom: "28px",
-              }}
-            />
+            <div style={{ width: "48px", height: "1px", background: "rgba(198,168,92,0.45)", marginBottom: "24px" }} />
 
-            {/* Subtitle */}
-            <p
-              style={{
-                color: "rgba(200,196,188,0.72)",
-                fontSize: "15px",
-                lineHeight: "1.75",
-                fontWeight: 300,
-                maxWidth: "420px",
-                marginBottom: "44px",
-              }}
-            >
+            <p style={{
+              color: "rgba(200,196,188,0.70)",
+              fontSize: "15px", lineHeight: "1.75",
+              fontWeight: 300, maxWidth: "400px",
+              marginBottom: "40px",
+            }}>
               {t.hero.subtitle}
             </p>
 
-            {/* Search */}
             <div style={{ maxWidth: "500px" }}>
-              <SearchBar
-                large
-                placeholder={t.hero.searchPlaceholder}
-                onSearch={setSearch}
-              />
+              <SearchBar large placeholder={t.hero.searchPlaceholder} onSearch={setSearch} />
             </div>
 
-            {/* Quick stats — editorial detail */}
+            {/* Stats */}
             <div
-              className="flex items-center gap-6 mt-10"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px" }}
+              className="flex items-center gap-8 mt-10"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "24px" }}
             >
               {[
                 { value: `${MOCK_PLACES.length}+`, label: "Lugares curados" },
                 { value: "6", label: "Ciudades" },
-                { value: "100%", label: "Selección editorial" },
+                { value: "100%", label: "Editorial" },
               ].map(({ value, label }) => (
                 <div key={label}>
-                  <p
-                    className="font-serif"
-                    style={{ fontSize: "20px", color: "#D4AF37", fontWeight: 400, lineHeight: 1 }}
-                  >
+                  <p className="font-serif" style={{ fontSize: "22px", color: "#C6A85C", fontWeight: 400, lineHeight: 1 }}>
                     {value}
                   </p>
-                  <p
-                    style={{
-                      fontSize: "9px",
-                      letterSpacing: "0.14em",
-                      textTransform: "uppercase",
-                      color: "rgba(255,255,255,0.30)",
-                      fontFamily: "'Sora', system-ui, sans-serif",
-                      fontWeight: 500,
-                      marginTop: "5px",
-                    }}
-                  >
+                  <p style={{
+                    fontSize: "9px", letterSpacing: "0.14em", textTransform: "uppercase",
+                    color: "rgba(255,255,255,0.28)", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontWeight: 500, marginTop: "5px",
+                  }}>
                     {label}
                   </p>
                 </div>
@@ -259,163 +246,155 @@ export default function HomePage() {
         </div>
 
         {/* Scroll indicator */}
-        <div
-          className="absolute"
-          style={{
-            bottom: "36px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "8px",
-            opacity: 0.35,
-          }}
-          aria-hidden="true"
-        >
-          <div
-            style={{
-              width: "1px",
-              height: "40px",
-              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.6))",
-              animation: "scrollPulse 2s ease-in-out infinite",
-            }}
-          />
+        <div style={{
+          position: "absolute", bottom: "32px", left: "50%", transform: "translateX(-50%)",
+          display: "flex", flexDirection: "column", alignItems: "center",
+          opacity: 0.4, animation: "scrollPulse 2.2s ease-in-out infinite",
+        }} aria-hidden="true">
+          <div style={{
+            width: "1px", height: "40px",
+            background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.6))",
+          }} />
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════════
-          DISCOVERY SECTIONS
+          DISCOVERY SECTIONS (light + dark alternating)
       ══════════════════════════════════════════════════════════════════ */}
       {!isExploring && (
-        <div className="max-w-7xl mx-auto px-6 pt-24">
+        <>
+          {/* 1 — HOY EN TU CIUDAD — warm light */}
+          <LightSection bg="#F7F5F2">
+            <HoySection places={MOCK_PLACES} />
+          </LightSection>
 
-          {/* 1 — HOY EN TU CIUDAD */}
-          <HoySection places={MOCK_PLACES} />
+          {/* 2 — LUGARES DESTACADOS — white */}
+          <LightSection bg="#FFFFFF">
+            <FeaturedSection places={featuredPlaces} />
+          </LightSection>
 
-          {/* 2 — LUGARES DESTACADOS (editorial grid) */}
-          <FeaturedSection places={featuredPlaces} />
-
-          {/* 3 — EN FOCO (spotlight) */}
+          {/* 3 — EN FOCO (spotlight) — dark cinematic */}
           {spotlightPlace && (
-            <section className="mb-32">
-              <div className="discovery-header">
+            <DarkSection>
+              <div style={{
+                display: "flex", alignItems: "flex-end", justifyContent: "space-between",
+                marginBottom: "28px", paddingBottom: "18px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+              }}>
                 <div>
-                  <div className="section-label-bar">
-                    <span className="label-micro">En foco</span>
-                  </div>
-                  <h2
-                    className="font-serif"
-                    style={{ fontSize: "clamp(22px, 3vw, 30px)", color: "#D4D0C8" }}
-                  >
+                  <p style={{
+                    fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
+                    fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
+                    color: "#C6A85C", marginBottom: "8px",
+                    display: "flex", alignItems: "center", gap: "8px",
+                  }}>
+                    <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+                    En foco
+                  </p>
+                  <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#E8E4DC" }}>
                     Lugares que valen la pena
                   </h2>
                 </div>
               </div>
               <SpotlightSection place={spotlightPlace} />
-            </section>
+            </DarkSection>
           )}
 
-          {/* ── Editorial breathing space ── */}
-          <EditorialBreak
-            quote="Cada rincón de Colombia tiene una historia que merece ser contada"
-            sub="Descubre · Curaduría editorial"
-          />
+          {/* 4 — EXPERIENCIAS — dark cinematic */}
+          <DarkSection bg="#111110">
+            <ExperienciasSection events={MOCK_EVENTS} />
+          </DarkSection>
 
-          {/* 4 — PLANES QUE VALEN EL VIAJE (experiences) */}
-          <ExperienciasSection events={MOCK_EVENTS} />
+          {/* 5 — JOYAS ESCONDIDAS — warm editorial */}
+          <LightSection bg="#EFEAE4">
+            <JoyasSection places={MOCK_PLACES} />
+          </LightSection>
 
-          {/* 5 — JOYAS ESCONDIDAS */}
-          <JoyasSection places={MOCK_PLACES} />
+          {/* 6 — PEQUEÑOS PLANES — white */}
+          <LightSection bg="#FFFFFF">
+            <PlanesSection places={MOCK_PLACES} />
+          </LightSection>
 
-          {/* 6 — PEQUEÑOS PLANES */}
-          <PlanesSection places={MOCK_PLACES} />
+          {/* 7 — MAGAZINE — light editorial */}
+          <LightSection bg="#F7F5F2">
+            <MagazineSection places={MOCK_PLACES} />
+          </LightSection>
 
-          {/* ── Second editorial break ── */}
-          <EditorialBreak
-            quote="El mejor restaurante de Bogotá es el que descubriste tú primero"
-            sub="Colombia · Gastronomía local"
-          />
+          {/* 8 — LO QUE ESTÁ PASANDO — dark */}
+          <DarkSection>
+            <AhoraSection places={MOCK_PLACES} />
+          </DarkSection>
 
-          {/* 7 — MAGAZINE / HISTORIAS */}
-          <MagazineSection places={MOCK_PLACES} />
+          {/* 9 — REVIEWS — warm light */}
+          <LightSection bg="#FAFAF8">
+            <ReviewsSection />
+          </LightSection>
 
-          {/* 8 — LO QUE ESTÁ PASANDO */}
-          <AhoraSection places={MOCK_PLACES} />
-
-          {/* 9 — REVIEWS */}
-          <ReviewsSection />
-
-          {/* ── Divider before explore ── */}
-          <div
-            id="explore"
-            className="mb-10 pt-4"
-            style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}
-          >
-            <div className="flex items-end justify-between pt-10 mb-2">
-              <div>
-                <div className="section-label-bar">
-                  <span className="label-micro">Explorar todo</span>
+          {/* 10 — EXPLORE HEADER — white */}
+          <div style={{ background: "#FFFFFF" }}>
+            <div className="max-w-7xl mx-auto px-6 pt-16 pb-4" id="explore">
+              <div style={{ borderTop: "1px solid rgba(28,28,28,0.06)", paddingTop: "40px" }}>
+                <div className="flex items-end justify-between mb-2">
+                  <div>
+                    <p style={{
+                      fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
+                      fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
+                      color: "#C6A85C", marginBottom: "8px",
+                      display: "flex", alignItems: "center", gap: "8px",
+                    }}>
+                      <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+                      Explorar todo
+                    </p>
+                    <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#1C1C1C", letterSpacing: "-0.02em" }}>
+                      Todos los lugares
+                    </h2>
+                  </div>
+                  <p style={{ fontSize: "11px", color: "#9A9087", fontWeight: 300 }}>
+                    {MOCK_PLACES.length} lugares en Colombia
+                  </p>
                 </div>
-                <h2
-                  className="font-serif"
-                  style={{ fontSize: "clamp(22px, 3vw, 30px)", color: "#D4D0C8" }}
-                >
-                  Todos los lugares
-                </h2>
               </div>
-              <p
-                style={{
-                  fontSize: "11px",
-                  color: "rgba(255,255,255,0.18)",
-                  fontWeight: 300,
-                  paddingBottom: "4px",
-                }}
-              >
-                {MOCK_PLACES.length} lugares en Colombia
-              </p>
             </div>
           </div>
-        </div>
+        </>
       )}
 
       {/* ══════════════════════════════════════════════════════════════════
-          EXPLORE — filter bar + place grid
+          EXPLORE — filter + grid on white
       ══════════════════════════════════════════════════════════════════ */}
-      <div className={`max-w-7xl mx-auto px-6 ${isExploring ? "pt-12" : ""} pb-24`}>
-        <div className="mb-8 pb-6 border-b border-[rgba(255,255,255,0.04)]">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
-            <CategoryPills active={category} onChange={setCategory} />
-            <p
-              style={{
-                fontSize: "10px",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "#555555",
-                fontWeight: 500,
-                whiteSpace: "nowrap",
+      <div style={{ background: "#FFFFFF" }}>
+        <div className={`max-w-7xl mx-auto px-6 ${isExploring ? "pt-12" : ""} pb-24`}>
+          <div
+            className="mb-8 pb-6"
+            style={{ borderBottom: "1px solid rgba(28,28,28,0.08)" }}
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+              <CategoryPills active={category} onChange={setCategory} />
+              <p style={{
+                fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase",
+                color: "#9A9087", fontWeight: 500, whiteSpace: "nowrap",
                 fontFamily: "'Sora', system-ui, sans-serif",
-              }}
-            >
-              {filteredPlaces.length}{" "}
-              {filteredPlaces.length === 1 ? t.results.place : t.results.places}
-            </p>
+              }}>
+                {filteredPlaces.length}{" "}
+                {filteredPlaces.length === 1 ? t.results.place : t.results.places}
+              </p>
+            </div>
+            <FilterBar
+              city={city}
+              price={price}
+              sort={sort}
+              onCityChange={setCity}
+              onPriceChange={setPrice}
+              onSortChange={setSort}
+            />
           </div>
-          <FilterBar
-            city={city}
-            price={price}
-            sort={sort}
-            onCityChange={setCity}
-            onPriceChange={setPrice}
-            onSortChange={setSort}
+
+          <PlaceGrid
+            places={filteredPlaces}
+            emptyMessage="Ningún lugar coincide con tus filtros."
+            surface="homepage"
           />
         </div>
-
-        <PlaceGrid
-          places={filteredPlaces}
-          emptyMessage="Ningún lugar coincide con tus filtros."
-          surface="homepage"
-        />
       </div>
     </div>
   );

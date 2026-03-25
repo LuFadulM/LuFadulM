@@ -4,7 +4,6 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Place } from "@/lib/types";
-import CardBadge from "@/components/ui/CardBadge";
 
 interface PlanesSectionProps {
   places: Place[];
@@ -14,87 +13,56 @@ interface PlanCard {
   place: Place;
   planTitle: string;
   planMoment: string;
+  momentColor: string;
 }
 
-function derivePlan(place: Place): { planTitle: string; planMoment: string } {
+function derivePlan(place: Place): { planTitle: string; planMoment: string; momentColor: string } {
   const loc = place.neighborhood ?? place.city;
-  if (place.category === "Cafés") {
-    return { planTitle: `El café de la mañana en ${loc}`, planMoment: "Mañana" };
-  }
-  if (place.category === "Bars") {
-    return { planTitle: `Tragos con vista en ${loc}`, planMoment: "Tarde" };
-  }
-  if (place.category === "Nightlife") {
-    return { planTitle: `La noche empieza en ${loc}`, planMoment: "Noche" };
-  }
-  if (place.category === "Attractions") {
-    return { planTitle: `Explorar ${place.name} con tiempo`, planMoment: "Fin de semana" };
-  }
-  if (place.category === "Hotels") {
-    return { planTitle: `Quedarse en ${place.city} sin apuros`, planMoment: "Fin de semana" };
-  }
+  if (place.category === "Cafés") return { planTitle: `El café de la mañana en ${loc}`, planMoment: "Mañana", momentColor: "#8C6820" };
+  if (place.category === "Bars") return { planTitle: `Tragos con vista en ${loc}`, planMoment: "Tarde", momentColor: "#B84A36" };
+  if (place.category === "Nightlife") return { planTitle: `La noche empieza en ${loc}`, planMoment: "Noche", momentColor: "#7050B8" };
+  if (place.category === "Attractions") return { planTitle: `Explorar ${place.name} con tiempo`, planMoment: "Fin de semana", momentColor: "#27734A" };
+  if (place.category === "Hotels") return { planTitle: `Quedarse en ${place.city} sin apuros`, planMoment: "Fin de semana", momentColor: "#1E7262" };
   const isLunch = place.tags.some((t) => t.includes("lunch") || t.includes("almuerzo"));
   return {
     planTitle: `${isLunch ? "Un buen almuerzo" : "Cena de altura"} en ${loc}`,
     planMoment: isLunch ? "Tarde" : "Noche",
+    momentColor: "#B84A36",
   };
 }
 
-// ─── Scroll arrow ─────────────────────────────────────────────────────────────
-
-function ArrowButton({
-  direction,
-  onClick,
-  disabled,
-}: {
-  direction: "left" | "right";
-  onClick: () => void;
-  disabled: boolean;
-}) {
+function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right"; onClick: () => void; disabled: boolean }) {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
       aria-label={direction === "left" ? "Ver anteriores" : "Ver más"}
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "32px",
-        height: "32px",
-        background: disabled ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",
-        border: `1px solid ${disabled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.12)"}`,
-        borderRadius: "6px",
-        cursor: disabled ? "default" : "pointer",
-        transition: "all 0.2s ease",
-        flexShrink: 0,
-        color: disabled ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.7)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        width: "34px", height: "34px",
+        background: disabled ? "rgba(0,0,0,0.03)" : "#FFFFFF",
+        border: `1px solid ${disabled ? "rgba(0,0,0,0.06)" : "rgba(0,0,0,0.12)"}`,
+        borderRadius: "50%", cursor: disabled ? "default" : "pointer",
+        transition: "all 0.2s ease", color: disabled ? "rgba(0,0,0,0.20)" : "#3C3C3C",
+        boxShadow: disabled ? "none" : "0 2px 8px rgba(0,0,0,0.08)",
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(212,175,55,0.10)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(212,175,55,0.28)";
-          (e.currentTarget as HTMLButtonElement).style.color = "#D4AF37";
+          (e.currentTarget as HTMLButtonElement).style.background = "#C6A85C";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C6A85C";
+          (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF";
         }
       }}
       onMouseLeave={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.12)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
+          (e.currentTarget as HTMLButtonElement).style.background = "#FFFFFF";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,0,0,0.12)";
+          (e.currentTarget as HTMLButtonElement).style.color = "#3C3C3C";
         }
       }}
     >
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        aria-hidden="true"
-        style={{ transform: direction === "left" ? "rotate(180deg)" : "rotate(0deg)" }}
-      >
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"
+        style={{ transform: direction === "left" ? "rotate(180deg)" : "rotate(0deg)" }}>
         <line x1="5" y1="12" x2="19" y2="12" />
         <polyline points="12 5 19 12 12 19" />
       </svg>
@@ -102,84 +70,74 @@ function ArrowButton({
   );
 }
 
-// ─── Plan card — full-overlay cinematic ───────────────────────────────────────
-
-function PlanCard({ plan }: { plan: PlanCard }) {
-  const { place, planTitle, planMoment } = plan;
+function PlanCardItem({ plan }: { plan: PlanCard }) {
   const [hovered, setHovered] = useState(false);
+  const { place, planTitle, planMoment, momentColor } = plan;
 
   return (
     <Link href={`/places/${place.slug}`} className="block">
       <article
-        className="card-rounded-lg relative overflow-hidden"
         style={{
-          width: "260px",
-          height: "340px",
-          background: "#111",
-          border: "1px solid rgba(255,255,255,0.05)",
-          transform: hovered ? "translateY(-4px)" : "translateY(0)",
+          width: "240px",
+          background: "#FFFFFF",
+          borderRadius: "14px",
+          overflow: "hidden",
           boxShadow: hovered
-            ? "0 24px 56px rgba(0,0,0,0.65), 0 0 0 1px rgba(212,175,55,0.10)"
-            : "0 4px 20px rgba(0,0,0,0.3)",
-          transition: "transform 0.45s cubic-bezier(0.23,1,0.32,1), box-shadow 0.45s ease",
+            ? "0 16px 40px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)"
+            : "0 2px 12px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.04)",
+          transform: hovered ? "translateY(-3px)" : "translateY(0)",
+          transition: "box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.23,1,0.32,1)",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {/* Full image */}
-        {place.cover_image_url && (
-          <Image
-            src={place.cover_image_url}
-            alt={place.name}
-            fill
-            className="object-cover"
-            style={{
-              transform: hovered ? "scale(1.07)" : "scale(1)",
-              transition: "transform 0.75s cubic-bezier(0.23,1,0.32,1)",
-            }}
-            sizes="(max-width: 640px) 70vw, 22vw"
-            draggable={false}
-          />
-        )}
-
-        {/* Gradient overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.60) 42%, rgba(0,0,0,0.10) 75%, transparent 100%)",
-          }}
-        />
-
-        {/* Moment badge — top right */}
-        <div className="absolute top-4 right-4">
-          <CardBadge label={planMoment} variant="moment" />
+        {/* Image */}
+        <div style={{ position: "relative", height: "160px", overflow: "hidden" }}>
+          {place.cover_image_url ? (
+            <Image
+              src={place.cover_image_url}
+              alt={place.name}
+              fill
+              className="object-cover"
+              style={{
+                transform: hovered ? "scale(1.07)" : "scale(1)",
+                transition: "transform 0.65s cubic-bezier(0.23,1,0.32,1)",
+              }}
+              sizes="(max-width: 640px) 70vw, 22vw"
+              draggable={false}
+            />
+          ) : (
+            <div style={{ position: "absolute", inset: 0, background: "#F0EDE8" }} />
+          )}
         </div>
 
-        {/* Content — bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-5">
-          <h3
-            className="font-serif text-white leading-tight mb-2"
-            style={{
-              fontSize: "16px",
-              fontWeight: 700,
-              textShadow: "0 1px 12px rgba(0,0,0,0.95), 0 2px 24px rgba(0,0,0,0.8)",
-              letterSpacing: "-0.01em",
-            }}
-          >
+        {/* Content */}
+        <div style={{ padding: "12px 14px 16px" }}>
+          {/* Moment tag */}
+          <span style={{
+            fontSize: "8px", letterSpacing: "0.14em", textTransform: "uppercase",
+            fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
+            color: momentColor, display: "block", marginBottom: "7px",
+          }}>
+            {planMoment}
+          </span>
+
+          {/* Plan title */}
+          <h3 style={{
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontSize: "14px", fontWeight: 600,
+            color: "#1C1C1C", lineHeight: "1.35",
+            marginBottom: "5px", letterSpacing: "-0.01em",
+          }}>
             {planTitle}
           </h3>
-          <p
-            style={{
-              fontSize: "9px",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.48)",
-              fontFamily: "'Sora', system-ui, sans-serif",
-              fontWeight: 500,
-              textShadow: "0 1px 8px rgba(0,0,0,0.9)",
-            }}
-          >
+
+          {/* Place name */}
+          <p style={{
+            fontSize: "10px", color: "#9A9087",
+            fontFamily: "'Sora', system-ui, sans-serif",
+            fontWeight: 500, letterSpacing: "0.04em",
+          }}>
             {place.name}
           </p>
         </div>
@@ -188,9 +146,7 @@ function PlanCard({ plan }: { plan: PlanCard }) {
   );
 }
 
-// ─── Main section ─────────────────────────────────────────────────────────────
-
-const CARD_WIDTH = 260;
+const CARD_WIDTH = 240;
 const CARD_GAP = 14;
 const SCROLL_STEP = (CARD_WIDTH + CARD_GAP) * 2;
 
@@ -200,8 +156,8 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const plans: PlanCard[] = places.slice(0, 10).map((place) => {
-    const { planTitle, planMoment } = derivePlan(place);
-    return { place, planTitle, planMoment };
+    const { planTitle, planMoment, momentColor } = derivePlan(place);
+    return { place, planTitle, planMoment, momentColor };
   });
 
   const updateScrollState = useCallback(() => {
@@ -218,10 +174,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
     el.addEventListener("scroll", updateScrollState, { passive: true });
     const ro = new ResizeObserver(updateScrollState);
     ro.observe(el);
-    return () => {
-      el.removeEventListener("scroll", updateScrollState);
-      ro.disconnect();
-    };
+    return () => { el.removeEventListener("scroll", updateScrollState); ro.disconnect(); };
   }, [updateScrollState]);
 
   const scrollLeft = () => scrollRef.current?.scrollBy({ left: -SCROLL_STEP, behavior: "smooth" });
@@ -230,54 +183,47 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
   if (plans.length === 0) return null;
 
   return (
-    <section className="mb-32">
-      {/* ── Header ── */}
-      <div className="discovery-header">
+    <section>
+      {/* Header */}
+      <div style={{
+        display: "flex", alignItems: "flex-end", justifyContent: "space-between",
+        marginBottom: "24px", paddingBottom: "20px",
+        borderBottom: "1px solid rgba(28,28,28,0.08)",
+      }}>
         <div>
-          <div className="section-label-bar">
-            <span className="label-micro">Inspiración</span>
-          </div>
-          <h2
-            className="font-serif"
-            style={{ fontSize: "clamp(22px, 3vw, 30px)", color: "#D4D0C8" }}
-          >
+          <p style={{
+            fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
+            fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
+            color: "#C6A85C", marginBottom: "8px",
+            display: "flex", alignItems: "center", gap: "8px",
+          }}>
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+            Inspiración
+          </p>
+          <h2 className="font-serif" style={{ fontSize: "clamp(22px, 3vw, 32px)", color: "#1C1C1C", fontWeight: 400, letterSpacing: "-0.02em" }}>
             Pequeños planes
           </h2>
         </div>
         <div className="flex items-center gap-3">
-          <p
-            className="hidden sm:block font-serif"
-            style={{
-              fontSize: "13px",
-              color: "rgba(255,255,255,0.22)",
-              fontStyle: "italic",
-              fontWeight: 400,
-            }}
-          >
+          <p className="hidden sm:block font-serif" style={{ fontSize: "13px", color: "#9A9087", fontStyle: "italic" }}>
             ¿Qué hacer hoy?
           </p>
-          <div className="flex items-center gap-2">
-            <ArrowButton direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
-            <ArrowButton direction="right" onClick={scrollRight} disabled={!canScrollRight} />
+          <div style={{ display: "flex", gap: "8px" }}>
+            <ArrowBtn direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
+            <ArrowBtn direction="right" onClick={scrollRight} disabled={!canScrollRight} />
           </div>
         </div>
       </div>
 
-      {/* ── Scroll row ── */}
+      {/* Scroll row */}
       <div style={{ position: "relative" }}>
         <div
           ref={scrollRef}
           style={{
-            display: "flex",
-            overflowX: "auto",
-            gap: `${CARD_GAP}px`,
-            paddingBottom: "8px",
-            paddingRight: "40px",
-            scrollSnapType: "x mandatory",
-            WebkitOverflowScrolling: "touch",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            cursor: "grab",
+            display: "flex", overflowX: "auto",
+            gap: `${CARD_GAP}px`, paddingBottom: "12px", paddingRight: "40px",
+            scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none", msOverflowStyle: "none", cursor: "grab",
           }}
           onMouseDown={(e) => {
             const el = scrollRef.current;
@@ -285,9 +231,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
             el.style.cursor = "grabbing";
             const startX = e.pageX - el.offsetLeft;
             const startScroll = el.scrollLeft;
-            const onMove = (ev: MouseEvent) => {
-              el.scrollLeft = startScroll - (ev.pageX - el.offsetLeft - startX);
-            };
+            const onMove = (ev: MouseEvent) => { el.scrollLeft = startScroll - (ev.pageX - el.offsetLeft - startX); };
             const onUp = () => {
               el.style.cursor = "grab";
               document.removeEventListener("mousemove", onMove);
@@ -298,39 +242,23 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
           }}
         >
           {plans.map((plan) => (
-            <div
-              key={plan.place.id}
-              style={{ flexShrink: 0, scrollSnapAlign: "start" }}
-            >
-              <PlanCard plan={plan} />
+            <div key={plan.place.id} style={{ flexShrink: 0, scrollSnapAlign: "start" }}>
+              <PlanCardItem plan={plan} />
             </div>
           ))}
         </div>
-
-        {/* Right fade */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute", top: 0, right: 0,
-            width: "100px", height: "calc(100% - 8px)",
-            background: "linear-gradient(to right, transparent, #0A0A09 90%)",
-            pointerEvents: "none",
-            opacity: canScrollRight ? 1 : 0,
-            transition: "opacity 0.3s ease",
-          }}
-        />
-        {/* Left fade */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute", top: 0, left: 0,
-            width: "70px", height: "calc(100% - 8px)",
-            background: "linear-gradient(to left, transparent, #0A0A09 90%)",
-            pointerEvents: "none",
-            opacity: canScrollLeft ? 1 : 0,
-            transition: "opacity 0.3s ease",
-          }}
-        />
+        <div aria-hidden="true" style={{
+          position: "absolute", top: 0, right: 0,
+          width: "90px", height: "calc(100% - 12px)",
+          background: "linear-gradient(to right, transparent, #FFFFFF 90%)",
+          pointerEvents: "none", opacity: canScrollRight ? 1 : 0, transition: "opacity 0.3s ease",
+        }} />
+        <div aria-hidden="true" style={{
+          position: "absolute", top: 0, left: 0,
+          width: "60px", height: "calc(100% - 12px)",
+          background: "linear-gradient(to left, transparent, #FFFFFF 90%)",
+          pointerEvents: "none", opacity: canScrollLeft ? 1 : 0, transition: "opacity 0.3s ease",
+        }} />
       </div>
     </section>
   );
