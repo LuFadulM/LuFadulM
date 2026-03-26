@@ -18,8 +18,8 @@ const ACTIVIDADES_ITEMS = [
   { label: "Atracciones",    href: "/?category=Attractions" },
 ];
 
-const NAV_BASE = "rgba(200,196,188,0.62)";
-const NAV_HOVER = "#F0EBE4";
+const NAV_BASE = "rgba(223,220,213,0.45)";
+const NAV_HOVER = "#EAE9E3";
 
 function NavLink({ href, label }: { href: string; label: string }) {
   return (
@@ -27,7 +27,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
       href={href}
       className="px-3 xl:px-4 py-2 transition-colors duration-200 whitespace-nowrap"
       style={{
-        fontSize: "10px", letterSpacing: "0.14em",
+        fontSize: "9.5px", letterSpacing: "0.18em",
         textTransform: "uppercase", fontWeight: 500,
         color: NAV_BASE,
       }}
@@ -176,49 +176,31 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          scrolled
-            ? "border-b border-[rgba(255,255,255,0.05)]"
-            : ""
-        }`}
+        className="sticky top-0 z-40 transition-all duration-500"
         style={{
-          background: scrolled ? "rgba(10,10,9,0.96)" : "transparent",
-          backdropFilter: scrolled ? "blur(16px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+          background: scrolled ? "rgba(42,41,37,0.92)" : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(177,152,124,0.08)" : "none",
         }}
       >
-        {/* Top bar — only when not scrolled */}
-        {!scrolled && (
-          <div className="border-b border-[rgba(255,255,255,0.04)]">
-            <div className="max-w-7xl mx-auto px-6 h-7 flex items-center justify-between">
-              <span style={{
-                fontSize: "9px", letterSpacing: "0.2em",
-                textTransform: "uppercase", color: "rgba(255,255,255,0.28)", fontWeight: 600,
-              }}>
-                {t.topbar.tagline}
-              </span>
-              <span style={{
-                fontSize: "9px", letterSpacing: "0.2em",
-                textTransform: "uppercase", color: "rgba(255,255,255,0.28)", fontWeight: 600,
-              }}>
-                {t.topbar.cities}
-              </span>
-            </div>
-          </div>
-        )}
-
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between gap-4">
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-serif tracking-tight shrink-0 transition-colors duration-200"
+            className="shrink-0 transition-opacity duration-300"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontStyle: "italic",
+              fontWeight: 400,
+              fontSize: "clamp(22px, 2.5vw, 30px)",
+              letterSpacing: "-0.03em",
               color: "#B1987C",
+              textDecoration: "none",
+              lineHeight: 1,
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#CEAD95")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#B1987C")}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
             hyex
           </Link>
