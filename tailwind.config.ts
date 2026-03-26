@@ -10,24 +10,24 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: "#2A2925",
-          card: "#252219",
-          surface: "#2D2922",
-          hover: "#33302A",
-          olive: "#363A28",
-          "olive-light": "#3A3E2C",
+          DEFAULT: "#0A0909",
+          card: "#141413",
+          surface: "#111110",
+          hover: "#1A1A18",
+          dark: "#050505",
         },
         text: {
-          DEFAULT: "#DFDCD5",
-          secondary: "#B8B3AA",
-          tertiary: "#888888",
-          dim: "#555555",
-          inactive: "#3E3A33",
+          DEFAULT: "#F0EDE6",
+          secondary: "#A8A49E",
+          tertiary: "#706C67",
+          dim: "#3D3D3B",
+          inactive: "#252523",
         },
         gold: {
-          DEFAULT: "#B1987C",
-          hover: "#CEAD95",
-          deep: "#9A7D65",
+          DEFAULT: "#C9A84C",
+          hover: "#E0C070",
+          deep: "#A88A35",
+          muted: "#8A7030",
         },
         sage: {
           DEFAULT: "#8A9E6A",
