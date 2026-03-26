@@ -59,7 +59,7 @@ export default function SearchBar({
           onChange={handleChange}
           placeholder={placeholder}
           autoComplete="off"
-          className="w-full bg-bg-surface border border-[rgba(255,255,255,0.12)] text-text placeholder-text-tertiary focus:outline-none focus-gold transition-all duration-200"
+          className="w-full text-text placeholder-text-tertiary focus:outline-none transition-all duration-200"
           style={{
             paddingLeft: large ? "52px" : "44px",
             paddingRight: "20px",
@@ -68,6 +68,10 @@ export default function SearchBar({
             fontSize: large ? "15px" : "13px",
             fontWeight: 300,
             letterSpacing: "0.02em",
+            background: "#141413",
+            border: "1px solid rgba(255,255,255,0.12)",
+            borderRadius: large ? "8px" : "6px",
+            color: "#F0EDE6",
           }}
         />
 

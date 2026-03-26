@@ -100,240 +100,109 @@ export default function HomePage() {
   const isExploring = search || category !== "All" || city !== "All" || price !== "All";
 
   return (
-    <div style={{ background: "#2A2925" }}>
+    <div style={{ background: "#0A0909" }}>
 
       <SectionDots />
 
       {/* ══════════════════════════════════════════════════════════════════
-          HERO — Full-screen, cinematic, dark
+          HERO — Clean, editorial, black + gold
       ══════════════════════════════════════════════════════════════════ */}
       <section
         id="hero"
         style={{
-          minHeight: "100vh",
+          minHeight: "88vh",
           display: "flex",
           alignItems: "center",
-          background: "#2A2925",
+          background: "#0A0909",
           position: "relative",
-          overflow: "hidden",
         }}
       >
-        {/* ── Abstract editorial background ──────────────────────── */}
-
-        {/* 1. Deep warm gradient — adds cinematic depth */}
+        {/* Subtle gold glow top-right */}
         <div aria-hidden="true" style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          background: "radial-gradient(ellipse at 22% 52%, #38342E 0%, #2E2B26 30%, #252219 65%, #1A1916 100%)",
+          background: "radial-gradient(ellipse at 85% 10%, rgba(201,168,76,0.07) 0%, transparent 55%)",
         }} />
 
-        {/* 2. Grain / noise texture — cinematic film feel */}
-        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
-          <defs>
-            <filter id="hero-grain" x="0%" y="0%" width="100%" height="100%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.72 0.68" numOctaves="4" seed="12" stitchTiles="stitch" result="noise" />
-              <feColorMatrix type="saturate" values="0" />
-            </filter>
-          </defs>
-          <rect width="100%" height="100%" filter="url(#hero-grain)" opacity="0.055" />
-        </svg>
+        <div className="max-w-5xl mx-auto px-8 md:px-12 w-full relative" style={{ zIndex: 10 }}>
+          <div style={{ padding: "clamp(64px,9vh,100px) 0" }}>
 
-        {/* 3. Monuma vertical grid lines */}
-        <svg aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
-          {[16.66, 33.33, 50, 66.66, 83.33].map((pct) => (
-            <line key={pct}
-              x1={`${pct}%`} y1="0" x2={`${pct}%`} y2="100%"
-              stroke="rgba(177,152,124,0.09)" strokeWidth="0.5"
-            />
-          ))}
-          <line x1="0" y1="100%" x2="100%" y2="100%" stroke="rgba(177,152,124,0.06)" strokeWidth="0.5" />
-        </svg>
-
-        {/* 4. Topographic rings — right side, suggests exploration / cartography */}
-        <svg aria-hidden="true" style={{
-          position: "absolute", right: "-60px", top: "50%",
-          transform: "translateY(-50%)",
-          width: "580px", height: "580px", pointerEvents: "none",
-        }}>
-          {[60, 120, 180, 240, 300, 360, 420, 480].map((r, i) => (
-            <circle key={r} cx="480" cy="290" r={r} fill="none"
-              stroke="rgba(177,152,124,1)" strokeWidth="0.5"
-              opacity={Math.max(0.03, 0.22 - i * 0.025)}
-            />
-          ))}
-        </svg>
-
-        {/* 5. Subtle diagonal scan lines — adds editorial texture */}
-        <div aria-hidden="true" style={{
-          position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.018,
-          backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(223,220,213,1) 3px, rgba(223,220,213,1) 4px)",
-        }} />
-
-        {/* 6. Bronze ambient glow — upper right warm light */}
-        <div aria-hidden="true" style={{
-          position: "absolute", inset: 0, pointerEvents: "none",
-          background: "radial-gradient(ellipse at 80% 15%, rgba(177,152,124,0.11) 0%, transparent 52%)",
-        }} />
-
-        {/* 7. Olive glow — lower left, grounds the composition */}
-        <div aria-hidden="true" style={{
-          position: "absolute", inset: 0, pointerEvents: "none",
-          background: "radial-gradient(ellipse at 5% 90%, rgba(54,58,40,0.5) 0%, transparent 42%)",
-        }} />
-
-        <div aria-hidden="true" style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, height: "80px",
-          background: "linear-gradient(to bottom, transparent, rgba(42,41,37,0.6))",
-          pointerEvents: "none",
-        }} />
-
-
-        <div className="max-w-7xl mx-auto px-6 w-full relative" style={{ zIndex: 10 }}>
-          <div style={{ padding: "clamp(80px,10vh,120px) 0 clamp(60px,8vh,90px)" }}>
-
-            <p style={{
-              fontSize: "9px", letterSpacing: "0.32em", textTransform: "uppercase",
-              fontWeight: 600, fontFamily: "'Sora', system-ui, sans-serif",
-              color: "rgba(177,152,124,0.7)", marginBottom: "40px",
-              display: "flex", alignItems: "center", gap: "14px",
-            }}>
-              <span style={{ display: "inline-block", width: "32px", height: "1px", background: "rgba(177,152,124,0.5)" }} />
-              {t.hero.label}
-            </p>
-
+            {/* Main headline — "Descubre Colombia" inline */}
             <h1 className="font-serif" style={{
-              fontSize: "clamp(64px, 11vw, 148px)",
-              color: "#EAE9E3",
-              marginBottom: "8px",
-              letterSpacing: "-0.04em",
-              lineHeight: "0.95",
-              fontWeight: 300,
-              maxWidth: "900px",
+              fontSize: "clamp(52px, 8vw, 112px)",
+              lineHeight: 1.0,
+              letterSpacing: "-0.03em",
+              fontWeight: 400,
+              marginBottom: "28px",
             }}>
-              {t.hero.title}
-            </h1>
-            <h1 className="font-serif" style={{
-              fontSize: "clamp(64px, 11vw, 148px)",
-              marginBottom: "48px",
-              letterSpacing: "-0.04em",
-              lineHeight: "0.95",
-              fontWeight: 300,
-              fontStyle: "italic",
-              background: "linear-gradient(135deg, #CEAD95 0%, #B1987C 60%, #9A7D65 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              maxWidth: "900px",
-            }}>
-              {t.hero.titleAccent}.
+              <span style={{ color: "#F0EDE6" }}>{t.hero.title} </span>
+              <em style={{
+                fontStyle: "italic",
+                background: "linear-gradient(135deg, #E0C070 0%, #C9A84C 55%, #A88A35 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
+                {t.hero.titleAccent}
+              </em>
             </h1>
 
+            {/* Subtitle */}
             <p style={{
-              color: "rgba(220,215,207,0.58)",
-              fontSize: "15px", lineHeight: "1.85",
-              fontWeight: 300, maxWidth: "400px",
-              marginBottom: "44px",
+              color: "rgba(240,237,230,0.50)",
+              fontSize: "16px",
+              lineHeight: "1.75",
+              fontWeight: 300,
+              maxWidth: "520px",
+              marginBottom: "40px",
               fontFamily: "'Sora', system-ui, sans-serif",
-              letterSpacing: "0.01em",
             }}>
               {t.hero.subtitle}
             </p>
 
-            <div style={{ maxWidth: "520px" }}>
+            {/* Search bar */}
+            <div style={{ maxWidth: "600px", marginBottom: "32px" }}>
               <SearchBar large placeholder={t.hero.searchPlaceholder} onSearch={setSearch} />
             </div>
 
-            {/* Category quick-access pills */}
-            <div className="flex flex-wrap gap-2 mt-8">
+            {/* Stat pills — like descubre screenshot */}
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
               {[
-                { label: "Restaurantes", emoji: "🍽", hoverBg: "rgba(177,152,124,0.14)", hoverBorder: "rgba(177,152,124,0.35)", hoverColor: "#B1987C" },
-                { label: "Cafés", emoji: "☕", hoverBg: "rgba(177,152,124,0.14)", hoverBorder: "rgba(177,152,124,0.35)", hoverColor: "#B1987C" },
-                { label: "Aventuras", emoji: "🧗", hoverBg: "rgba(138,158,106,0.18)", hoverBorder: "rgba(138,158,106,0.4)", hoverColor: "#8A9E6A" },
-                { label: "Cultura", emoji: "🎭", hoverBg: "rgba(177,152,124,0.14)", hoverBorder: "rgba(177,152,124,0.35)", hoverColor: "#B1987C" },
-                { label: "Naturaleza", emoji: "🌿", hoverBg: "rgba(100,122,72,0.22)", hoverBorder: "rgba(100,122,72,0.45)", hoverColor: "#8A9E6A" },
-                { label: "Estadías", emoji: "🏨", hoverBg: "rgba(177,152,124,0.14)", hoverBorder: "rgba(177,152,124,0.35)", hoverColor: "#B1987C" },
-              ].map(({ label, emoji, hoverBg, hoverBorder, hoverColor }) => (
-                <button
-                  key={label}
-                  onClick={() => {
-                    const map: Record<string, CategoryFilter> = {
-                      Restaurantes: "Restaurants",
-                      Cafés: "Cafés",
-                      Estadías: "Hotels",
-                      Cultura: "Attractions",
-                      Aventuras: "Attractions",
-                      Naturaleza: "Attractions",
-                    };
-                    setCategory(map[label] ?? "All");
-                    document.getElementById("explore")?.scrollIntoView({ behavior: "smooth" });
-                  }}
+                { value: `${MOCK_PLACES.length} lugares`, action: null },
+                { value: "6 ciudades", action: () => {} },
+                { value: "6 categorías", action: () => {} },
+              ].map(({ value }) => (
+                <span
+                  key={value}
                   style={{
-                    display: "inline-flex", alignItems: "center", gap: "5px",
-                    padding: "6px 13px",
-                    fontSize: "10px", letterSpacing: "0.08em",
-                    fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 500,
-                    color: "rgba(223,220,213,0.62)",
-                    background: "rgba(255,255,255,0.055)",
-                    border: "1px solid rgba(255,255,255,0.09)",
+                    display: "inline-flex", alignItems: "center",
+                    padding: "7px 16px",
+                    fontSize: "12px",
+                    fontFamily: "'Sora', system-ui, sans-serif",
+                    fontWeight: 400,
+                    color: "rgba(240,237,230,0.55)",
+                    background: "transparent",
+                    border: "1px solid rgba(255,255,255,0.12)",
                     borderRadius: "100px",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.background = hoverBg;
-                    (e.currentTarget as HTMLButtonElement).style.borderColor = hoverBorder;
-                    (e.currentTarget as HTMLButtonElement).style.color = hoverColor;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.055)";
-                    (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.09)";
-                    (e.currentTarget as HTMLButtonElement).style.color = "rgba(223,220,213,0.62)";
+                    letterSpacing: "0.01em",
                   }}
                 >
-                  <span>{emoji}</span> {label}
-                </button>
+                  {value}
+                </span>
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="flex items-center gap-10 mt-10">
-              {[
-                { value: `${MOCK_PLACES.length}+`, label: "Lugares curados" },
-                { value: "6", label: "Ciudades" },
-                { value: "100%", label: "Sin patrocinios" },
-              ].map(({ value, label }, i) => (
-                <div key={label} style={{ display: "flex", alignItems: "center", gap: i < 2 ? "0" : "0" }}>
-                  <div>
-                    <p className="font-serif" style={{ fontSize: "26px", color: "#DFDCD5", fontWeight: 400, lineHeight: 1 }}>
-                      {value}
-                    </p>
-                    <p style={{
-                      fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase",
-                      color: "rgba(223,220,213,0.38)",
-                      fontFamily: "'Sora', system-ui, sans-serif",
-                      fontWeight: 500, marginTop: "7px",
-                    }}>
-                      {label}
-                    </p>
-                  </div>
-                  {i < 2 && (
-                    <span style={{ display: "inline-block", width: "1px", height: "28px", background: "rgba(177,152,124,0.2)", marginLeft: "40px" }} />
-                  )}
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
         {/* Scroll indicator */}
         <div style={{
-          position: "absolute", bottom: "32px", left: "50%", transform: "translateX(-50%)",
+          position: "absolute", bottom: "28px", left: "50%", transform: "translateX(-50%)",
           display: "flex", flexDirection: "column", alignItems: "center",
-          opacity: 0.4, animation: "scrollPulse 2.2s ease-in-out infinite",
+          opacity: 0.25, animation: "scrollPulse 2.2s ease-in-out infinite",
         }} aria-hidden="true">
           <div style={{
-            width: "1px", height: "44px",
-            background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.6))",
+            width: "1px", height: "40px",
+            background: "linear-gradient(to bottom, transparent, rgba(201,168,76,0.8))",
           }} />
         </div>
       </section>
@@ -344,18 +213,18 @@ export default function HomePage() {
       {!isExploring && (
         <>
           {/* 1 — HOY EN TU CIUDAD */}
-          <Section bg="#2A2925" id="hoy">
+          <Section bg="#0A0909" id="hoy">
             <HoySection places={MOCK_PLACES} />
           </Section>
 
           {/* 2 — LUGARES DESTACADOS */}
-          <Section bg="#363A28" id="featured">
+          <Section bg="#111110" id="featured">
             <FeaturedSection places={featuredPlaces} />
           </Section>
 
           {/* 3 — EN FOCO */}
           {spotlightPlace && (
-            <Section bg="#2A2925" id="spotlight">
+            <Section bg="#0D0D0C" id="spotlight">
               <div style={{
                 display: "flex", alignItems: "flex-end", justifyContent: "space-between",
                 marginBottom: "28px", paddingBottom: "18px",
@@ -381,37 +250,37 @@ export default function HomePage() {
           )}
 
           {/* 4 — EXPERIENCIAS Y EVENTOS */}
-          <Section bg="#363A28" id="experiencias">
+          <Section bg="#111110" id="experiencias">
             <ExperienciasSection events={MOCK_EVENTS} />
           </Section>
 
           {/* 5 — JOYAS ESCONDIDAS */}
-          <Section bg="#2A2925" id="joyas">
+          <Section bg="#0A0909" id="joyas">
             <JoyasSection places={MOCK_PLACES} />
           </Section>
 
           {/* 6 — PEQUEÑOS PLANES */}
-          <Section bg="#3A3E2C" id="planes">
+          <Section bg="#111110" id="planes">
             <PlanesSection places={MOCK_PLACES} />
           </Section>
 
           {/* 7 — MAGAZINE EDITORIAL */}
-          <Section bg="#252219" id="magazine">
+          <Section bg="#0D0D0C" id="magazine">
             <MagazineSection places={MOCK_PLACES} />
           </Section>
 
           {/* 8 — LO QUE ESTÁ PASANDO AHORA */}
-          <Section bg="#363A28">
+          <Section bg="#111110">
             <AhoraSection places={MOCK_PLACES} />
           </Section>
 
           {/* 9 — OPINIONES */}
-          <Section bg="#2A2925">
+          <Section bg="#0A0909">
             <ReviewsSection />
           </Section>
 
           {/* 10 — EXPLORAR HEADER */}
-          <div style={{ background: "#252219" }}>
+          <div style={{ background: "#0D0D0C" }}>
             <div className="max-w-7xl mx-auto px-6 pt-16 pb-4" id="explore">
               <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "40px" }}>
                 <div className="flex items-end justify-between mb-2">
@@ -442,7 +311,7 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════════════
           EXPLORE — filter + grid
       ══════════════════════════════════════════════════════════════════ */}
-      <div style={{ background: "#252219" }}>
+      <div style={{ background: "#0D0D0C" }}>
         <div className={`max-w-7xl mx-auto px-6 ${isExploring ? "pt-12" : ""} pb-24`} id={isExploring ? "explore" : undefined}>
           <div className="mb-8 pb-6" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">

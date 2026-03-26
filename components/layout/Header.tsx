@@ -178,10 +178,10 @@ export default function Header() {
       <header
         className="sticky top-0 z-40 transition-all duration-500"
         style={{
-          background: scrolled ? "rgba(42,41,37,0.92)" : "transparent",
+          background: scrolled ? "rgba(10,9,9,0.95)" : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(177,152,124,0.08)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between gap-4">
@@ -195,7 +195,7 @@ export default function Header() {
               fontWeight: 400,
               fontSize: "clamp(22px, 2.5vw, 30px)",
               letterSpacing: "-0.03em",
-              color: "#B1987C",
+              color: "#C9A84C",
               textDecoration: "none",
               lineHeight: 1,
             }}
@@ -205,65 +205,38 @@ export default function Header() {
             hyex
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-0 flex-1 justify-center">
-            <NavLink href="/"         label="Explorar" />
-            <ActividadesDropdown />
-            <NavLink href="/reviews"  label="Reviews" />
-            <NavLink href="/about"    label="Nosotros" />
-            <NavLink href="/magazine" label="Magazine" />
+          {/* Desktop Nav — clean 3 items like descubre */}
+          <nav className="hidden lg:flex items-center gap-8 flex-1 justify-center">
+            <NavLink href="/"          label="Explorar" />
+            <NavLink href="/ciudades"  label="Ciudades" />
+            <NavLink href="/saved"     label="Guardados" />
           </nav>
 
-          {/* Right — lang + auth */}
-          <div className="hidden lg:flex items-center gap-4 shrink-0">
-            {/* Language toggle */}
-            <div className="flex items-center" role="group" aria-label="Seleccionar idioma" style={{ gap: "1px" }}>
-              {(["es", "en"] as Locale[]).map((l, i) => (
-                <React.Fragment key={l}>
-                  <button
-                    onClick={() => setLocale(l)}
-                    aria-label={l === "es" ? "Español" : "English"}
-                    aria-pressed={locale === l}
-                    style={{
-                      fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase",
-                      fontWeight: locale === l ? 600 : 400,
-                      color: locale === l ? "#B1987C" : "rgba(200,196,188,0.40)",
-                      background: "none", border: "none", cursor: "pointer",
-                      padding: "2px 4px", transition: "color 0.2s",
-                    }}
-                  >
-                    {l.toUpperCase()}
-                  </button>
-                  {i === 0 && (
-                    <span aria-hidden="true" style={{ color: "rgba(255,255,255,0.15)", fontSize: "10px" }}>·</span>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-
+          {/* Right — auth only, no lang toggle in header */}
+          <div className="hidden lg:flex items-center gap-5 shrink-0">
             {user ? (
               <>
                 <Link
                   href="/profile"
-                  className="transition-colors duration-200"
                   style={{
-                    fontSize: "11px", letterSpacing: "0.14em",
-                    textTransform: "uppercase", fontWeight: 500,
-                    color: NAV_BASE,
+                    fontSize: "14px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontWeight: 400, color: NAV_BASE, textDecoration: "none",
+                    transition: "color 0.2s",
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = NAV_HOVER)}
                   onMouseLeave={(e) => (e.currentTarget.style.color = NAV_BASE)}
                 >
-                  {user.user_metadata?.display_name ?? user.email?.split("@")[0] ?? t.nav.explore}
+                  {user.user_metadata?.display_name ?? user.email?.split("@")[0]}
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="px-4 py-2 border border-[rgba(255,255,255,0.07)] transition-all duration-200 hover:border-[rgba(177,152,124,0.35)]"
                   style={{
-                    fontSize: "11px", letterSpacing: "0.14em",
-                    textTransform: "uppercase", fontWeight: 500,
-                    color: NAV_BASE, background: "none", cursor: "pointer",
+                    fontSize: "14px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontWeight: 400, color: NAV_BASE, background: "none",
+                    border: "none", cursor: "pointer", transition: "color 0.2s",
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = NAV_HOVER)}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = NAV_BASE)}
                 >
                   {t.nav.signout}
                 </button>
@@ -272,29 +245,32 @@ export default function Header() {
               <>
                 <Link
                   href="/auth/login"
-                  className="transition-colors duration-200"
                   style={{
-                    fontSize: "11px", letterSpacing: "0.14em",
-                    textTransform: "uppercase", fontWeight: 500,
-                    color: NAV_BASE,
+                    fontSize: "14px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontWeight: 400, color: NAV_BASE, textDecoration: "none",
+                    transition: "color 0.2s",
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = NAV_HOVER)}
                   onMouseLeave={(e) => (e.currentTarget.style.color = NAV_BASE)}
                 >
-                  {t.nav.login}
+                  Iniciar sesión
                 </Link>
                 <Link
                   href="/auth/signup"
-                  className="px-4 py-2.5 transition-all duration-200"
                   style={{
-                    fontSize: "11px", letterSpacing: "0.14em",
-                    textTransform: "uppercase", fontWeight: 600,
-                    color: "#2A2925", background: "#B1987C",
+                    fontSize: "14px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontWeight: 500, color: "#0A0909",
+                    background: "#C9A84C",
+                    padding: "9px 20px",
+                    borderRadius: "6px",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    transition: "background 0.2s, transform 0.15s",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "#CEAD95")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "#B1987C")}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#E0C070"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "#C9A84C"; }}
                 >
-                  {t.nav.signup}
+                  Registrarse
                 </Link>
               </>
             )}
