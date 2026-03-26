@@ -16,6 +16,7 @@ import AhoraSection from "@/components/discovery/AhoraSection";
 import ExperienciasSection from "@/components/discovery/ExperienciasSection";
 import MagazineSection from "@/components/discovery/MagazineSection";
 import ReviewsSection from "@/components/reviews/ReviewsSection";
+import SectionDots from "@/components/layout/SectionDots";
 import { MOCK_EVENTS } from "./data/events";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { rankPlacesWithFeatured } from "@/lib/ranking";
@@ -25,10 +26,10 @@ type CategoryFilter = Category | "All";
 
 // ─── Section wrappers ─────────────────────────────────────────────────────────
 
-function Section({ children, bg = "#2A2925" }: { children: React.ReactNode; bg?: string }) {
+function Section({ children, bg = "#2A2925", id }: { children: React.ReactNode; bg?: string; id?: string }) {
   return (
-    <div style={{ background: bg }}>
-      <div className="max-w-7xl mx-auto px-6 py-20 md:py-24">
+    <div style={{ background: bg }} id={id}>
+      <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
         {children}
       </div>
     </div>
@@ -101,12 +102,15 @@ export default function HomePage() {
   return (
     <div style={{ background: "#2A2925" }}>
 
+      <SectionDots />
+
       {/* ══════════════════════════════════════════════════════════════════
           HERO — Full-screen, cinematic, dark
       ══════════════════════════════════════════════════════════════════ */}
       <section
+        id="hero"
         style={{
-          minHeight: "92vh",
+          minHeight: "100vh",
           display: "flex",
           alignItems: "center",
           background: "#2A2925",
@@ -185,45 +189,52 @@ export default function HomePage() {
 
 
         <div className="max-w-7xl mx-auto px-6 w-full relative" style={{ zIndex: 10 }}>
-          <div style={{ maxWidth: "680px", padding: "clamp(60px,8vh,100px) 0" }}>
+          <div style={{ padding: "clamp(80px,10vh,120px) 0 clamp(60px,8vh,90px)" }}>
 
             <p style={{
-              fontSize: "9px", letterSpacing: "0.28em", textTransform: "uppercase",
-              fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-              color: "#B1987C", marginBottom: "28px",
-              display: "flex", alignItems: "center", gap: "10px",
+              fontSize: "9px", letterSpacing: "0.32em", textTransform: "uppercase",
+              fontWeight: 600, fontFamily: "'Sora', system-ui, sans-serif",
+              color: "rgba(177,152,124,0.7)", marginBottom: "40px",
+              display: "flex", alignItems: "center", gap: "14px",
             }}>
-              <span style={{ display: "inline-block", width: "22px", height: "1px", background: "#B1987C" }} />
+              <span style={{ display: "inline-block", width: "32px", height: "1px", background: "rgba(177,152,124,0.5)" }} />
               {t.hero.label}
             </p>
 
             <h1 className="font-serif" style={{
-              fontSize: "clamp(48px, 7vw, 88px)",
-              color: "#F0EBE4",
-              marginBottom: "20px",
-              letterSpacing: "-0.03em",
-              lineHeight: "1.05",
-              fontWeight: 400,
+              fontSize: "clamp(64px, 11vw, 148px)",
+              color: "#EAE9E3",
+              marginBottom: "8px",
+              letterSpacing: "-0.04em",
+              lineHeight: "0.95",
+              fontWeight: 300,
+              maxWidth: "900px",
             }}>
               {t.hero.title}
-              <br />
-              <em style={{
-                fontStyle: "italic",
-                background: "linear-gradient(135deg, #CEAD95 0%, #B1987C 60%, #9A7D65 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
-                {t.hero.titleAccent}
-              </em>
+            </h1>
+            <h1 className="font-serif" style={{
+              fontSize: "clamp(64px, 11vw, 148px)",
+              marginBottom: "48px",
+              letterSpacing: "-0.04em",
+              lineHeight: "0.95",
+              fontWeight: 300,
+              fontStyle: "italic",
+              background: "linear-gradient(135deg, #CEAD95 0%, #B1987C 60%, #9A7D65 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              maxWidth: "900px",
+            }}>
+              {t.hero.titleAccent}.
             </h1>
 
             <p style={{
-              color: "rgba(220,215,207,0.72)",
-              fontSize: "16px", lineHeight: "1.8",
-              fontWeight: 300, maxWidth: "440px",
-              marginBottom: "40px",
+              color: "rgba(220,215,207,0.58)",
+              fontSize: "15px", lineHeight: "1.85",
+              fontWeight: 300, maxWidth: "400px",
+              marginBottom: "44px",
               fontFamily: "'Sora', system-ui, sans-serif",
+              letterSpacing: "0.01em",
             }}>
               {t.hero.subtitle}
             </p>
@@ -333,18 +344,18 @@ export default function HomePage() {
       {!isExploring && (
         <>
           {/* 1 — HOY EN TU CIUDAD */}
-          <Section bg="#2A2925">
+          <Section bg="#2A2925" id="hoy">
             <HoySection places={MOCK_PLACES} />
           </Section>
 
           {/* 2 — LUGARES DESTACADOS */}
-          <Section bg="#363A28">
+          <Section bg="#363A28" id="featured">
             <FeaturedSection places={featuredPlaces} />
           </Section>
 
           {/* 3 — EN FOCO */}
           {spotlightPlace && (
-            <Section bg="#2A2925">
+            <Section bg="#2A2925" id="spotlight">
               <div style={{
                 display: "flex", alignItems: "flex-end", justifyContent: "space-between",
                 marginBottom: "28px", paddingBottom: "18px",
@@ -360,7 +371,7 @@ export default function HomePage() {
                     <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
                     En foco
                   </p>
-                  <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}>
+                  <h2 className="font-serif" style={{ fontSize: "clamp(32px,4.5vw,58px)", color: "#EAE9E3", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
                     Lugares que valen la pena
                   </h2>
                 </div>
@@ -370,22 +381,22 @@ export default function HomePage() {
           )}
 
           {/* 4 — EXPERIENCIAS Y EVENTOS */}
-          <Section bg="#363A28">
+          <Section bg="#363A28" id="experiencias">
             <ExperienciasSection events={MOCK_EVENTS} />
           </Section>
 
           {/* 5 — JOYAS ESCONDIDAS */}
-          <Section bg="#2A2925">
+          <Section bg="#2A2925" id="joyas">
             <JoyasSection places={MOCK_PLACES} />
           </Section>
 
           {/* 6 — PEQUEÑOS PLANES */}
-          <Section bg="#3A3E2C">
+          <Section bg="#3A3E2C" id="planes">
             <PlanesSection places={MOCK_PLACES} />
           </Section>
 
           {/* 7 — MAGAZINE EDITORIAL */}
-          <Section bg="#252219">
+          <Section bg="#252219" id="magazine">
             <MagazineSection places={MOCK_PLACES} />
           </Section>
 
@@ -408,13 +419,13 @@ export default function HomePage() {
                     <p style={{
                       fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
                       fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-                      color: "#B1987C", marginBottom: "8px",
-                      display: "flex", alignItems: "center", gap: "8px",
+                      color: "rgba(177,152,124,0.65)", marginBottom: "14px",
+                      display: "flex", alignItems: "center", gap: "12px",
                     }}>
                       <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
                       Explorar todo
                     </p>
-                    <h2 className="font-serif" style={{ fontSize: "clamp(22px,3vw,30px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}>
+                    <h2 className="font-serif" style={{ fontSize: "clamp(32px,4.5vw,58px)", color: "#EAE9E3", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
                       Todos los lugares
                     </h2>
                   </div>

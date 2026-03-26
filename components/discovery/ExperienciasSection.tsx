@@ -453,7 +453,7 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
           </div>
           <h2
             className="font-serif"
-            style={{ fontSize: "clamp(22px, 3vw, 30px)", color: "#D4D0C8" }}
+            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#D4D0C8" }}
           >
             Planes que valen el viaje
           </h2>

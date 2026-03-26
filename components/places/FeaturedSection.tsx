@@ -89,7 +89,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
           <h3
             className="font-serif text-white mb-3 transition-colors duration-300 group-hover:text-[#F5F0E8]"
             style={{
-              fontSize: "clamp(22px, 3vw, 32px)",
+              fontSize: "clamp(36px, 5vw, 62px)",
               lineHeight: "1.15",
               fontWeight: 700,
               textShadow: "0 2px 16px rgba(0,0,0,0.9), 0 0 32px rgba(0,0,0,0.6)",
@@ -224,7 +224,7 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
           </div>
           <h2
             className="font-serif"
-            style={{ fontSize: "clamp(22px, 3vw, 30px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}
+            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#EAE9E3", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: "1.05" }}
           >
             {t.featured.sectionTitle}
           </h2>

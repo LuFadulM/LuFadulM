@@ -35,7 +35,7 @@ export default function JoyasSection({ places }: JoyasSectionProps) {
             Solo para locales
           </p>
           <h2 className="font-serif" style={{
-            fontSize: "clamp(22px, 3vw, 32px)",
+            fontSize: "clamp(36px, 5vw, 62px)",
             color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em",
           }}>
             Joyas escondidas

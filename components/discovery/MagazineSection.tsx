@@ -140,7 +140,7 @@ function FeaturedStory({ story }: { story: Story }) {
 
           <h3 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: "clamp(20px, 3vw, 30px)", fontWeight: 700,
+            fontSize: "clamp(30px, 4vw, 48px)", fontWeight: 700,
             color: "#FFFFFF", lineHeight: "1.2",
             marginBottom: "14px", letterSpacing: "-0.01em",
             textShadow: "0 2px 16px rgba(0,0,0,0.8)",
@@ -277,7 +277,7 @@ export default function MagazineSection({ places }: MagazineSectionProps) {
             <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
             Editorial
           </p>
-          <h2 className="font-serif" style={{ fontSize: "clamp(22px, 3vw, 32px)", color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em" }}>
+          <h2 className="font-serif" style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#EAE9E3", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: "1.05" }}>
             Colombia en historias
           </h2>
           <p style={{ fontSize: "13px", color: "rgba(220,215,207,0.52)", fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 300, marginTop: "6px" }}>
