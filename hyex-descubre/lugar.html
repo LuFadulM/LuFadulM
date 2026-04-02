@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Café Velvet en La Candelaria, Bogotá. El café de especialidad más íntimo del barrio colonial. Reseñas, horarios, dirección y cómo llegar.">
+  <title>Café Velvet, Bogotá — hyex</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/globals.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/cards.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+
+  <style>
+    /* ── Place hero ── */
+    #lugar-hero {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 120px 48px 48px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        160deg,
+        #0a0909 0%,
+        #141210 50%,
+        #191511 100%
+      );
+    }
+    #lugar-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 60% at 20% 80%, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .lugar-hero__inner {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .breadcrumb {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 230, 0.35);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a {
+      color: rgba(240, 237, 230, 0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+    .breadcrumb__sep {
+      color: rgba(240, 237, 230, 0.2);
+    }
+    .breadcrumb__current {
+      color: var(--gold-dim);
+    }
+    .lugar-hero__tag {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+    #lugar-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .lugar-hero__tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 22px);
+      color: rgba(240, 237, 230, 0.55);
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+    .lugar-hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+    }
+    .lugar-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+      color: rgba(240, 237, 230, 0.5);
+      font-weight: 400;
+    }
+    .lugar-meta-item--rating {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .lugar-meta-item--rating .meta-score {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--cream);
+      margin-left: 4px;
+    }
+    .lugar-meta-sep {
+      width: 1px;
+      height: 14px;
+      background: rgba(240, 237, 230, 0.15);
+    }
+
+    /* ── Gallery ── */
+    #lugar-gallery {
+      padding: 0 48px 56px;
+      background: var(--bg);
+    }
+    .lugar-gallery__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .lugar-gallery__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 8px;
+    }
+    .gallery-img {
+      background: #2a2925;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .gallery-img--main {
+      grid-row: 1 / 3;
+      aspect-ratio: 4 / 3;
+    }
+    .gallery-img--sm {
+      aspect-ratio: 16 / 9;
+    }
+
+    /* ── Details layout ── */
+    #lugar-detalles {
+      padding: 64px 48px;
+      background: var(--bg-muted);
+    }
+    .lugar-detalles__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* Left column */
+    .lugar-detalles__main h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .lugar-desc {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(240, 237, 230, 0.7);
+      margin-bottom: 36px;
+      font-weight: 300;
+    }
+    .lugar-section-title {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: rgba(240, 237, 230, 0.4);
+      margin-bottom: 14px;
+    }
+    .lugar-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 36px;
+    }
+    .lugar-tag {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(240, 237, 230, 0.55);
+      background: transparent;
+    }
+    .lugar-hours {
+      margin-bottom: 36px;
+    }
+    .lugar-hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+    }
+    .lugar-hours-row:first-of-type {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .lugar-hours-row__day {
+      color: rgba(240, 237, 230, 0.5);
+      font-weight: 400;
+    }
+    .lugar-hours-row__time {
+      color: var(--cream);
+      font-weight: 500;
+    }
+    .lugar-price {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .lugar-price__symbols {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .lugar-price__label {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+      color: rgba(240, 237, 230, 0.4);
+    }
+
+    /* Right column — sidebar */
+    .lugar-sidebar {
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+      position: sticky;
+      top: 80px;
+    }
+    .sidebar-block {
+      padding: 22px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .sidebar-block:last-child {
+      border-bottom: none;
+    }
+    .sidebar-label {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 230, 0.3);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .sidebar-value {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 14px;
+      color: var(--cream);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .sidebar-value a {
+      color: var(--gold-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sidebar-value a:hover {
+      color: var(--gold);
+    }
+    .sidebar-btns {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-sidebar {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: block;
+    }
+    .btn-sidebar--outline {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+    .btn-sidebar--outline:hover {
+      background: rgba(201, 168, 76, 0.08);
+    }
+    .btn-sidebar--filled {
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      color: #0a0909;
+    }
+    .btn-sidebar--filled:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold-dim);
+    }
+
+    /* ── Reviews ── */
+    #lugar-resenas {
+      padding: 64px 48px;
+      background: var(--bg);
+    }
+    .lugar-resenas__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .resenas-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .resenas-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+    }
+    .resenas-write-link {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--gold-dim);
+      text-decoration: none;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      padding: 9px 18px;
+      border-radius: 5px;
+      transition: all 0.2s;
+    }
+    .resenas-write-link:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(201, 168, 76, 0.06);
+    }
+    .resenas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .resena-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .resena-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+    .resena-card__reviewer {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream);
+    }
+    .resena-card__date {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      color: rgba(240, 237, 230, 0.3);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .resena-card__stars {
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .resena-card__text {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(240, 237, 230, 0.6);
+      font-weight: 300;
+    }
+
+    /* ── Nearby places ── */
+    #lugares-cercanos {
+      padding: 64px 48px 96px;
+      background: var(--bg-muted);
+    }
+    .lugares-cercanos__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .lugares-cercanos__inner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 36px;
+    }
+    .nearby-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Shared card styles */
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      transform: translateY(-3px);
+    }
+    .card__image-wrap {
+      display: block;
+      overflow: hidden;
+    }
+    .card__image-placeholder {
+      aspect-ratio: 16 / 9;
+      background: #2a2925;
+      transition: transform 0.4s;
+    }
+    .card:hover .card__image-placeholder {
+      transform: scale(1.03);
+    }
+    .card__body {
+      padding: 18px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card__tag {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    .card__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .card__name-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card__name-link:hover {
+      color: var(--gold);
+    }
+    .card__location {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      color: rgba(240, 237, 230, 0.4);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .card__desc {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(240, 237, 230, 0.6);
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .card__stars {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .card__cta {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--gold-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card__cta:hover {
+      color: var(--gold);
+    }
+
+    /* Visually hidden utility */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .lugar-detalles__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .lugar-sidebar {
+        position: static;
+      }
+    }
+    @media (max-width: 768px) {
+      #lugar-hero {
+        padding: 100px 24px 40px;
+      }
+      #lugar-gallery {
+        padding: 0 24px 40px;
+      }
+      #lugar-detalles {
+        padding: 48px 24px;
+      }
+      #lugar-resenas {
+        padding: 48px 24px;
+      }
+      #lugares-cercanos {
+        padding: 48px 24px 64px;
+      }
+      .lugar-gallery__grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-img--main {
+        grid-row: auto;
+      }
+      .resenas-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">hyex</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Explorar</a></li>
+        <li><a href="explorar.html" class="nav__link">Lugares</a></li>
+        <li><a href="ciudad.html" class="nav__link">Ciudades</a></li>
+        <li><a href="about.html" class="nav__link">Manifiesto</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="#" class="nav__cta">Iniciar sesión</a>
+      </div>
+      <button class="nav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="index.html">Explorar</a></li>
+        <li><a href="explorar.html">Lugares</a></li>
+        <li><a href="ciudad.html">Ciudades</a></li>
+        <li><a href="about.html">Manifiesto</a></li>
+        <li><a href="#">Iniciar sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ========== PLACE HERO ========== -->
+    <section id="lugar-hero" data-reveal aria-labelledby="lugar-heading">
+      <div class="lugar-hero__inner">
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="explorar.html">Explorar</a>
+          <span class="breadcrumb__sep" aria-hidden="true">→</span>
+          <a href="ciudad.html">Bogotá</a>
+          <span class="breadcrumb__sep" aria-hidden="true">→</span>
+          <a href="explorar.html">Cafés</a>
+          <span class="breadcrumb__sep" aria-hidden="true">→</span>
+          <span class="breadcrumb__current" aria-current="page">Café Velvet</span>
+        </nav>
+
+        <span class="lugar-hero__tag" aria-label="Categoría: Café">Café</span>
+        <h1 id="lugar-heading">Café Velvet</h1>
+        <p class="lugar-hero__tagline">El café de especialidad más íntimo de La Candelaria</p>
+
+        <!-- Meta row -->
+        <div class="lugar-hero__meta" aria-label="Información del lugar">
+          <div class="lugar-meta-item lugar-meta-item--rating">
+            <span aria-hidden="true">★★★★☆</span>
+            <span class="meta-score" aria-label="Calificación 4.2 de 5">4.2</span>
+          </div>
+          <div class="lugar-meta-sep" aria-hidden="true"></div>
+          <div class="lugar-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>127 reseñas</span>
+          </div>
+          <div class="lugar-meta-sep" aria-hidden="true"></div>
+          <div class="lugar-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>La Candelaria, Bogotá</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== IMAGE GALLERY ========== -->
+    <section id="lugar-gallery" data-reveal aria-label="Galería de imágenes de Café Velvet">
+      <div class="lugar-gallery__inner">
+        <div class="lugar-gallery__grid">
+          <!-- Large left image -->
+          <div class="gallery-img gallery-img--main" role="img" aria-label="Vista principal de Café Velvet"></div>
+          <!-- Two stacked right images -->
+          <div class="gallery-img gallery-img--sm" role="img" aria-label="Interior de Café Velvet"></div>
+          <div class="gallery-img gallery-img--sm" role="img" aria-label="Especialidades de Café Velvet"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PLACE DETAILS ========== -->
+    <section id="lugar-detalles" data-reveal aria-labelledby="detalles-heading">
+      <div class="lugar-detalles__inner">
+
+        <!-- Left: main content -->
+        <div class="lugar-detalles__main">
+          <h2 id="detalles-heading">Sobre el lugar</h2>
+
+          <p class="lugar-desc">
+            Café Velvet nació en 2019 en una casona colonial de La Candelaria con una premisa simple: servir el mejor café de origen posible en el barrio más histórico de Bogotá. Tuestan sus propios granos de fincas del Huila y Nariño, y la carta cambia con cada cosecha. La atmósfera —paredes de ladrillo expuesto, mesas de madera oscura, silencio casi total— convierte cada visita en un pequeño ritual.
+          </p>
+
+          <!-- Tags -->
+          <p class="lugar-section-title">Características</p>
+          <div class="lugar-tags" role="list" aria-label="Etiquetas del lugar">
+            <span class="lugar-tag" role="listitem">Café de especialidad</span>
+            <span class="lugar-tag" role="listitem">Tercera ola</span>
+            <span class="lugar-tag" role="listitem">La Candelaria</span>
+            <span class="lugar-tag" role="listitem">Silencioso</span>
+            <span class="lugar-tag" role="listitem">WiFi</span>
+            <span class="lugar-tag" role="listitem">Bueno para trabajar</span>
+          </div>
+
+          <!-- Hours -->
+          <p class="lugar-section-title">Horario</p>
+          <div class="lugar-hours" aria-label="Horario de apertura">
+            <div class="lugar-hours-row">
+              <span class="lugar-hours-row__day">Lunes — Viernes</span>
+              <span class="lugar-hours-row__time">7:00 am — 7:00 pm</span>
+            </div>
+            <div class="lugar-hours-row">
+              <span class="lugar-hours-row__day">Sábado — Domingo</span>
+              <span class="lugar-hours-row__time">8:00 am — 6:00 pm</span>
+            </div>
+          </div>
+
+          <!-- Price -->
+          <p class="lugar-section-title">Precio</p>
+          <div class="lugar-price">
+            <span class="lugar-price__symbols" aria-label="Precio moderado: dos signos de pesos">$$</span>
+            <span class="lugar-price__label">Precio moderado</span>
+          </div>
+        </div>
+
+        <!-- Right: sidebar -->
+        <aside class="lugar-sidebar" aria-label="Información de contacto y acceso">
+
+          <div class="sidebar-block">
+            <p class="sidebar-label">Dirección</p>
+            <p class="sidebar-value">Calle 10 #3-16<br>La Candelaria, Bogotá</p>
+          </div>
+
+          <div class="sidebar-block">
+            <p class="sidebar-label">Teléfono</p>
+            <p class="sidebar-value">
+              <a href="tel:+5712345678">+57 1 234 5678</a>
+            </p>
+          </div>
+
+          <div class="sidebar-block">
+            <p class="sidebar-label">Sitio web</p>
+            <p class="sidebar-value">
+              <a href="https://velvetcafe.co" target="_blank" rel="noopener noreferrer">velvetcafe.co</a>
+            </p>
+          </div>
+
+          <div class="sidebar-btns">
+            <a href="#" class="btn-sidebar btn-sidebar--outline" aria-label="Obtener indicaciones para llegar a Café Velvet">
+              Cómo llegar
+            </a>
+            <a href="#" class="btn-sidebar btn-sidebar--filled" aria-label="Guardar Café Velvet en tu lista">
+              Guardar lugar
+            </a>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ========== REVIEWS ========== -->
+    <section id="lugar-resenas" data-reveal aria-labelledby="resenas-heading">
+      <div class="lugar-resenas__inner">
+
+        <div class="resenas-header">
+          <h2 id="resenas-heading">Reseñas</h2>
+          <a href="#" class="resenas-write-link" aria-label="Escribir una reseña sobre Café Velvet">
+            Escribir una reseña
+          </a>
+        </div>
+
+        <div class="resenas-grid" role="list" aria-label="Reseñas de Café Velvet">
+
+          <!-- Review 1 -->
+          <article class="resena-card" data-reveal data-stagger role="listitem">
+            <div class="resena-card__header">
+              <span class="resena-card__reviewer">María C.</span>
+              <span class="resena-card__date">Marzo 2026</span>
+            </div>
+            <p class="resena-card__stars" aria-label="Calificación: 5 de 5 estrellas">★★★★★</p>
+            <p class="resena-card__text">
+              El mejor flat white que he tomado en Bogotá. El espacio tiene algo especial: el ruido de La Candelaria desaparece en cuanto cruzas la puerta. Los granos del Huila son excepcionales y el personal conoce el producto a fondo. Imprescindible.
+            </p>
+          </article>
+
+          <!-- Review 2 -->
+          <article class="resena-card" data-reveal data-stagger role="listitem">
+            <div class="resena-card__header">
+              <span class="resena-card__reviewer">Andrés M.</span>
+              <span class="resena-card__date">Febrero 2026</span>
+            </div>
+            <p class="resena-card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</p>
+            <p class="resena-card__text">
+              Fui a trabajar un viernes por la mañana y me quedé tres horas sin darme cuenta. El WiFi funciona, hay enchufes disponibles y el ambiente es tan silencioso que se vuelve productivo de manera natural. El cold brew de Nariño es lo mejor del menú.
+            </p>
+          </article>
+
+          <!-- Review 3 -->
+          <article class="resena-card" data-reveal data-stagger role="listitem">
+            <div class="resena-card__header">
+              <span class="resena-card__reviewer">Luisa P.</span>
+              <span class="resena-card__date">Enero 2026</span>
+            </div>
+            <p class="resena-card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</p>
+            <p class="resena-card__text">
+              Un lugar que no grita, pero que tampoco necesita hacerlo. La casona colonial, los ladrillos expuestos y la carta de temporada hacen que cada visita se sienta diferente. Ideal para ir solo con un libro o con alguien con quien quieras hablar de verdad.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== NEARBY PLACES ========== -->
+    <section id="lugares-cercanos" data-reveal aria-labelledby="cercanos-heading">
+      <div class="lugares-cercanos__inner">
+        <h2 id="cercanos-heading">Cerca de Café Velvet</h2>
+
+        <ul class="nearby-grid" role="list">
+
+          <!-- Cantina y Punto -->
+          <li class="card" data-reveal data-stagger>
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de Cantina y Punto"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Bar</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">Cantina y Punto</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                La Macarena · Bogotá
+              </p>
+              <p class="card__desc">Mezcal y cumbia bajo el mismo techo. Un referente cultural en el barrio.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Cantina y Punto">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- La Pesquera Jaramillo -->
+          <li class="card" data-reveal data-stagger>
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de La Pesquera Jaramillo"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Restaurante</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">La Pesquera Jaramillo</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Chapinero · Bogotá
+              </p>
+              <p class="card__desc">La mejor cocina de mar en tierra firme. Ceviches y langostinos del Pacífico.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: La Pesquera Jaramillo">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Usaquén Market -->
+          <li class="card" data-reveal data-stagger>
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de Usaquén Market"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Atracción</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">Usaquén Market</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Usaquén · Bogotá
+              </p>
+              <p class="card__desc">El mercado dominical de Usaquén: artesanías, comida local y ritmo pausado del norte.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Usaquén Market">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:#0a0909; border-top:1px solid rgba(255,255,255,0.06); padding:48px 0 32px;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;">
+      <span style="font-family:'Playfair Display',serif; font-style:italic; color:#c9a84c; font-size:22px; letter-spacing:-0.02em;">hyex</span>
+      <p style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,237,230,0.3); font-weight:400;">
+        © 2026 hyex — Descubre Colombia
+      </p>
+      <nav aria-label="Footer navigation" style="display:flex; gap:24px;">
+        <a href="about.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400;">Manifiesto</a>
+        <a href="explorar.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400;">Explorar</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/nav.js" defer></script>
+  <script src="assets/js/parallax.js" defer></script>
+  <script src="assets/js/scroll-fx.js" defer></script>
+  <script src="assets/js/search.js" defer></script>
+
+</body>
+</html>
