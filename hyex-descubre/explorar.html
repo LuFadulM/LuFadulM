@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Todos los lugares de Colombia curados por hyex. Restaurantes, cafés, bares, hoteles y atracciones en 6 ciudades colombianas.">
+  <title>Todos los lugares — hyex</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/globals.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/cards.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+
+  <style>
+    /* ── Page header ── */
+    #explorar-header {
+      padding: 120px 48px 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    #explorar-header .page-label {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+    #explorar-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    #explorar-header .page-subtitle {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 15px;
+      color: rgba(240, 237, 230, 0.5);
+      font-weight: 300;
+    }
+
+    /* ── Filter bar ── */
+    #filter-bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--bg);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 14px 48px;
+    }
+    .filter-bar__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .filter-bar__search-wrap {
+      flex: 1 1 260px;
+      position: relative;
+    }
+    .filter-bar__search-wrap svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(240, 237, 230, 0.3);
+      pointer-events: none;
+    }
+    #search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 10px 14px 10px 40px;
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    #search-input::placeholder {
+      color: rgba(240, 237, 230, 0.3);
+    }
+    #search-input:focus {
+      border-color: var(--gold);
+    }
+    .filter-bar__categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .filter-btn {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: transparent;
+      color: rgba(240, 237, 230, 0.5);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: var(--gold-dim);
+      color: var(--cream);
+    }
+    .filter-btn.is-active,
+    .filter-btn[aria-pressed="true"] {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #0a0909;
+    }
+    .filter-bar__city-wrap select {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 9px 32px 9px 12px;
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      color: var(--cream);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(240,237,230,0.4)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      transition: border-color 0.2s;
+    }
+    .filter-bar__city-wrap select:focus {
+      border-color: var(--gold);
+    }
+    .filter-bar__count {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      color: rgba(240, 237, 230, 0.35);
+      white-space: nowrap;
+      margin-left: auto;
+    }
+
+    /* ── Place grid ── */
+    #place-grid-wrap {
+      padding: 48px 48px 96px;
+    }
+    #place-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      transform: translateY(-3px);
+    }
+    .card__image-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .card__image-placeholder {
+      aspect-ratio: 16 / 9;
+      background: #2a2925;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s;
+    }
+    .card:hover .card__image-placeholder {
+      transform: scale(1.03);
+    }
+    .card__body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card__tag {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .card__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .card__name-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card__name-link:hover {
+      color: var(--gold);
+    }
+    .card__location {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      color: rgba(240, 237, 230, 0.4);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .card__desc {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(240, 237, 230, 0.6);
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .card__stars {
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .card__cta {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--gold-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card__cta:hover {
+      color: var(--gold);
+    }
+
+    /* Hidden card when filtered out */
+    .card[hidden] {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      #explorar-header {
+        padding: 100px 24px 32px;
+      }
+      #filter-bar {
+        padding: 12px 24px;
+      }
+      #place-grid-wrap {
+        padding: 32px 24px 64px;
+      }
+      .filter-bar__count {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">hyex</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Explorar</a></li>
+        <li><a href="explorar.html" class="nav__link" aria-current="page">Lugares</a></li>
+        <li><a href="ciudad.html" class="nav__link">Ciudades</a></li>
+        <li><a href="about.html" class="nav__link">Manifiesto</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="#" class="nav__cta">Iniciar sesión</a>
+      </div>
+      <button class="nav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="index.html">Explorar</a></li>
+        <li><a href="explorar.html">Lugares</a></li>
+        <li><a href="ciudad.html">Ciudades</a></li>
+        <li><a href="about.html">Manifiesto</a></li>
+        <li><a href="#">Iniciar sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ========== PAGE HEADER ========== -->
+    <header id="explorar-header" data-reveal>
+      <p class="page-label" aria-hidden="true">— Directorio</p>
+      <h1>Todos los lugares</h1>
+      <p class="page-subtitle">33 lugares en 6 ciudades colombianas</p>
+    </header>
+
+    <!-- ========== FILTER BAR ========== -->
+    <div id="filter-bar" role="search" aria-label="Filtrar y buscar lugares">
+      <div class="filter-bar__inner">
+
+        <!-- Search -->
+        <div class="filter-bar__search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <label for="search-input" class="visually-hidden">Buscar lugares</label>
+          <input
+            type="search"
+            id="search-input"
+            data-search-input
+            placeholder="Busca lugares, cocinas, experiencias..."
+            autocomplete="off"
+            aria-label="Buscar lugares, cocinas, experiencias"
+          >
+        </div>
+
+        <!-- Category filters -->
+        <ul class="filter-bar__categories" role="list" aria-label="Filtrar por categoría">
+          <li>
+            <button class="filter-btn is-active" data-filter-btn data-category="todos" aria-pressed="true" type="button">
+              Todos
+            </button>
+          </li>
+          <li>
+            <button class="filter-btn" data-filter-btn data-category="restaurantes" aria-pressed="false" type="button">
+              Restaurantes
+            </button>
+          </li>
+          <li>
+            <button class="filter-btn" data-filter-btn data-category="cafes" aria-pressed="false" type="button">
+              Cafés
+            </button>
+          </li>
+          <li>
+            <button class="filter-btn" data-filter-btn data-category="bares" aria-pressed="false" type="button">
+              Bares
+            </button>
+          </li>
+          <li>
+            <button class="filter-btn" data-filter-btn data-category="hoteles" aria-pressed="false" type="button">
+              Hoteles
+            </button>
+          </li>
+          <li>
+            <button class="filter-btn" data-filter-btn data-category="atracciones" aria-pressed="false" type="button">
+              Atracciones
+            </button>
+          </li>
+        </ul>
+
+        <!-- City filter -->
+        <div class="filter-bar__city-wrap">
+          <label for="city-filter" class="visually-hidden">Filtrar por ciudad</label>
+          <select id="city-filter" data-city-filter aria-label="Filtrar por ciudad">
+            <option value="todas">Todas las ciudades</option>
+            <option value="bogota">Bogotá</option>
+            <option value="medellin">Medellín</option>
+            <option value="cartagena">Cartagena</option>
+            <option value="cali">Cali</option>
+            <option value="barranquilla">Barranquilla</option>
+            <option value="santa-marta">Santa Marta</option>
+          </select>
+        </div>
+
+        <!-- Results count -->
+        <p class="filter-bar__count" aria-live="polite" aria-atomic="true">
+          <span data-results-count>33</span> lugares
+        </p>
+
+      </div>
+    </div>
+
+    <!-- ========== PLACE GRID ========== -->
+    <div id="place-grid-wrap">
+      <ul id="place-grid" data-place-grid role="list" aria-label="Lista de lugares">
+
+        <!-- 1. Café Velvet -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="cafes" data-city="bogota">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Café Velvet"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Café</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Café Velvet</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              La Candelaria · Bogotá
+            </p>
+            <p class="card__desc">El café de especialidad más íntimo de La Candelaria. Tueste propio y atmósfera editorial.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Café Velvet">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 2. Restaurante Celele -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="restaurantes" data-city="cartagena">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Restaurante Celele"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Restaurante</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Restaurante Celele</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Getsemaní · Cartagena
+            </p>
+            <p class="card__desc">Cocina del Caribe colombiano reinventada. Ingredientes del palenque, técnica contemporánea.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 5 de 5 estrellas">★★★★★</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Restaurante Celele">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 3. Clos de Marie -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="restaurantes" data-city="medellin">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Clos de Marie"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Restaurante</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Clos de Marie</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              El Poblado · Medellín
+            </p>
+            <p class="card__desc">Alta cocina francesa en el corazón del Poblado. Vinos naturales y quesos artesanales.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Clos de Marie">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 4. Cantina y Punto -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="bares" data-city="bogota">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Cantina y Punto"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Bar</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Cantina y Punto</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              La Macarena · Bogotá
+            </p>
+            <p class="card__desc">Mezcal y cumbia bajo el mismo techo. Un bar de barrio que se convirtió en referente cultural.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Cantina y Punto">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 5. Hotel Casa San Agustín -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="hoteles" data-city="cartagena">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Hotel Casa San Agustín"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Hotel</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Hotel Casa San Agustín</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Ciudad Amurallada · Cartagena
+            </p>
+            <p class="card__desc">Cinco siglos de historia en cada piedra. El hotel más elegante de la ciudad amurallada.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 5 de 5 estrellas">★★★★★</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Hotel Casa San Agustín">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 6. Mirador del Cristo Rey -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="atracciones" data-city="cali">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Mirador del Cristo Rey"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Atracción</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Mirador del Cristo Rey</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Cerro de las Tres Cruces · Cali
+            </p>
+            <p class="card__desc">La ciudad a tus pies, el Valle a tu espalda. La perspectiva más honesta de Cali.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Mirador del Cristo Rey">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 7. Pergamino Café -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="cafes" data-city="medellin">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Pergamino Café"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Café</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Pergamino Café</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              El Poblado · Medellín
+            </p>
+            <p class="card__desc">El epicentro del café colombiano de origen. Altura, precisión y un ritual que vale la pena.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 5 de 5 estrellas">★★★★★</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Pergamino Café">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 8. El Cielo -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="restaurantes" data-city="medellin">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de El Cielo"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Restaurante</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">El Cielo</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              El Centro · Medellín
+            </p>
+            <p class="card__desc">Gastronomía molecular con ingredientes locales. Una experiencia multisensorial en el corazón de Medellín.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 5 de 5 estrellas">★★★★★</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: El Cielo">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 9. Bazurto Social Club -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="bares" data-city="cartagena">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Bazurto Social Club"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Bar</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Bazurto Social Club</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Bocagrande · Cartagena
+            </p>
+            <p class="card__desc">Salsa y soul junto al mar. El ritmo del Caribe concentrado en un solo lugar.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Bazurto Social Club">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 10. La Popa -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="atracciones" data-city="cartagena">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de La Popa"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Atracción</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">La Popa</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Cerro de La Popa · Cartagena
+            </p>
+            <p class="card__desc">El cerro que domina la ciudad amurallada. Vistas al mar y al skyline desde el punto más alto.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: La Popa">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 11. Aloft Bogotá -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="hoteles" data-city="bogota">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Aloft Bogotá"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Hotel</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Aloft Bogotá</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Usaquén · Bogotá
+            </p>
+            <p class="card__desc">Diseño contemporáneo en el corazón de Usaquén. Arte local, bar de terraza y energía urbana.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Aloft Bogotá">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 12. Santa Marta Histórica -->
+        <li class="card" data-place-card data-reveal data-stagger data-category="atracciones" data-city="santa-marta">
+          <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+            <div class="card__image-placeholder" role="img" aria-label="Imagen de Santa Marta Histórica"></div>
+          </a>
+          <div class="card__body">
+            <span class="card__tag">Atracción</span>
+            <h3 class="card__name">
+              <a href="lugar.html" class="card__name-link">Santa Marta Histórica</a>
+            </h3>
+            <p class="card__location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Centro Histórico · Santa Marta
+            </p>
+            <p class="card__desc">La ciudad más antigua de Colombia. Arquitectura colonial, el mar Caribe y la Sierra Nevada al fondo.</p>
+            <div class="card__footer">
+              <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+              <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Santa Marta Histórica">Ver lugar →</a>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:#0a0909; border-top:1px solid rgba(255,255,255,0.06); padding:48px 0 32px;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;">
+      <span style="font-family:'Playfair Display',serif; font-style:italic; color:#c9a84c; font-size:22px; letter-spacing:-0.02em;">hyex</span>
+      <p style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,237,230,0.3); font-weight:400;">
+        © 2026 hyex — Descubre Colombia
+      </p>
+      <nav aria-label="Footer navigation" style="display:flex; gap:24px;">
+        <a href="about.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400;">Manifiesto</a>
+        <a href="explorar.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400;">Explorar</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/nav.js" defer></script>
+  <script src="assets/js/parallax.js" defer></script>
+  <script src="assets/js/scroll-fx.js" defer></script>
+  <script src="assets/js/search.js" defer></script>
+
+</body>
+</html>

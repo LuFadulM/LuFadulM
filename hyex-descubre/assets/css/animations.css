@@ -1,0 +1,452 @@
+/* ==========================================================================
+   animations.css — hyex-descubre reveal animations + keyframes
+   ========================================================================== */
+
+/* ==========================================================================
+   Base Reveal — [data-reveal]
+   ========================================================================== */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Optional delay variant */
+[data-reveal][data-delay="100"] { transition-delay: 0.1s; }
+[data-reveal][data-delay="200"] { transition-delay: 0.2s; }
+[data-reveal][data-delay="300"] { transition-delay: 0.3s; }
+[data-reveal][data-delay="400"] { transition-delay: 0.4s; }
+[data-reveal][data-delay="500"] { transition-delay: 0.5s; }
+
+/* ==========================================================================
+   Stagger Children — [data-stagger]
+   ========================================================================== */
+
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-stagger].revealed > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger delay increments: 0.07s per child, 1–9 */
+[data-stagger].revealed > *:nth-child(1) { transition-delay: 0.00s; }
+[data-stagger].revealed > *:nth-child(2) { transition-delay: 0.07s; }
+[data-stagger].revealed > *:nth-child(3) { transition-delay: 0.14s; }
+[data-stagger].revealed > *:nth-child(4) { transition-delay: 0.21s; }
+[data-stagger].revealed > *:nth-child(5) { transition-delay: 0.28s; }
+[data-stagger].revealed > *:nth-child(6) { transition-delay: 0.35s; }
+[data-stagger].revealed > *:nth-child(7) { transition-delay: 0.42s; }
+[data-stagger].revealed > *:nth-child(8) { transition-delay: 0.49s; }
+[data-stagger].revealed > *:nth-child(9) { transition-delay: 0.56s; }
+
+/* Pre-reveal hidden state still needs stagger (before .revealed is added) */
+[data-stagger] > *:nth-child(1) { transition-delay: 0.00s; }
+[data-stagger] > *:nth-child(2) { transition-delay: 0.07s; }
+[data-stagger] > *:nth-child(3) { transition-delay: 0.14s; }
+[data-stagger] > *:nth-child(4) { transition-delay: 0.21s; }
+[data-stagger] > *:nth-child(5) { transition-delay: 0.28s; }
+[data-stagger] > *:nth-child(6) { transition-delay: 0.35s; }
+[data-stagger] > *:nth-child(7) { transition-delay: 0.42s; }
+[data-stagger] > *:nth-child(8) { transition-delay: 0.49s; }
+[data-stagger] > *:nth-child(9) { transition-delay: 0.56s; }
+
+/* ==========================================================================
+   Text Draw — slide-up per line
+   ========================================================================== */
+
+/* Outer wrapper clips the overflow so the translateY slide is hidden */
+.text-draw {
+  overflow: hidden;
+}
+
+/* Each inner span slides up from below */
+.text-draw span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Revealed state: slides into place */
+.text-draw.revealed span {
+  transform: translateY(0);
+}
+
+/* Per-line stagger for text-draw children */
+.text-draw.revealed span:nth-child(1) { transition-delay: 0.00s; }
+.text-draw.revealed span:nth-child(2) { transition-delay: 0.08s; }
+.text-draw.revealed span:nth-child(3) { transition-delay: 0.16s; }
+.text-draw.revealed span:nth-child(4) { transition-delay: 0.24s; }
+.text-draw.revealed span:nth-child(5) { transition-delay: 0.32s; }
+.text-draw.revealed span:nth-child(6) { transition-delay: 0.40s; }
+.text-draw.revealed span:nth-child(7) { transition-delay: 0.48s; }
+.text-draw.revealed span:nth-child(8) { transition-delay: 0.56s; }
+.text-draw.revealed span:nth-child(9) { transition-delay: 0.64s; }
+
+/* Pre-reveal still needs delays so the transition fires in order */
+.text-draw span:nth-child(1) { transition-delay: 0.00s; }
+.text-draw span:nth-child(2) { transition-delay: 0.08s; }
+.text-draw span:nth-child(3) { transition-delay: 0.16s; }
+.text-draw span:nth-child(4) { transition-delay: 0.24s; }
+.text-draw span:nth-child(5) { transition-delay: 0.32s; }
+.text-draw span:nth-child(6) { transition-delay: 0.40s; }
+.text-draw span:nth-child(7) { transition-delay: 0.48s; }
+.text-draw span:nth-child(8) { transition-delay: 0.56s; }
+.text-draw span:nth-child(9) { transition-delay: 0.64s; }
+
+/* ==========================================================================
+   Image Wipe — reveal left-to-right using a cover overlay
+   ========================================================================== */
+
+.img-wipe {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay that covers the image initially, then wipes away */
+.img-wipe::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg, #0a0909);
+  transform-origin: right center;
+  transform: scaleX(1);
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Wipe away — scale to 0 from the right origin */
+.img-wipe.revealed::after {
+  transform: scaleX(0);
+}
+
+/* Optional delay for img-wipe */
+.img-wipe[data-delay="200"]::after  { transition-delay: 0.2s; }
+.img-wipe[data-delay="400"]::after  { transition-delay: 0.4s; }
+.img-wipe[data-delay="600"]::after  { transition-delay: 0.6s; }
+
+/* ==========================================================================
+   Line Draw — horizontal line grows from left
+   ========================================================================== */
+
+.line-draw {
+  display: block;
+  height: 1px;
+  background-color: var(--gold, #c9a84c);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.line-draw.revealed {
+  transform: scaleX(1);
+}
+
+/* Variants */
+.line-draw--cream {
+  background-color: var(--cream, #f0ede6);
+}
+
+.line-draw--muted {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
+   Named Keyframe Animations
+   ========================================================================== */
+
+/* Fade up */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale in from slightly smaller */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Fade in (no transform) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Fade down — for tooltips, dropdowns */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulse glow — used for decorative elements */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+  }
+  50% {
+    box-shadow: 0 0 24px 6px rgba(201, 168, 76, 0.15);
+  }
+}
+
+/* Spin — for loaders */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Helper Animation Classes
+   ========================================================================== */
+
+/* Apply named animations directly via class */
+.anim-fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-slide-left {
+  animation: slideInLeft 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-scale-in {
+  animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+/* Delay utilities for directly applied animations */
+.anim-delay-100 { animation-delay: 0.1s; }
+.anim-delay-200 { animation-delay: 0.2s; }
+.anim-delay-300 { animation-delay: 0.3s; }
+.anim-delay-400 { animation-delay: 0.4s; }
+.anim-delay-500 { animation-delay: 0.5s; }
+.anim-delay-600 { animation-delay: 0.6s; }
+.anim-delay-700 { animation-delay: 0.7s; }
+.anim-delay-800 { animation-delay: 0.8s; }
+
+/* ==========================================================================
+   Hover Micro-interactions
+   ========================================================================== */
+
+/* Lift on hover */
+.hover-lift {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Subtle scale on hover */
+.hover-scale {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+
+/* Glow pulse on hover */
+.hover-glow {
+  transition: box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 28px rgba(201, 168, 76, 0.18);
+}
+
+/* ==========================================================================
+   Loading / Skeleton States
+   ========================================================================== */
+
+@keyframes shimmer {
+  from {
+    background-position: -400px 0;
+  }
+  to {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Prefers Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all transforms — use opacity-only transitions */
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.3s !important;
+    transition-delay: 0ms !important;
+  }
+
+  /* Reveal: opacity only, no transform */
+  [data-reveal] {
+    opacity: 0;
+    transform: none;
+    transition: opacity 0.3s ease-out;
+  }
+
+  [data-reveal].revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Stagger: opacity only */
+  [data-stagger] > * {
+    opacity: 0;
+    transform: none;
+    transition: opacity 0.3s ease-out;
+  }
+
+  [data-stagger].revealed > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Remove all stagger delays */
+  [data-stagger].revealed > *:nth-child(1),
+  [data-stagger].revealed > *:nth-child(2),
+  [data-stagger].revealed > *:nth-child(3),
+  [data-stagger].revealed > *:nth-child(4),
+  [data-stagger].revealed > *:nth-child(5),
+  [data-stagger].revealed > *:nth-child(6),
+  [data-stagger].revealed > *:nth-child(7),
+  [data-stagger].revealed > *:nth-child(8),
+  [data-stagger].revealed > *:nth-child(9) {
+    transition-delay: 0ms;
+  }
+
+  /* Text draw: opacity only */
+  .text-draw span {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .text-draw.revealed span {
+    transform: none;
+    opacity: 1;
+  }
+
+  .text-draw.revealed span:nth-child(1),
+  .text-draw.revealed span:nth-child(2),
+  .text-draw.revealed span:nth-child(3),
+  .text-draw.revealed span:nth-child(4),
+  .text-draw.revealed span:nth-child(5),
+  .text-draw.revealed span:nth-child(6),
+  .text-draw.revealed span:nth-child(7),
+  .text-draw.revealed span:nth-child(8),
+  .text-draw.revealed span:nth-child(9) {
+    transition-delay: 0ms;
+  }
+
+  /* Image wipe: opacity only */
+  .img-wipe::after {
+    transform: none;
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .img-wipe.revealed::after {
+    opacity: 0;
+    transform: none;
+  }
+
+  /* Line draw: opacity only */
+  .line-draw {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .line-draw.revealed {
+    transform: none;
+    opacity: 1;
+  }
+
+  /* Disable hover transforms */
+  .hover-lift:hover,
+  .hover-scale:hover {
+    transform: none;
+  }
+
+  /* Disable skeleton shimmer */
+  .skeleton {
+    animation: none;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Disable marquee */
+  .marquee-track {
+    animation: none;
+  }
+
+  /* Disable scroll indicator animation */
+  .scroll-indicator {
+    animation: none;
+    opacity: 0.5;
+  }
+}

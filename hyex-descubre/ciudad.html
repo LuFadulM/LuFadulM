@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubre Bogotá con hyex. 18 lugares curados a mano: restaurantes, cafés, bares, hoteles y atracciones en la capital colombiana.">
+  <title>Bogotá — hyex</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/globals.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/cards.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+
+  <style>
+    /* ── City hero ── */
+    #ciudad-hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 120px 48px 56px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(
+        160deg,
+        #0a0909 0%,
+        #141210 40%,
+        #1a1612 100%
+      );
+    }
+    #ciudad-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ciudad-hero__inner {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .breadcrumb {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 230, 0.35);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a {
+      color: rgba(240, 237, 230, 0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+    .breadcrumb__sep {
+      color: rgba(240, 237, 230, 0.2);
+    }
+    .breadcrumb__current {
+      color: var(--gold-dim);
+    }
+    #ciudad-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(56px, 10vw, 120px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .ciudad-hero__meta {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 230, 0.4);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+    .ciudad-hero__tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(18px, 2.5vw, 26px);
+      color: rgba(240, 237, 230, 0.65);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+    .ciudad-hero__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .stat-pill {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      color: var(--gold-dim);
+      background: rgba(201, 168, 76, 0.06);
+    }
+
+    /* ── Section base ── */
+    .ciudad-section {
+      padding: 72px 48px;
+    }
+    .ciudad-section__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+    }
+
+    /* ── About city ── */
+    #ciudad-about {
+      background: var(--bg-muted);
+    }
+    .ciudad-about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .ciudad-about__prose p {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(240, 237, 230, 0.7);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+    .ciudad-about__prose p:last-child {
+      margin-bottom: 0;
+    }
+    .ciudad-facts {
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+    .ciudad-fact {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .ciudad-fact:last-child {
+      border-bottom: none;
+    }
+    .ciudad-fact__label {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 230, 0.35);
+      font-weight: 400;
+    }
+    .ciudad-fact__value {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    /* ── Categories ── */
+    #ciudad-categorias {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .categoria-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .categoria-pill {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 22px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--card-bg);
+      color: var(--cream);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .categoria-pill:hover {
+      border-color: rgba(201, 168, 76, 0.35);
+      background: rgba(201, 168, 76, 0.06);
+    }
+    .categoria-pill__count {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── Place cards (reused) ── */
+    #ciudad-lugares {
+      background: var(--bg-muted);
+    }
+    .place-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+    }
+    .card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      transform: translateY(-3px);
+    }
+    .card__image-wrap {
+      display: block;
+      overflow: hidden;
+    }
+    .card__image-placeholder {
+      aspect-ratio: 16 / 9;
+      background: #2a2925;
+      transition: transform 0.4s;
+    }
+    .card:hover .card__image-placeholder {
+      transform: scale(1.03);
+    }
+    .card__body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card__tag {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .card__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .card__name-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card__name-link:hover {
+      color: var(--gold);
+    }
+    .card__location {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      color: rgba(240, 237, 230, 0.4);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .card__desc {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(240, 237, 230, 0.6);
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .card__stars {
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .card__cta {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--gold-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .card__cta:hover {
+      color: var(--gold);
+    }
+
+    /* ── Other cities ── */
+    #otras-ciudades {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .ciudad-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .ciudad-link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px;
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      gap: 16px;
+    }
+    .ciudad-link-card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      background: rgba(201, 168, 76, 0.04);
+    }
+    .ciudad-link-card__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+    .ciudad-link-card__count {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(240, 237, 230, 0.35);
+      font-weight: 400;
+    }
+    .ciudad-link-card__arrow {
+      font-family: 'Sora', system-ui, sans-serif;
+      font-size: 18px;
+      color: var(--gold-dim);
+      transition: transform 0.2s;
+    }
+    .ciudad-link-card:hover .ciudad-link-card__arrow {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 900px) {
+      .ciudad-about__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+    @media (max-width: 768px) {
+      #ciudad-hero {
+        padding: 100px 24px 48px;
+      }
+      .ciudad-section {
+        padding: 56px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">hyex</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Explorar</a></li>
+        <li><a href="explorar.html" class="nav__link">Lugares</a></li>
+        <li><a href="ciudad.html" class="nav__link" aria-current="page">Ciudades</a></li>
+        <li><a href="about.html" class="nav__link">Manifiesto</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="#" class="nav__cta">Iniciar sesión</a>
+      </div>
+      <button class="nav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="index.html">Explorar</a></li>
+        <li><a href="explorar.html">Lugares</a></li>
+        <li><a href="ciudad.html">Ciudades</a></li>
+        <li><a href="about.html">Manifiesto</a></li>
+        <li><a href="#">Iniciar sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ========== CITY HERO ========== -->
+    <section id="ciudad-hero" aria-labelledby="ciudad-heading">
+      <div class="ciudad-hero__inner">
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+          <a href="explorar.html">Explorar</a>
+          <span class="breadcrumb__sep" aria-hidden="true">→</span>
+          <a href="ciudad.html">Ciudades</a>
+          <span class="breadcrumb__sep" aria-hidden="true">→</span>
+          <span class="breadcrumb__current" aria-current="page">Bogotá</span>
+        </nav>
+
+        <h1 id="ciudad-heading">Bogotá</h1>
+        <p class="ciudad-hero__meta">2,640 m · 8M habitantes</p>
+        <p class="ciudad-hero__tagline">Caótica, apasionante, inevitable</p>
+
+        <div class="ciudad-hero__pills" aria-label="Estadísticas de la ciudad">
+          <span class="stat-pill">18 lugares</span>
+          <span class="stat-pill">6 categorías</span>
+          <span class="stat-pill">Capital</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== ABOUT THE CITY ========== -->
+    <section id="ciudad-about" class="ciudad-section" data-reveal aria-labelledby="about-heading">
+      <div class="ciudad-section__inner">
+        <div class="ciudad-about__grid">
+
+          <!-- Left: prose -->
+          <div class="ciudad-about__prose">
+            <p class="section-label" aria-hidden="true">— La ciudad</p>
+            <h2 class="section-heading" id="about-heading">Una capital que no pide perdón</h2>
+            <p>
+              Bogotá no seduce a primera vista. A 2.640 metros sobre el nivel del mar, con un cielo que cambia cuatro veces en una tarde y una energía que no descansa, la capital colombiana exige entrega total antes de revelar su mejor cara. Quienes la comprenden nunca la olvidan.
+            </p>
+            <p>
+              La escena gastronómica bogotana ha madurado a un ritmo que sorprende incluso a sus propios habitantes. Desde los mercados de La Perseverancia hasta las cocinas de autor en la Zona Rosa, la ciudad ofrece un espectro de experiencias culinarias que pocas capitales latinoamericanas pueden igualar.
+            </p>
+            <p>
+              Sus barrios son mundos autónomos: La Candelaria conserva el alma colonial del país, La Macarena concentra la escena creativa y cultural, y Usaquén despliega un cosmopolitismo silencioso y refinado. Tres barrios, tres ciudades dentro de la ciudad.
+            </p>
+          </div>
+
+          <!-- Right: key facts -->
+          <div>
+            <p class="section-label" aria-hidden="true">— Datos clave</p>
+            <div class="ciudad-facts" role="list" aria-label="Datos de la ciudad">
+              <div class="ciudad-fact" role="listitem">
+                <span class="ciudad-fact__label">Fundada</span>
+                <span class="ciudad-fact__value">1538</span>
+              </div>
+              <div class="ciudad-fact" role="listitem">
+                <span class="ciudad-fact__label">Altitud</span>
+                <span class="ciudad-fact__value">2,640 m</span>
+              </div>
+              <div class="ciudad-fact" role="listitem">
+                <span class="ciudad-fact__label">Clima</span>
+                <span class="ciudad-fact__value">14 °C promedio</span>
+              </div>
+              <div class="ciudad-fact" role="listitem">
+                <span class="ciudad-fact__label">Zona horaria</span>
+                <span class="ciudad-fact__value">UTC −5</span>
+              </div>
+              <div class="ciudad-fact" role="listitem">
+                <span class="ciudad-fact__label">Habitantes</span>
+                <span class="ciudad-fact__value">8 millones</span>
+              </div>
+              <div class="ciudad-fact" role="listitem">
+                <span class="ciudad-fact__label">Lugares en hyex</span>
+                <span class="ciudad-fact__value">18</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CATEGORIES ========== -->
+    <section id="ciudad-categorias" class="ciudad-section" data-reveal aria-labelledby="categorias-heading">
+      <div class="ciudad-section__inner">
+        <p class="section-label" aria-hidden="true">— En Bogotá</p>
+        <h2 class="section-heading" id="categorias-heading">Explora por categoría</h2>
+        <nav class="categoria-pills" aria-label="Categorías en Bogotá">
+          <a href="explorar.html" class="categoria-pill" aria-label="Ver restaurantes en Bogotá">
+            Restaurantes <span class="categoria-pill__count">5</span>
+          </a>
+          <a href="explorar.html" class="categoria-pill" aria-label="Ver cafés en Bogotá">
+            Cafés <span class="categoria-pill__count">3</span>
+          </a>
+          <a href="explorar.html" class="categoria-pill" aria-label="Ver bares en Bogotá">
+            Bares <span class="categoria-pill__count">4</span>
+          </a>
+          <a href="explorar.html" class="categoria-pill" aria-label="Ver hoteles en Bogotá">
+            Hoteles <span class="categoria-pill__count">2</span>
+          </a>
+          <a href="explorar.html" class="categoria-pill" aria-label="Ver atracciones en Bogotá">
+            Atracciones <span class="categoria-pill__count">3</span>
+          </a>
+          <a href="explorar.html" class="categoria-pill" aria-label="Ver vida nocturna en Bogotá">
+            Vida Nocturna <span class="categoria-pill__count">1</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ========== PLACES IN THE CITY ========== -->
+    <section id="ciudad-lugares" class="ciudad-section" data-reveal aria-labelledby="lugares-heading">
+      <div class="ciudad-section__inner">
+        <p class="section-label" aria-hidden="true">— Directorio</p>
+        <h2 class="section-heading" id="lugares-heading">Lugares en Bogotá</h2>
+
+        <ul class="place-grid" data-place-grid role="list">
+
+          <!-- Café Velvet -->
+          <li class="card" data-reveal data-stagger data-category="cafes" data-city="bogota">
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de Café Velvet"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Café</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">Café Velvet</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                La Candelaria · Bogotá
+              </p>
+              <p class="card__desc">El café de especialidad más íntimo de La Candelaria. Tueste propio y silencio editorial.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Café Velvet">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Cantina y Punto -->
+          <li class="card" data-reveal data-stagger data-category="bares" data-city="bogota">
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de Cantina y Punto"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Bar</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">Cantina y Punto</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                La Macarena · Bogotá
+              </p>
+              <p class="card__desc">Mezcal y cumbia bajo el mismo techo. Referente cultural inevitable en La Macarena.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Cantina y Punto">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Aloft Bogotá -->
+          <li class="card" data-reveal data-stagger data-category="hoteles" data-city="bogota">
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de Aloft Bogotá"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Hotel</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">Aloft Bogotá</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Usaquén · Bogotá
+              </p>
+              <p class="card__desc">Diseño contemporáneo en el corazón de Usaquén. Arte local y energía urbana sin artificio.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Aloft Bogotá">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Usaquén Market -->
+          <li class="card" data-reveal data-stagger data-category="atracciones" data-city="bogota">
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de Usaquén Market"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Atracción</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">Usaquén Market</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Usaquén · Bogotá
+              </p>
+              <p class="card__desc">El mercado dominical de Usaquén: artesanías, gastronomía local y el ritmo pausado del norte bogotano.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Usaquén Market">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- La Pesquera Jaramillo -->
+          <li class="card" data-reveal data-stagger data-category="restaurantes" data-city="bogota">
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de La Pesquera Jaramillo"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Restaurante</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">La Pesquera Jaramillo</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Chapinero · Bogotá
+              </p>
+              <p class="card__desc">La mejor cocina de mar en tierra firme. Ceviches, langostinos y el mejor bagre del altiplano.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: La Pesquera Jaramillo">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+          <!-- Andrés DC -->
+          <li class="card" data-reveal data-stagger data-category="restaurantes" data-city="bogota">
+            <a href="lugar.html" class="card__image-wrap" tabindex="-1" aria-hidden="true">
+              <div class="card__image-placeholder" role="img" aria-label="Imagen de Andrés DC"></div>
+            </a>
+            <div class="card__body">
+              <span class="card__tag">Restaurante</span>
+              <h3 class="card__name">
+                <a href="lugar.html" class="card__name-link">Andrés DC</a>
+              </h3>
+              <p class="card__location">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Centro Internacional · Bogotá
+              </p>
+              <p class="card__desc">La versión urbana de la institución. Caos orquestado, carne a la brasa y una atmósfera colombiana sin filtros.</p>
+              <div class="card__footer">
+                <span class="card__stars" aria-label="Calificación: 4 de 5 estrellas">★★★★☆</span>
+                <a href="lugar.html" class="card__cta" aria-label="Ver lugar: Andrés DC">Ver lugar →</a>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== OTHER CITIES ========== -->
+    <section id="otras-ciudades" class="ciudad-section" data-reveal aria-labelledby="otras-ciudades-heading">
+      <div class="ciudad-section__inner">
+        <p class="section-label" aria-hidden="true">— Seguir explorando</p>
+        <h2 class="section-heading" id="otras-ciudades-heading">Explora otras ciudades</h2>
+
+        <ul class="ciudad-cards-list" role="list">
+          <li>
+            <a href="ciudad.html" class="ciudad-link-card" data-reveal data-stagger aria-label="Explorar Medellín — 8 lugares">
+              <span class="ciudad-link-card__name">Medellín</span>
+              <span class="ciudad-link-card__count">8 lugares</span>
+              <span class="ciudad-link-card__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="ciudad.html" class="ciudad-link-card" data-reveal data-stagger aria-label="Explorar Cartagena — 6 lugares">
+              <span class="ciudad-link-card__name">Cartagena</span>
+              <span class="ciudad-link-card__count">6 lugares</span>
+              <span class="ciudad-link-card__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="ciudad.html" class="ciudad-link-card" data-reveal data-stagger aria-label="Explorar Cali — 4 lugares">
+              <span class="ciudad-link-card__name">Cali</span>
+              <span class="ciudad-link-card__count">4 lugares</span>
+              <span class="ciudad-link-card__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:#0a0909; border-top:1px solid rgba(255,255,255,0.06); padding:48px 0 32px;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;">
+      <span style="font-family:'Playfair Display',serif; font-style:italic; color:#c9a84c; font-size:22px; letter-spacing:-0.02em;">hyex</span>
+      <p style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,237,230,0.3); font-weight:400;">
+        © 2026 hyex — Descubre Colombia
+      </p>
+      <nav aria-label="Footer navigation" style="display:flex; gap:24px;">
+        <a href="about.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400;">Manifiesto</a>
+        <a href="explorar.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400;">Explorar</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/nav.js" defer></script>
+  <script src="assets/js/parallax.js" defer></script>
+  <script src="assets/js/scroll-fx.js" defer></script>
+  <script src="assets/js/search.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+/* ==========================================================================
+   about.css — hyex-descubre about / manifesto page
+   ========================================================================== */
+
+/* ==========================================================================
+   About Hero
+   ========================================================================== */
+
+.about-hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--bg, #0a0909);
+  position: relative;
+  overflow: hidden;
+  padding-top: 64px; /* offset for fixed nav */
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at 80% 30%,
+    rgba(201, 168, 76, 0.05) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.about-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* About hero eyebrow */
+.about-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim, #b1987c);
+  line-height: 1.4;
+}
+
+.about-hero__eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background-color: var(--gold, #c9a84c);
+  flex-shrink: 0;
+}
+
+/* About hero title */
+.about-hero__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(40px, 7vw, 88px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  max-width: 900px;
+  color: var(--cream, #f0ede6);
+}
+
+/* Gold italic emphasis spans inside title */
+.about-hero__title em {
+  color: var(--gold, #c9a84c);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   About Sections
+   ========================================================================== */
+
+.about-section {
+  padding-top: clamp(4rem, 8vw, 10rem);
+  padding-bottom: clamp(4rem, 8vw, 10rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.about-section:first-of-type {
+  border-top: none;
+}
+
+/* Two-column layout within a section */
+.about-section__grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-section__aside {
+  position: sticky;
+  top: calc(64px + 2rem);
+}
+
+/* Section number */
+.section-num {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold, #c9a84c);
+  margin-bottom: 1.5rem;
+  display: block;
+  line-height: 1.4;
+}
+
+/* Section title */
+.section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  color: var(--cream, #f0ede6);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+/* Body copy */
+.section-body {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--cream-50, rgba(240, 237, 230, 0.5));
+  line-height: 1.85;
+  max-width: 640px;
+}
+
+.section-body p + p {
+  margin-top: 1.25rem;
+}
+
+/* ==========================================================================
+   Pull Quote
+   ========================================================================== */
+
+.pull-quote {
+  border-left: 3px solid var(--gold, #c9a84c);
+  padding-left: 2rem;
+  margin: 3rem 0;
+}
+
+.pull-quote p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--cream, #f0ede6);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.pull-quote cite {
+  display: block;
+  margin-top: 1rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim, #b1987c);
+  font-style: normal;
+}
+
+/* ==========================================================================
+   City Tags
+   ========================================================================== */
+
+.city-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.city-tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--cream-50, rgba(240, 237, 230, 0.5));
+  background: transparent;
+  transition:
+    border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.city-tag:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  color: var(--cream, #f0ede6);
+}
+
+/* ==========================================================================
+   Audience Grid
+   ========================================================================== */
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.audience-card {
+  background-color: var(--card-bg, #2a2925);
+  padding: 2rem;
+  border-top: 2px solid var(--gold, #c9a84c);
+  position: relative;
+}
+
+.audience-card__num {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim, #b1987c);
+  margin-bottom: 1.25rem;
+  display: block;
+  line-height: 1.4;
+}
+
+.audience-card__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--cream, #f0ede6);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.audience-card__desc {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--cream-50, rgba(240, 237, 230, 0.5));
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   Differentiator Grid
+   ========================================================================== */
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+.diff-item {
+  padding: 2.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Right column cells get no right border */
+.diff-item:nth-child(2n) {
+  border-right: none;
+}
+
+/* Last row cells get no bottom border */
+.diff-item:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+/* If odd number of items, last item spans or just loses bottom */
+.diff-item:last-child {
+  border-bottom: none;
+}
+
+.diff-item__num {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold, #c9a84c);
+  margin-bottom: 1rem;
+  display: block;
+  line-height: 1.4;
+}
+
+.diff-item__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--cream, #f0ede6);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.diff-item__desc {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--cream-50, rgba(240, 237, 230, 0.5));
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   About Closer / CTA Section
+   ========================================================================== */
+
+.about-closer {
+  text-align: center;
+  padding-top: clamp(5rem, 10vw, 12rem);
+  padding-bottom: clamp(5rem, 10vw, 12rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.about-closer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 50%,
+    rgba(201, 168, 76, 0.04) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.about-closer .container {
+  position: relative;
+  z-index: 2;
+}
+
+.about-closer__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 400;
+  color: var(--cream, #f0ede6);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 2rem;
+}
+
+.about-closer__title em {
+  font-style: italic;
+  color: var(--gold, #c9a84c);
+}
+
+.about-closer__body {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--cream-50, rgba(240, 237, 230, 0.5));
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  line-height: 1.85;
+}
+
+.about-closer__credit {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 3rem;
+  display: block;
+  line-height: 1.4;
+}
+
+.about-closer__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   About Footer Credit
+   ========================================================================== */
+
+.about-footer-credit {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.25);
+  margin-top: 4rem;
+  display: block;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Manifesto Line
+   ========================================================================== */
+
+.manifesto-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201, 168, 76, 0.3), transparent);
+  margin: clamp(3rem, 6vw, 5rem) 0;
+}
+
+/* ==========================================================================
+   Team / Credits Section
+   ========================================================================== */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.team-member__name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--cream, #f0ede6);
+  letter-spacing: -0.01em;
+}
+
+.team-member__role {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim, #b1987c);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  .about-section__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-section__aside {
+    position: static;
+  }
+}
+
+@media (max-width: 900px) {
+  .audience-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-hero {
+    min-height: 70vh;
+    padding-top: 56px;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .about-hero__title {
+    font-size: clamp(32px, 9vw, 56px);
+  }
+
+  .diff-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .diff-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2rem 0;
+  }
+
+  .diff-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Reset nth-child rules for single column */
+  .diff-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .diff-item:nth-last-child(-n+2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .diff-item:last-child {
+    border-bottom: none;
+  }
+
+  .pull-quote {
+    padding-left: 1.25rem;
+    margin: 2rem 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .audience-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-closer__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .about-closer__actions .btn-gold,
+  .about-closer__actions .btn-ghost {
+    text-align: center;
+    justify-content: center;
+  }
+}
