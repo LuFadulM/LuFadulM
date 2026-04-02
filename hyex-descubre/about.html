@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="El manifiesto de hyex: cómo y por qué construimos la guía más honesta de Colombia. Nuestros principios, nuestro equipo, nuestra visión.">
+  <title>Manifiesto — hyex</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/globals.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/cards.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">hyex</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Explorar</a></li>
+        <li><a href="explorar.html" class="nav__link">Lugares</a></li>
+        <li><a href="ciudad.html" class="nav__link">Ciudades</a></li>
+        <li><a href="about.html" class="nav__link" aria-current="page">Manifiesto</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="#" class="nav__cta">Iniciar sesión</a>
+      </div>
+      <button class="nav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="index.html">Explorar</a></li>
+        <li><a href="explorar.html">Lugares</a></li>
+        <li><a href="ciudad.html">Ciudades</a></li>
+        <li><a href="about.html">Manifiesto</a></li>
+        <li><a href="#">Iniciar sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main id="main-content">
+
+    <!-- ========== ABOUT HERO ========== -->
+    <section id="about-hero" class="about-hero section" aria-labelledby="about-hero-heading">
+      <div class="about-hero__bg" data-parallax aria-hidden="true"></div>
+      <div class="section__inner about-hero__inner">
+        <div class="about-hero__content" data-reveal>
+          <p class="section__label" aria-hidden="true">— Manifiesto</p>
+          <h1 class="about-hero__heading" id="about-hero-heading">
+            Un mapa hecho de<br>
+            <em class="about-hero__accent">experiencias</em>
+          </h1>
+          <p class="about-hero__subtitle">
+            hyex no es una lista. Es un punto de vista. Creemos que Colombia merece una guía que no tenga miedo de decir la verdad: qué vale la pena, qué no, y por qué algunos lugares cambian la forma en que ves un país.
+          </p>
+          <p class="about-hero__body">
+            Somos un equipo pequeño con obsesiones grandes: la autenticidad, el diseño, la gastronomía, los hoteles con carácter y los cafés donde no tienes que pedir disculpas por quedarte tres horas. Recorremos ciudades, probamos platos, dormimos en camas y bebemos café —con criterio— para que tú no pierdas el tiempo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MANIFIESTO ========== -->
+    <section id="manifesto" class="section manifesto" style="background:var(--bg-muted);" aria-labelledby="manifesto-heading">
+      <div class="section__inner">
+        <header class="section__header">
+          <p class="section__label" aria-hidden="true">— Lo que creemos</p>
+          <h2 class="section__heading" id="manifesto-heading" data-reveal>
+            Tres principios, sin excepciones
+          </h2>
+        </header>
+
+        <ol class="manifesto-list" role="list" style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0;">
+
+          <!-- Principio 01 -->
+          <li class="manifesto-item" data-reveal>
+            <div class="manifesto-item__inner">
+              <span class="manifesto-item__number" aria-hidden="true">01</span>
+              <div class="manifesto-item__content">
+                <h3 class="manifesto-item__heading">Creemos en los lugares que duran</h3>
+                <p class="manifesto-item__body">
+                  No publicamos tendencias. Publicamos lugares con historia, o con la madera para construirla. Un restaurante que lleva veinte años sirviendo el mismo sancocho perfecto nos interesa más que el último pop-up con menú degustación de doce tiempos. La permanencia es una forma de respeto al cliente. Nosotros lo tomamos en serio.
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <!-- Principio 02 -->
+          <li class="manifesto-item" data-reveal>
+            <div class="manifesto-item__inner">
+              <span class="manifesto-item__number" aria-hidden="true">02</span>
+              <div class="manifesto-item__content">
+                <h3 class="manifesto-item__heading">La autenticidad no se puede pagar</h3>
+                <p class="manifesto-item__body">
+                  Ningún lugar paga por aparecer en hyex. Ninguno. No aceptamos publicidad encubierta, contenido patrocinado disfrazado de recomendación, ni acuerdos de comisión con hoteles o restaurantes. Nuestra única moneda es la credibilidad. Si un lugar está aquí es porque alguien del equipo fue, pagó su cuenta y volvió convencido.
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <!-- Principio 03 -->
+          <li class="manifesto-item" data-reveal>
+            <div class="manifesto-item__inner">
+              <span class="manifesto-item__number" aria-hidden="true">03</span>
+              <div class="manifesto-item__content">
+                <h3 class="manifesto-item__heading">Cada ciudad tiene su propia gramática</h3>
+                <p class="manifesto-item__body">
+                  Bogotá no se lee como Cartagena. Medellín no suena como Cali. Barranquilla no huele como Santa Marta. Tratar a Colombia como un bloque homogéneo es el error más común de las guías de viaje. Nosotros aprendemos el idioma de cada ciudad antes de hablar de ella. El contexto no es opcional: es el punto de partida.
+                </p>
+              </div>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== CÓMO FUNCIONA ========== -->
+    <section id="como-funciona" class="section como-funciona" aria-labelledby="como-funciona-heading">
+      <div class="section__inner">
+        <header class="section__header">
+          <p class="section__label" aria-hidden="true">— El proceso</p>
+          <h2 class="section__heading" id="como-funciona-heading" data-reveal>
+            Cómo funciona hyex
+          </h2>
+          <p class="section__subtitle" data-reveal>
+            Cuatro pasos para que tu próximo viaje por Colombia no sea una decepción.
+          </p>
+        </header>
+
+        <ol class="process-grid" role="list" style="list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:2px;" data-stagger>
+
+          <!-- Paso 1: Explorar -->
+          <li class="process-card" data-reveal data-stagger>
+            <div class="process-card__inner">
+              <span class="process-card__step" aria-hidden="true">01</span>
+              <h3 class="process-card__heading">Explorar</h3>
+              <p class="process-card__body">
+                Navega por ciudades, categorías o ánimos. ¿Quieres un café donde trabajar en paz? ¿Un bar donde nadie te mire raro si pides la carta de vinos naturales? ¿Un hotel con carácter propio? Todo está aquí, organizado para que encuentres lo que buscas —y lo que no sabías que buscabas.
+              </p>
+            </div>
+          </li>
+
+          <!-- Paso 2: Filtrar -->
+          <li class="process-card" data-reveal data-stagger>
+            <div class="process-card__inner">
+              <span class="process-card__step" aria-hidden="true">02</span>
+              <h3 class="process-card__heading">Filtrar</h3>
+              <p class="process-card__body">
+                Cada lugar tiene etiquetas detalladas: tipo de ambiente, rango de precio, barrio, horarios, si es apto para trabajo remoto, si aceptan perros, si el café es de especialidad. Filtra hasta que la lista tenga exactamente el tamaño que necesitas. La precisión es un servicio.
+              </p>
+            </div>
+          </li>
+
+          <!-- Paso 3: Guardar -->
+          <li class="process-card" data-reveal data-stagger>
+            <div class="process-card__inner">
+              <span class="process-card__step" aria-hidden="true">03</span>
+              <h3 class="process-card__heading">Guardar</h3>
+              <p class="process-card__body">
+                Crea listas personales. "Próximo viaje a Medellín". "Cafés para el jueves". "Lugares para llevar a mis padres". Guarda lo que te interesa, comparte la lista con quien viaja contigo. Tus colecciones viajan donde tú vayas, accesibles desde cualquier dispositivo.
+              </p>
+            </div>
+          </li>
+
+          <!-- Paso 4: Compartir -->
+          <li class="process-card" data-reveal data-stagger>
+            <div class="process-card__inner">
+              <span class="process-card__step" aria-hidden="true">04</span>
+              <h3 class="process-card__heading">Compartir</h3>
+              <p class="process-card__body">
+                Cuando encuentras un lugar que cambia la conversación, merece ser compartido. Envía el enlace a quien viaja pronto, publica tu lista en lo que uses para comunicarte, o simplemente deja una nota sobre lo que experimentaste. El conocimiento de los lugares buenos no debería guardarse para uno solo.
+              </p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== EL EQUIPO ========== -->
+    <section id="equipo" class="section equipo" style="background:var(--bg-muted);" aria-labelledby="equipo-heading">
+      <div class="section__inner">
+        <header class="section__header">
+          <p class="section__label" aria-hidden="true">— Las personas</p>
+          <h2 class="section__heading" id="equipo-heading" data-reveal>
+            El equipo
+          </h2>
+          <p class="section__subtitle" data-reveal>
+            Pequeños en número. Grandes en kilómetros recorridos.
+          </p>
+        </header>
+
+        <ul class="team-grid" role="list" style="list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:32px;" data-stagger>
+
+          <!-- Miembro 1 -->
+          <li class="team-card" data-reveal data-stagger>
+            <div class="team-card__inner">
+              <div class="team-card__deco" aria-hidden="true"></div>
+              <div class="team-card__content">
+                <h3 class="team-card__name">Camila Restrepo</h3>
+                <p class="team-card__role">Editora jefe — Medellín</p>
+                <div class="team-card__rule" aria-hidden="true"></div>
+                <p class="team-card__bio">
+                  Periodista cultural con quince años cubriendo gastronomía, hospitalidad y diseño en Colombia y el exterior. Antes: <em>Semana</em>, <em>Gatopardo</em>. Cree que un buen desayuno puede revelar el alma de una ciudad.
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <!-- Miembro 2 -->
+          <li class="team-card" data-reveal data-stagger>
+            <div class="team-card__inner">
+              <div class="team-card__deco" aria-hidden="true"></div>
+              <div class="team-card__content">
+                <h3 class="team-card__name">Sebastián Mora</h3>
+                <p class="team-card__role">Director de producto — Bogotá</p>
+                <div class="team-card__rule" aria-hidden="true"></div>
+                <p class="team-card__bio">
+                  Diseñador y estratega digital. Construyó plataformas editoriales durante una década antes de decidir que quería construir solo cosas que usaría él mismo. hyex es eso. Viaja con libreta y sin agenda.
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <!-- Miembro 3 -->
+          <li class="team-card" data-reveal data-stagger>
+            <div class="team-card__inner">
+              <div class="team-card__deco" aria-hidden="true"></div>
+              <div class="team-card__content">
+                <h3 class="team-card__name">Valentina Torres</h3>
+                <p class="team-card__role">Investigadora de campo — Cartagena</p>
+                <div class="team-card__rule" aria-hidden="true"></div>
+                <p class="team-card__bio">
+                  Antropóloga convertida en exploradora urbana. Especialista en el Caribe colombiano, habla con el pescadero, con el sommelier y con el dueño del kiosco con la misma curiosidad. Cada lugar es un texto que hay que saber leer.
+                </p>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== CIUDADES ========== -->
+    <section id="ciudades-about" class="section ciudades-about" aria-labelledby="ciudades-about-heading">
+      <div class="section__inner">
+        <header class="section__header">
+          <p class="section__label" aria-hidden="true">— Dónde estamos</p>
+          <h2 class="section__heading" id="ciudades-about-heading" data-reveal>
+            Seis ciudades
+          </h2>
+          <p class="section__subtitle" data-reveal>
+            Y seguimos sumando. Colombia tiene más ciudades de las que cualquier guía ha podido abarcar.
+          </p>
+        </header>
+
+        <ul class="city-list" role="list" style="list-style:none; padding:0; margin:0;" data-stagger>
+
+          <li class="city-list__item" data-reveal data-stagger>
+            <a href="ciudad.html" class="city-list__link">
+              <div class="city-list__inner">
+                <div class="city-list__left">
+                  <span class="city-list__index" aria-hidden="true">01</span>
+                  <h3 class="city-list__name">Bogotá</h3>
+                </div>
+                <p class="city-list__tagline">La ciudad que nunca termina de presentarse. Caótica, brillante, imposible de agotar.</p>
+                <span class="city-list__count">12 lugares</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="city-list__item" data-reveal data-stagger>
+            <a href="ciudad.html" class="city-list__link">
+              <div class="city-list__inner">
+                <div class="city-list__left">
+                  <span class="city-list__index" aria-hidden="true">02</span>
+                  <h3 class="city-list__name">Medellín</h3>
+                </div>
+                <p class="city-list__tagline">La ciudad que se reinventó y no paró de hacerlo. Cultura, diseño y el mejor café del país.</p>
+                <span class="city-list__count">8 lugares</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="city-list__item" data-reveal data-stagger>
+            <a href="ciudad.html" class="city-list__link">
+              <div class="city-list__inner">
+                <div class="city-list__left">
+                  <span class="city-list__index" aria-hidden="true">03</span>
+                  <h3 class="city-list__name">Cartagena</h3>
+                </div>
+                <p class="city-list__tagline">Murallas, Caribe y una escena gastronómica que ya no tiene nada que envidiarle a nadie.</p>
+                <span class="city-list__count">6 lugares</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="city-list__item" data-reveal data-stagger>
+            <a href="ciudad.html" class="city-list__link">
+              <div class="city-list__inner">
+                <div class="city-list__left">
+                  <span class="city-list__index" aria-hidden="true">04</span>
+                  <h3 class="city-list__name">Cali</h3>
+                </div>
+                <p class="city-list__tagline">Ritmo, sabor y una manera de vivir que el resto del país no ha terminado de entender.</p>
+                <span class="city-list__count">4 lugares</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="city-list__item" data-reveal data-stagger>
+            <a href="ciudad.html" class="city-list__link">
+              <div class="city-list__inner">
+                <div class="city-list__left">
+                  <span class="city-list__index" aria-hidden="true">05</span>
+                  <h3 class="city-list__name">Barranquilla</h3>
+                </div>
+                <p class="city-list__tagline">El Caribe sin filtro. Calor, cumbia y una cocina que es pura memoria afectiva.</p>
+                <span class="city-list__count">2 lugares</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="city-list__item" data-reveal data-stagger>
+            <a href="ciudad.html" class="city-list__link">
+              <div class="city-list__inner">
+                <div class="city-list__left">
+                  <span class="city-list__index" aria-hidden="true">06</span>
+                  <h3 class="city-list__name">Santa Marta</h3>
+                </div>
+                <p class="city-list__tagline">La ciudad más antigua del continente. Mar, sierra y el tiempo que pasa diferente.</p>
+                <span class="city-list__count">1 lugar</span>
+              </div>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== CTA ========== -->
+    <section class="section cta-section" style="background:var(--bg-muted);" aria-labelledby="about-cta-heading">
+      <div class="section__inner" style="text-align:center; max-width:640px; margin-left:auto; margin-right:auto;">
+        <p class="section__label" style="text-align:center;" aria-hidden="true">— Únete</p>
+        <h2 class="cta-section__heading" id="about-cta-heading" data-reveal>
+          Únete a hyex
+        </h2>
+        <p class="cta-section__body" data-reveal>
+          Crea tu cuenta gratuita, guarda tus lugares favoritos, construye listas para tus próximos viajes y ayúdanos a hacer la guía más honesta de Colombia.
+        </p>
+        <a href="index.html" class="btn btn--gold" data-reveal>Empezar a explorar</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:#0a0909; border-top:1px solid rgba(255,255,255,0.06); padding:48px 0 32px;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;">
+      <span style="font-family:'Playfair Display',serif; font-style:italic; color:#c9a84c; font-size:22px; letter-spacing:-0.02em;">hyex</span>
+      <p style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,237,230,0.3); font-weight:400;">
+        © 2026 hyex — Descubre Colombia
+      </p>
+      <nav aria-label="Footer navigation" style="display:flex; gap:24px;">
+        <a href="about.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400; transition:color 0.2s;">Manifiesto</a>
+        <a href="explorar.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400; transition:color 0.2s;">Explorar</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/nav.js" defer></script>
+  <script src="assets/js/parallax.js" defer></script>
+  <script src="assets/js/scroll-fx.js" defer></script>
+  <script src="assets/js/search.js" defer></script>
+
+</body>
+</html>
