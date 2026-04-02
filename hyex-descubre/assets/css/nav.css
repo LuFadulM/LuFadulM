@@ -1,0 +1,370 @@
+/* ==========================================================================
+   nav.css — hyex-descubre navigation
+   ========================================================================== */
+
+/* ==========================================================================
+   Nav Base
+   ========================================================================== */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 64px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: var(--container-padding, clamp(1rem, 4vw, 4rem));
+  padding-right: var(--container-padding, clamp(1rem, 4vw, 4rem));
+  background: transparent;
+  transition:
+    background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  border-bottom: 1px solid transparent;
+}
+
+/* Scrolled state */
+.nav--scrolled {
+  background: rgba(10, 9, 9, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ==========================================================================
+   Logo
+   ========================================================================== */
+
+.nav__logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--gold, #c9a84c);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav__logo:hover {
+  color: #d9b85c;
+}
+
+/* ==========================================================================
+   Nav Links (desktop)
+   ========================================================================== */
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--cream-50, rgba(240, 237, 230, 0.5));
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Underline draw-from-left on hover */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--gold, #c9a84c);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav__link:hover {
+  color: var(--cream, #f0ede6);
+}
+
+.nav__link:hover::after,
+.nav__link--active::after {
+  transform: scaleX(1);
+}
+
+.nav__link--active {
+  color: var(--cream, #f0ede6);
+}
+
+/* ==========================================================================
+   Nav Right
+   ========================================================================== */
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Login link */
+.btn-nav-login {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--cream-50, rgba(240, 237, 230, 0.5));
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.btn-nav-login:hover {
+  color: var(--cream, #f0ede6);
+}
+
+/* Register button */
+.btn-nav-register {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--bg, #0a0909);
+  background-color: var(--gold, #c9a84c);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  padding: 9px 20px;
+  border-radius: 6px;
+  border: 1px solid var(--gold, #c9a84c);
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition:
+    background-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.btn-nav-register:hover {
+  background-color: #d9b85c;
+  border-color: #d9b85c;
+  box-shadow: 0 4px 16px rgba(201, 168, 76, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-nav-register:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Hamburger (mobile)
+   ========================================================================== */
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 101;
+}
+
+.nav__hamburger-line {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background-color: var(--cream, #f0ede6);
+  transform-origin: center;
+  transition:
+    transform 350ms cubic-bezier(0.76, 0, 0.24, 1),
+    opacity 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    width 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animate to X when open */
+.nav__hamburger.open .nav__hamburger-line:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav__hamburger.open .nav__hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav__hamburger.open .nav__hamburger-line:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   Mobile Menu Overlay
+   ========================================================================== */
+
+.nav__mobile {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg, #0a0909);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav__mobile--open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+/* Mobile nav links list */
+.nav__mobile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.nav__mobile-link {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 400;
+  color: var(--cream-50, rgba(240, 237, 230, 0.5));
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  display: block;
+  padding: 0.25rem 1rem;
+  position: relative;
+  transition:
+    color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav__mobile-link:hover {
+  color: var(--cream, #f0ede6);
+  transform: translateX(6px);
+}
+
+.nav__mobile-link--accent {
+  color: var(--gold, #c9a84c);
+  font-style: italic;
+}
+
+.nav__mobile-link--accent:hover {
+  color: #d9b85c;
+  transform: translateX(6px);
+}
+
+/* Mobile nav footer */
+.nav__mobile-footer {
+  position: absolute;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+
+.nav__mobile-footer .btn-nav-login {
+  font-size: 0.9rem;
+}
+
+.nav__mobile-footer .btn-nav-register {
+  font-size: 0.9rem;
+}
+
+/* Stagger animation for mobile links */
+.nav__mobile--open .nav__mobile-link {
+  animation: mobileNavItem 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.nav__mobile--open .nav__mobile-links li:nth-child(1) .nav__mobile-link { animation-delay: 80ms; }
+.nav__mobile--open .nav__mobile-links li:nth-child(2) .nav__mobile-link { animation-delay: 120ms; }
+.nav__mobile--open .nav__mobile-links li:nth-child(3) .nav__mobile-link { animation-delay: 160ms; }
+.nav__mobile--open .nav__mobile-links li:nth-child(4) .nav__mobile-link { animation-delay: 200ms; }
+.nav__mobile--open .nav__mobile-links li:nth-child(5) .nav__mobile-link { animation-delay: 240ms; }
+.nav__mobile--open .nav__mobile-links li:nth-child(6) .nav__mobile-link { animation-delay: 280ms; }
+
+@keyframes mobileNavItem {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Responsive — Show/hide hamburger
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  .nav__links {
+    display: none;
+  }
+
+  .nav__right {
+    display: none;
+  }
+
+  .nav__hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav {
+    height: 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav__mobile {
+    display: none;
+  }
+}

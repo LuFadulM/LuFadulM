@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubre los mejores restaurantes, cafés, bares, hoteles y atracciones de Colombia. Una guía editorial oscura para viajeros exigentes.">
+  <title>hyex — Descubre Colombia</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="assets/css/globals.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/cards.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">hyex</a>
+      <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link" aria-current="page">Explorar</a></li>
+        <li><a href="explorar.html" class="nav__link">Lugares</a></li>
+        <li><a href="ciudad.html" class="nav__link">Ciudades</a></li>
+        <li><a href="about.html" class="nav__link">Manifiesto</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="#" class="nav__cta">Iniciar sesión</a>
+      </div>
+      <button class="nav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <ul role="list">
+        <li><a href="index.html">Explorar</a></li>
+        <li><a href="explorar.html">Lugares</a></li>
+        <li><a href="ciudad.html">Ciudades</a></li>
+        <li><a href="about.html">Manifiesto</a></li>
+        <li><a href="#">Iniciar sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main id="main-content">
+
+    <!-- ========== HERO ========== -->
+    <section id="hero" class="hero" aria-label="Portada principal">
+      <div class="hero__bg" data-parallax aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <h1 class="hero__headline">
+          <span class="hero__headline-main">Descubre</span>
+          <em class="hero__headline-accent">Colombia</em>
+        </h1>
+
+        <p class="hero__subtitle">
+          Una guía editorial para viajeros exigentes. Los mejores lugares de Colombia, curados a mano.
+        </p>
+
+        <!-- Search bar -->
+        <form class="hero__search" role="search" aria-label="Buscar lugares">
+          <label for="search-input" class="visually-hidden">Buscar lugares, ciudades o categorías</label>
+          <input
+            type="search"
+            id="search-input"
+            class="hero__search-input"
+            data-search-input
+            placeholder="Busca un lugar, ciudad o categoría…"
+            autocomplete="off"
+            aria-label="Buscar lugares"
+          >
+          <button type="submit" class="hero__search-btn" aria-label="Buscar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Stat pills -->
+        <div class="hero__stats" aria-label="Estadísticas de la plataforma">
+          <span class="hero__stat">33 lugares</span>
+          <span class="hero__stat-divider" aria-hidden="true">·</span>
+          <span class="hero__stat">6 ciudades</span>
+          <span class="hero__stat-divider" aria-hidden="true">·</span>
+          <span class="hero__stat">6 categorías</span>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero__scroll-indicator" aria-hidden="true">
+        <span class="hero__scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ========== FEATURED ========== -->
+    <section id="featured" class="section featured" data-reveal aria-labelledby="featured-heading">
+      <div class="section__inner">
+        <header class="section__header">
+          <p class="section__label" aria-hidden="true">— Destacados</p>
+          <h2 class="section__heading" id="featured-heading" data-reveal>
+            Lugares que vale la pena conocer
+          </h2>
+        </header>
+
+        <ul class="cards cards--featured" role="list" data-stagger>
+
+          <!-- Card 1: Café Velvet -->
+          <li>
+            <article class="card card--featured atmo-card" data-reveal data-stagger>
+              <a href="explorar.html" class="card__image-link" tabindex="-1" aria-hidden="true">
+                <div class="card__image card__image--placeholder" style="aspect-ratio:4/3; background:#2a2925;" role="img" aria-label="Imagen de Café Velvet"></div>
+              </a>
+              <div class="card__body">
+                <span class="card__tag">Café</span>
+                <h3 class="card__name">
+                  <a href="explorar.html" class="card__name-link">Café Velvet</a>
+                </h3>
+                <p class="card__city">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Bogotá
+                </p>
+                <p class="card__desc">
+                  El café de especialidad más íntimo de La Candelaria. Tueste propio, atmósfera editorial y silencio que vale oro en la ciudad.
+                </p>
+                <a href="explorar.html" class="card__cta" aria-label="Ver más sobre Café Velvet">Ver más →</a>
+              </div>
+            </article>
+          </li>
+
+          <!-- Card 2: Restaurante Celele -->
+          <li>
+            <article class="card card--featured atmo-card" data-reveal data-stagger>
+              <a href="explorar.html" class="card__image-link" tabindex="-1" aria-hidden="true">
+                <div class="card__image card__image--placeholder" style="aspect-ratio:4/3; background:#2a2925;" role="img" aria-label="Imagen de Restaurante Celele"></div>
+              </a>
+              <div class="card__body">
+                <span class="card__tag">Restaurante</span>
+                <h3 class="card__name">
+                  <a href="explorar.html" class="card__name-link">Restaurante Celele</a>
+                </h3>
+                <p class="card__city">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Cartagena
+                </p>
+                <p class="card__desc">
+                  Alta cocina del Caribe colombiano. Ingredientes del palenque, técnica contemporánea y un homenaje honesto a la diáspora africana.
+                </p>
+                <a href="explorar.html" class="card__cta" aria-label="Ver más sobre Restaurante Celele">Ver más →</a>
+              </div>
+            </article>
+          </li>
+
+          <!-- Card 3: Clos de Marie -->
+          <li>
+            <article class="card card--featured atmo-card" data-reveal data-stagger>
+              <a href="explorar.html" class="card__image-link" tabindex="-1" aria-hidden="true">
+                <div class="card__image card__image--placeholder" style="aspect-ratio:4/3; background:#2a2925;" role="img" aria-label="Imagen de Clos de Marie"></div>
+              </a>
+              <div class="card__body">
+                <span class="card__tag">Bar</span>
+                <h3 class="card__name">
+                  <a href="explorar.html" class="card__name-link">Clos de Marie</a>
+                </h3>
+                <p class="card__city">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Medellín
+                </p>
+                <p class="card__desc">
+                  Vinos naturales, quesos artesanales y una terraza en El Poblado que detiene el tiempo. El rincón europeo que Medellín necesitaba.
+                </p>
+                <a href="explorar.html" class="card__cta" aria-label="Ver más sobre Clos de Marie">Ver más →</a>
+              </div>
+            </article>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== DISCOVERY / HOY EN TU CIUDAD ========== -->
+    <section id="hoy" class="section hoy" style="background:var(--bg-muted);" aria-labelledby="hoy-heading">
+      <div class="section__inner">
+        <header class="section__header">
+          <p class="section__label" aria-hidden="true">— Hoy en tu ciudad</p>
+          <h2 class="section__heading" id="hoy-heading" data-reveal>
+            Lo que está pasando
+          </h2>
+        </header>
+
+        <div class="cards-scroll-row" role="list" aria-label="Lugares destacados hoy" data-stagger>
+
+          <!-- Discovery card 1 -->
+          <article class="card card--discovery" role="listitem" data-reveal data-stagger>
+            <div class="card__image card__image--placeholder" style="aspect-ratio:4/3; background:#2a2925;" role="img" aria-label="Imagen de Azul Profundo"></div>
+            <div class="card__body">
+              <span class="card__tag">Hotel</span>
+              <h3 class="card__name"><a href="explorar.html" class="card__name-link">Azul Profundo</a></h3>
+              <p class="card__city">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Santa Marta
+              </p>
+              <p class="card__desc">Boutique frente al mar. Arquitectura colonial, brisa del Caribe y silencio.</p>
+            </div>
+          </article>
+
+          <!-- Discovery card 2 -->
+          <article class="card card--discovery" role="listitem" data-reveal data-stagger>
+            <div class="card__image card__image--placeholder" style="aspect-ratio:4/3; background:#2a2925;" role="img" aria-label="Imagen de La Mulata"></div>
+            <div class="card__body">
+              <span class="card__tag">Restaurante</span>
+              <h3 class="card__name"><a href="explorar.html" class="card__name-link">La Mulata</a></h3>
+              <p class="card__city">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Cartagena
+              </p>
+              <p class="card__desc">Comida costeña sin artificios. El lugar donde comen los que saben.</p>
+            </div>
+          </article>
+
+          <!-- Discovery card 3 -->
+          <article class="card card--discovery" role="listitem" data-reveal data-stagger>
+            <div class="card__image card__image--placeholder" style="aspect-ratio:4/3; background:#2a2925;" role="img" aria-label="Imagen de Pergamino"></div>
+            <div class="card__body">
+              <span class="card__tag">Café</span>
+              <h3 class="card__name"><a href="explorar.html" class="card__name-link">Pergamino</a></h3>
+              <p class="card__city">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Medellín
+              </p>
+              <p class="card__desc">El referente del café de especialidad en Colombia. Altura, origen y precisión.</p>
+            </div>
+          </article>
+
+          <!-- Discovery card 4 -->
+          <article class="card card--discovery" role="listitem" data-reveal data-stagger>
+            <div class="card__image card__image--placeholder" style="aspect-ratio:4/3; background:#2a2925;" role="img" aria-label="Imagen de Andrés Carne de Res"></div>
+            <div class="card__body">
+              <span class="card__tag">Atracción</span>
+              <h3 class="card__name"><a href="explorar.html" class="card__name-link">Andrés Carne de Res</a></h3>
+              <p class="card__city">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Bogotá
+              </p>
+              <p class="card__desc">Una institución caótica y brillante. Comer aquí es un acto cultural.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CITIES ========== -->
+    <section id="ciudades" class="section ciudades" aria-labelledby="ciudades-heading">
+      <div class="section__inner">
+        <header class="section__header">
+          <p class="section__label" aria-hidden="true">— Explora</p>
+          <h2 class="section__heading" id="ciudades-heading" data-reveal>
+            Seis ciudades, mil historias
+          </h2>
+        </header>
+
+        <ul class="ciudad-grid" role="list" data-stagger>
+
+          <li>
+            <a href="ciudad.html" class="ciudad-card" data-reveal data-stagger>
+              <div class="ciudad-card__inner">
+                <h3 class="ciudad-card__name">Bogotá</h3>
+                <p class="ciudad-card__count">12 lugares</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="ciudad.html" class="ciudad-card" data-reveal data-stagger>
+              <div class="ciudad-card__inner">
+                <h3 class="ciudad-card__name">Medellín</h3>
+                <p class="ciudad-card__count">8 lugares</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="ciudad.html" class="ciudad-card" data-reveal data-stagger>
+              <div class="ciudad-card__inner">
+                <h3 class="ciudad-card__name">Cartagena</h3>
+                <p class="ciudad-card__count">6 lugares</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="ciudad.html" class="ciudad-card" data-reveal data-stagger>
+              <div class="ciudad-card__inner">
+                <h3 class="ciudad-card__name">Cali</h3>
+                <p class="ciudad-card__count">4 lugares</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="ciudad.html" class="ciudad-card" data-reveal data-stagger>
+              <div class="ciudad-card__inner">
+                <h3 class="ciudad-card__name">Barranquilla</h3>
+                <p class="ciudad-card__count">2 lugares</p>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="ciudad.html" class="ciudad-card" data-reveal data-stagger>
+              <div class="ciudad-card__inner">
+                <h3 class="ciudad-card__name">Santa Marta</h3>
+                <p class="ciudad-card__count">1 lugar</p>
+              </div>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== MAGAZINE / EDITORIAL ========== -->
+    <section id="magazine" class="section magazine" style="background:var(--bg-muted);" aria-labelledby="magazine-heading">
+      <div class="section__inner">
+        <header class="section__header">
+          <p class="section__label" aria-hidden="true">— Perspectiva</p>
+          <h2 class="section__heading" id="magazine-heading" data-reveal>
+            El lado b de Colombia
+          </h2>
+        </header>
+
+        <div class="magazine-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:32px;">
+
+          <article class="magazine-card" data-reveal>
+            <div class="magazine-card__image card__image--placeholder" style="aspect-ratio:16/9; background:#2a2925; margin-bottom:20px;" role="img" aria-label="Imagen editorial: Bogotá nocturna"></div>
+            <div class="magazine-card__body">
+              <p class="magazine-card__label">Crónica</p>
+              <h3 class="magazine-card__title">
+                <a href="about.html" class="magazine-card__link">Bogotá a las 2am: la ciudad que los turistas nunca ven</a>
+              </h3>
+              <p class="magazine-card__excerpt">
+                Desde la Perseverancia hasta La Macarena, una noche caminando los barrios que definen el carácter irreverente de la capital.
+              </p>
+              <div style="display:flex; align-items:center; gap:12px; margin-top:16px;">
+                <span style="font-family:'Sora',system-ui,sans-serif; font-size:11px; color:rgba(240,237,230,0.4); letter-spacing:0.1em; text-transform:uppercase;">Marzo 2026</span>
+                <span style="width:24px; height:1px; background:rgba(240,237,230,0.2);" aria-hidden="true"></span>
+                <span style="font-family:'Sora',system-ui,sans-serif; font-size:11px; color:rgba(240,237,230,0.4); letter-spacing:0.1em; text-transform:uppercase;">8 min lectura</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="magazine-card" data-reveal>
+            <div class="magazine-card__image card__image--placeholder" style="aspect-ratio:16/9; background:#2a2925; margin-bottom:20px;" role="img" aria-label="Imagen editorial: Café colombiano"></div>
+            <div class="magazine-card__body">
+              <p class="magazine-card__label">Gastronomía</p>
+              <h3 class="magazine-card__title">
+                <a href="about.html" class="magazine-card__link">El café colombiano no es lo que crees que es</a>
+              </h3>
+              <p class="magazine-card__excerpt">
+                Cómo el país que exporta uno de los mejores cafés del mundo aprendió, lentamente, a tomárselo bien. Una historia de orgullo tardío.
+              </p>
+              <div style="display:flex; align-items:center; gap:12px; margin-top:16px;">
+                <span style="font-family:'Sora',system-ui,sans-serif; font-size:11px; color:rgba(240,237,230,0.4); letter-spacing:0.1em; text-transform:uppercase;">Febrero 2026</span>
+                <span style="width:24px; height:1px; background:rgba(240,237,230,0.2);" aria-hidden="true"></span>
+                <span style="font-family:'Sora',system-ui,sans-serif; font-size:11px; color:rgba(240,237,230,0.4); letter-spacing:0.1em; text-transform:uppercase;">6 min lectura</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA ========== -->
+    <section class="section cta-section" aria-labelledby="cta-heading">
+      <div class="section__inner" style="text-align:center; max-width:640px; margin-left:auto; margin-right:auto;">
+        <h2 class="cta-section__heading" id="cta-heading" data-reveal>
+          ¿Tienes un lugar especial?
+        </h2>
+        <p class="cta-section__body" data-reveal>
+          Estamos construyendo la guía más honesta de Colombia. Si conoces un lugar que merece estar aquí, cuéntanos.
+        </p>
+        <a href="#" class="btn btn--gold" data-reveal>Regístrate</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:#0a0909; border-top:1px solid rgba(255,255,255,0.06); padding:48px 0 32px;">
+    <div style="max-width:1280px; margin:0 auto; padding:0 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;">
+      <span style="font-family:'Playfair Display',serif; font-style:italic; color:#c9a84c; font-size:22px; letter-spacing:-0.02em;">hyex</span>
+      <p style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(240,237,230,0.3); font-weight:400;">
+        © 2026 hyex — Descubre Colombia
+      </p>
+      <nav aria-label="Footer navigation" style="display:flex; gap:24px;">
+        <a href="about.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400; transition:color 0.2s;">Manifiesto</a>
+        <a href="explorar.html" style="font-family:'Sora',system-ui,sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(240,237,230,0.4); text-decoration:none; font-weight:400; transition:color 0.2s;">Explorar</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/nav.js" defer></script>
+  <script src="assets/js/parallax.js" defer></script>
+  <script src="assets/js/scroll-fx.js" defer></script>
+  <script src="assets/js/search.js" defer></script>
+
+</body>
+</html>
