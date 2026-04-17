@@ -50,7 +50,6 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  // Focus the close button when menu opens
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => closeButtonRef.current?.focus(), 50);
@@ -64,7 +63,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
       {/* Backdrop */}
       <button
         className="absolute inset-0 w-full h-full border-0 cursor-default"
-        style={{ background: "rgba(0,0,0,0.7)" }}
+        style={{ background: "rgba(0,0,0,0.75)" }}
         onClick={onClose}
         aria-label="Cerrar menú"
         tabIndex={-1}
@@ -73,19 +72,19 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
       {/* Drawer */}
       <div
         className="absolute top-0 right-0 bottom-0 w-72 flex flex-col animate-slide-up"
-        style={{ background: "#FFFFFF", borderLeft: "1px solid rgba(0,0,0,0.08)" }}
+        style={{ background: "var(--bg)", borderLeft: "1px solid var(--border)" }}
       >
         {/* Header */}
         <div
           className="flex items-center justify-between px-6 h-16"
-          style={{ borderBottom: "1px solid rgba(0,0,0,0.07)" }}
+          style={{ borderBottom: "1px solid var(--border)" }}
         >
           <span
             aria-hidden="true"
             style={{
-              color: "#C6A85C",
+              color: "var(--gold)",
               fontSize: "20px",
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "var(--font-serif)",
               fontStyle: "italic",
             }}
           >
@@ -95,7 +94,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
             ref={closeButtonRef}
             onClick={onClose}
             className="p-2 transition-colors duration-200"
-            style={{ color: "#9A9A9A" }}
+            style={{ color: "var(--text-muted)" }}
             aria-label="Cerrar menú de navegación"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -116,7 +115,8 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#C0BAB2",
+                  fontFamily: "var(--font-sans)",
+                  color: "var(--text-muted)",
                 }}
               >
                 {section.label}
@@ -132,11 +132,13 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#6A6A6A",
-                    borderBottom: "1px solid rgba(0,0,0,0.06)",
+                    fontFamily: "var(--font-sans)",
+                    color: "var(--text-secondary)",
+                    borderBottom: "1px solid var(--border)",
+                    textDecoration: "none",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#1C1C1C")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#6A6A6A")}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
                 >
                   {link.label}
                 </Link>
@@ -148,33 +150,40 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
         {/* Auth */}
         <div
           className="px-4 pb-8 pt-4 space-y-2"
-          style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}
+          style={{ borderTop: "1px solid var(--border)" }}
         >
           {user ? (
             <>
               <Link
                 href="/profile"
                 onClick={onClose}
-                className="block w-full text-center py-3 border border-[rgba(0,0,0,0.08)] transition-all duration-200"
+                className="block w-full text-center py-3 transition-all duration-200"
                 style={{
                   fontSize: "10px",
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  color: "#1C1C1C",
+                  fontFamily: "var(--font-sans)",
+                  color: "var(--text-primary)",
+                  border: "1px solid var(--border)",
+                  textDecoration: "none",
                 }}
               >
                 {user.user_metadata?.display_name ?? user.email?.split("@")[0] ?? "Perfil"}
               </Link>
               <button
                 onClick={() => { onClose(); onSignOut(); }}
-                className="block w-full text-center py-3 border border-[rgba(0,0,0,0.06)] transition-all duration-200"
+                className="block w-full text-center py-3 transition-all duration-200"
                 style={{
                   fontSize: "10px",
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  color: "#6A6A6A",
+                  fontFamily: "var(--font-sans)",
+                  color: "var(--text-muted)",
+                  background: "none",
+                  border: "1px solid var(--border)",
+                  cursor: "pointer",
                 }}
               >
                 {t.nav.signout}
@@ -185,13 +194,16 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
               <Link
                 href="/auth/login"
                 onClick={onClose}
-                className="block w-full text-center py-3 border border-[rgba(0,0,0,0.08)] transition-all duration-200"
+                className="block w-full text-center py-3 transition-all duration-200"
                 style={{
                   fontSize: "10px",
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  color: "#1C1C1C",
+                  fontFamily: "var(--font-sans)",
+                  color: "var(--text-secondary)",
+                  border: "1px solid var(--border)",
+                  textDecoration: "none",
                 }}
               >
                 {t.nav.login}
@@ -199,13 +211,17 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
               <Link
                 href="/auth/signup"
                 onClick={onClose}
-                className="block w-full text-center py-3 bg-gold transition-all duration-200 hover:bg-gold-hover"
+                className="block w-full text-center py-3 transition-all duration-200"
                 style={{
                   fontSize: "10px",
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#000000",
+                  fontFamily: "var(--font-sans)",
+                  color: "var(--bg)",
+                  background: "var(--gold)",
+                  border: "1px solid var(--gold)",
+                  textDecoration: "none",
                 }}
               >
                 {t.nav.signup}

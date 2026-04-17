@@ -11,13 +11,13 @@ interface HoySectionProps {
 const CITIES = ["Todas", "Bogotá", "Medellín", "Cartagena", "Cali", "Santa Marta"];
 
 const CATEGORIES: { label: string; value: Category | "Todas" }[] = [
-  { label: "Todos",   value: "Todas" },
-  { label: "Comer",   value: "Restaurants" },
-  { label: "Cafés",   value: "Cafés" },
-  { label: "Beber",   value: "Bars" },
-  { label: "Noche",   value: "Nightlife" },
-  { label: "Cultura", value: "Attractions" },
-  { label: "Estadías",value: "Hotels" },
+  { label: "Todos",    value: "Todas" },
+  { label: "Comer",    value: "Restaurants" },
+  { label: "Cafés",    value: "Cafés" },
+  { label: "Beber",    value: "Bars" },
+  { label: "Noche",    value: "Nightlife" },
+  { label: "Cultura",  value: "Attractions" },
+  { label: "Estadías", value: "Hotels" },
 ];
 
 function getMoment(place: Place, date: Date): string {
@@ -43,27 +43,27 @@ function FilterPill({ label, active, onClick }: { label: string; active: boolean
       onClick={onClick}
       style={{
         display: "inline-flex", alignItems: "center",
-        padding: "7px 16px",
-        fontSize: "10px", letterSpacing: "0.10em", textTransform: "uppercase",
-        fontWeight: 600, fontFamily: "'Sora', system-ui, sans-serif",
-        background: active ? "#C6A85C" : "rgba(0,0,0,0.05)",
-        color: active ? "#FFFFFF" : "rgba(28,28,28,0.60)",
-        border: active ? "1px solid #C6A85C" : "1px solid rgba(0,0,0,0.08)",
-        borderRadius: "100px",
+        padding: "0.4375rem 1rem",
+        fontSize: "var(--text-micro)", letterSpacing: "0.08em", textTransform: "uppercase",
+        fontWeight: 500, fontFamily: "var(--font-sans)",
+        background: active ? "var(--gold)" : "transparent",
+        color: active ? "var(--bg)" : "var(--text-secondary)",
+        border: active ? "1px solid var(--gold)" : "1px solid var(--border)",
+        borderRadius: "var(--radius-pill)",
         cursor: "pointer",
         transition: "all 0.2s ease",
         whiteSpace: "nowrap",
       }}
       onMouseEnter={(e) => {
         if (!active) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.08)";
-          (e.currentTarget as HTMLButtonElement).style.color = "#1C1C1C";
+          (e.currentTarget as HTMLButtonElement).style.color = "var(--text-primary)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(245,240,232,0.20)";
         }
       }}
       onMouseLeave={(e) => {
         if (!active) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.05)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(28,28,28,0.60)";
+          (e.currentTarget as HTMLButtonElement).style.color = "var(--text-secondary)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border)";
         }
       }}
     >
@@ -91,13 +91,13 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
         onClick={() => setOpen((v) => !v)}
         style={{
           display: "inline-flex", alignItems: "center", gap: "5px",
-          padding: "7px 16px",
-          fontSize: "10px", letterSpacing: "0.10em", textTransform: "uppercase",
-          fontWeight: 600, fontFamily: "'Sora', system-ui, sans-serif",
-          background: isActive ? "rgba(198,168,92,0.10)" : "rgba(0,0,0,0.05)",
-          color: isActive ? "#C6A85C" : "rgba(28,28,28,0.60)",
-          border: isActive ? "1px solid rgba(198,168,92,0.35)" : "1px solid rgba(0,0,0,0.08)",
-          borderRadius: "100px",
+          padding: "0.4375rem 1rem",
+          fontSize: "var(--text-micro)", letterSpacing: "0.08em", textTransform: "uppercase",
+          fontWeight: 500, fontFamily: "var(--font-sans)",
+          background: isActive ? "var(--gold-muted)" : "transparent",
+          color: isActive ? "var(--gold)" : "var(--text-secondary)",
+          border: isActive ? "1px solid var(--gold-border)" : "1px solid var(--border)",
+          borderRadius: "var(--radius-pill)",
           cursor: "pointer",
           transition: "all 0.2s ease",
           whiteSpace: "nowrap",
@@ -114,11 +114,11 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
         <div style={{
           position: "absolute", top: "calc(100% + 8px)", left: 0, zIndex: 50,
           minWidth: "160px",
-          background: "#FFFFFF",
-          border: "1px solid rgba(0,0,0,0.08)",
-          borderRadius: "12px",
+          background: "var(--surface-alt)",
+          border: "1px solid var(--border)",
+          borderRadius: "var(--radius-sm)",
           padding: "6px",
-          boxShadow: "0 16px 40px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06)",
+          boxShadow: "0 16px 40px rgba(0,0,0,0.40), 0 4px 12px rgba(0,0,0,0.20)",
         }}>
           {CITIES.map((city) => {
             const sel = city === value;
@@ -130,18 +130,18 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
                   display: "flex", alignItems: "center", justifyContent: "space-between",
                   width: "100%", padding: "8px 12px",
                   fontSize: "11px", letterSpacing: "0.06em",
-                  fontFamily: "'Sora', system-ui, sans-serif",
+                  fontFamily: "var(--font-sans)",
                   fontWeight: sel ? 600 : 400,
-                  color: sel ? "#C6A85C" : "rgba(28,28,28,0.70)",
-                  background: sel ? "rgba(198,168,92,0.08)" : "transparent",
-                  border: "none", borderRadius: "7px", cursor: "pointer", textAlign: "left",
+                  color: sel ? "var(--gold)" : "var(--text-secondary)",
+                  background: sel ? "var(--gold-muted)" : "transparent",
+                  border: "none", cursor: "pointer", textAlign: "left",
                   transition: "background 0.15s",
                 }}
-                onMouseEnter={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.04)"; }}
+                onMouseEnter={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(245,240,232,0.04)"; }}
                 onMouseLeave={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}
               >
                 {city}
-                {sel && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#C6A85C" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>}
+                {sel && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ color: "var(--gold)" }}><polyline points="20 6 9 17 4 12" /></svg>}
               </button>
             );
           })}
@@ -160,25 +160,25 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
       style={{
         display: "flex", alignItems: "center", justifyContent: "center",
         width: "34px", height: "34px",
-        background: disabled ? "rgba(0,0,0,0.03)" : "rgba(0,0,0,0.06)",
-        border: `1px solid ${disabled ? "rgba(0,0,0,0.04)" : "rgba(0,0,0,0.10)"}`,
+        background: "transparent",
+        border: `1px solid ${disabled ? "var(--border)" : "rgba(245,240,232,0.14)"}`,
         borderRadius: "50%",
         cursor: disabled ? "default" : "pointer",
         transition: "all 0.2s ease",
-        color: disabled ? "rgba(0,0,0,0.18)" : "rgba(28,28,28,0.60)",
+        color: disabled ? "var(--text-muted)" : "var(--text-secondary)",
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "#C6A85C";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C6A85C";
-          (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF";
+          (e.currentTarget as HTMLButtonElement).style.background = "var(--gold)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--gold)";
+          (e.currentTarget as HTMLButtonElement).style.color = "var(--bg)";
         }
       }}
       onMouseLeave={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.06)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,0,0,0.10)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(28,28,28,0.60)";
+          (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(245,240,232,0.14)";
+          (e.currentTarget as HTMLButtonElement).style.color = "var(--text-secondary)";
         }
       }}
     >
@@ -238,27 +238,19 @@ export default function HoySection({ places }: HoySectionProps) {
       <div style={{
         display: "flex", alignItems: "flex-end", justifyContent: "space-between",
         marginBottom: "24px", paddingBottom: "20px",
-        borderBottom: "1px solid rgba(0,0,0,0.08)",
+        borderBottom: "1px solid var(--border)",
       }}>
         <div>
-          <p style={{
-            fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
-            fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#C6A85C", marginBottom: "8px",
-            display: "flex", alignItems: "center", gap: "8px",
-          }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
-            Descubre
-          </p>
+          <p className="section-label">Descubre</p>
           <h2 className="font-serif" style={{
-            fontSize: "clamp(28px, 4vw, 52px)",
-            color: "#1C1C1C", fontWeight: 600, letterSpacing: "-0.02em",
+            fontSize: "clamp(28px, 4vw, 48px)",
+            color: "var(--text-primary)", fontWeight: 400, letterSpacing: "-0.02em",
           }}>
             Hoy en tu ciudad
           </h2>
           <p style={{
-            fontSize: "13px", color: "#6A6A6A",
-            fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 400,
+            fontSize: "var(--text-small)", color: "var(--text-secondary)",
+            fontFamily: "var(--font-sans)", fontWeight: 400,
             marginTop: "6px",
           }}>
             Lugares para cada momento del día
@@ -273,7 +265,7 @@ export default function HoySection({ places }: HoySectionProps) {
       {/* ── Filters ── */}
       <div className="flex items-center gap-2 flex-wrap mb-8">
         <CitySelect value={activeCity} onChange={setActiveCity} />
-        <div style={{ width: "1px", height: "16px", background: "rgba(0,0,0,0.10)" }} />
+        <div style={{ width: "1px", height: "16px", background: "var(--border)" }} />
         {CATEGORIES.map((cat) => (
           <FilterPill
             key={cat.value}
@@ -287,12 +279,12 @@ export default function HoySection({ places }: HoySectionProps) {
             onClick={() => { setActiveCity("Todas"); setActiveCategory("Todas"); }}
             style={{
               fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase",
-              fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 500,
-              color: "rgba(28,28,28,0.38)", background: "transparent", border: "none",
+              fontFamily: "var(--font-sans)", fontWeight: 500,
+              color: "var(--text-muted)", background: "transparent", border: "none",
               cursor: "pointer", padding: "4px 8px", transition: "color 0.2s",
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#1C1C1C"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(28,28,28,0.38)"; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "var(--text-primary)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "var(--text-muted)"; }}
           >
             Limpiar ×
           </button>
@@ -342,11 +334,11 @@ export default function HoySection({ places }: HoySectionProps) {
               </div>
             ))}
           </div>
-          {/* Edge fades — light bg */}
+          {/* Edge fades — dark bg */}
           <div aria-hidden="true" style={{
             position: "absolute", top: 0, right: 0,
             width: "100px", height: "calc(100% - 12px)",
-            background: "linear-gradient(to right, transparent, #F7F5F2 90%)",
+            background: "linear-gradient(to right, transparent, var(--bg) 90%)",
             pointerEvents: "none",
             opacity: canScrollRight ? 1 : 0,
             transition: "opacity 0.3s ease",
@@ -354,14 +346,18 @@ export default function HoySection({ places }: HoySectionProps) {
           <div aria-hidden="true" style={{
             position: "absolute", top: 0, left: 0,
             width: "60px", height: "calc(100% - 12px)",
-            background: "linear-gradient(to left, transparent, #F7F5F2 90%)",
+            background: "linear-gradient(to left, transparent, var(--bg) 90%)",
             pointerEvents: "none",
             opacity: canScrollLeft ? 1 : 0,
             transition: "opacity 0.3s ease",
           }} />
         </div>
       ) : (
-        <div style={{ padding: "64px 0", textAlign: "center", color: "#9A9A9A", fontSize: "13px", fontWeight: 400, fontFamily: "'Sora', system-ui, sans-serif" }}>
+        <div style={{
+          padding: "64px 0", textAlign: "center",
+          color: "var(--text-muted)", fontSize: "var(--text-small)",
+          fontFamily: "var(--font-sans)",
+        }}>
           Sin resultados para estos filtros.
         </div>
       )}

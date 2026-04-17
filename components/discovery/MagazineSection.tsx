@@ -82,7 +82,7 @@ function FeaturedStory({ story }: { story: Story }) {
           overflow: "hidden",
           height: "100%",
           minHeight: "460px",
-          background: "#1C1C1C",
+          background: "#161410",
           position: "relative",
           boxShadow: hovered
             ? "0 24px 56px rgba(0,0,0,0.20)"
@@ -118,9 +118,9 @@ function FeaturedStory({ story }: { story: Story }) {
           <div style={{ position: "absolute", top: 24, left: 24 }}>
             <span style={{
               fontSize: "8px", letterSpacing: "0.22em", textTransform: "uppercase",
-              fontWeight: 700, color: "#C6A85C",
-              background: "rgba(198,168,92,0.12)",
-              border: "1px solid rgba(198,168,92,0.30)",
+              fontWeight: 700, color: "#C9A84C",
+              background: "rgba(201,168,76,0.12)",
+              border: "1px solid rgba(201,168,76,0.30)",
               padding: "4px 10px", backdropFilter: "blur(4px)",
             }}>
               {story.guide}
@@ -132,7 +132,7 @@ function FeaturedStory({ story }: { story: Story }) {
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "32px" }}>
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
-            color: "#C6A85C", fontWeight: 700,
+            color: "#C9A84C", fontWeight: 700,
             fontFamily: "'Sora', system-ui, sans-serif", marginBottom: "12px",
           }}>
             {story.category} · {story.readTime} de lectura
@@ -160,12 +160,12 @@ function FeaturedStory({ story }: { story: Story }) {
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={{
               fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase",
-              fontWeight: 700, color: "#C6A85C",
+              fontWeight: 700, color: "#C9A84C",
               fontFamily: "'Sora', system-ui, sans-serif",
             }}>
               Leer historia
             </span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C6A85C" strokeWidth="2"
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2"
               style={{ transition: "transform 0.3s ease", transform: hovered ? "translateX(4px)" : "translateX(0)" }} aria-hidden="true">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
@@ -186,17 +186,17 @@ function SmallStory({ story }: { story: Story }) {
     <Link href={`/places/${story.place.slug}`} className="block group h-full">
       <article
         style={{
-          background: "#FFFFFF",
+          background: "#161410",
           borderRadius: "14px",
           overflow: "hidden",
           height: "100%",
           minHeight: "200px",
           position: "relative",
-          border: "1px solid rgba(0,0,0,0.08)",
+          border: "1px solid rgba(245,240,232,0.07)",
           transform: hovered ? "translateY(-3px)" : "translateY(0)",
           boxShadow: hovered
-            ? "0 18px 48px rgba(0,0,0,0.14), 0 4px 16px rgba(0,0,0,0.08)"
-            : "0 4px 20px rgba(0,0,0,0.06)",
+            ? "0 18px 48px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.35)"
+            : "0 4px 20px rgba(0,0,0,0.35)",
           transition: "box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.23,1,0.32,1)",
         }}
         onMouseEnter={() => setHovered(true)}
@@ -215,7 +215,7 @@ function SmallStory({ story }: { story: Story }) {
             sizes="(max-width: 768px) 100vw, 38vw"
           />
         ) : (
-          <div style={{ position: "absolute", inset: 0, background: "#EFEAE4" }} />
+          <div style={{ position: "absolute", inset: 0, background: "#1E1B17" }} />
         )}
 
         {/* Overlay */}
@@ -228,7 +228,7 @@ function SmallStory({ story }: { story: Story }) {
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "18px 20px 20px" }}>
           <p style={{
             fontSize: "8px", letterSpacing: "0.20em", textTransform: "uppercase",
-            color: "#C6A85C", fontWeight: 700,
+            color: "#C9A84C", fontWeight: 700,
             fontFamily: "'Sora', system-ui, sans-serif", marginBottom: "7px",
             textShadow: "0 1px 8px rgba(0,0,0,0.9)",
           }}>
@@ -237,7 +237,7 @@ function SmallStory({ story }: { story: Story }) {
           <h3 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
             fontSize: "17px", fontWeight: 600,
-            color: hovered ? "#C6A85C" : "#F0EBE4",
+            color: hovered ? "#C9A84C" : "#F0EBE4",
             lineHeight: "1.28", letterSpacing: "-0.01em",
             transition: "color 0.25s ease",
             textShadow: "0 1px 12px rgba(0,0,0,0.9)",
@@ -265,22 +265,22 @@ export default function MagazineSection({ places }: MagazineSectionProps) {
       <div style={{
         display: "flex", alignItems: "flex-end", justifyContent: "space-between",
         marginBottom: "28px", paddingBottom: "20px",
-        borderBottom: "1px solid rgba(0,0,0,0.08)",
+        borderBottom: "1px solid rgba(245,240,232,0.07)",
       }}>
         <div>
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#C6A85C", marginBottom: "8px",
+            color: "#C9A84C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C9A84C" }} />
             Editorial
           </p>
-          <h2 className="font-serif" style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#1C1C1C", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: "1.05" }}>
+          <h2 className="font-serif" style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#F5F0E8", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: "1.05" }}>
             Colombia en historias
           </h2>
-          <p style={{ fontSize: "13px", color: "#6A6A6A", fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 300, marginTop: "6px" }}>
+          <p style={{ fontSize: "13px", color: "rgba(245,240,232,0.65)", fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 300, marginTop: "6px" }}>
             Lecturas sobre lugares que vale la pena conocer
           </p>
         </div>

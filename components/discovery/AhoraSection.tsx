@@ -43,7 +43,7 @@ function NowCard({ place, index }: NowCardProps) {
         className="flex gap-4 items-start transition-all duration-300 group-hover:pl-2"
         style={{
           padding: "16px 0",
-          borderBottom: "1px solid rgba(0,0,0,0.08)",
+          borderBottom: "1px solid rgba(245,240,232,0.07)",
         }}
       >
         {/* Index */}
@@ -52,7 +52,7 @@ function NowCard({ place, index }: NowCardProps) {
           aria-hidden="true"
           style={{
             fontSize: "18px",
-            color: "rgba(0,0,0,0.38)",
+            color: "rgba(245,240,232,0.35)",
             lineHeight: 1,
             minWidth: "26px",
             paddingTop: "5px",
@@ -75,7 +75,7 @@ function NowCard({ place, index }: NowCardProps) {
               sizes="72px"
             />
           ) : (
-            <div className="absolute inset-0" style={{ background: "#EFEAE4" }} />
+            <div className="absolute inset-0" style={{ background: "#1E1B17" }} />
           )}
         </div>
 
@@ -88,8 +88,8 @@ function NowCard({ place, index }: NowCardProps) {
 
           {/* Name */}
           <h3
-            className="font-serif leading-snug transition-colors duration-200 group-hover:text-[#1C1C1C] mb-1"
-            style={{ fontSize: "15px", color: "#1C1C1C", fontWeight: 600 }}
+            className="font-serif leading-snug transition-colors duration-200 group-hover:text-[#F5F0E8] mb-1"
+            style={{ fontSize: "15px", color: "#F5F0E8", fontWeight: 600 }}
           >
             {place.name}
           </h3>
@@ -99,7 +99,7 @@ function NowCard({ place, index }: NowCardProps) {
             style={{
               fontSize: "10px",
               letterSpacing: "0.08em",
-              color: "#6A6A6A",
+              color: "rgba(245,240,232,0.65)",
               fontFamily: "'Sora', system-ui, sans-serif",
               fontWeight: 400,
             }}
@@ -107,7 +107,7 @@ function NowCard({ place, index }: NowCardProps) {
             {place.neighborhood ? `${place.neighborhood} · ` : ""}
             {place.city}
             {place.category ? (
-              <span style={{ color: "rgba(0,0,0,0.38)", marginLeft: "6px" }}>
+              <span style={{ color: "rgba(245,240,232,0.35)", marginLeft: "6px" }}>
                 · {place.category === "Restaurants" ? "Restaurante" : place.category === "Attractions" ? "Atracción" : place.category}
               </span>
             ) : null}
@@ -117,7 +117,7 @@ function NowCard({ place, index }: NowCardProps) {
         {/* Arrow */}
         <div
           className="shrink-0 flex items-center self-center transition-all duration-200 group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
-          style={{ color: "#C6A85C" }}
+          style={{ color: "#C9A84C" }}
           aria-hidden="true"
         >
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -153,7 +153,7 @@ export default function AhoraSection({ places }: AhoraSectionProps) {
           </div>
           <h2
             className="font-serif"
-            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#1C1C1C" }}
+            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#F5F0E8" }}
           >
             Lo que está pasando
           </h2>
@@ -162,7 +162,7 @@ export default function AhoraSection({ places }: AhoraSectionProps) {
           className="hidden sm:block"
           style={{
             fontSize: "12px",
-            color: "rgba(0,0,0,0.38)",
+            color: "rgba(245,240,232,0.35)",
             fontWeight: 300,
           }}
         >

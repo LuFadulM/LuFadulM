@@ -18,8 +18,8 @@ const ACTIVIDADES_ITEMS = [
   { label: "Atracciones",    href: "/?category=Attractions" },
 ];
 
-const NAV_BASE  = "rgba(28,28,28,0.50)";
-const NAV_HOVER = "#1C1C1C";
+const NAV_BASE  = "rgba(245,240,232,0.45)";
+const NAV_HOVER = "#F5F0E8";
 
 function NavLink({ href, label }: { href: string; label: string }) {
   return (
@@ -180,11 +180,10 @@ export default function Header() {
       <header
         className="sticky top-0 z-40 transition-all duration-500"
         style={{
-          background: scrolled ? "rgba(247,245,242,0.96)" : "transparent",
+          background: scrolled ? "rgba(12,11,9,0.96)" : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "none",
-          boxShadow: scrolled ? "0 1px 12px rgba(0,0,0,0.06)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(245,240,232,0.07)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between gap-4">
@@ -222,7 +221,7 @@ export default function Header() {
                 <Link
                   href="/profile"
                   style={{
-                    fontSize: "14px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontSize: "14px", fontFamily: "var(--font-sans)",
                     fontWeight: 400, color: NAV_BASE, textDecoration: "none",
                     transition: "color 0.2s",
                   }}
@@ -234,7 +233,7 @@ export default function Header() {
                 <button
                   onClick={handleSignOut}
                   style={{
-                    fontSize: "14px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontSize: "14px", fontFamily: "var(--font-sans)",
                     fontWeight: 400, color: NAV_BASE, background: "none",
                     border: "none", cursor: "pointer", transition: "color 0.2s",
                   }}
@@ -249,7 +248,7 @@ export default function Header() {
                 <Link
                   href="/auth/login"
                   style={{
-                    fontSize: "13px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontSize: "13px", fontFamily: "var(--font-sans)",
                     fontWeight: 400, color: NAV_BASE, textDecoration: "none",
                     transition: "color 0.2s",
                   }}
@@ -261,18 +260,28 @@ export default function Header() {
                 <Link
                   href="/auth/signup"
                   style={{
-                    fontSize: "13px", fontFamily: "'Sora', system-ui, sans-serif",
-                    fontWeight: 600, color: "#FFFFFF",
-                    background: "#C6A85C",
-                    padding: "9px 22px",
-                    borderRadius: "6px",
+                    fontSize: "11px", fontFamily: "var(--font-sans)",
+                    fontWeight: 500, color: "var(--gold)",
+                    background: "transparent",
+                    border: "1.5px solid rgba(201,168,76,0.35)",
+                    borderRadius: "var(--radius-pill)",
+                    padding: "0.5rem 1.375rem",
                     textDecoration: "none",
                     display: "inline-block",
-                    transition: "background 0.2s, transform 0.15s",
-                    letterSpacing: "0.02em",
+                    transition: "background 0.2s, color 0.2s, border-color 0.2s",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "#D4B870"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "#C6A85C"; }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "var(--gold)";
+                    e.currentTarget.style.color = "var(--bg)";
+                    e.currentTarget.style.borderColor = "var(--gold)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = "var(--gold)";
+                    e.currentTarget.style.borderColor = "rgba(201,168,76,0.35)";
+                  }}
                 >
                   Registrarse
                 </Link>
