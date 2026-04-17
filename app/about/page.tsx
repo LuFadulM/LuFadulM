@@ -9,248 +9,178 @@ export default function AboutPage() {
 
       {/* ── Hero ── */}
       <section style={{
-        padding: "clamp(5rem, 12vw, 9rem) 0 clamp(4rem, 8vw, 7rem)",
+        padding: "clamp(5rem, 12vw, 9rem) 0 clamp(3rem, 6vw, 5rem)",
         borderBottom: "1px solid var(--border)",
       }}>
-        <div className="max-w-7xl mx-auto px-8">
+        <div style={{ maxWidth: "var(--container)", margin: "0 auto", padding: "0 var(--container-pad)" }}>
           <p className="section-label">Sobre Hyex</p>
 
           <h1 style={{
             fontFamily: "var(--font-serif)",
-            fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
+            fontSize: "clamp(2.5rem, 6vw, 5rem)",
             fontWeight: 400,
             color: "var(--text-primary)",
             lineHeight: 1.05,
             letterSpacing: "-0.02em",
-            maxWidth: "780px",
-            marginBottom: "1.5rem",
+            maxWidth: "820px",
+            marginBottom: "1.25rem",
           }}>
-            No somos una guía de viajes.
+            Hyex no es una guía de viajes.
           </h1>
 
           <p style={{
             fontFamily: "var(--font-serif)",
             fontStyle: "italic",
-            fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
+            fontSize: "clamp(1.25rem, 2.5vw, 1.875rem)",
             color: "var(--gold)",
             fontWeight: 400,
             letterSpacing: "-0.01em",
-            marginBottom: "2.5rem",
           }}>
-            Somos el criterio.
-          </p>
-
-          <p style={{
-            fontFamily: "var(--font-sans)",
-            fontSize: "var(--text-md)",
-            color: "var(--text-secondary)",
-            lineHeight: 1.75,
-            maxWidth: "560px",
-          }}>
-            Hyex nació de una incomodidad: la sensación de llegar a una ciudad colombiana
-            con conexiones locales y no saber cómo usarlas. Listas genéricas. Reseñas sin contexto.
-            Opiniones de nadie.
+            Es una forma de vivir Colombia de manera diferente.
           </p>
         </div>
       </section>
 
       {/* ── Body ── */}
       <section style={{ padding: "clamp(4rem, 8vw, 7rem) 0" }}>
-        <div className="max-w-7xl mx-auto px-8">
+        <div style={{ maxWidth: "var(--container)", margin: "0 auto", padding: "0 var(--container-pad)" }}>
           <div style={{
             display: "grid",
             gridTemplateColumns: "1fr",
-            gap: "3rem",
+            gap: "4rem",
           }}
-            className="lg:grid-cols-[1fr_1fr] lg:gap-20"
+            className="lg:grid-cols-[1fr_420px] lg:gap-24"
           >
-            {/* Left column */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            {/* Main copy */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.625rem", maxWidth: "640px" }}>
               <p style={{
                 fontFamily: "var(--font-sans)",
-                fontSize: "var(--text-base)",
+                fontSize: "clamp(1rem, 1.1vw, 1.125rem)",
                 color: "var(--text-secondary)",
-                lineHeight: 1.8,
+                lineHeight: 1.85,
               }}>
-                Construimos Hyex para las personas que viajan con intención. Que prefieren
-                una mesa en el lugar correcto a una reserva en el lugar obvio. Que saben que
-                la mejor experiencia de una ciudad no está en el primer resultado de búsqueda.
+                Todo empezó con una frustración simple. Después de vivir en el exterior, nos acostumbramos
+                a plataformas que hacían que descubrir una ciudad fuera algo sin esfuerzo — dónde ir, qué
+                hacer, qué valía realmente la pena. Al volver a Colombia, eso no existía. Encontrar buenos
+                lugares significaba saltar entre Instagram, Google Maps y recomendaciones de WhatsApp —
+                dispersas, inconsistentes y fáciles de perder.
               </p>
 
               <p style={{
                 fontFamily: "var(--font-sans)",
-                fontSize: "var(--text-base)",
+                fontSize: "clamp(1rem, 1.1vw, 1.125rem)",
                 color: "var(--text-secondary)",
-                lineHeight: 1.8,
+                lineHeight: 1.85,
               }}>
-                Colombia tiene una riqueza gastronómica, cultural y social que merece más que
-                un rating de cinco estrellas y una foto de comida. Cada lugar en Hyex está
-                curado por lo que significa dentro de su contexto: el barrio, la hora del día,
-                el tipo de experiencia que ofrece.
+                <strong style={{ color: "var(--text-primary)", fontWeight: 500 }}>Hyex nació para cambiar eso.</strong>
               </p>
 
               <p style={{
                 fontFamily: "var(--font-sans)",
-                fontSize: "var(--text-base)",
+                fontSize: "clamp(1rem, 1.1vw, 1.125rem)",
                 color: "var(--text-secondary)",
-                lineHeight: 1.8,
+                lineHeight: 1.85,
               }}>
-                No estamos construyendo una base de datos. Estamos construyendo un punto de
-                vista editorial sobre los mejores rincones del país.
+                Creamos una plataforma para personas que no solo quieren visitar lugares — quieren entenderlos.
+                Personas que se preocupan por dónde van, a quién conocen, y las historias detrás de cada rincón.
+              </p>
+
+              <p style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "clamp(1rem, 1.1vw, 1.125rem)",
+                color: "var(--text-secondary)",
+                lineHeight: 1.85,
+              }}>
+                En lugar de abrumarte con opciones, Hyex cura lo que realmente importa: experiencias
+                significativas, joyas ocultas y lugares que los locales recomendarían genuinamente —
+                no los algoritmos.
+              </p>
+
+              <p style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "clamp(1rem, 1.1vw, 1.125rem)",
+                color: "var(--text-secondary)",
+                lineHeight: 1.85,
+              }}>
+                Desde un amanecer en Tayrona hasta una noche en el barrio de Getsemaní, cada plan en
+                Hyex está seleccionado para ayudarte a conectar con la cultura, no solo a pasar por ella.
               </p>
             </div>
 
-            {/* Right column — pull quote */}
+            {/* Pull quote + closing */}
             <div style={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
-              borderLeft: "1px solid var(--border)",
-              paddingLeft: "clamp(2rem, 4vw, 4rem)",
+              gap: "2.5rem",
             }}>
               <blockquote style={{
-                fontFamily: "var(--font-serif)",
-                fontStyle: "italic",
-                fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)",
-                color: "var(--text-primary)",
-                lineHeight: 1.45,
-                letterSpacing: "-0.01em",
-                marginBottom: "1.5rem",
+                borderLeft: "2px solid var(--gold)",
+                paddingLeft: "1.75rem",
               }}>
-                "Esto no se trata de marcar destinos en una lista. Se trata de saber exactamente
-                a dónde ir, cuándo ir, y por qué ese lugar importa."
+                <p style={{
+                  fontFamily: "var(--font-serif)",
+                  fontStyle: "italic",
+                  fontSize: "clamp(1.25rem, 1.8vw, 1.625rem)",
+                  color: "var(--text-primary)",
+                  lineHeight: 1.45,
+                  letterSpacing: "-0.01em",
+                }}>
+                  "Esto no se trata de marcar destinos en una lista. Se trata de descubrir qué hace que cada lugar sea inolvidable."
+                </p>
               </blockquote>
 
               <div style={{
-                width: "32px",
-                height: "1px",
-                background: "var(--gold)",
-                marginBottom: "1rem",
-                opacity: 0.6,
-              }} />
-
-              <p style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "var(--text-micro)",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "var(--text-muted)",
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                padding: "2rem",
               }}>
-                Fundadores, Hyex
-              </p>
+                <p style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "var(--text-small)",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.75,
+                  marginBottom: "1rem",
+                }}>
+                  Hyex está construyendo una nueva forma de explorar — una que conecta personas, cultura y lugares.
+                </p>
+                <p style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "var(--text-small)",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.75,
+                }}>
+                  Hoy empezamos con Colombia.{" "}
+                  <span style={{ color: "var(--gold)" }}>Mañana, expandimos por toda América Latina.</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── What we are not ── */}
+      {/* ── Closing ── */}
       <section style={{
-        background: "var(--surface)",
+        background: "var(--surface-alt)",
         borderTop: "1px solid var(--border)",
-        borderBottom: "1px solid var(--border)",
         padding: "clamp(4rem, 8vw, 7rem) 0",
       }}>
-        <div className="max-w-7xl mx-auto px-8">
-          <p className="section-label">Nuestra postura</p>
-
-          <div style={{
-            display: "grid",
-            gap: "0",
-          }}>
-            {[
-              {
-                num: "01",
-                title: "No somos TripAdvisor",
-                body: "No acumulamos reseñas anónimas. Curamos lugares con criterio editorial, no con volumen de opiniones.",
-              },
-              {
-                num: "02",
-                title: "No somos un directorio",
-                body: "Cada lugar que aparece en Hyex está aquí por una razón específica. Si no tiene contexto, no tiene lugar.",
-              },
-              {
-                num: "03",
-                title: "No vendemos visibilidad",
-                body: "Los lugares destacados lo son porque merecen estarlo, no porque pagaron para aparecer primero.",
-              },
-              {
-                num: "04",
-                title: "No traducimos listas globales",
-                body: "Colombia merece una mirada construida desde adentro, con conocimiento local real.",
-              },
-            ].map((item) => (
-              <div
-                key={item.num}
-                style={{
-                  display: "flex",
-                  gap: "2rem",
-                  alignItems: "flex-start",
-                  padding: "2rem 0",
-                  borderBottom: "1px solid var(--border)",
-                }}
-              >
-                <span style={{
-                  fontFamily: "var(--font-sans)",
-                  fontSize: "9px",
-                  letterSpacing: "0.16em",
-                  color: "var(--gold)",
-                  fontWeight: 600,
-                  paddingTop: "4px",
-                  minWidth: "24px",
-                  flexShrink: 0,
-                }}>
-                  {item.num}
-                </span>
-                <div>
-                  <h3 style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: "clamp(1.125rem, 2vw, 1.5rem)",
-                    color: "var(--text-primary)",
-                    fontWeight: 400,
-                    marginBottom: "0.5rem",
-                  }}>
-                    {item.title}
-                  </h3>
-                  <p style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "var(--text-base)",
-                    color: "var(--text-secondary)",
-                    lineHeight: 1.75,
-                    maxWidth: "560px",
-                  }}>
-                    {item.body}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Closing CTA ── */}
-      <section style={{ padding: "clamp(5rem, 10vw, 9rem) 0" }}>
-        <div className="max-w-7xl mx-auto px-8 text-center" style={{ maxWidth: "640px", margin: "0 auto" }}>
-          <h2 style={{
+        <div style={{
+          maxWidth: "var(--container)", margin: "0 auto",
+          padding: "0 var(--container-pad)",
+          textAlign: "center",
+        }}>
+          <p style={{
             fontFamily: "var(--font-serif)",
             fontStyle: "italic",
-            fontSize: "clamp(2rem, 4vw, 3.5rem)",
+            fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
             color: "var(--text-primary)",
             fontWeight: 400,
-            lineHeight: 1.1,
+            lineHeight: 1.2,
             letterSpacing: "-0.02em",
-            marginBottom: "1.5rem",
+            maxWidth: "600px",
+            margin: "0 auto 2.5rem",
           }}>
-            Colombia, con criterio.
-          </h2>
-
-          <p style={{
-            fontFamily: "var(--font-sans)",
-            fontSize: "var(--text-base)",
-            color: "var(--text-secondary)",
-            lineHeight: 1.75,
-            marginBottom: "3rem",
-          }}>
-            Empieza por explorar lo que Hyex ha encontrado para ti.
+            Hyex existe para que la exploración vuelva a sentirse personal.
           </p>
 
           <Link
@@ -264,20 +194,16 @@ export default function AboutPage() {
               letterSpacing: "0.14em",
               textTransform: "uppercase",
               fontWeight: 500,
-              color: "var(--text-primary)",
+              color: "var(--gold)",
               textDecoration: "none",
-              borderBottom: "1px solid var(--gold)",
+              borderBottom: "1px solid var(--gold-border)",
               paddingBottom: "2px",
-              transition: "color 0.2s, border-color 0.2s",
+              transition: "gap 200ms ease",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = "var(--gold)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = "var(--text-primary)";
-            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = "0.875rem"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.gap = "0.5rem"; }}
           >
-            Explorar ahora →
+            Explorar ahora <span aria-hidden="true">→</span>
           </Link>
         </div>
       </section>
