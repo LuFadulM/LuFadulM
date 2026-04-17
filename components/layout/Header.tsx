@@ -212,6 +212,7 @@ export default function Header() {
             <NavLink href="/"          label="Explorar" />
             <NavLink href="/ciudades"  label="Ciudades" />
             <NavLink href="/saved"     label="Guardados" />
+            <NavLink href="/about"     label="Nosotros" />
           </nav>
 
           {/* Right — auth */}

@@ -223,7 +223,7 @@ export const MOCK_PLACES: Place[] = [
     latitude: 10.423,
     longitude: -75.5466,
     cover_image_url:
-      "https://images.unsplash.com/photo-1571997392405-ea84be8929c7?w=800&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
     is_featured: true,
     is_claimed: true,
     claimed_by: null,
@@ -397,7 +397,7 @@ export const MOCK_PLACES: Place[] = [
     latitude: 4.6517,
     longitude: -74.0529,
     cover_image_url:
-      "https://images.unsplash.com/photo-1571997392405-ea84be8929c7?w=800&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
     is_featured: false,
     is_claimed: true,
     claimed_by: null,
@@ -575,7 +575,7 @@ export const MOCK_PLACES: Place[] = [
     latitude: 5.636,
     longitude: -73.5282,
     cover_image_url:
-      "https://images.unsplash.com/photo-1571997392405-ea84be8929c7?w=800&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
     is_featured: true,
     is_claimed: true,
     claimed_by: null,
@@ -755,7 +755,7 @@ export const MOCK_PLACES: Place[] = [
     latitude: 6.6338,
     longitude: -73.2288,
     cover_image_url:
-      "https://images.unsplash.com/photo-1571997392405-ea84be8929c7?w=800&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
     is_featured: true,
     is_claimed: true,
     claimed_by: null,
