@@ -22,33 +22,33 @@ export default function JoyasSection({ places }: JoyasSectionProps) {
       <div style={{
         display: "flex", alignItems: "flex-end", justifyContent: "space-between",
         marginBottom: "28px", paddingBottom: "20px",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid rgba(0,0,0,0.08)",
       }}>
         <div>
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#B1987C", marginBottom: "8px",
+            color: "#C6A85C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
             Solo para locales
           </p>
           <h2 className="font-serif" style={{
             fontSize: "clamp(36px, 5vw, 62px)",
-            color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em",
+            color: "#1C1C1C", fontWeight: 400, letterSpacing: "-0.02em",
           }}>
             Joyas escondidas
           </h2>
           <p style={{
-            fontSize: "13px", color: "rgba(220,215,207,0.52)",
+            fontSize: "13px", color: "#6A6A6A",
             fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 300, marginTop: "6px",
           }}>
             Los rincones que los locales no comparten fácilmente
           </p>
         </div>
         <p className="hidden sm:block font-serif" style={{
-          fontSize: "13px", color: "rgba(255,255,255,0.32)",
+          fontSize: "13px", color: "rgba(0,0,0,0.38)",
           fontStyle: "italic", maxWidth: "200px", textAlign: "right", lineHeight: "1.6",
         }}>
           Curado sin patrocinios, sin rankings vacíos
