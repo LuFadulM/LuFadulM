@@ -223,9 +223,9 @@ export default function HomePage() {
           {/* Photo — replace URL with your best Colombia atmospheric image */}
           <div style={{
             position: "absolute", inset: 0,
-            backgroundImage: `url('https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=1400&q=80')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1400&q=80')`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "center 40%",
           }} />
           {/* Left edge blends into dark bg */}
           <div style={{
