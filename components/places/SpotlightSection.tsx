@@ -124,7 +124,7 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
                 fontWeight: 600,
-                color: "#C6A85C",
+                color: "#C9A84C",
                 fontFamily: "'Sora', system-ui, sans-serif",
               }}>
                 Ver perfil
@@ -134,7 +134,7 @@ export default function SpotlightSection({ place }: SpotlightSectionProps) {
                 height="12"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#C6A85C"
+                stroke="#C9A84C"
                 strokeWidth="2"
                 className="transition-transform duration-200 group-hover:translate-x-1"
                 aria-hidden="true"

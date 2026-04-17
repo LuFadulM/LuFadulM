@@ -15,16 +15,19 @@ export default function Pill({ label, active = false, onClick, className }: Pill
     <button
       onClick={onClick}
       aria-pressed={active}
-      className={cn("transition-all duration-200 whitespace-nowrap border", className)}
+      className={cn("transition-all duration-200 whitespace-nowrap", className)}
       style={{
-        padding: "6px 16px",
-        fontSize: "10px",
-        letterSpacing: "0.16em",
+        padding: "0.4375rem 1rem",
+        fontSize: "var(--text-micro)",
+        letterSpacing: "0.08em",
         textTransform: "uppercase",
-        fontWeight: active ? 600 : 500,
-        background: active ? "rgba(198,168,92,0.10)" : "transparent",
-        borderColor: active ? "rgba(198,168,92,0.35)" : "rgba(0,0,0,0.10)",
-        color: active ? "#C6A85C" : "#6A6A6A",
+        fontWeight: 500,
+        fontFamily: "var(--font-sans)",
+        background: active ? "var(--gold)" : "transparent",
+        border: active ? "1px solid var(--gold)" : "1px solid var(--border)",
+        borderRadius: "var(--radius-pill)",
+        color: active ? "var(--bg)" : "var(--text-secondary)",
+        cursor: "pointer",
       }}
     >
       {label}
