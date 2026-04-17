@@ -62,25 +62,25 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
       style={{
         display: "flex", alignItems: "center", justifyContent: "center",
         width: "34px", height: "34px",
-        background: disabled ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.08)",
-        border: `1px solid ${disabled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.12)"}`,
+        background: disabled ? "rgba(0,0,0,0.03)" : "rgba(0,0,0,0.06)",
+        border: `1px solid ${disabled ? "rgba(0,0,0,0.04)" : "rgba(0,0,0,0.12)"}`,
         borderRadius: "50%",
         cursor: disabled ? "default" : "pointer",
         transition: "all 0.2s ease",
-        color: disabled ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.65)",
+        color: disabled ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.65)",
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "#B1987C";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "#B1987C";
-          (e.currentTarget as HTMLButtonElement).style.color = "#2A2925";
+          (e.currentTarget as HTMLButtonElement).style.background = "#C6A85C";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C6A85C";
+          (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF";
         }
       }}
       onMouseLeave={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.08)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.12)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.65)";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.06)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,0,0,0.12)";
+          (e.currentTarget as HTMLButtonElement).style.color = "rgba(0,0,0,0.65)";
         }
       }}
     >
@@ -106,12 +106,12 @@ function PlanCardItem({ plan }: { plan: PlanCard }) {
           position: "relative",
           overflow: "hidden",
           borderRadius: "14px",
-          background: "#302C26",
-          border: "1px solid rgba(255,255,255,0.06)",
+          background: "#FFFFFF",
+          border: "1px solid rgba(0,0,0,0.08)",
           transform: hovered ? "translateY(-4px)" : "translateY(0)",
           boxShadow: hovered
-            ? "0 20px 50px rgba(0,0,0,0.6), 0 6px 20px rgba(0,0,0,0.4)"
-            : "0 4px 20px rgba(0,0,0,0.35)",
+            ? "0 20px 50px rgba(0,0,0,0.15), 0 6px 20px rgba(0,0,0,0.08)"
+            : "0 4px 20px rgba(0,0,0,0.08)",
           transition: "transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.4s ease",
           cursor: "pointer",
         }}
@@ -225,26 +225,26 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
       <div style={{
         display: "flex", alignItems: "flex-end", justifyContent: "space-between",
         marginBottom: "24px", paddingBottom: "20px",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid rgba(0,0,0,0.08)",
       }}>
         <div>
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#B1987C", marginBottom: "8px",
+            color: "#C6A85C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
             Para ti
           </p>
           <h2 className="font-serif" style={{
             fontSize: "clamp(36px, 5vw, 62px)",
-            color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em",
+            color: "#1C1C1C", fontWeight: 400, letterSpacing: "-0.02em",
           }}>
             Pequeños planes
           </h2>
           <p style={{
-            fontSize: "13px", color: "rgba(220,215,207,0.52)",
+            fontSize: "13px", color: "#6A6A6A",
             fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 300, marginTop: "6px",
           }}>
             Momentos que vale la pena vivir
@@ -294,11 +294,11 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
             </div>
           ))}
         </div>
-        {/* Dark edge fades */}
+        {/* Light edge fades */}
         <div aria-hidden="true" style={{
           position: "absolute", top: 0, right: 0,
           width: "100px", height: "calc(100% - 12px)",
-          background: "linear-gradient(to right, transparent, #2D2922 90%)",
+          background: "linear-gradient(to right, transparent, #F7F5F2 90%)",
           pointerEvents: "none",
           opacity: canScrollRight ? 1 : 0,
           transition: "opacity 0.3s ease",
@@ -306,7 +306,7 @@ export default function PlanesSection({ places }: PlanesSectionProps) {
         <div aria-hidden="true" style={{
           position: "absolute", top: 0, left: 0,
           width: "60px", height: "calc(100% - 12px)",
-          background: "linear-gradient(to left, transparent, #2D2922 90%)",
+          background: "linear-gradient(to left, transparent, #F7F5F2 90%)",
           pointerEvents: "none",
           opacity: canScrollLeft ? 1 : 0,
           transition: "opacity 0.3s ease",

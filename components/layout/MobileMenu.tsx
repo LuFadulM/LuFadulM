@@ -73,17 +73,17 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
       {/* Drawer */}
       <div
         className="absolute top-0 right-0 bottom-0 w-72 flex flex-col animate-slide-up"
-        style={{ background: "#0A0A0A", borderLeft: "1px solid rgba(255,255,255,0.05)" }}
+        style={{ background: "#FFFFFF", borderLeft: "1px solid rgba(0,0,0,0.08)" }}
       >
         {/* Header */}
         <div
           className="flex items-center justify-between px-6 h-16"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+          style={{ borderBottom: "1px solid rgba(0,0,0,0.07)" }}
         >
           <span
             aria-hidden="true"
             style={{
-              color: "#C8A44E",
+              color: "#C6A85C",
               fontSize: "20px",
               fontFamily: "'Playfair Display', serif",
               fontStyle: "italic",
@@ -95,7 +95,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
             ref={closeButtonRef}
             onClick={onClose}
             className="p-2 transition-colors duration-200"
-            style={{ color: "#888888" }}
+            style={{ color: "#9A9A9A" }}
             aria-label="Cerrar menú de navegación"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -116,7 +116,7 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#555555",
+                  color: "#C0BAB2",
                 }}
               >
                 {section.label}
@@ -132,11 +132,11 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
                     fontWeight: 500,
-                    color: "#AFAFAF",
-                    borderBottom: "1px solid rgba(255,255,255,0.04)",
+                    color: "#6A6A6A",
+                    borderBottom: "1px solid rgba(0,0,0,0.06)",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FFFFFF")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#AFAFAF")}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#1C1C1C")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#6A6A6A")}
                 >
                   {link.label}
                 </Link>
@@ -148,33 +148,33 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
         {/* Auth */}
         <div
           className="px-4 pb-8 pt-4 space-y-2"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}
+          style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}
         >
           {user ? (
             <>
               <Link
                 href="/profile"
                 onClick={onClose}
-                className="block w-full text-center py-3 border border-[rgba(255,255,255,0.06)] transition-all duration-200"
+                className="block w-full text-center py-3 border border-[rgba(0,0,0,0.08)] transition-all duration-200"
                 style={{
                   fontSize: "10px",
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  color: "#D4D0C8",
+                  color: "#1C1C1C",
                 }}
               >
                 {user.user_metadata?.display_name ?? user.email?.split("@")[0] ?? "Perfil"}
               </Link>
               <button
                 onClick={() => { onClose(); onSignOut(); }}
-                className="block w-full text-center py-3 border border-[rgba(255,255,255,0.04)] transition-all duration-200"
+                className="block w-full text-center py-3 border border-[rgba(0,0,0,0.06)] transition-all duration-200"
                 style={{
                   fontSize: "10px",
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  color: "#706D64",
+                  color: "#6A6A6A",
                 }}
               >
                 {t.nav.signout}
@@ -185,13 +185,13 @@ export default function MobileMenu({ isOpen, onClose, user, onSignOut }: MobileM
               <Link
                 href="/auth/login"
                 onClick={onClose}
-                className="block w-full text-center py-3 border border-[rgba(255,255,255,0.06)] transition-all duration-200"
+                className="block w-full text-center py-3 border border-[rgba(0,0,0,0.08)] transition-all duration-200"
                 style={{
                   fontSize: "10px",
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 500,
-                  color: "#D4D0C8",
+                  color: "#1C1C1C",
                 }}
               >
                 {t.nav.login}

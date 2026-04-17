@@ -28,26 +28,26 @@ function ArrowButton({
         justifyContent: "center",
         width: "32px",
         height: "32px",
-        background: disabled ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.06)",
-        border: `1px solid ${disabled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.12)"}`,
+        background: disabled ? "rgba(0,0,0,0.03)" : "rgba(0,0,0,0.06)",
+        border: `1px solid ${disabled ? "rgba(0,0,0,0.06)" : "rgba(0,0,0,0.12)"}`,
         borderRadius: "6px",
         cursor: disabled ? "default" : "pointer",
         transition: "all 0.2s ease",
         flexShrink: 0,
-        color: disabled ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.7)",
+        color: disabled ? "rgba(0,0,0,0.18)" : "rgba(0,0,0,0.65)",
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(177,152,124,0.10)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(177,152,124,0.28)";
-          (e.currentTarget as HTMLButtonElement).style.color = "#B1987C";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(198,168,92,0.10)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(198,168,92,0.28)";
+          (e.currentTarget as HTMLButtonElement).style.color = "#C6A85C";
         }
       }}
       onMouseLeave={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.12)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.06)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,0,0,0.12)";
+          (e.currentTarget as HTMLButtonElement).style.color = "rgba(0,0,0,0.65)";
         }
       }}
     >
@@ -105,9 +105,9 @@ function CityDropdown({ value, onChange }: { value: string; onChange: (v: string
           textTransform: "uppercase",
           fontWeight: 500,
           fontFamily: "'Sora', system-ui, sans-serif",
-          background: isActive ? "rgba(177,152,124,0.10)" : "rgba(255,255,255,0.04)",
-          color: isActive ? "#B1987C" : "rgba(255,255,255,0.45)",
-          border: isActive ? "1px solid rgba(177,152,124,0.28)" : "1px solid rgba(255,255,255,0.07)",
+          background: isActive ? "rgba(198,168,92,0.10)" : "rgba(0,0,0,0.05)",
+          color: isActive ? "#C6A85C" : "rgba(0,0,0,0.45)",
+          border: isActive ? "1px solid rgba(198,168,92,0.28)" : "1px solid rgba(0,0,0,0.08)",
           borderRadius: "6px",
           cursor: "pointer",
           transition: "all 0.2s ease",
@@ -132,11 +132,11 @@ function CityDropdown({ value, onChange }: { value: string; onChange: (v: string
             left: 0,
             zIndex: 50,
             minWidth: "160px",
-            background: "#141414",
-            border: "1px solid rgba(255,255,255,0.08)",
+            background: "#FFFFFF",
+            border: "1px solid rgba(0,0,0,0.10)",
             borderRadius: "8px",
             padding: "6px",
-            boxShadow: "0 20px 48px rgba(0,0,0,0.7)",
+            boxShadow: "0 20px 48px rgba(0,0,0,0.12)",
           }}
         >
           {CITIES.map((city) => {
@@ -152,17 +152,17 @@ function CityDropdown({ value, onChange }: { value: string; onChange: (v: string
                   width: "100%", padding: "8px 12px", fontSize: "11px",
                   letterSpacing: "0.08em", fontFamily: "'Sora', system-ui, sans-serif",
                   fontWeight: isSel ? 500 : 400,
-                  color: isSel ? "#B1987C" : "rgba(255,255,255,0.6)",
-                  background: isSel ? "rgba(177,152,124,0.08)" : "transparent",
+                  color: isSel ? "#C6A85C" : "rgba(0,0,0,0.65)",
+                  background: isSel ? "rgba(198,168,92,0.10)" : "transparent",
                   border: "none", borderRadius: "4px", cursor: "pointer", textAlign: "left",
                   transition: "background 0.15s, color 0.15s",
                 }}
-                onMouseEnter={(e) => { if (!isSel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.04)"; }}
+                onMouseEnter={(e) => { if (!isSel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.04)"; }}
                 onMouseLeave={(e) => { if (!isSel) (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}
               >
                 {city}
                 {isSel && (
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#B1987C" strokeWidth="2.5" aria-hidden="true">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#C6A85C" strokeWidth="2.5" aria-hidden="true">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 )}
@@ -187,12 +187,12 @@ function EventCard({ event }: { event: HyexEvent }) {
         style={{
           width: "clamp(240px, 28vw, 300px)",
           height: "400px",
-          background: "#111111",
-          border: "1px solid rgba(255,255,255,0.05)",
+          background: "#FFFFFF",
+          border: "1px solid rgba(0,0,0,0.08)",
           transform: hovered ? "translateY(-5px)" : "translateY(0)",
           boxShadow: hovered
-            ? "0 28px 60px rgba(0,0,0,0.70), 0 0 0 1px rgba(177,152,124,0.10)"
-            : "0 4px 20px rgba(0,0,0,0.3)",
+            ? "0 28px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(198,168,92,0.10)"
+            : "0 4px 20px rgba(0,0,0,0.08)",
           transition: "transform 0.45s cubic-bezier(0.23,1,0.32,1), box-shadow 0.45s ease",
         }}
         onMouseEnter={() => setHovered(true)}
@@ -214,7 +214,7 @@ function EventCard({ event }: { event: HyexEvent }) {
         ) : (
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #2A2925 0%, #2D2922 50%, #252219 100%)" }}
+            style={{ background: "linear-gradient(135deg, #EFEAE4 0%, #E8E3DC 50%, #DDD8D0 100%)" }}
           />
         )}
 
@@ -305,7 +305,7 @@ function EventCard({ event }: { event: HyexEvent }) {
                 </span>
               )}
               {event.price_level && (
-                <span style={{ fontSize: "9px", letterSpacing: "0.1em", color: "rgba(177,152,124,0.65)", fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 600 }}>
+                <span style={{ fontSize: "9px", letterSpacing: "0.1em", color: "rgba(198,168,92,0.7)", fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 600 }}>
                   {event.price_level}
                 </span>
               )}
@@ -316,7 +316,7 @@ function EventCard({ event }: { event: HyexEvent }) {
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#B1987C",
+                  color: "#C6A85C",
                   fontFamily: "'Sora', system-ui, sans-serif",
                   opacity: hovered ? 1 : 0,
                   transform: hovered ? "translateX(0)" : "translateX(-4px)",
@@ -340,15 +340,15 @@ function RecurrenteRow({ event }: { event: HyexEvent }) {
     <Link href={`/experiences/${event.slug}`} className="block group">
       <div
         className="flex items-center gap-4 transition-all duration-200 group-hover:pl-1"
-        style={{ padding: "14px 0", borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+        style={{ padding: "14px 0", borderBottom: "1px solid rgba(0,0,0,0.08)" }}
       >
         <div
           className="card-rounded-sm shrink-0 flex items-center justify-center"
           style={{
             width: "40px",
             height: "40px",
-            background: "rgba(177,152,124,0.05)",
-            border: "1px solid rgba(177,152,124,0.12)",
+            background: "rgba(198,168,92,0.05)",
+            border: "1px solid rgba(198,168,92,0.12)",
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8A44E" strokeWidth="1.5" aria-hidden="true">
@@ -359,8 +359,8 @@ function RecurrenteRow({ event }: { event: HyexEvent }) {
 
         <div className="flex-1 min-w-0">
           <p
-            className="font-serif leading-snug transition-colors duration-200 group-hover:text-white"
-            style={{ fontSize: "14px", color: "#C8C4BC" }}
+            className="font-serif leading-snug transition-colors duration-200 group-hover:text-[#1C1C1C]"
+            style={{ fontSize: "14px", color: "#1C1C1C" }}
           >
             {event.title}
           </p>
@@ -369,21 +369,21 @@ function RecurrenteRow({ event }: { event: HyexEvent }) {
               fontSize: "9px",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.25)",
+              color: "rgba(0,0,0,0.38)",
               fontFamily: "'Sora', system-ui, sans-serif",
               fontWeight: 500,
               marginTop: "3px",
             }}
           >
             {event.timing_label}
-            <span style={{ color: "rgba(255,255,255,0.1)", margin: "0 6px" }}>·</span>
+            <span style={{ color: "rgba(0,0,0,0.18)", margin: "0 6px" }}>·</span>
             {event.city}
           </p>
         </div>
 
         <div
           className="shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-0.5"
-          style={{ color: "#B1987C" }}
+          style={{ color: "#C6A85C" }}
           aria-hidden="true"
         >
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -453,7 +453,7 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
           </div>
           <h2
             className="font-serif"
-            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#D4D0C8" }}
+            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#1C1C1C" }}
           >
             Planes que valen el viaje
           </h2>
@@ -524,7 +524,7 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
             style={{
               position: "absolute", top: 0, right: 0,
               width: "100px", height: "calc(100% - 8px)",
-              background: "linear-gradient(to right, transparent, #2A2925 90%)",
+              background: "linear-gradient(to right, transparent, #F7F5F2 90%)",
               pointerEvents: "none",
               opacity: canScrollRight ? 1 : 0,
               transition: "opacity 0.3s ease",
@@ -535,7 +535,7 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
             style={{
               position: "absolute", top: 0, left: 0,
               width: "70px", height: "calc(100% - 8px)",
-              background: "linear-gradient(to left, transparent, #2A2925 90%)",
+              background: "linear-gradient(to left, transparent, #F7F5F2 90%)",
               pointerEvents: "none",
               opacity: canScrollLeft ? 1 : 0,
               transition: "opacity 0.3s ease",
@@ -543,7 +543,7 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
           />
         </div>
       ) : (
-        <div style={{ padding: "40px 0", textAlign: "center", color: "rgba(255,255,255,0.22)", fontSize: "13px", fontWeight: 300, marginBottom: "40px" }}>
+        <div style={{ padding: "40px 0", textAlign: "center", color: "rgba(0,0,0,0.38)", fontSize: "13px", fontWeight: 300, marginBottom: "40px" }}>
           Sin experiencias para esta ciudad aún.
         </div>
       )}
@@ -552,8 +552,8 @@ export default function ExperienciasSection({ events }: ExperienciasSectionProps
       {recurrentes.length > 0 && (
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <span className="label-micro" style={{ color: "#555555" }}>Pasa cada semana</span>
-            <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.04)" }} />
+            <span className="label-micro" style={{ color: "#6A6A6A" }}>Pasa cada semana</span>
+            <div style={{ flex: 1, height: "1px", background: "rgba(0,0,0,0.08)" }} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
             {recurrentes.map((event) => (

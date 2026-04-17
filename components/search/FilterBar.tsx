@@ -15,31 +15,18 @@ interface FilterBarProps {
 
 const cities: FilterCity[] = [
   "All",
-  "Bogotá",
-  "Medellín",
-  "Cartagena",
-  "Cali",
-  "Santa Marta",
-  "Barranquilla",
-  "Bucaramanga",
-  "Manizales",
-  "Pereira",
-  "Salento",
-  "Villa de Leyva",
-  "Popayán",
-  "San Andrés",
-  "Barichara",
-  "San Gil",
-  "Leticia",
+  "Bogotá", "Medellín", "Cartagena", "Cali", "Santa Marta",
+  "Barranquilla", "Bucaramanga", "Manizales", "Pereira",
+  "Salento", "Villa de Leyva", "Popayán", "San Andrés",
+  "Barichara", "San Gil", "Leticia",
 ];
 
 const prices: FilterPrice[] = ["All", "$", "$$", "$$$", "$$$$"];
-const sorts: SortOption[] = ["Rating", "Newest", "Most Reviewed"];
 
 const selectStyle: React.CSSProperties = {
-  background: "#252219",
-  border: "1px solid rgba(255,255,255,0.06)",
-  color: "#706D64",
+  background: "#FFFFFF",
+  border: "1px solid rgba(0,0,0,0.10)",
+  color: "#6A6A6A",
   fontSize: "10px",
   letterSpacing: "0.12em",
   textTransform: "uppercase",
@@ -49,75 +36,41 @@ const selectStyle: React.CSSProperties = {
   outline: "none",
   appearance: "none" as const,
   WebkitAppearance: "none" as const,
-  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234A4843' stroke-width='1.5'/%3E%3C/svg%3E")`,
+  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239A9A9A' stroke-width='1.5'/%3E%3C/svg%3E")`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "right 10px center",
   paddingRight: "28px",
 };
 
-export default function FilterBar({
-  city,
-  price,
-  sort,
-  onCityChange,
-  onPriceChange,
-  onSortChange,
-}: FilterBarProps) {
+export default function FilterBar({ city, price, sort, onCityChange, onPriceChange, onSortChange }: FilterBarProps) {
   const { t } = useLanguage();
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span
-        style={{
-          fontSize: "9px",
-          letterSpacing: "0.2em",
-          color: "#3A3835",
-          textTransform: "uppercase",
-          fontWeight: 600,
-          marginRight: "4px",
-        }}
-      >
+      <span style={{
+        fontSize: "9px", letterSpacing: "0.2em",
+        color: "#C0BAB2", textTransform: "uppercase", fontWeight: 600,
+        marginRight: "4px",
+      }}>
         {t.filter.label}
       </span>
 
-      {/* City */}
-      <select
-        value={city}
-        onChange={(e) => onCityChange(e.target.value as FilterCity)}
-        style={selectStyle}
-        aria-label="Filtrar por ciudad"
-      >
+      <select value={city} onChange={(e) => onCityChange(e.target.value as FilterCity)} style={selectStyle} aria-label="Filtrar por ciudad">
         {cities.map((c) => (
-          <option key={c} value={c} style={{ background: "#252219" }}>
-            {c === "All" ? t.filter.allCities : c}
-          </option>
+          <option key={c} value={c}>{c === "All" ? t.filter.allCities : c}</option>
         ))}
       </select>
 
-      {/* Price */}
-      <select
-        value={price}
-        onChange={(e) => onPriceChange(e.target.value as FilterPrice)}
-        style={selectStyle}
-        aria-label="Filtrar por precio"
-      >
+      <select value={price} onChange={(e) => onPriceChange(e.target.value as FilterPrice)} style={selectStyle} aria-label="Filtrar por precio">
         {prices.map((p) => (
-          <option key={p} value={p} style={{ background: "#252219" }}>
-            {p === "All" ? t.filter.allPrices : p}
-          </option>
+          <option key={p} value={p}>{p === "All" ? t.filter.allPrices : p}</option>
         ))}
       </select>
 
-      {/* Sort */}
-      <select
-        value={sort}
-        onChange={(e) => onSortChange(e.target.value as SortOption)}
-        style={selectStyle}
-        aria-label="Ordenar por"
-      >
-        <option value="Rating" style={{ background: "#252219" }}>{t.filter.sortRating}</option>
-        <option value="Newest" style={{ background: "#252219" }}>{t.filter.sortNewest}</option>
-        <option value="Most Reviewed" style={{ background: "#252219" }}>{t.filter.sortReviewed}</option>
+      <select value={sort} onChange={(e) => onSortChange(e.target.value as SortOption)} style={selectStyle} aria-label="Ordenar por">
+        <option value="Rating">{t.filter.sortRating}</option>
+        <option value="Newest">{t.filter.sortNewest}</option>
+        <option value="Most Reviewed">{t.filter.sortReviewed}</option>
       </select>
     </div>
   );

@@ -18,8 +18,8 @@ const ACTIVIDADES_ITEMS = [
   { label: "Atracciones",    href: "/?category=Attractions" },
 ];
 
-const NAV_BASE = "rgba(223,220,213,0.45)";
-const NAV_HOVER = "#EAE9E3";
+const NAV_BASE  = "rgba(28,28,28,0.50)";
+const NAV_HOVER = "#1C1C1C";
 
 function NavLink({ href, label }: { href: string; label: string }) {
   return (
@@ -30,6 +30,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
         fontSize: "9.5px", letterSpacing: "0.18em",
         textTransform: "uppercase", fontWeight: 500,
         color: NAV_BASE,
+        textDecoration: "none",
       }}
       onMouseEnter={(e) => (e.currentTarget.style.color = NAV_HOVER)}
       onMouseLeave={(e) => (e.currentTarget.style.color = NAV_BASE)}
@@ -95,12 +96,12 @@ function ActividadesDropdown() {
             position: "absolute", top: "8px", left: "50%",
             transform: "translateX(-50%)", width: 0, height: 0,
             borderLeft: "6px solid transparent", borderRight: "6px solid transparent",
-            borderBottom: "6px solid rgba(255,255,255,0.05)",
+            borderBottom: "6px solid rgba(0,0,0,0.05)",
           }} />
           <div style={{
-            background: "#2F2C26",
-            border: "1px solid rgba(255,255,255,0.08)",
-            boxShadow: "0 24px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(177,152,124,0.04)",
+            background: "#FFFFFF",
+            border: "1px solid rgba(0,0,0,0.08)",
+            boxShadow: "0 16px 40px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06)",
             overflow: "hidden", marginTop: "6px",
           }}>
             {ACTIVIDADES_ITEMS.map((item, i) => (
@@ -113,24 +114,25 @@ function ActividadesDropdown() {
                 style={{
                   fontSize: "10px", letterSpacing: "0.13em",
                   textTransform: "uppercase", fontWeight: 500,
-                  color: "rgba(200,196,188,0.55)",
+                  color: "rgba(28,28,28,0.55)",
                   borderBottom: i < ACTIVIDADES_ITEMS.length - 1
-                    ? "1px solid rgba(255,255,255,0.04)" : "none",
+                    ? "1px solid rgba(0,0,0,0.05)" : "none",
+                  textDecoration: "none",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#F0EBE4";
-                  e.currentTarget.style.background = "rgba(177,152,124,0.05)";
+                  e.currentTarget.style.color = "#1C1C1C";
+                  e.currentTarget.style.background = "rgba(198,168,92,0.06)";
                   e.currentTarget.style.paddingLeft = "22px";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "rgba(200,196,188,0.55)";
+                  e.currentTarget.style.color = "rgba(28,28,28,0.55)";
                   e.currentTarget.style.background = "transparent";
                   e.currentTarget.style.paddingLeft = "20px";
                 }}
               >
                 {item.label}
                 <span aria-hidden="true" style={{
-                  color: "rgba(177,152,124,0.5)", fontSize: "11px",
+                  color: "#C6A85C", fontSize: "11px",
                   opacity: 0, transition: "opacity 0.15s ease",
                 }} className="group-hover:opacity-100">
                   →
@@ -178,10 +180,11 @@ export default function Header() {
       <header
         className="sticky top-0 z-40 transition-all duration-500"
         style={{
-          background: scrolled ? "rgba(10,9,9,0.95)" : "transparent",
+          background: scrolled ? "rgba(247,245,242,0.96)" : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.07)" : "none",
+          boxShadow: scrolled ? "0 1px 12px rgba(0,0,0,0.06)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between gap-4">
@@ -195,7 +198,7 @@ export default function Header() {
               fontWeight: 400,
               fontSize: "clamp(22px, 2.5vw, 30px)",
               letterSpacing: "-0.03em",
-              color: "#C9A84C",
+              color: "#C6A85C",
               textDecoration: "none",
               lineHeight: 1,
             }}
@@ -205,14 +208,14 @@ export default function Header() {
             hyex
           </Link>
 
-          {/* Desktop Nav — clean 3 items like descubre */}
+          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8 flex-1 justify-center">
             <NavLink href="/"          label="Explorar" />
             <NavLink href="/ciudades"  label="Ciudades" />
             <NavLink href="/saved"     label="Guardados" />
           </nav>
 
-          {/* Right — auth only, no lang toggle in header */}
+          {/* Right — auth */}
           <div className="hidden lg:flex items-center gap-5 shrink-0">
             {user ? (
               <>
@@ -246,7 +249,7 @@ export default function Header() {
                 <Link
                   href="/auth/login"
                   style={{
-                    fontSize: "14px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontSize: "13px", fontFamily: "'Sora', system-ui, sans-serif",
                     fontWeight: 400, color: NAV_BASE, textDecoration: "none",
                     transition: "color 0.2s",
                   }}
@@ -258,17 +261,18 @@ export default function Header() {
                 <Link
                   href="/auth/signup"
                   style={{
-                    fontSize: "14px", fontFamily: "'Sora', system-ui, sans-serif",
-                    fontWeight: 500, color: "#0A0909",
-                    background: "#C9A84C",
-                    padding: "9px 20px",
+                    fontSize: "13px", fontFamily: "'Sora', system-ui, sans-serif",
+                    fontWeight: 600, color: "#FFFFFF",
+                    background: "#C6A85C",
+                    padding: "9px 22px",
                     borderRadius: "6px",
                     textDecoration: "none",
                     display: "inline-block",
                     transition: "background 0.2s, transform 0.15s",
+                    letterSpacing: "0.02em",
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "#E0C070"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "#C9A84C"; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#D4B870"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "#C6A85C"; }}
                 >
                   Registrarse
                 </Link>
@@ -276,28 +280,8 @@ export default function Header() {
             )}
           </div>
 
-          {/* Mobile — lang + hamburger */}
+          {/* Mobile — hamburger */}
           <div className="lg:hidden flex items-center gap-3">
-            <div className="flex items-center" style={{ gap: "1px" }}>
-              {(["es", "en"] as Locale[]).map((l, i) => (
-                <React.Fragment key={l}>
-                  <button
-                    onClick={() => setLocale(l)}
-                    style={{
-                      fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase",
-                      fontWeight: locale === l ? 600 : 400,
-                      color: locale === l ? "#B1987C" : "rgba(200,196,188,0.40)",
-                      background: "none", border: "none", cursor: "pointer", padding: "2px 3px",
-                    }}
-                  >
-                    {l.toUpperCase()}
-                  </button>
-                  {i === 0 && (
-                    <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "10px" }}>·</span>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
             <button
               className="p-2 transition-colors duration-200"
               style={{ color: NAV_BASE }}

@@ -11,13 +11,13 @@ interface HoySectionProps {
 const CITIES = ["Todas", "Bogotá", "Medellín", "Cartagena", "Cali", "Santa Marta"];
 
 const CATEGORIES: { label: string; value: Category | "Todas" }[] = [
-  { label: "Todos", value: "Todas" },
-  { label: "Comer", value: "Restaurants" },
-  { label: "Cafés", value: "Cafés" },
-  { label: "Beber", value: "Bars" },
-  { label: "Noche", value: "Nightlife" },
+  { label: "Todos",   value: "Todas" },
+  { label: "Comer",   value: "Restaurants" },
+  { label: "Cafés",   value: "Cafés" },
+  { label: "Beber",   value: "Bars" },
+  { label: "Noche",   value: "Nightlife" },
   { label: "Cultura", value: "Attractions" },
-  { label: "Estadías", value: "Hotels" },
+  { label: "Estadías",value: "Hotels" },
 ];
 
 function getMoment(place: Place, date: Date): string {
@@ -37,17 +37,7 @@ function getMoment(place: Place, date: Date): string {
   return isWeekend ? "Este fin" : "Para hoy";
 }
 
-// ─── Dark filter pill ─────────────────────────────────────────────────────────
-
-function FilterPill({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
+function FilterPill({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
@@ -56,9 +46,9 @@ function FilterPill({
         padding: "7px 16px",
         fontSize: "10px", letterSpacing: "0.10em", textTransform: "uppercase",
         fontWeight: 600, fontFamily: "'Sora', system-ui, sans-serif",
-        background: active ? "#B1987C" : "rgba(255,255,255,0.07)",
-        color: active ? "#2A2925" :"rgba(255,255,255,0.65)",
-        border: active ? "1px solid #B1987C" : "1px solid rgba(255,255,255,0.09)",
+        background: active ? "#C6A85C" : "rgba(0,0,0,0.05)",
+        color: active ? "#FFFFFF" : "rgba(28,28,28,0.60)",
+        border: active ? "1px solid #C6A85C" : "1px solid rgba(0,0,0,0.08)",
         borderRadius: "100px",
         cursor: "pointer",
         transition: "all 0.2s ease",
@@ -66,14 +56,14 @@ function FilterPill({
       }}
       onMouseEnter={(e) => {
         if (!active) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.11)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.88)";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.08)";
+          (e.currentTarget as HTMLButtonElement).style.color = "#1C1C1C";
         }
       }}
       onMouseLeave={(e) => {
         if (!active) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.07)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.65)";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.05)";
+          (e.currentTarget as HTMLButtonElement).style.color = "rgba(28,28,28,0.60)";
         }
       }}
     >
@@ -81,8 +71,6 @@ function FilterPill({
     </button>
   );
 }
-
-// ─── Dark city select ─────────────────────────────────────────────────────────
 
 function CitySelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const [open, setOpen] = useState(false);
@@ -106,9 +94,9 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
           padding: "7px 16px",
           fontSize: "10px", letterSpacing: "0.10em", textTransform: "uppercase",
           fontWeight: 600, fontFamily: "'Sora', system-ui, sans-serif",
-          background: isActive ? "rgba(198,168,92,0.15)" : "rgba(255,255,255,0.07)",
-          color: isActive ? "#B1987C" : "rgba(255,255,255,0.65)",
-          border: isActive ? "1px solid rgba(198,168,92,0.40)" : "1px solid rgba(255,255,255,0.09)",
+          background: isActive ? "rgba(198,168,92,0.10)" : "rgba(0,0,0,0.05)",
+          color: isActive ? "#C6A85C" : "rgba(28,28,28,0.60)",
+          border: isActive ? "1px solid rgba(198,168,92,0.35)" : "1px solid rgba(0,0,0,0.08)",
           borderRadius: "100px",
           cursor: "pointer",
           transition: "all 0.2s ease",
@@ -126,11 +114,11 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
         <div style={{
           position: "absolute", top: "calc(100% + 8px)", left: 0, zIndex: 50,
           minWidth: "160px",
-          background: "#1A1A18",
-          border: "1px solid rgba(255,255,255,0.08)",
+          background: "#FFFFFF",
+          border: "1px solid rgba(0,0,0,0.08)",
           borderRadius: "12px",
           padding: "6px",
-          boxShadow: "0 24px 48px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.4)",
+          boxShadow: "0 16px 40px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06)",
         }}>
           {CITIES.map((city) => {
             const sel = city === value;
@@ -144,16 +132,16 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
                   fontSize: "11px", letterSpacing: "0.06em",
                   fontFamily: "'Sora', system-ui, sans-serif",
                   fontWeight: sel ? 600 : 400,
-                  color: sel ? "#B1987C" : "rgba(255,255,255,0.65)",
-                  background: sel ? "rgba(198,168,92,0.10)" : "transparent",
+                  color: sel ? "#C6A85C" : "rgba(28,28,28,0.70)",
+                  background: sel ? "rgba(198,168,92,0.08)" : "transparent",
                   border: "none", borderRadius: "7px", cursor: "pointer", textAlign: "left",
                   transition: "background 0.15s",
                 }}
-                onMouseEnter={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.06)"; }}
+                onMouseEnter={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.04)"; }}
                 onMouseLeave={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}
               >
                 {city}
-                {sel && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#B1987C" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>}
+                {sel && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#C6A85C" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>}
               </button>
             );
           })}
@@ -162,8 +150,6 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
     </div>
   );
 }
-
-// ─── Dark arrow button ────────────────────────────────────────────────────────
 
 function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right"; onClick: () => void; disabled: boolean }) {
   return (
@@ -174,25 +160,25 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
       style={{
         display: "flex", alignItems: "center", justifyContent: "center",
         width: "34px", height: "34px",
-        background: disabled ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.08)",
-        border: `1px solid ${disabled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.12)"}`,
+        background: disabled ? "rgba(0,0,0,0.03)" : "rgba(0,0,0,0.06)",
+        border: `1px solid ${disabled ? "rgba(0,0,0,0.04)" : "rgba(0,0,0,0.10)"}`,
         borderRadius: "50%",
         cursor: disabled ? "default" : "pointer",
         transition: "all 0.2s ease",
-        color: disabled ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.65)",
+        color: disabled ? "rgba(0,0,0,0.18)" : "rgba(28,28,28,0.60)",
       }}
       onMouseEnter={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "#B1987C";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "#B1987C";
-          (e.currentTarget as HTMLButtonElement).style.color = "#2A2925";
+          (e.currentTarget as HTMLButtonElement).style.background = "#C6A85C";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C6A85C";
+          (e.currentTarget as HTMLButtonElement).style.color = "#FFFFFF";
         }
       }}
       onMouseLeave={(e) => {
         if (!disabled) {
-          (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.08)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.12)";
-          (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.65)";
+          (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.06)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,0,0,0.10)";
+          (e.currentTarget as HTMLButtonElement).style.color = "rgba(28,28,28,0.60)";
         }
       }}
     >
@@ -205,17 +191,15 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
   );
 }
 
-// ─── Section ──────────────────────────────────────────────────────────────────
-
 const CARD_WIDTH = 280;
-const CARD_GAP = 16;
+const CARD_GAP   = 16;
 const SCROLL_STEP = (CARD_WIDTH + CARD_GAP) * 2;
 
 export default function HoySection({ places }: HoySectionProps) {
-  const [activeCity, setActiveCity] = useState("Todas");
+  const [activeCity, setActiveCity]         = useState("Todas");
   const [activeCategory, setActiveCategory] = useState<string>("Todas");
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollLeft, setCanScrollLeft]   = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const today = new Date();
@@ -243,8 +227,8 @@ export default function HoySection({ places }: HoySectionProps) {
     return () => { el.removeEventListener("scroll", updateScrollState); ro.disconnect(); };
   }, [updateScrollState, filtered.length]);
 
-  const scrollLeft = () => scrollRef.current?.scrollBy({ left: -SCROLL_STEP, behavior: "smooth" });
-  const scrollRight = () => scrollRef.current?.scrollBy({ left: SCROLL_STEP, behavior: "smooth" });
+  const scrollLeft  = () => scrollRef.current?.scrollBy({ left: -SCROLL_STEP, behavior: "smooth" });
+  const scrollRight = () => scrollRef.current?.scrollBy({ left: SCROLL_STEP,  behavior: "smooth" });
 
   if (places.length === 0) return null;
 
@@ -254,34 +238,34 @@ export default function HoySection({ places }: HoySectionProps) {
       <div style={{
         display: "flex", alignItems: "flex-end", justifyContent: "space-between",
         marginBottom: "24px", paddingBottom: "20px",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid rgba(0,0,0,0.08)",
       }}>
         <div>
           <p style={{
             fontSize: "9px", letterSpacing: "0.22em", textTransform: "uppercase",
             fontWeight: 700, fontFamily: "'Sora', system-ui, sans-serif",
-            color: "#B1987C", marginBottom: "8px",
+            color: "#C6A85C", marginBottom: "8px",
             display: "flex", alignItems: "center", gap: "8px",
           }}>
-            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#B1987C" }} />
+            <span style={{ display: "inline-block", width: "18px", height: "1px", background: "#C6A85C" }} />
             Descubre
           </p>
           <h2 className="font-serif" style={{
-            fontSize: "clamp(36px, 5vw, 62px)",
-            color: "#E8E4DC", fontWeight: 400, letterSpacing: "-0.02em",
+            fontSize: "clamp(28px, 4vw, 52px)",
+            color: "#1C1C1C", fontWeight: 600, letterSpacing: "-0.02em",
           }}>
             Hoy en tu ciudad
           </h2>
           <p style={{
-            fontSize: "13px", color: "rgba(220,215,207,0.52)",
-            fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 300,
+            fontSize: "13px", color: "#6A6A6A",
+            fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 400,
             marginTop: "6px",
           }}>
             Lugares para cada momento del día
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <ArrowBtn direction="left" onClick={scrollLeft} disabled={!canScrollLeft} />
+          <ArrowBtn direction="left"  onClick={scrollLeft}  disabled={!canScrollLeft}  />
           <ArrowBtn direction="right" onClick={scrollRight} disabled={!canScrollRight} />
         </div>
       </div>
@@ -289,7 +273,7 @@ export default function HoySection({ places }: HoySectionProps) {
       {/* ── Filters ── */}
       <div className="flex items-center gap-2 flex-wrap mb-8">
         <CitySelect value={activeCity} onChange={setActiveCity} />
-        <div style={{ width: "1px", height: "16px", background: "rgba(255,255,255,0.10)" }} />
+        <div style={{ width: "1px", height: "16px", background: "rgba(0,0,0,0.10)" }} />
         {CATEGORIES.map((cat) => (
           <FilterPill
             key={cat.value}
@@ -304,11 +288,11 @@ export default function HoySection({ places }: HoySectionProps) {
             style={{
               fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase",
               fontFamily: "'Sora', system-ui, sans-serif", fontWeight: 500,
-              color: "rgba(255,255,255,0.32)", background: "transparent", border: "none",
+              color: "rgba(28,28,28,0.38)", background: "transparent", border: "none",
               cursor: "pointer", padding: "4px 8px", transition: "color 0.2s",
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.70)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.32)"; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#1C1C1C"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(28,28,28,0.38)"; }}
           >
             Limpiar ×
           </button>
@@ -358,11 +342,11 @@ export default function HoySection({ places }: HoySectionProps) {
               </div>
             ))}
           </div>
-          {/* Edge fades — dark bg */}
+          {/* Edge fades — light bg */}
           <div aria-hidden="true" style={{
             position: "absolute", top: 0, right: 0,
             width: "100px", height: "calc(100% - 12px)",
-            background: "linear-gradient(to right, transparent, #2A2925 90%)",
+            background: "linear-gradient(to right, transparent, #F7F5F2 90%)",
             pointerEvents: "none",
             opacity: canScrollRight ? 1 : 0,
             transition: "opacity 0.3s ease",
@@ -370,14 +354,14 @@ export default function HoySection({ places }: HoySectionProps) {
           <div aria-hidden="true" style={{
             position: "absolute", top: 0, left: 0,
             width: "60px", height: "calc(100% - 12px)",
-            background: "linear-gradient(to left, transparent, #2A2925 90%)",
+            background: "linear-gradient(to left, transparent, #F7F5F2 90%)",
             pointerEvents: "none",
             opacity: canScrollLeft ? 1 : 0,
             transition: "opacity 0.3s ease",
           }} />
         </div>
       ) : (
-        <div style={{ padding: "64px 0", textAlign: "center", color: "rgba(255,255,255,0.30)", fontSize: "13px", fontWeight: 300, fontFamily: "'Sora', system-ui, sans-serif" }}>
+        <div style={{ padding: "64px 0", textAlign: "center", color: "#9A9A9A", fontSize: "13px", fontWeight: 400, fontFamily: "'Sora', system-ui, sans-serif" }}>
           Sin resultados para estos filtros.
         </div>
       )}

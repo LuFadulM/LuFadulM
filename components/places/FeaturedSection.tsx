@@ -224,7 +224,7 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
           </div>
           <h2
             className="font-serif"
-            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#EAE9E3", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: "1.05" }}
+            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#1C1C1C", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: "1.05" }}
           >
             {t.featured.sectionTitle}
           </h2>
@@ -232,9 +232,9 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
         <Link
           href="/?featured=true"
           className="label-micro transition-colors duration-200 hidden sm:block"
-          style={{ color: "rgba(255,255,255,0.30)" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#B1987C")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.30)")}
+          style={{ color: "rgba(0,0,0,0.38)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#C6A85C")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(0,0,0,0.38)")}
         >
           {t.featured.viewAll} →
         </Link>
