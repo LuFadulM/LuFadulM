@@ -22,9 +22,9 @@ export default function Pill({ label, active = false, onClick, className }: Pill
         letterSpacing: "0.16em",
         textTransform: "uppercase",
         fontWeight: active ? 600 : 500,
-        background: active ? "rgba(200,164,78,0.08)" : "transparent",
-        borderColor: active ? "rgba(200,164,78,0.3)" : "rgba(255,255,255,0.06)",
-        color: active ? "#C8A44E" : "#706D64",
+        background: active ? "rgba(198,168,92,0.10)" : "transparent",
+        borderColor: active ? "rgba(198,168,92,0.35)" : "rgba(0,0,0,0.10)",
+        color: active ? "#C6A85C" : "#6A6A6A",
       }}
     >
       {label}

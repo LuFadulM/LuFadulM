@@ -68,10 +68,10 @@ export default function SearchBar({
             fontSize: large ? "15px" : "13px",
             fontWeight: 300,
             letterSpacing: "0.02em",
-            background: "#141413",
-            border: "1px solid rgba(255,255,255,0.12)",
+            background: large ? "rgba(255,255,255,0.07)" : "#FFFFFF",
+            border: large ? "1px solid rgba(255,255,255,0.14)" : "1px solid rgba(0,0,0,0.10)",
             borderRadius: large ? "8px" : "6px",
-            color: "#F0EDE6",
+            color: large ? "#F0EDE6" : "#1C1C1C",
           }}
         />
 
