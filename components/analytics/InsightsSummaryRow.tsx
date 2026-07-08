@@ -41,9 +41,9 @@ export default function InsightsSummaryRow({ overview }: InsightsSummaryRowProps
         <div
           key={c.label}
           style={{
-            background: "#111110",
+            background: "#0F1B15",
             borderTop: c.gold
-              ? "2px solid rgba(200,164,78,0.4)"
+              ? "2px solid rgba(61,220,151,0.4)"
               : "1px solid rgba(255,255,255,0.06)",
             padding: "22px 24px",
           }}
@@ -53,7 +53,7 @@ export default function InsightsSummaryRow({ overview }: InsightsSummaryRowProps
               fontSize: "9px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#4A4843",
+              color: "#3A4A41",
               fontWeight: 600,
               marginBottom: "12px",
             }}
@@ -64,7 +64,7 @@ export default function InsightsSummaryRow({ overview }: InsightsSummaryRowProps
             className="font-serif"
             style={{
               fontSize: "32px",
-              color: c.gold ? "#C8A44E" : "#D4D0C8",
+              color: c.gold ? "#3DDC97" : "#CBD6CE",
               lineHeight: 1,
             }}
           >

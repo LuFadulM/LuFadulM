@@ -58,7 +58,7 @@ export default function SignupPage() {
   };
 
   const inputClass =
-    "w-full bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-btn px-4 py-3 text-sm text-text placeholder-text-dim focus:outline-none focus:border-coral transition-colors";
+    "w-full bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-btn px-4 py-3 text-sm text-text placeholder-text-dim focus:outline-none focus:border-coral transition-colors";
 
   if (success) {
     return (
@@ -94,7 +94,7 @@ export default function SignupPage() {
         </div>
 
         {/* Card */}
-        <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-7">
+        <div className="bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-card p-7">
           {error && (
             <div
               id="signup-error"
@@ -223,7 +223,7 @@ export default function SignupPage() {
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[rgba(242,237,232,0.07)]" />
+              <div className="w-full border-t border-[rgba(234,241,236,0.07)]" />
             </div>
             <div className="relative flex justify-center">
               <span className="bg-bg-card px-3 text-xs text-text-dim">or</span>

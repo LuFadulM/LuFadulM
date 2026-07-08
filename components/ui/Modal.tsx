@@ -44,7 +44,7 @@ export default function Modal({ isOpen, onClose, title, children, className }: M
       {/* Modal Content */}
       <div
         className={cn(
-          "relative z-10 bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-t-card sm:rounded-card w-full sm:max-w-lg mx-0 sm:mx-4 p-6 animate-slide-up",
+          "relative z-10 bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-t-card sm:rounded-card w-full sm:max-w-lg mx-0 sm:mx-4 p-6 animate-slide-up",
           className
         )}
       >

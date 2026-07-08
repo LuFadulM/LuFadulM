@@ -77,9 +77,9 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
         <div
           className="mb-8 p-8"
           style={{
-            background: "#111110",
-            border: placement ? "1px solid rgba(200,164,78,0.15)" : "1px solid rgba(255,255,255,0.06)",
-            borderTop: placement ? "2px solid rgba(200,164,78,0.3)" : "1px solid rgba(255,255,255,0.06)",
+            background: "#0F1B15",
+            border: placement ? "1px solid rgba(61,220,151,0.15)" : "1px solid rgba(255,255,255,0.06)",
+            borderTop: placement ? "2px solid rgba(61,220,151,0.3)" : "1px solid rgba(255,255,255,0.06)",
           }}
         >
           <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -88,7 +88,7 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
                 fontSize: "9px",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#C8A44E",
+                color: "#3DDC97",
                 fontWeight: 600,
               }}
             >
@@ -97,7 +97,7 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
             {place.price_level && (
               <span style={{
                 fontSize: "10px",
-                color: "#706D64",
+                color: "#64756B",
                 letterSpacing: "0.06em",
                 borderLeft: "1px solid rgba(255,255,255,0.08)",
                 paddingLeft: "10px",
@@ -112,22 +112,22 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
             )}
           </div>
 
-          <h1 className="font-serif mb-2" style={{ fontSize: "clamp(28px, 4vw, 48px)", color: "#D4D0C8", lineHeight: 1.1 }}>
+          <h1 className="font-serif mb-2" style={{ fontSize: "clamp(28px, 4vw, 48px)", color: "#CBD6CE", lineHeight: 1.1 }}>
             {place.name}
           </h1>
 
-          <p style={{ color: "#706D64", fontSize: "13px", marginBottom: "20px" }}>
+          <p style={{ color: "#64756B", fontSize: "13px", marginBottom: "20px" }}>
             {place.neighborhood ? `${place.neighborhood}, ` : ""}{place.city}, Colombia
           </p>
 
           {/* Rating */}
           <div className="flex items-center gap-3">
-            <span className="font-serif" style={{ fontSize: "36px", color: "#D4D0C8", lineHeight: 1 }}>
+            <span className="font-serif" style={{ fontSize: "36px", color: "#CBD6CE", lineHeight: 1 }}>
               {formatRating(place.avg_rating)}
             </span>
             <div>
               <StarRating rating={place.avg_rating} size="lg" />
-              <p style={{ fontSize: "11px", color: "#706D64", marginTop: "2px" }}>
+              <p style={{ fontSize: "11px", color: "#64756B", marginTop: "2px" }}>
                 {place.review_count} {place.review_count === 1 ? "reseña" : "reseñas"}
               </p>
             </div>
@@ -143,7 +143,7 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
                     fontSize: "9px",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    color: "#4A4843",
+                    color: "#3A4A41",
                     fontWeight: 500,
                     border: "1px solid rgba(255,255,255,0.04)",
                     padding: "4px 10px",
@@ -161,11 +161,11 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
           {/* Main column */}
           <div className="md:col-span-2 space-y-6">
             {place.description && (
-              <div style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.06)", padding: "24px" }}>
-                <h2 className="font-serif mb-4" style={{ fontSize: "20px", color: "#D4D0C8" }}>
+              <div style={{ background: "#0F1B15", border: "1px solid rgba(255,255,255,0.06)", padding: "24px" }}>
+                <h2 className="font-serif mb-4" style={{ fontSize: "20px", color: "#CBD6CE" }}>
                   Sobre este lugar
                 </h2>
-                <p style={{ color: "#706D64", fontSize: "14px", lineHeight: "1.8", fontWeight: 300 }}>
+                <p style={{ color: "#64756B", fontSize: "14px", lineHeight: "1.8", fontWeight: 300 }}>
                   {place.description}
                 </p>
               </div>
@@ -177,9 +177,9 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
               <WriteReview placeId={place.id} />
             ) : (
               <div
-                style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.06)", padding: "20px", textAlign: "center" }}
+                style={{ background: "#0F1B15", border: "1px solid rgba(255,255,255,0.06)", padding: "20px", textAlign: "center" }}
               >
-                <p style={{ color: "#706D64", fontSize: "13px", marginBottom: "12px" }}>
+                <p style={{ color: "#64756B", fontSize: "13px", marginBottom: "12px" }}>
                   Inicia sesión para escribir una reseña
                 </p>
                 <Link
@@ -190,8 +190,8 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
                     letterSpacing: "0.16em",
                     textTransform: "uppercase",
                     fontWeight: 600,
-                    color: "#0A0A09",
-                    background: "#C8A44E",
+                    color: "#08130E",
+                    background: "#3DDC97",
                     padding: "10px 20px",
                   }}
                 >
@@ -203,8 +203,8 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
 
           {/* Sidebar */}
           <div className="space-y-4">
-            <div style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.06)", padding: "20px" }}>
-              <h3 className="font-serif mb-5" style={{ fontSize: "16px", color: "#D4D0C8" }}>
+            <div style={{ background: "#0F1B15", border: "1px solid rgba(255,255,255,0.06)", padding: "20px" }}>
+              <h3 className="font-serif mb-5" style={{ fontSize: "16px", color: "#CBD6CE" }}>
                 Información
               </h3>
               <div className="space-y-4">
@@ -218,12 +218,12 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
                   <div className="flex gap-3">
                     <ClockIcon type="phone" />
                     <div>
-                      <p style={{ fontSize: "10px", color: "#4A4843", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Teléfono</p>
+                      <p style={{ fontSize: "10px", color: "#3A4A41", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Teléfono</p>
                       <a
                         href={`tel:${place.phone}`}
                         onClick={() => trackClick("phone_click")}
-                        style={{ fontSize: "13px", color: "#706D64" }}
-                        className="hover:text-[#D4D0C8] transition-colors"
+                        style={{ fontSize: "13px", color: "#64756B" }}
+                        className="hover:text-[#CBD6CE] transition-colors"
                       >
                         {place.phone}
                       </a>
@@ -234,14 +234,14 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
                   <div className="flex gap-3">
                     <ClockIcon type="web" />
                     <div>
-                      <p style={{ fontSize: "10px", color: "#4A4843", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Sitio web</p>
+                      <p style={{ fontSize: "10px", color: "#3A4A41", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Sitio web</p>
                       <a
                         href={place.website}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => trackClick("website_click")}
-                        style={{ fontSize: "13px", color: "#C8A44E" }}
-                        className="hover:text-[#D4B05A] transition-colors break-all"
+                        style={{ fontSize: "13px", color: "#3DDC97" }}
+                        className="hover:text-[#4FE3A4] transition-colors break-all"
                       >
                         {place.website.replace(/^https?:\/\//, "")}
                       </a>
@@ -252,14 +252,14 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
                   <div className="flex gap-3">
                     <ClockIcon type="instagram" />
                     <div>
-                      <p style={{ fontSize: "10px", color: "#4A4843", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Instagram</p>
+                      <p style={{ fontSize: "10px", color: "#3A4A41", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>Instagram</p>
                       <a
                         href={`https://instagram.com/${place.instagram.replace("@", "")}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => trackClick("instagram_click")}
-                        style={{ fontSize: "13px", color: "#C8A44E" }}
-                        className="hover:text-[#D4B05A] transition-colors"
+                        style={{ fontSize: "13px", color: "#3DDC97" }}
+                        className="hover:text-[#4FE3A4] transition-colors"
                       >
                         {place.instagram}
                       </a>
@@ -273,13 +273,13 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackClick("directions_click")}
-                    className="block w-full text-center mt-4 transition-all duration-200 hover:border-[rgba(200,164,78,0.3)]"
+                    className="block w-full text-center mt-4 transition-all duration-200 hover:border-[rgba(61,220,151,0.3)]"
                     style={{
                       fontSize: "10px",
                       letterSpacing: "0.16em",
                       textTransform: "uppercase",
                       fontWeight: 500,
-                      color: "#706D64",
+                      color: "#64756B",
                       border: "1px solid rgba(255,255,255,0.06)",
                       padding: "10px",
                     }}
@@ -299,14 +299,14 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
             style={{
               background: "#0D0D0C",
               border: "1px solid rgba(255,255,255,0.04)",
-              borderLeft: "2px solid rgba(200,164,78,0.2)",
+              borderLeft: "2px solid rgba(61,220,151,0.2)",
             }}
           >
             <div>
-              <p style={{ fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C8A44E", fontWeight: 600, marginBottom: "6px" }}>
+              <p style={{ fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase", color: "#3DDC97", fontWeight: 600, marginBottom: "6px" }}>
                 ¿Es tu negocio?
               </p>
-              <p style={{ fontSize: "13px", color: "#706D64", fontWeight: 300, lineHeight: "1.6" }}>
+              <p style={{ fontSize: "13px", color: "#64756B", fontWeight: 300, lineHeight: "1.6" }}>
                 Reclama este perfil para responder reseñas y gestionar tu presencia en Hyex.
               </p>
             </div>
@@ -318,8 +318,8 @@ export default function PlaceDetail({ place, reviews = [], isAuthenticated = fal
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
                 fontWeight: 600,
-                color: "#0A0A09",
-                background: "#C8A44E",
+                color: "#08130E",
+                background: "#3DDC97",
                 padding: "10px 20px",
                 whiteSpace: "nowrap",
               }}
@@ -338,15 +338,15 @@ function InfoRow({ icon, label, value }: { icon: string; label: string; value: s
     <div className="flex gap-3">
       <ClockIcon type={icon} />
       <div>
-        <p style={{ fontSize: "10px", color: "#4A4843", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>{label}</p>
-        <p style={{ fontSize: "13px", color: "#706D64" }}>{value}</p>
+        <p style={{ fontSize: "10px", color: "#3A4A41", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "2px" }}>{label}</p>
+        <p style={{ fontSize: "13px", color: "#64756B" }}>{value}</p>
       </div>
     </div>
   );
 }
 
 function ClockIcon({ type }: { type: string }) {
-  const style = { color: "#3A3835", flexShrink: 0, marginTop: "2px" };
+  const style = { color: "#2A3A31", flexShrink: 0, marginTop: "2px" };
   if (type === "clock") return (
     <svg style={style} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />

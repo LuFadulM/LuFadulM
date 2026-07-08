@@ -11,9 +11,9 @@ export default function MetricCard({ label, value, sub, highlight = false }: Met
   return (
     <div
       style={{
-        background: "#111110",
+        background: "#0F1B15",
         border: "1px solid rgba(255,255,255,0.06)",
-        borderTop: highlight ? "2px solid rgba(200,164,78,0.4)" : "1px solid rgba(255,255,255,0.06)",
+        borderTop: highlight ? "2px solid rgba(61,220,151,0.4)" : "1px solid rgba(255,255,255,0.06)",
         padding: "20px 24px",
       }}
     >
@@ -22,7 +22,7 @@ export default function MetricCard({ label, value, sub, highlight = false }: Met
           fontSize: "9px",
           letterSpacing: "0.18em",
           textTransform: "uppercase",
-          color: "#4A4843",
+          color: "#3A4A41",
           fontWeight: 600,
           marginBottom: "10px",
         }}
@@ -33,7 +33,7 @@ export default function MetricCard({ label, value, sub, highlight = false }: Met
         className="font-serif"
         style={{
           fontSize: "30px",
-          color: highlight ? "#C8A44E" : "#D4D0C8",
+          color: highlight ? "#3DDC97" : "#CBD6CE",
           lineHeight: 1,
           marginBottom: sub ? "6px" : 0,
         }}
@@ -41,7 +41,7 @@ export default function MetricCard({ label, value, sub, highlight = false }: Met
         {value}
       </p>
       {sub && (
-        <p style={{ fontSize: "11px", color: "#4A4843", marginTop: "4px" }}>{sub}</p>
+        <p style={{ fontSize: "11px", color: "#3A4A41", marginTop: "4px" }}>{sub}</p>
       )}
     </div>
   );

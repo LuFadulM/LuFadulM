@@ -16,7 +16,7 @@ export default async function ProfilePage() {
     return (
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
         <div className="max-w-md mx-auto text-center">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-bg-card border border-[rgba(242,237,232,0.07)] flex items-center justify-center">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-bg-card border border-[rgba(234,241,236,0.07)] flex items-center justify-center">
             <svg
               width="28"
               height="28"
@@ -45,7 +45,7 @@ export default async function ProfilePage() {
             </Link>
             <Link
               href="/auth/signup"
-              className="px-6 py-3 border border-[rgba(242,237,232,0.14)] text-text rounded-btn text-sm hover:bg-bg-card transition-colors"
+              className="px-6 py-3 border border-[rgba(234,241,236,0.14)] text-text rounded-btn text-sm hover:bg-bg-card transition-colors"
             >
               Create Account
             </Link>
@@ -81,9 +81,9 @@ export default async function ProfilePage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
       {/* Profile Header */}
-      <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-6 mb-6">
+      <div className="bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-card p-6 mb-6">
         <div className="flex items-start gap-5">
-          <div className="w-16 h-16 rounded-full bg-bg-surface border border-[rgba(242,237,232,0.14)] flex items-center justify-center text-xl font-serif text-text-muted flex-shrink-0">
+          <div className="w-16 h-16 rounded-full bg-bg-surface border border-[rgba(234,241,236,0.14)] flex items-center justify-center text-xl font-serif text-text-muted flex-shrink-0">
             {displayName[0]?.toUpperCase() ?? "U"}
           </div>
           <div className="flex-1 min-w-0">
@@ -98,7 +98,7 @@ export default async function ProfilePage() {
       </div>
 
       {/* Reviews */}
-      <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-6">
+      <div className="bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-card p-6">
         <h2 className="text-xl font-serif text-text mb-4">Your Reviews</h2>
         {!reviews?.length ? (
           <p className="text-text-muted text-sm">
@@ -110,7 +110,7 @@ export default async function ProfilePage() {
         ) : (
           <div className="space-y-4">
             {reviews.map((review) => (
-              <div key={review.id} className="border-t border-[rgba(242,237,232,0.07)] pt-4 first:border-0 first:pt-0">
+              <div key={review.id} className="border-t border-[rgba(234,241,236,0.07)] pt-4 first:border-0 first:pt-0">
                 <div className="flex items-center justify-between mb-1">
                   <Link
                     href={`/places/${review.place?.slug}`}

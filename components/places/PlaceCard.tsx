@@ -18,12 +18,12 @@ interface PlaceCardProps {
 }
 
 const CATEGORY_TAG: Record<string, { color: string; label: string }> = {
-  Restaurants: { color: "#C9A84C", label: "Restaurante" },
-  Bars:        { color: "#C9A84C", label: "Bar" },
-  Nightlife:   { color: "#C9A84C", label: "Vida nocturna" },
-  Cafés:       { color: "#C9A84C", label: "Café" },
-  Hotels:      { color: "#C9A84C", label: "Hotel" },
-  Attractions: { color: "#C9A84C", label: "Atracción" },
+  Restaurants: { color: "#3DDC97", label: "Restaurante" },
+  Bars:        { color: "#3DDC97", label: "Bar" },
+  Nightlife:   { color: "#3DDC97", label: "Vida nocturna" },
+  Cafés:       { color: "#3DDC97", label: "Café" },
+  Hotels:      { color: "#3DDC97", label: "Hotel" },
+  Attractions: { color: "#3DDC97", label: "Atracción" },
 };
 
 export default function PlaceCard({
@@ -37,7 +37,7 @@ export default function PlaceCard({
   const impressionTracked = useRef(false);
   const [hovered, setHovered] = useState(false);
 
-  const catCfg = CATEGORY_TAG[place.category] ?? { color: "#C9A84C", label: place.category };
+  const catCfg = CATEGORY_TAG[place.category] ?? { color: "#3DDC97", label: place.category };
   const loc = [place.neighborhood, place.city].filter(Boolean).join(" · ");
 
   useEffect(() => {
@@ -102,7 +102,7 @@ export default function PlaceCard({
                 />
                 <div style={{
                   position: "absolute", inset: 0, pointerEvents: "none",
-                  background: "linear-gradient(to top, rgba(12,11,9,0.70) 0%, rgba(12,11,9,0.15) 50%, transparent 100%)",
+                  background: "linear-gradient(to top, rgba(7,18,13,0.70) 0%, rgba(7,18,13,0.15) 50%, transparent 100%)",
                 }} />
               </>
             ) : (
@@ -115,7 +115,7 @@ export default function PlaceCard({
                 fontSize: "0.625rem", letterSpacing: "0.12em", textTransform: "uppercase",
                 fontWeight: 700, fontFamily: "var(--font-sans)",
                 color: "var(--gold)",
-                background: "rgba(12,11,9,0.75)",
+                background: "rgba(7,18,13,0.75)",
                 border: "1px solid var(--gold-border)",
                 padding: "0.25rem 0.625rem", borderRadius: "var(--radius-pill)",
                 backdropFilter: "blur(4px)",
@@ -217,7 +217,7 @@ export default function PlaceCard({
                   <div style={{ display: "flex", gap: "2px" }}>
                     {[1, 2, 3, 4, 5].map((s) => (
                       <svg key={s} width="11" height="11" viewBox="0 0 24 24"
-                        fill={s <= Math.round(place.avg_rating) ? "#C9A84C" : "rgba(245,240,232,0.12)"}
+                        fill={s <= Math.round(place.avg_rating) ? "#3DDC97" : "rgba(236,243,238,0.12)"}
                         aria-hidden="true">
                         <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
                       </svg>

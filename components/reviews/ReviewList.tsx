@@ -14,7 +14,7 @@ export default function ReviewList({ reviews, isLoading = false }: ReviewListPro
         {Array.from({ length: 3 }).map((_, i) => (
           <div
             key={i}
-            className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-5 animate-pulse"
+            className="bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-card p-5 animate-pulse"
           >
             <div className="flex items-center gap-3 mb-3">
               <div className="w-9 h-9 rounded-full bg-bg-surface" />

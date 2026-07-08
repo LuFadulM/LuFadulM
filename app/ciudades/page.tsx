@@ -19,11 +19,11 @@ export default function CiudadesPage() {
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-16 sm:py-20">
-      <p className="label-micro mb-6" style={{ color: "#C8A44E" }}>{p.label}</p>
-      <h1 className="font-serif mb-4" style={{ fontSize: "clamp(36px, 5vw, 64px)", color: "#D4D0C8" }}>
+      <p className="label-micro mb-6" style={{ color: "#3DDC97" }}>{p.label}</p>
+      <h1 className="font-serif mb-4" style={{ fontSize: "clamp(36px, 5vw, 64px)", color: "#CBD6CE" }}>
         {p.title}
       </h1>
-      <div style={{ width: "40px", height: "1px", background: "rgba(200,164,78,0.4)", marginBottom: "40px" }} />
+      <div style={{ width: "40px", height: "1px", background: "rgba(61,220,151,0.4)", marginBottom: "40px" }} />
 
       <ul
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px"
@@ -41,15 +41,15 @@ export default function CiudadesPage() {
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#3A3835",
+                  color: "#2A3A31",
                 }}
               >
                 0{i + 1} · {city.region}
               </span>
               <div className="mt-12">
                 <p
-                  className="font-serif mb-1 transition-colors duration-200 group-hover:text-[#D4D0C8]"
-                  style={{ fontSize: "28px", color: "#706D64" }}
+                  className="font-serif mb-1 transition-colors duration-200 group-hover:text-[#CBD6CE]"
+                  style={{ fontSize: "28px", color: "#64756B" }}
                 >
                   {city.name}
                 </p>
@@ -58,7 +58,7 @@ export default function CiudadesPage() {
                     fontSize: "10px",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    color: "#C8A44E",
+                    color: "#3DDC97",
                   }}
                 >
                   {p.explore}

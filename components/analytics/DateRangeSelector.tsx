@@ -17,9 +17,9 @@ interface DateRangeSelectorProps {
 }
 
 const INPUT_STYLE: React.CSSProperties = {
-  background: "#111110",
+  background: "#0F1B15",
   border: "1px solid rgba(255,255,255,0.08)",
-  color: "#D4D0C8",
+  color: "#CBD6CE",
   fontSize: "11px",
   fontFamily: "'Sora', system-ui, sans-serif",
   padding: "7px 10px",
@@ -61,7 +61,7 @@ export default function DateRangeSelector({ startDate, endDate, onChange }: Date
           onChange={(e) => onChange(e.target.value, endDate)}
           style={INPUT_STYLE}
         />
-        <span style={{ color: "#3A3835", fontSize: "11px" }}>→</span>
+        <span style={{ color: "#2A3A31", fontSize: "11px" }}>→</span>
         <input
           type="date"
           value={endDate}
@@ -88,8 +88,8 @@ export default function DateRangeSelector({ startDate, endDate, onChange }: Date
                 padding: "7px 14px",
                 border: "none",
                 cursor: "pointer",
-                background: isActive ? "#C8A44E" : "#111110",
-                color: isActive ? "#0A0A09" : "#4A4843",
+                background: isActive ? "#3DDC97" : "#0F1B15",
+                color: isActive ? "#08130E" : "#3A4A41",
                 transition: "background 0.15s, color 0.15s",
               }}
             >

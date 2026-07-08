@@ -72,28 +72,28 @@ export default function CityPage({ params }: CityPageProps) {
     <div className="max-w-7xl mx-auto px-6 py-16">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 mb-8">
-        <Link href="/" style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500, color: "#4A4843" }}
-          className="transition-colors duration-200 hover:text-[#706D64]">
+        <Link href="/" style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500, color: "#3A4A41" }}
+          className="transition-colors duration-200 hover:text-[#64756B]">
           {t.nav.explore}
         </Link>
-        <span style={{ fontSize: "10px", color: "#3A3835" }}>·</span>
-        <Link href="/ciudades" style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500, color: "#4A4843" }}
-          className="transition-colors duration-200 hover:text-[#706D64]">
+        <span style={{ fontSize: "10px", color: "#2A3A31" }}>·</span>
+        <Link href="/ciudades" style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500, color: "#3A4A41" }}
+          className="transition-colors duration-200 hover:text-[#64756B]">
           {t.nav.cities}
         </Link>
-        <span style={{ fontSize: "10px", color: "#3A3835" }}>·</span>
-        <span style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500, color: "#706D64" }}>
+        <span style={{ fontSize: "10px", color: "#2A3A31" }}>·</span>
+        <span style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 500, color: "#64756B" }}>
           {displayName}
         </span>
       </div>
 
       {/* Header */}
       <div className="mb-10 pb-8 border-b border-[rgba(255,255,255,0.04)]">
-        <p className="label-micro mb-4" style={{ color: "#C8A44E" }}>Colombia</p>
-        <h1 className="font-serif mb-3" style={{ fontSize: "clamp(40px, 6vw, 72px)", color: "#D4D0C8", lineHeight: 1 }}>
+        <p className="label-micro mb-4" style={{ color: "#3DDC97" }}>Colombia</p>
+        <h1 className="font-serif mb-3" style={{ fontSize: "clamp(40px, 6vw, 72px)", color: "#CBD6CE", lineHeight: 1 }}>
           {displayName}
         </h1>
-        <p style={{ color: "#706D64", fontSize: "13px", fontWeight: 300 }}>
+        <p style={{ color: "#64756B", fontSize: "13px", fontWeight: 300 }}>
           {places.length} {places.length === 1 ? t.results.place : t.results.places}
         </p>
       </div>

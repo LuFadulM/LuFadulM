@@ -17,7 +17,7 @@ export default async function SavedPage() {
     return (
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
         <div className="max-w-md mx-auto text-center">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-bg-card border border-[rgba(242,237,232,0.07)] flex items-center justify-center">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-bg-card border border-[rgba(234,241,236,0.07)] flex items-center justify-center">
             <svg
               width="28"
               height="28"
@@ -45,13 +45,13 @@ export default async function SavedPage() {
             </Link>
             <Link
               href="/auth/signup"
-              className="px-6 py-3 border border-[rgba(242,237,232,0.14)] text-text rounded-btn text-sm hover:bg-bg-card transition-colors"
+              className="px-6 py-3 border border-[rgba(234,241,236,0.14)] text-text rounded-btn text-sm hover:bg-bg-card transition-colors"
             >
               Create Account
             </Link>
           </div>
 
-          <div className="mt-10 pt-8 border-t border-[rgba(242,237,232,0.07)]">
+          <div className="mt-10 pt-8 border-t border-[rgba(234,241,236,0.07)]">
             <p className="text-text-dim text-sm mb-4">
               Or explore places without an account
             </p>
@@ -89,7 +89,7 @@ export default async function SavedPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {savedPlaces.map((place) => (
             <Link key={place.id} href={`/places/${place.slug}`} className="block group">
-              <article className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card overflow-hidden card-hover h-full p-4">
+              <article className="bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-card overflow-hidden card-hover h-full p-4">
                 <h3 className="font-serif text-text text-lg mb-1">{place.name}</h3>
                 <p className="text-text-muted text-sm">{place.city}</p>
               </article>

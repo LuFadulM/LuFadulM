@@ -42,7 +42,7 @@ export default function StarRating({
             key={star}
             style={{
               fontSize: sizePx[size],
-              color: filled ? "#C8A44E" : "#2A2A28",
+              color: filled ? "#3DDC97" : "#2A2A28",
               cursor: interactive ? "pointer" : "default",
               lineHeight: 1,
               transition: "color 0.15s",

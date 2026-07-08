@@ -92,7 +92,7 @@ export default function InsightsChart({ data, height = 220 }: InsightsChartProps
             <line x1={PAD.left} y1={yOf(t)} x2={W - PAD.right} y2={yOf(t)}
               stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
             <text x={PAD.left - 8} y={yOf(t) + 4} textAnchor="end"
-              fill="#3A3835" fontSize="10" fontFamily="'Sora',system-ui,sans-serif">
+              fill="#2A3A31" fontSize="10" fontFamily="'Sora',system-ui,sans-serif">
               {fmt(t)}
             </text>
           </g>
@@ -103,7 +103,7 @@ export default function InsightsChart({ data, height = 220 }: InsightsChartProps
           const i = data.indexOf(d);
           return (
             <text key={d.date} x={xOf(i)} y={H - 8} textAnchor="middle"
-              fill="#3A3835" fontSize="10" fontFamily="'Sora',system-ui,sans-serif">
+              fill="#2A3A31" fontSize="10" fontFamily="'Sora',system-ui,sans-serif">
               {fmtAxisDate(d.date)}
             </text>
           );
@@ -124,11 +124,11 @@ export default function InsightsChart({ data, height = 220 }: InsightsChartProps
         <polygon
           points={[[PAD.left, PAD.top + innerH], ...clkPts, [W - PAD.right, PAD.top + innerH]]
             .map(([x, y]) => `${x},${y}`).join(" ")}
-          fill="rgba(200,164,78,0.07)"
+          fill="rgba(61,220,151,0.07)"
         />
         {/* Clicks line */}
         <polyline points={polyline(clkPts)} fill="none"
-          stroke="#C8A44E" strokeWidth="2"
+          stroke="#3DDC97" strokeWidth="2"
           strokeLinejoin="round" strokeLinecap="round" />
 
         {/* Hover vertical line */}
@@ -141,7 +141,7 @@ export default function InsightsChart({ data, height = 220 }: InsightsChartProps
               <circle cx={xOf(idx)} cy={yOf(tooltip.item.impressions)} r="3.5"
                 fill="rgba(212,208,200,0.6)" />
               <circle cx={xOf(idx)} cy={yOf(tooltip.item.clicks)} r="3.5"
-                fill="#C8A44E" />
+                fill="#3DDC97" />
             </>
           );
         })()}
@@ -150,16 +150,16 @@ export default function InsightsChart({ data, height = 220 }: InsightsChartProps
         <circle cx={impPts[impPts.length - 1][0]} cy={impPts[impPts.length - 1][1]}
           r="3" fill="rgba(212,208,200,0.5)" />
         <circle cx={clkPts[clkPts.length - 1][0]} cy={clkPts[clkPts.length - 1][1]}
-          r="3" fill="#C8A44E" />
+          r="3" fill="#3DDC97" />
 
         {/* Legend */}
         <g transform={`translate(${PAD.left},${PAD.top - 12})`}>
           <line x1="0" y1="0" x2="16" y2="0" stroke="rgba(212,208,200,0.4)" strokeWidth="1.5" />
-          <text x="22" y="4" fill="#706D64" fontSize="10" fontFamily="'Sora',system-ui,sans-serif">
+          <text x="22" y="4" fill="#64756B" fontSize="10" fontFamily="'Sora',system-ui,sans-serif">
             Impresiones
           </text>
-          <line x1="114" y1="0" x2="130" y2="0" stroke="#C8A44E" strokeWidth="2" />
-          <text x="136" y="4" fill="#706D64" fontSize="10" fontFamily="'Sora',system-ui,sans-serif">
+          <line x1="114" y1="0" x2="130" y2="0" stroke="#3DDC97" strokeWidth="2" />
+          <text x="136" y="4" fill="#64756B" fontSize="10" fontFamily="'Sora',system-ui,sans-serif">
             Clics
           </text>
         </g>
@@ -180,18 +180,18 @@ export default function InsightsChart({ data, height = 220 }: InsightsChartProps
             zIndex: 10,
           }}
         >
-          <p style={{ fontSize: "9px", color: "#4A4843", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "8px" }}>
+          <p style={{ fontSize: "9px", color: "#3A4A41", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "8px" }}>
             {fmtDate(tooltip.item.date)}
           </p>
           <div className="flex items-center justify-between gap-4" style={{ marginBottom: "4px" }}>
             <span style={{ fontSize: "10px", color: "rgba(212,208,200,0.5)" }}>Impresiones</span>
-            <span style={{ fontSize: "13px", color: "#D4D0C8", fontWeight: 500, fontFamily: "'Playfair Display',serif" }}>
+            <span style={{ fontSize: "13px", color: "#CBD6CE", fontWeight: 500, fontFamily: "'Playfair Display',serif" }}>
               {tooltip.item.impressions}
             </span>
           </div>
           <div className="flex items-center justify-between gap-4">
-            <span style={{ fontSize: "10px", color: "#C8A44E" }}>Clics</span>
-            <span style={{ fontSize: "13px", color: "#C8A44E", fontWeight: 500, fontFamily: "'Playfair Display',serif" }}>
+            <span style={{ fontSize: "10px", color: "#3DDC97" }}>Clics</span>
+            <span style={{ fontSize: "13px", color: "#3DDC97", fontWeight: 500, fontFamily: "'Playfair Display',serif" }}>
               {tooltip.item.clicks}
             </span>
           </div>

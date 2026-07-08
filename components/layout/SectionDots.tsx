@@ -80,7 +80,7 @@ export default function SectionDots() {
               height: isActive ? "24px" : "4px",
               borderRadius: "3px",
               background: isActive
-                ? "#B1987C"
+                ? "#D98D72"
                 : "rgba(223,220,213,0.28)",
               border: "none",
               cursor: "pointer",

@@ -57,7 +57,7 @@ function FilterPill({ label, active, onClick }: { label: string; active: boolean
       onMouseEnter={(e) => {
         if (!active) {
           (e.currentTarget as HTMLButtonElement).style.color = "var(--text-primary)";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(245,240,232,0.20)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(236,243,238,0.20)";
         }
       }}
       onMouseLeave={(e) => {
@@ -137,7 +137,7 @@ function CitySelect({ value, onChange }: { value: string; onChange: (v: string) 
                   border: "none", cursor: "pointer", textAlign: "left",
                   transition: "background 0.15s",
                 }}
-                onMouseEnter={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(245,240,232,0.04)"; }}
+                onMouseEnter={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "rgba(236,243,238,0.04)"; }}
                 onMouseLeave={(e) => { if (!sel) (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}
               >
                 {city}
@@ -161,7 +161,7 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
         display: "flex", alignItems: "center", justifyContent: "center",
         width: "34px", height: "34px",
         background: "transparent",
-        border: `1px solid ${disabled ? "var(--border)" : "rgba(245,240,232,0.14)"}`,
+        border: `1px solid ${disabled ? "var(--border)" : "rgba(236,243,238,0.14)"}`,
         borderRadius: "50%",
         cursor: disabled ? "default" : "pointer",
         transition: "all 0.2s ease",
@@ -177,7 +177,7 @@ function ArrowBtn({ direction, onClick, disabled }: { direction: "left" | "right
       onMouseLeave={(e) => {
         if (!disabled) {
           (e.currentTarget as HTMLButtonElement).style.background = "transparent";
-          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(245,240,232,0.14)";
+          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(236,243,238,0.14)";
           (e.currentTarget as HTMLButtonElement).style.color = "var(--text-secondary)";
         }
       }}

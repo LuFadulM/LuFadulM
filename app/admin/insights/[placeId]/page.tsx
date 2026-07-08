@@ -30,11 +30,11 @@ interface MetricTile {
 
 function MetricTile({ label, value }: MetricTile) {
   return (
-    <div style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.04)", padding: "20px 22px" }}>
-      <p style={{ fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#4A4843", fontWeight: 600, marginBottom: "10px" }}>
+    <div style={{ background: "#0F1B15", border: "1px solid rgba(255,255,255,0.04)", padding: "20px 22px" }}>
+      <p style={{ fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 600, marginBottom: "10px" }}>
         {label}
       </p>
-      <p style={{ fontSize: "24px", color: "#D4D0C8", fontWeight: 300, fontFamily: "'Sora',system-ui,sans-serif", lineHeight: 1 }}>
+      <p style={{ fontSize: "24px", color: "#CBD6CE", fontWeight: 300, fontFamily: "'Sora',system-ui,sans-serif", lineHeight: 1 }}>
         {value}
       </p>
     </div>
@@ -43,15 +43,15 @@ function MetricTile({ label, value }: MetricTile) {
 
 function BigStatCard({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.04)", borderTop: "2px solid rgba(200,164,78,0.35)", padding: "24px 28px", flex: 1 }}>
-      <p style={{ fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4A4843", fontWeight: 600, marginBottom: "14px" }}>
+    <div style={{ background: "#0F1B15", border: "1px solid rgba(255,255,255,0.04)", borderTop: "2px solid rgba(61,220,151,0.35)", padding: "24px 28px", flex: 1 }}>
+      <p style={{ fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 600, marginBottom: "14px" }}>
         {label}
       </p>
-      <p className="font-serif" style={{ fontSize: "42px", color: "#C8A44E", lineHeight: 1 }}>
+      <p className="font-serif" style={{ fontSize: "42px", color: "#3DDC97", lineHeight: 1 }}>
         {value}
       </p>
       {sub && (
-        <p style={{ fontSize: "11px", color: "#4A4843", marginTop: "6px" }}>{sub}</p>
+        <p style={{ fontSize: "11px", color: "#3A4A41", marginTop: "6px" }}>{sub}</p>
       )}
     </div>
   );
@@ -86,7 +86,7 @@ export default function PlaceInsightsPage() {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 flex items-center justify-center">
-        <p style={{ color: "#4A4843", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+        <p style={{ color: "#3A4A41", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
           Verificando acceso…
         </p>
       </div>
@@ -96,10 +96,10 @@ export default function PlaceInsightsPage() {
   if (!insights) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-        <p style={{ color: "#4A4843", fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+        <p style={{ color: "#3A4A41", fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
           Placement no encontrado.
         </p>
-        <Link href="/admin/insights" style={{ color: "#C8A44E", fontSize: "11px", marginTop: "12px", display: "inline-block" }}>
+        <Link href="/admin/insights" style={{ color: "#3DDC97", fontSize: "11px", marginTop: "12px", display: "inline-block" }}>
           ← Volver
         </Link>
       </div>
@@ -129,16 +129,16 @@ export default function PlaceInsightsPage() {
       <div className="flex items-center gap-3 mb-10">
         <Link
           href="/admin/insights"
-          style={{ fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#4A4843", fontWeight: 500 }}
-          className="hover:text-[#706D64] transition-colors"
+          style={{ fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 500 }}
+          className="hover:text-[#64756B] transition-colors"
         >
           ← Insights
         </Link>
-        <span style={{ color: "#3A3835" }}>·</span>
+        <span style={{ color: "#2A3A31" }}>·</span>
         <Link
           href="/admin/featured"
-          style={{ fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#4A4843", fontWeight: 500 }}
-          className="hover:text-[#706D64] transition-colors"
+          style={{ fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 500 }}
+          className="hover:text-[#64756B] transition-colors"
         >
           Placements
         </Link>
@@ -147,22 +147,22 @@ export default function PlaceInsightsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 pb-6 border-b border-[rgba(255,255,255,0.06)]">
         <div>
-          <p style={{ fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C8A44E", fontWeight: 600, marginBottom: "8px" }}>
+          <p style={{ fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3DDC97", fontWeight: 600, marginBottom: "8px" }}>
             Admin · Analytics · Detalle
           </p>
-          <h1 className="font-serif" style={{ fontSize: "36px", color: "#D4D0C8", lineHeight: 1.1 }}>
+          <h1 className="font-serif" style={{ fontSize: "36px", color: "#CBD6CE", lineHeight: 1.1 }}>
             {insights.placeName}
           </h1>
           <div className="flex flex-wrap items-center gap-2 mt-3">
-            <span style={{ fontSize: "12px", color: "#706D64" }}>{insights.city}</span>
-            <span style={{ color: "#3A3835" }}>·</span>
-            <span style={{ fontSize: "11px", color: "#706D64" }}>{planLabel[insights.planType] ?? insights.planType}</span>
-            <span style={{ color: "#3A3835" }}>·</span>
-            <span style={{ fontSize: "11px", color: "#4A4843" }}>Prioridad {insights.rankPriority}/10</span>
-            <span style={{ color: "#3A3835" }}>·</span>
+            <span style={{ fontSize: "12px", color: "#64756B" }}>{insights.city}</span>
+            <span style={{ color: "#2A3A31" }}>·</span>
+            <span style={{ fontSize: "11px", color: "#64756B" }}>{planLabel[insights.planType] ?? insights.planType}</span>
+            <span style={{ color: "#2A3A31" }}>·</span>
+            <span style={{ fontSize: "11px", color: "#3A4A41" }}>Prioridad {insights.rankPriority}/10</span>
+            <span style={{ color: "#2A3A31" }}>·</span>
             <span style={{
               fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600,
-              color: "#C8A44E", background: "rgba(200,164,78,0.06)", border: "1px solid rgba(200,164,78,0.2)",
+              color: "#3DDC97", background: "rgba(61,220,151,0.06)", border: "1px solid rgba(61,220,151,0.2)",
               padding: "2px 8px",
             }}>
               {insights.labelText}
@@ -185,12 +185,12 @@ export default function PlaceInsightsPage() {
       </div>
 
       {/* Daily chart */}
-      <div style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.06)", padding: "24px", marginBottom: "6px" }}>
+      <div style={{ background: "#0F1B15", border: "1px solid rgba(255,255,255,0.06)", padding: "24px", marginBottom: "6px" }}>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="font-serif" style={{ fontSize: "20px", color: "#D4D0C8" }}>
+          <h2 className="font-serif" style={{ fontSize: "20px", color: "#CBD6CE" }}>
             Tendencia diaria
           </h2>
-          <span style={{ fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#4A4843" }}>
+          <span style={{ fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#3A4A41" }}>
             {insights.daily.length} días
           </span>
         </div>
@@ -212,8 +212,8 @@ export default function PlaceInsightsPage() {
       </div>
 
       {/* Conversion funnel */}
-      <div style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.06)", padding: "24px" }}>
-        <h2 className="font-serif mb-6" style={{ fontSize: "18px", color: "#D4D0C8" }}>
+      <div style={{ background: "#0F1B15", border: "1px solid rgba(255,255,255,0.06)", padding: "24px" }}>
+        <h2 className="font-serif mb-6" style={{ fontSize: "18px", color: "#CBD6CE" }}>
           Funnel de conversión
         </h2>
         {[
@@ -226,12 +226,12 @@ export default function PlaceInsightsPage() {
           return (
             <div key={row.label} className="mb-5">
               <div className="flex items-center justify-between mb-2">
-                <span style={{ fontSize: "11px", color: "#706D64", letterSpacing: "0.06em" }}>{row.label}</span>
+                <span style={{ fontSize: "11px", color: "#64756B", letterSpacing: "0.06em" }}>{row.label}</span>
                 <div className="flex items-center gap-3">
-                  <span className="font-serif" style={{ fontSize: "16px", color: "#D4D0C8", fontWeight: 300 }}>
+                  <span className="font-serif" style={{ fontSize: "16px", color: "#CBD6CE", fontWeight: 300 }}>
                     {row.value.toLocaleString("es-CO")}
                   </span>
-                  <span style={{ fontSize: "10px", color: "#4A4843", width: "40px", textAlign: "right" }}>
+                  <span style={{ fontSize: "10px", color: "#3A4A41", width: "40px", textAlign: "right" }}>
                     {pct.toFixed(1)}%
                   </span>
                 </div>
@@ -240,7 +240,7 @@ export default function PlaceInsightsPage() {
                 <div style={{
                   position: "absolute", left: 0, top: 0, height: "100%",
                   width: `${Math.min(pct, 100)}%`,
-                  background: row.label === "Impresiones" ? "rgba(212,208,200,0.3)" : "#C8A44E",
+                  background: row.label === "Impresiones" ? "rgba(212,208,200,0.3)" : "#3DDC97",
                   transition: "width 0.4s ease",
                 }} />
               </div>
@@ -249,7 +249,7 @@ export default function PlaceInsightsPage() {
         })}
       </div>
 
-      <p style={{ fontSize: "11px", color: "#3A3835", marginTop: "24px" }}>
+      <p style={{ fontSize: "11px", color: "#2A3A31", marginTop: "24px" }}>
         Datos de prueba (mock). Conectar Supabase para datos en tiempo real.
       </p>
     </div>

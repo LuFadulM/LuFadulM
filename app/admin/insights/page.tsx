@@ -38,7 +38,7 @@ function SortTh({
         letterSpacing: "0.18em",
         textTransform: "uppercase",
         fontWeight: 600,
-        color: active ? "#C8A44E" : "#4A4843",
+        color: active ? "#3DDC97" : "#3A4A41",
         whiteSpace: "nowrap",
         cursor: "pointer",
         userSelect: "none",
@@ -100,7 +100,7 @@ export default function AdminInsightsPage() {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 flex items-center justify-center">
-        <p style={{ color: "#4A4843", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+        <p style={{ color: "#3A4A41", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
           Verificando acceso…
         </p>
       </div>
@@ -115,15 +115,15 @@ export default function AdminInsightsPage() {
         <div>
           <Link
             href="/admin/featured"
-            style={{ fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#4A4843", fontWeight: 500, display: "block", marginBottom: "12px" }}
-            className="hover:text-[#706D64] transition-colors"
+            style={{ fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 500, display: "block", marginBottom: "12px" }}
+            className="hover:text-[#64756B] transition-colors"
           >
             ← Placements
           </Link>
-          <p style={{ fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C8A44E", fontWeight: 600, marginBottom: "8px" }}>
+          <p style={{ fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3DDC97", fontWeight: 600, marginBottom: "8px" }}>
             Admin · Analytics
           </p>
-          <h1 className="font-serif" style={{ fontSize: "36px", color: "#D4D0C8", lineHeight: 1 }}>
+          <h1 className="font-serif" style={{ fontSize: "36px", color: "#CBD6CE", lineHeight: 1 }}>
             Insights
           </h1>
         </div>
@@ -141,13 +141,13 @@ export default function AdminInsightsPage() {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-              <th style={{ textAlign: "left", padding: "10px 16px", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600, color: "#4A4843", whiteSpace: "nowrap" }}>
+              <th style={{ textAlign: "left", padding: "10px 16px", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600, color: "#3A4A41", whiteSpace: "nowrap" }}>
                 Lugar
               </th>
-              <th style={{ textAlign: "left", padding: "10px 16px", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600, color: "#4A4843", whiteSpace: "nowrap" }}>
+              <th style={{ textAlign: "left", padding: "10px 16px", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600, color: "#3A4A41", whiteSpace: "nowrap" }}>
                 Ciudad
               </th>
-              <th style={{ textAlign: "left", padding: "10px 16px", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600, color: "#4A4843", whiteSpace: "nowrap" }}>
+              <th style={{ textAlign: "left", padding: "10px 16px", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 600, color: "#3A4A41", whiteSpace: "nowrap" }}>
                 Estado
               </th>
               <SortTh label="Impresiones"  col="impressions"  current={sortKey} dir={sortDir} onSort={handleSort} />
@@ -169,13 +169,13 @@ export default function AdminInsightsPage() {
                 {/* Place name */}
                 <td style={{ padding: "14px 16px" }}>
                   <Link href={`/admin/insights/${p.placementId}`}>
-                    <p style={{ fontSize: "13px", color: "#C8A44E", fontWeight: 500, marginBottom: "3px" }}>
+                    <p style={{ fontSize: "13px", color: "#3DDC97", fontWeight: 500, marginBottom: "3px" }}>
                       {p.placeName}
                     </p>
                   </Link>
                   <span style={{
                     fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase",
-                    color: "#706D64", fontWeight: 600,
+                    color: "#64756B", fontWeight: 600,
                     border: "1px solid rgba(255,255,255,0.08)",
                     padding: "1px 6px", display: "inline-block",
                   }}>
@@ -184,60 +184,60 @@ export default function AdminInsightsPage() {
                 </td>
                 {/* City */}
                 <td style={{ padding: "14px 16px" }}>
-                  <span style={{ fontSize: "12px", color: "#706D64" }}>{p.city}</span>
+                  <span style={{ fontSize: "12px", color: "#64756B" }}>{p.city}</span>
                 </td>
                 {/* Status dot */}
                 <td style={{ padding: "14px 16px" }}>
                   <div className="flex items-center gap-2">
                     <span style={{
                       width: "6px", height: "6px", borderRadius: "50%", display: "inline-block",
-                      background: p.isActive ? "#5A8F6E" : "#3A3835",
+                      background: p.isActive ? "#5A8F6E" : "#2A3A31",
                       boxShadow: p.isActive ? "0 0 6px rgba(90,143,110,0.6)" : "none",
                     }} />
-                    <span style={{ fontSize: "10px", color: p.isActive ? "#5A8F6E" : "#3A3835" }}>
+                    <span style={{ fontSize: "10px", color: p.isActive ? "#5A8F6E" : "#2A3A31" }}>
                       {p.isActive ? "Activo" : "Inactivo"}
                     </span>
                   </div>
                 </td>
                 {/* Metrics */}
                 <td style={{ padding: "14px 16px" }}>
-                  <span className="font-serif" style={{ fontSize: "18px", color: "#D4D0C8", fontWeight: 300 }}>
+                  <span className="font-serif" style={{ fontSize: "18px", color: "#CBD6CE", fontWeight: 300 }}>
                     {p.totals.impressions.toLocaleString("es-CO")}
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <span className="font-serif" style={{ fontSize: "18px", color: "#D4D0C8", fontWeight: 300 }}>
+                  <span className="font-serif" style={{ fontSize: "18px", color: "#CBD6CE", fontWeight: 300 }}>
                     {p.totals.cardClicks.toLocaleString("es-CO")}
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
                   <span className="font-serif" style={{
                     fontSize: "18px", fontWeight: 300,
-                    color: p.ctr >= 0.08 ? "#5A8F6E" : p.ctr >= 0.05 ? "#C8A44E" : "#706D64",
+                    color: p.ctr >= 0.08 ? "#5A8F6E" : p.ctr >= 0.05 ? "#3DDC97" : "#64756B",
                   }}>
                     {(p.ctr * 100).toFixed(1)}%
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <span className="font-serif" style={{ fontSize: "18px", color: "#D4D0C8", fontWeight: 300 }}>
+                  <span className="font-serif" style={{ fontSize: "18px", color: "#CBD6CE", fontWeight: 300 }}>
                     {p.totals.profileViews.toLocaleString("es-CO")}
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <span className="font-serif" style={{ fontSize: "18px", color: "#D4D0C8", fontWeight: 300 }}>
+                  <span className="font-serif" style={{ fontSize: "18px", color: "#CBD6CE", fontWeight: 300 }}>
                     {p.totals.saves.toLocaleString("es-CO")}
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <span className="font-serif" style={{ fontSize: "18px", color: "#D4D0C8", fontWeight: 300 }}>
+                  <span className="font-serif" style={{ fontSize: "18px", color: "#CBD6CE", fontWeight: 300 }}>
                     {p.totals.shares.toLocaleString("es-CO")}
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
                   <Link
                     href={`/admin/insights/${p.placementId}`}
-                    style={{ fontSize: "9px", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 600, color: "#C8A44E", whiteSpace: "nowrap" }}
-                    className="hover:text-[#D4B05A] transition-colors"
+                    style={{ fontSize: "9px", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 600, color: "#3DDC97", whiteSpace: "nowrap" }}
+                    className="hover:text-[#4FE3A4] transition-colors"
                   >
                     Ver →
                   </Link>
@@ -248,7 +248,7 @@ export default function AdminInsightsPage() {
         </table>
       </div>
 
-      <p style={{ fontSize: "11px", color: "#3A3835", marginTop: "24px" }}>
+      <p style={{ fontSize: "11px", color: "#2A3A31", marginTop: "24px" }}>
         Datos de prueba (mock). Conectar Supabase para datos en tiempo real.
       </p>
     </div>

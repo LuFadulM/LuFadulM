@@ -32,7 +32,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
             sizes="(max-width: 640px) 100vw, 60vw"
           />
         ) : (
-          <div className="absolute inset-0" style={{ background: "#252219" }} />
+          <div className="absolute inset-0" style={{ background: "#1A2C22" }} />
         )}
 
         {/* Gradient for readability */}
@@ -51,7 +51,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               fontWeight: 700,
-              color: "#B1987C",
+              color: "#D98D72",
               background: "rgba(177,152,124,0.08)",
               border: "1px solid rgba(177,152,124,0.22)",
               padding: "4px 10px",
@@ -87,7 +87,7 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
             {place.city}
           </p>
           <h3
-            className="font-serif text-white mb-3 transition-colors duration-300 group-hover:text-[#F5F0E8]"
+            className="font-serif text-white mb-3 transition-colors duration-300 group-hover:text-[#EFF4EE]"
             style={{
               fontSize: "clamp(36px, 5vw, 62px)",
               lineHeight: "1.15",
@@ -117,14 +117,14 @@ function FeaturedHero({ place, editorialPick, reviews }: { place: Place; editori
           <div className="atmo-cta flex items-center justify-between">
             <div className="flex items-center gap-3">
               <RatingDisplay rating={place.avg_rating} mode="stars" />
-              <span style={{ color: "rgba(242,237,232,0.85)", fontSize: "12px", fontWeight: 500 }}>
+              <span style={{ color: "rgba(234,241,236,0.85)", fontSize: "12px", fontWeight: 500 }}>
                 {formatRating(place.avg_rating)}
               </span>
-              <span style={{ color: "rgba(242,237,232,0.52)", fontSize: "12px" }}>
+              <span style={{ color: "rgba(234,241,236,0.52)", fontSize: "12px" }}>
                 {place.review_count} {reviews}
               </span>
             </div>
-            <span style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: 600, color: "#B1987C", fontFamily: "'Sora', system-ui, sans-serif" }}>
+            <span style={{ fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: 600, color: "#D98D72", fontFamily: "'Sora', system-ui, sans-serif" }}>
               Ver lugar <span aria-hidden="true">→</span>
             </span>
           </div>
@@ -154,7 +154,7 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
             sizes="(max-width: 640px) 100vw, 30vw"
           />
         ) : (
-          <div className="absolute inset-0" style={{ background: "#252219" }} />
+          <div className="absolute inset-0" style={{ background: "#1A2C22" }} />
         )}
 
         <div
@@ -182,7 +182,7 @@ function FeaturedSmall({ place, index }: { place: Place; index: number }) {
         {/* Content — bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <h3
-            className="font-serif text-white leading-tight mb-1 transition-colors duration-200 group-hover:text-[#F5F0E8]"
+            className="font-serif text-white leading-tight mb-1 transition-colors duration-200 group-hover:text-[#EFF4EE]"
             style={{
               fontSize: "17px",
               fontWeight: 700,
@@ -224,7 +224,7 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
           </div>
           <h2
             className="font-serif"
-            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#F5F0E8", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: "1.05" }}
+            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#EFF4EE", fontWeight: 300, letterSpacing: "-0.03em", lineHeight: "1.05" }}
           >
             {t.featured.sectionTitle}
           </h2>
@@ -232,9 +232,9 @@ export default function FeaturedSection({ places }: FeaturedSectionProps) {
         <Link
           href="/?featured=true"
           className="label-micro transition-colors duration-200 hidden sm:block"
-          style={{ color: "rgba(245,240,232,0.35)" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#C9A84C")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,240,232,0.35)")}
+          style={{ color: "rgba(236,243,238,0.35)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#3DDC97")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(236,243,238,0.35)")}
         >
           {t.featured.viewAll} →
         </Link>

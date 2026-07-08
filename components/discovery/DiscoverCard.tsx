@@ -118,9 +118,9 @@ export default function DiscoverCard({
                   textTransform: "uppercase",
                   fontWeight: 700,
                   fontFamily: "'Sora', system-ui, sans-serif",
-                  color: "#C6A85C",
-                  background: "rgba(198,168,92,0.15)",
-                  border: "1px solid rgba(198,168,92,0.35)",
+                  color: "#3DDC97",
+                  background: "rgba(7,18,13,0.55)",
+                  border: "1px solid rgba(61,220,151,0.40)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                   padding: "3px 9px",
@@ -160,13 +160,13 @@ export default function DiscoverCard({
               fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: "16px",
               fontWeight: 600,
-              color: "#1C1C1C",
+              color: "#0D1B14",
               lineHeight: "1.32",
               marginBottom: "5px",
               letterSpacing: "-0.01em",
               transition: "color 0.2s ease",
             }}
-            className={hovered ? "text-[#C6A85C]" : ""}
+            className={hovered ? "text-[#3DDC97]" : ""}
           >
             {place.name}
           </h3>
@@ -198,7 +198,7 @@ export default function DiscoverCard({
                     width="10"
                     height="10"
                     viewBox="0 0 24 24"
-                    fill={s <= Math.round(place.avg_rating) ? "#C6A85C" : "#DDD8D0"}
+                    fill={s <= Math.round(place.avg_rating) ? "#3DDC97" : "#DDD8D0"}
                     aria-hidden="true"
                   >
                     <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />

@@ -100,7 +100,7 @@ export default function ReviewsSection() {
           </div>
           <h2
             className="font-serif"
-            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#F5F0E8" }}
+            style={{ fontSize: "clamp(36px, 5vw, 62px)", color: "#EFF4EE" }}
           >
             Lo que dice la gente
           </h2>
@@ -108,9 +108,9 @@ export default function ReviewsSection() {
         <Link
           href="/reviews"
           className="label-micro transition-colors duration-200 hidden sm:block"
-          style={{ color: "rgba(245,240,232,0.35)" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#C9A84C")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,240,232,0.35)")}
+          style={{ color: "rgba(236,243,238,0.35)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#3DDC97")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(236,243,238,0.35)")}
         >
           Ver todas →
         </Link>
@@ -123,8 +123,8 @@ export default function ReviewsSection() {
             key={review.id}
             className="atmo-card card-rounded-lg flex flex-col gap-4"
             style={{
-              background: "#161410",
-              border: "1px solid rgba(245,240,232,0.07)",
+              background: "#0C1912",
+              border: "1px solid rgba(236,243,238,0.07)",
               padding: "20px",
             }}
           >
@@ -133,7 +133,7 @@ export default function ReviewsSection() {
               <div>
                 <p
                   className="font-serif leading-snug"
-                  style={{ color: "#F5F0E8", fontSize: "15px" }}
+                  style={{ color: "#EFF4EE", fontSize: "15px" }}
                 >
                   {review.place}
                 </p>
@@ -142,7 +142,7 @@ export default function ReviewsSection() {
                     fontSize: "9px",
                     letterSpacing: "0.15em",
                     textTransform: "uppercase",
-                    color: "rgba(245,240,232,0.65)",
+                    color: "rgba(236,243,238,0.65)",
                     fontWeight: 500,
                     marginTop: "3px",
                   }}
@@ -154,14 +154,14 @@ export default function ReviewsSection() {
             </div>
 
             {/* Thin rule */}
-            <div style={{ height: "1px", background: "rgba(245,240,232,0.07)" }} />
+            <div style={{ height: "1px", background: "rgba(236,243,238,0.07)" }} />
 
             {/* Review text — italic serif quote */}
             <p
               style={{
                 fontSize: "12px",
                 lineHeight: "1.75",
-                color: "rgba(245,240,232,0.65)",
+                color: "rgba(236,243,238,0.65)",
                 fontStyle: "italic",
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontWeight: 400,
@@ -179,14 +179,14 @@ export default function ReviewsSection() {
                   style={{
                     width: "28px",
                     height: "28px",
-                    background: "rgba(201,168,76,0.08)",
-                    border: "1px solid rgba(198,168,92,0.15)",
+                    background: "rgba(61,220,151,0.08)",
+                    border: "1px solid rgba(61,220,151,0.15)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "10px",
                     fontWeight: 600,
-                    color: "#C8A44E",
+                    color: "#3DDC97",
                     flexShrink: 0,
                   }}
                 >
@@ -196,7 +196,7 @@ export default function ReviewsSection() {
                   <p
                     style={{
                       fontSize: "10px",
-                      color: "rgba(245,240,232,0.70)",
+                      color: "rgba(236,243,238,0.70)",
                       fontWeight: 500,
                       fontFamily: "'Sora', system-ui, sans-serif",
                     }}
@@ -206,7 +206,7 @@ export default function ReviewsSection() {
                   <p
                     style={{
                       fontSize: "9px",
-                      color: "rgba(245,240,232,0.35)",
+                      color: "rgba(236,243,238,0.35)",
                       letterSpacing: "0.08em",
                       fontFamily: "'Sora', system-ui, sans-serif",
                     }}
@@ -221,7 +221,7 @@ export default function ReviewsSection() {
                 aria-label={liked.has(review.id) ? "Quitar útil" : "Marcar como útil"}
                 aria-pressed={liked.has(review.id)}
                 className="flex items-center gap-1.5 transition-colors duration-200"
-                style={{ color: liked.has(review.id) ? "#C8A44E" : "rgba(245,240,232,0.25)" }}
+                style={{ color: liked.has(review.id) ? "#3DDC97" : "rgba(236,243,238,0.25)" }}
               >
                 <svg
                   width="11"
@@ -253,12 +253,12 @@ export default function ReviewsSection() {
       {/* CTA row */}
       <div
         className="flex items-center justify-between mt-6 pt-5"
-        style={{ borderTop: "1px solid rgba(245,240,232,0.07)" }}
+        style={{ borderTop: "1px solid rgba(236,243,238,0.07)" }}
       >
         <p
           style={{
             fontSize: "11px",
-            color: "rgba(245,240,232,0.35)",
+            color: "rgba(236,243,238,0.35)",
             letterSpacing: "0.02em",
             fontFamily: "'Sora', system-ui, sans-serif",
             fontWeight: 300,
@@ -274,15 +274,15 @@ export default function ReviewsSection() {
             letterSpacing: "0.16em",
             textTransform: "uppercase",
             fontWeight: 600,
-            color: "#C9A84C",
+            color: "#3DDC97",
             fontFamily: "'Sora', system-ui, sans-serif",
             whiteSpace: "nowrap",
           }}
           onMouseEnter={(e) =>
-            ((e.currentTarget as HTMLElement).style.color = "#C9A84C")
+            ((e.currentTarget as HTMLElement).style.color = "#3DDC97")
           }
           onMouseLeave={(e) =>
-            ((e.currentTarget as HTMLElement).style.color = "#C9A84C")
+            ((e.currentTarget as HTMLElement).style.color = "#3DDC97")
           }
         >
           Escribir review

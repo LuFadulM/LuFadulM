@@ -93,7 +93,7 @@ export default function ColombiaMap({ onCitySelect, selectedCity }: ColombiaMapP
         <defs>
           {/* Sea hatching */}
           <pattern id="sea-hatch" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-            <line x1="0" y1="10" x2="10" y2="0" stroke="rgba(212,175,55,0.05)" strokeWidth="0.6" />
+            <line x1="0" y1="10" x2="10" y2="0" stroke="rgba(61,220,151,0.05)" strokeWidth="0.6" />
           </pattern>
 
           {/* Gold glow for active cities */}
@@ -135,7 +135,7 @@ export default function ColombiaMap({ onCitySelect, selectedCity }: ColombiaMapP
         <path d={COLOMBIA_PATH} fill="rgba(14,12,8,0.97)" stroke="none" />
 
         {/* Very faint Andes + Magdalena river */}
-        <path d={ANDES_PATH}     fill="none" stroke="rgba(212,175,55,0.055)" strokeWidth="1" strokeLinecap="round" />
+        <path d={ANDES_PATH}     fill="none" stroke="rgba(61,220,151,0.055)" strokeWidth="1" strokeLinecap="round" />
         <path d={MAGDALENA_PATH} fill="none" stroke="rgba(120,165,210,0.07)"  strokeWidth="0.8" strokeLinecap="round" />
 
         {/* Colombia outline — animated draw */}
@@ -143,7 +143,7 @@ export default function ColombiaMap({ onCitySelect, selectedCity }: ColombiaMapP
           className="colombia-outline"
           d={COLOMBIA_PATH}
           fill="none"
-          stroke="rgba(212,175,55,0.42)"
+          stroke="rgba(61,220,151,0.42)"
           strokeWidth="1.1"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -153,14 +153,14 @@ export default function ColombiaMap({ onCitySelect, selectedCity }: ColombiaMapP
 
         {/* MAR CARIBE */}
         <text x="175" y="52" textAnchor="middle"
-          fill="rgba(212,175,55,0.18)" fontSize="6"
+          fill="rgba(61,220,151,0.18)" fontSize="6"
           fontFamily="'Sora',system-ui,sans-serif" fontWeight="500" letterSpacing="0.2em">
           MAR CARIBE
         </text>
 
         {/* OCÉANO PACÍFICO — rotated */}
         <text x="28" y="148" textAnchor="middle"
-          fill="rgba(212,175,55,0.15)" fontSize="5.5"
+          fill="rgba(61,220,151,0.15)" fontSize="5.5"
           fontFamily="'Sora',system-ui,sans-serif" fontWeight="500" letterSpacing="0.15em"
           transform="rotate(-90 28 148)">
           OCÉANO PACÍFICO
@@ -168,33 +168,33 @@ export default function ColombiaMap({ onCitySelect, selectedCity }: ColombiaMapP
 
         {/* Colombia italic watermark */}
         <text x="158" y="155" textAnchor="middle"
-          fill="rgba(212,175,55,0.08)" fontSize="13"
+          fill="rgba(61,220,151,0.08)" fontSize="13"
           fontFamily="'Playfair Display',Georgia,serif" fontStyle="italic">
           Colombia
         </text>
 
         {/* ── Compass rose ── */}
         <g transform="translate(262,30)">
-          <line x1="0" y1="-9" x2="0" y2="-3" stroke="rgba(212,175,55,0.5)" strokeWidth="0.7" />
-          <polygon points="0,-13 -2.5,-4 2.5,-4" fill="rgba(212,175,55,0.55)" />
+          <line x1="0" y1="-9" x2="0" y2="-3" stroke="rgba(61,220,151,0.5)" strokeWidth="0.7" />
+          <polygon points="0,-13 -2.5,-4 2.5,-4" fill="rgba(61,220,151,0.55)" />
           <text x="0" y="-15" textAnchor="middle"
-            fill="rgba(212,175,55,0.5)" fontSize="5"
+            fill="rgba(61,220,151,0.5)" fontSize="5"
             fontFamily="'Sora',system-ui,sans-serif" fontWeight="700" letterSpacing="0.1em">
             N
           </text>
-          <line x1="-8" y1="0" x2="8" y2="0" stroke="rgba(212,175,55,0.15)" strokeWidth="0.5" />
-          <line x1="0" y1="-8" x2="0" y2="8" stroke="rgba(212,175,55,0.15)" strokeWidth="0.5" />
-          <circle cx="0" cy="0" r="1.5" fill="rgba(212,175,55,0.35)" />
+          <line x1="-8" y1="0" x2="8" y2="0" stroke="rgba(61,220,151,0.15)" strokeWidth="0.5" />
+          <line x1="0" y1="-8" x2="0" y2="8" stroke="rgba(61,220,151,0.15)" strokeWidth="0.5" />
+          <circle cx="0" cy="0" r="1.5" fill="rgba(61,220,151,0.35)" />
         </g>
 
         {/* ── Scale bar ── */}
         <g transform="translate(202,292)">
-          <line x1="0" y1="0" x2="32" y2="0" stroke="rgba(212,175,55,0.25)" strokeWidth="0.6" />
-          <line x1="0" y1="-2.5" x2="0" y2="2.5" stroke="rgba(212,175,55,0.25)" strokeWidth="0.6" />
-          <line x1="32" y1="-2.5" x2="32" y2="2.5" stroke="rgba(212,175,55,0.25)" strokeWidth="0.6" />
-          <line x1="16" y1="-1.5" x2="16" y2="1.5" stroke="rgba(212,175,55,0.18)" strokeWidth="0.6" />
+          <line x1="0" y1="0" x2="32" y2="0" stroke="rgba(61,220,151,0.25)" strokeWidth="0.6" />
+          <line x1="0" y1="-2.5" x2="0" y2="2.5" stroke="rgba(61,220,151,0.25)" strokeWidth="0.6" />
+          <line x1="32" y1="-2.5" x2="32" y2="2.5" stroke="rgba(61,220,151,0.25)" strokeWidth="0.6" />
+          <line x1="16" y1="-1.5" x2="16" y2="1.5" stroke="rgba(61,220,151,0.18)" strokeWidth="0.6" />
           <text x="16" y="-5" textAnchor="middle"
-            fill="rgba(212,175,55,0.22)" fontSize="4.5"
+            fill="rgba(61,220,151,0.22)" fontSize="4.5"
             fontFamily="'Sora',system-ui,sans-serif" fontWeight="500" letterSpacing="0.08em">
             ~600 km
           </text>
@@ -206,9 +206,9 @@ export default function ColombiaMap({ onCitySelect, selectedCity }: ColombiaMapP
           const isHovered  = hovered === city.id;
           const isActive   = isSelected || isHovered;
 
-          const dotFill    = isActive ? "#D4AF37" : "rgba(242,242,242,0.65)";
-          const ringStroke = isActive ? "rgba(212,175,55,0.3)" : "rgba(255,255,255,0.08)";
-          const labelFill  = isSelected ? "#D4AF37" : isHovered ? "#E0C878" : "rgba(255,255,255,0.38)";
+          const dotFill    = isActive ? "#3DDC97" : "rgba(242,242,242,0.65)";
+          const ringStroke = isActive ? "rgba(61,220,151,0.3)" : "rgba(255,255,255,0.08)";
+          const labelFill  = isSelected ? "#3DDC97" : isHovered ? "#E0C878" : "rgba(255,255,255,0.38)";
 
           return (
             <g
@@ -229,10 +229,10 @@ export default function ColombiaMap({ onCitySelect, selectedCity }: ColombiaMapP
 
               {/* Crosshair ticks */}
               <line x1={city.x - 6} y1={city.y} x2={city.x - 3} y2={city.y}
-                stroke={isActive ? "rgba(212,175,55,0.6)" : "rgba(255,255,255,0.14)"}
+                stroke={isActive ? "rgba(61,220,151,0.6)" : "rgba(255,255,255,0.14)"}
                 strokeWidth="0.6" style={{ transition: "stroke 0.25s ease" }} />
               <line x1={city.x + 3} y1={city.y} x2={city.x + 6} y2={city.y}
-                stroke={isActive ? "rgba(212,175,55,0.6)" : "rgba(255,255,255,0.14)"}
+                stroke={isActive ? "rgba(61,220,151,0.6)" : "rgba(255,255,255,0.14)"}
                 strokeWidth="0.6" style={{ transition: "stroke 0.25s ease" }} />
 
               {/* Dot */}

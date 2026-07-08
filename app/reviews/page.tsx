@@ -124,8 +124,8 @@ function StarRating({ rating }: { rating: number }) {
         <svg key={i} width="11" height="11" viewBox="0 0 24 24" fill="none">
           <polygon
             points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-            fill={i < rating ? "#D4AF37" : "rgba(255,255,255,0.1)"}
-            stroke={i < rating ? "#D4AF37" : "rgba(255,255,255,0.08)"}
+            fill={i < rating ? "#3DDC97" : "rgba(255,255,255,0.1)"}
+            stroke={i < rating ? "#3DDC97" : "rgba(255,255,255,0.08)"}
             strokeWidth="1"
           />
         </svg>
@@ -159,7 +159,7 @@ export default function ReviewsPage() {
       <div className="mb-12 border-b border-[rgba(255,255,255,0.04)] pb-12">
         <p
           className="label-micro mb-4"
-          style={{ color: "#D4AF37" }}
+          style={{ color: "#3DDC97" }}
         >
           Comunidad
         </p>
@@ -178,16 +178,16 @@ export default function ReviewsPage() {
               letterSpacing: "0.18em",
               textTransform: "uppercase",
               fontWeight: 600,
-              color: "#D4AF37",
-              border: "1px solid rgba(212,175,55,0.25)",
+              color: "#3DDC97",
+              border: "1px solid rgba(61,220,151,0.25)",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "rgba(212,175,55,0.06)";
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,55,0.5)";
+              (e.currentTarget as HTMLElement).style.background = "rgba(61,220,151,0.06)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(61,220,151,0.5)";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.background = "transparent";
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(212,175,55,0.25)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(61,220,151,0.25)";
             }}
           >
             Escribir review
@@ -209,9 +209,9 @@ export default function ReviewsPage() {
                 fontWeight: 500,
                 padding: "6px 12px",
                 border: "1px solid",
-                borderColor: city === c ? "rgba(212,175,55,0.35)" : "rgba(255,255,255,0.07)",
-                color: city === c ? "#D4AF37" : "#555555",
-                background: city === c ? "rgba(212,175,55,0.05)" : "transparent",
+                borderColor: city === c ? "rgba(61,220,151,0.35)" : "rgba(255,255,255,0.07)",
+                color: city === c ? "#3DDC97" : "#555555",
+                background: city === c ? "rgba(61,220,151,0.05)" : "transparent",
                 cursor: "pointer",
                 transition: "all 0.15s ease",
               }}
@@ -232,9 +232,9 @@ export default function ReviewsPage() {
                 fontWeight: 500,
                 padding: "6px 12px",
                 border: "1px solid",
-                borderColor: category === c ? "rgba(212,175,55,0.35)" : "rgba(255,255,255,0.07)",
-                color: category === c ? "#D4AF37" : "#555555",
-                background: category === c ? "rgba(212,175,55,0.05)" : "transparent",
+                borderColor: category === c ? "rgba(61,220,151,0.35)" : "rgba(255,255,255,0.07)",
+                color: category === c ? "#3DDC97" : "#555555",
+                background: category === c ? "rgba(61,220,151,0.05)" : "transparent",
                 cursor: "pointer",
                 transition: "all 0.15s ease",
               }}
@@ -271,12 +271,12 @@ export default function ReviewsPage() {
           {filtered.map((review) => (
             <article
               key={review.id}
-              style={{ background: "#0A0A09" }}
+              style={{ background: "#08130E" }}
               className="p-6 flex flex-col gap-4 hover:bg-[#0E0E0D] transition-colors duration-200"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-serif" style={{ color: "#D4D0C8", fontSize: "15px", lineHeight: 1.3 }}>
+                  <p className="font-serif" style={{ color: "#CBD6CE", fontSize: "15px", lineHeight: 1.3 }}>
                     {review.place}
                   </p>
                   <p style={{ fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#555555", fontWeight: 500, marginTop: "3px" }}>
@@ -296,9 +296,9 @@ export default function ReviewsPage() {
                 <div className="flex items-center gap-2.5">
                   <div style={{
                     width: "26px", height: "26px", borderRadius: "50%",
-                    background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.14)",
+                    background: "rgba(61,220,151,0.08)", border: "1px solid rgba(61,220,151,0.14)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: "10px", fontWeight: 600, color: "#D4AF37", flexShrink: 0,
+                    fontSize: "10px", fontWeight: 600, color: "#3DDC97", flexShrink: 0,
                   }}>
                     {review.avatar}
                   </div>
@@ -311,7 +311,7 @@ export default function ReviewsPage() {
                 <button
                   onClick={() => toggleLike(review.id)}
                   className="flex items-center gap-1.5 transition-all duration-200"
-                  style={{ color: liked.has(review.id) ? "#D4AF37" : "#3A3A38" }}
+                  style={{ color: liked.has(review.id) ? "#3DDC97" : "#3A3A38" }}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z" />

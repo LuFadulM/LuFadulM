@@ -21,7 +21,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
   const initials = getInitials(displayName);
 
   return (
-    <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-5">
+    <div className="bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-card p-5">
       {/* Header */}
       <div className="flex items-start justify-between gap-4 mb-3">
         <div className="flex items-center gap-3">
@@ -33,7 +33,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
               className="w-9 h-9 rounded-full object-cover"
             />
           ) : (
-            <div className="w-9 h-9 rounded-full bg-bg-surface border border-[rgba(242,237,232,0.14)] flex items-center justify-center text-xs font-semibold text-text-muted">
+            <div className="w-9 h-9 rounded-full bg-bg-surface border border-[rgba(234,241,236,0.14)] flex items-center justify-center text-xs font-semibold text-text-muted">
               {initials}
             </div>
           )}

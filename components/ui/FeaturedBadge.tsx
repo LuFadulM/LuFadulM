@@ -19,9 +19,9 @@ export default function FeaturedBadge({ label = "Destacado", variant = "gold" }:
           border: "1px solid rgba(255, 122, 122, 0.2)",
         }
       : {
-          color: "#C8A44E",
-          background: "rgba(200, 164, 78, 0.06)",
-          border: "1px solid rgba(200, 164, 78, 0.3)",
+          color: "#3DDC97",
+          background: "rgba(61, 220, 151, 0.06)",
+          border: "1px solid rgba(61, 220, 151, 0.3)",
         };
 
   return (

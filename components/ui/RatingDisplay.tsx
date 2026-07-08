@@ -21,7 +21,7 @@ function RatingDots({ rating, size }: { rating: number; size: "sm" | "md" }) {
             width: px,
             height: px,
             borderRadius: "50%",
-            background: i < filled ? "#B1987C" : "rgba(255,255,255,0.12)",
+            background: i < filled ? "#D98D72" : "rgba(255,255,255,0.12)",
             flexShrink: 0,
           }}
         />
@@ -38,7 +38,7 @@ function RatingStars({ rating, size }: { rating: number; size: "sm" | "md" }) {
         <span
           key={i}
           aria-hidden="true"
-          style={{ color: i < Math.round(rating) ? "#C8A44E" : "#2A2A28", fontSize }}
+          style={{ color: i < Math.round(rating) ? "#3DDC97" : "#2A2A28", fontSize }}
         >
           ★
         </span>
@@ -55,8 +55,8 @@ function RatingStarSvg({ rating, size }: { rating: number; size: "sm" | "md" }) 
         <svg key={i} width={px} height={px} viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <polygon
             points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-            fill={i < rating ? "#C8A44E" : "#252522"}
-            stroke={i < rating ? "#C8A44E" : "#252522"}
+            fill={i < rating ? "#3DDC97" : "#252522"}
+            stroke={i < rating ? "#3DDC97" : "#252522"}
             strokeWidth="1"
           />
         </svg>

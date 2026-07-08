@@ -232,7 +232,7 @@ export default function AtmosphereCard({
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   fontWeight: 600,
-                  color: "#B1987C",
+                  color: "#D98D72",
                   fontFamily: "'Sora', system-ui, sans-serif",
                   textShadow: "0 1px 8px rgba(0,0,0,0.8)",
                 }}

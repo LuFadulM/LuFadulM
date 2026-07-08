@@ -66,7 +66,7 @@ export default function CategoryGrid({ places, onCategorySelect }: CategoryGridP
       <div className="flex items-end justify-between mb-0 pb-4 border-b border-[rgba(255,255,255,0.06)]">
         <div>
           <p className="label-micro mb-3">{t.categoryGrid.sectionLabel}</p>
-          <h2 className="text-3xl font-serif" style={{ color: "#D4D0C8" }}>
+          <h2 className="text-3xl font-serif" style={{ color: "#CBD6CE" }}>
             {t.categoryGrid.sectionTitle}
           </h2>
         </div>
@@ -88,14 +88,14 @@ export default function CategoryGrid({ places, onCategorySelect }: CategoryGridP
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
-                  background: "linear-gradient(90deg, rgba(212,175,55,0.05) 0%, rgba(212,175,55,0.01) 40%, transparent 70%)",
+                  background: "linear-gradient(90deg, rgba(61,220,151,0.05) 0%, rgba(61,220,151,0.01) 40%, transparent 70%)",
                 }}
               />
 
               {/* Left accent line — subtle default, full gold on hover */}
               <div
                 className="absolute left-0 top-0 bottom-0 w-[2px] transition-all duration-250 group-hover:opacity-100"
-                style={{ background: "#D4AF37", opacity: 0.1 }}
+                style={{ background: "#3DDC97", opacity: 0.1 }}
               />
 
               {/* Index */}
@@ -114,7 +114,7 @@ export default function CategoryGrid({ places, onCategorySelect }: CategoryGridP
 
               {/* Icon */}
               <div
-                className="shrink-0 flex items-center justify-center transition-colors duration-200 group-hover:text-[#D4AF37] relative"
+                className="shrink-0 flex items-center justify-center transition-colors duration-200 group-hover:text-[#3DDC97] relative"
                 style={{ width: 32, height: 32, color: "#666660" }}
               >
                 {CATEGORY_ICONS[catKey]}
@@ -157,7 +157,7 @@ export default function CategoryGrid({ places, onCategorySelect }: CategoryGridP
                   {count} {count === 1 ? t.categoryGrid.place : t.categoryGrid.places}
                 </span>
                 <span
-                  className="transition-all duration-200 group-hover:text-[#D4AF37] group-hover:translate-x-1"
+                  className="transition-all duration-200 group-hover:text-[#3DDC97] group-hover:translate-x-1"
                   style={{ color: "#444440", fontSize: "14px", display: "inline-block" }}
                 >
                   →

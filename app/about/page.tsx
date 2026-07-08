@@ -4,13 +4,13 @@ import React from "react";
 import Link from "next/link";
 
 /* ── Shared light-editorial tokens ─────────────────────────────── */
-const BG        = "#F5F0E8";
-const INK       = "#1A1710";
-const INK_60    = "rgba(26,23,16,0.60)";
-const INK_45    = "rgba(26,23,16,0.45)";
-const GOLD      = "#8B6914";           /* gold-warm — on light bg */
-const GOLD_35   = "rgba(139,105,20,0.35)";
-const RULE      = "rgba(26,23,16,0.10)";
+const BG        = "#EFF4EE";
+const INK       = "#0D1B14";
+const INK_60    = "rgba(13,27,20,0.60)";
+const INK_45    = "rgba(13,27,20,0.45)";
+const GOLD      = "#0E7A5C";           /* gold-warm — on light bg */
+const GOLD_35   = "rgba(14,122,92,0.35)";
+const RULE      = "rgba(13,27,20,0.10)";
 
 const PROSE: React.CSSProperties = {
   fontFamily: "var(--font-sans)",
@@ -236,7 +236,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Stance ── */}
-      <section style={{ background: "rgba(26,23,16,0.04)", borderTop: `1px solid ${RULE}`, borderBottom: `1px solid ${RULE}`, padding: "clamp(4rem, 8vw, 6rem) 0" }}>
+      <section style={{ background: "rgba(13,27,20,0.04)", borderTop: `1px solid ${RULE}`, borderBottom: `1px solid ${RULE}`, padding: "clamp(4rem, 8vw, 6rem) 0" }}>
         <div style={{ maxWidth: "820px", margin: "0 auto", padding: "0 var(--container-pad)" }}>
           <Eyebrow>Nuestra postura</Eyebrow>
 

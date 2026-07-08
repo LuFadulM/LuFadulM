@@ -18,8 +18,8 @@ const ACTIVIDADES_ITEMS = [
   { label: "Atracciones",    href: "/?category=Attractions" },
 ];
 
-const NAV_BASE  = "rgba(245,240,232,0.45)";
-const NAV_HOVER = "#F5F0E8";
+const NAV_BASE  = "rgba(236,243,238,0.45)";
+const NAV_HOVER = "#EFF4EE";
 
 function NavLink({ href, label }: { href: string; label: string }) {
   return (
@@ -96,12 +96,12 @@ function ActividadesDropdown() {
             position: "absolute", top: "8px", left: "50%",
             transform: "translateX(-50%)", width: 0, height: 0,
             borderLeft: "6px solid transparent", borderRight: "6px solid transparent",
-            borderBottom: "6px solid rgba(0,0,0,0.05)",
+            borderBottom: "6px solid var(--surface-alt)",
           }} />
           <div style={{
-            background: "#FFFFFF",
-            border: "1px solid rgba(0,0,0,0.08)",
-            boxShadow: "0 16px 40px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06)",
+            background: "var(--surface-alt)",
+            border: "1px solid var(--border)",
+            boxShadow: "0 16px 40px rgba(0,0,0,0.45), 0 4px 12px rgba(0,0,0,0.30)",
             overflow: "hidden", marginTop: "6px",
           }}>
             {ACTIVIDADES_ITEMS.map((item, i) => (
@@ -114,25 +114,25 @@ function ActividadesDropdown() {
                 style={{
                   fontSize: "10px", letterSpacing: "0.13em",
                   textTransform: "uppercase", fontWeight: 500,
-                  color: "rgba(28,28,28,0.55)",
+                  color: "var(--text-secondary)",
                   borderBottom: i < ACTIVIDADES_ITEMS.length - 1
-                    ? "1px solid rgba(0,0,0,0.05)" : "none",
+                    ? "1px solid var(--border)" : "none",
                   textDecoration: "none",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#1C1C1C";
-                  e.currentTarget.style.background = "rgba(198,168,92,0.06)";
+                  e.currentTarget.style.color = "var(--text-primary)";
+                  e.currentTarget.style.background = "rgba(61,220,151,0.07)";
                   e.currentTarget.style.paddingLeft = "22px";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "rgba(28,28,28,0.55)";
+                  e.currentTarget.style.color = "var(--text-secondary)";
                   e.currentTarget.style.background = "transparent";
                   e.currentTarget.style.paddingLeft = "20px";
                 }}
               >
                 {item.label}
                 <span aria-hidden="true" style={{
-                  color: "#C6A85C", fontSize: "11px",
+                  color: "#3DDC97", fontSize: "11px",
                   opacity: 0, transition: "opacity 0.15s ease",
                 }} className="group-hover:opacity-100">
                   →
@@ -180,10 +180,10 @@ export default function Header() {
       <header
         className="sticky top-0 z-40 transition-all duration-500"
         style={{
-          background: scrolled ? "rgba(12,11,9,0.96)" : "transparent",
+          background: scrolled ? "rgba(7,18,13,0.96)" : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(245,240,232,0.07)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(236,243,238,0.07)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between gap-4">
@@ -197,7 +197,7 @@ export default function Header() {
               fontWeight: 400,
               fontSize: "clamp(22px, 2.5vw, 30px)",
               letterSpacing: "-0.03em",
-              color: "#C6A85C",
+              color: "#3DDC97",
               textDecoration: "none",
               lineHeight: 1,
             }}
@@ -264,7 +264,7 @@ export default function Header() {
                     fontSize: "11px", fontFamily: "var(--font-sans)",
                     fontWeight: 500, color: "var(--gold)",
                     background: "transparent",
-                    border: "1.5px solid rgba(201,168,76,0.35)",
+                    border: "1.5px solid rgba(61,220,151,0.35)",
                     borderRadius: "var(--radius-pill)",
                     padding: "0.5rem 1.375rem",
                     textDecoration: "none",
@@ -281,7 +281,7 @@ export default function Header() {
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "transparent";
                     e.currentTarget.style.color = "var(--gold)";
-                    e.currentTarget.style.borderColor = "rgba(201,168,76,0.35)";
+                    e.currentTarget.style.borderColor = "rgba(61,220,151,0.35)";
                   }}
                 >
                   Registrarse

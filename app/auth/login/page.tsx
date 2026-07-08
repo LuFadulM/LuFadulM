@@ -49,7 +49,7 @@ export default function LoginPage() {
   };
 
   const inputClass =
-    "w-full bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-btn px-4 py-3 text-sm text-text placeholder-text-dim focus:outline-none focus:border-coral transition-colors";
+    "w-full bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-btn px-4 py-3 text-sm text-text placeholder-text-dim focus:outline-none focus:border-coral transition-colors";
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12">
@@ -64,7 +64,7 @@ export default function LoginPage() {
         </div>
 
         {/* Card */}
-        <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-7">
+        <div className="bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-card p-7">
           {error && (
             <div
               id="login-error"
@@ -146,7 +146,7 @@ export default function LoginPage() {
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[rgba(242,237,232,0.07)]" />
+              <div className="w-full border-t border-[rgba(234,241,236,0.07)]" />
             </div>
             <div className="relative flex justify-center">
               <span className="bg-bg-card px-3 text-xs text-text-dim">or</span>

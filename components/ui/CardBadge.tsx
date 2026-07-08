@@ -12,7 +12,7 @@ const VARIANT_STYLES: Record<
 > = {
   /** Gold — editorial picks, gems, premium curation */
   editorial: {
-    color: "#B1987C",
+    color: "#D98D72",
     bg: "rgba(177,152,124,0.08)",
     border: "rgba(177,152,124,0.22)",
   },

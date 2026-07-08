@@ -7,26 +7,31 @@
 @layer base {
   :root {
     /* ── Backgrounds ──────────────────────────────────────────── */
-    --bg:           #0C0B09;
-    --surface:      #161410;
-    --surface-alt:  #1E1B17;
-    --warm-break:   #F2EDE4;
+    --bg:           #07120D;
+    --surface:      #0C1912;
+    --surface-alt:  #12241B;
+    --warm-break:   #EAF1E9;
 
     /* ── Typography ───────────────────────────────────────────── */
-    --text-primary:   #F5F0E8;
-    --text-secondary: rgba(245, 240, 232, 0.65);
-    --text-muted:     rgba(245, 240, 232, 0.35);
-    --text-dark:      #1A1710;
+    --text-primary:   #EFF4EE;
+    --text-secondary: rgba(236, 243, 238, 0.65);
+    --text-muted:     rgba(236, 243, 238, 0.35);
+    --text-dark:      #0D1B14;
 
-    /* ── Accent ───────────────────────────────────────────────── */
-    --gold:        #C9A84C;
-    --gold-muted:  rgba(201, 168, 76, 0.12);
-    --gold-border: rgba(201, 168, 76, 0.35);
+    /* ── Accent — Esmeralda (Colombia, capital mundial de la esmeralda) ── */
+    --gold:        #3DDC97;                      /* primary accent (emerald) */
+    --gold-muted:  rgba(61, 220, 151, 0.12);
+    --gold-border: rgba(61, 220, 151, 0.35);
+    --accent:      var(--gold);
+    --accent-deep: #0E7A5C;                      /* accent on light backgrounds */
+    --coral:        #E8785A;                     /* secondary accent (Cartagena walls) */
+    --coral-muted:  rgba(232, 120, 90, 0.12);
+    --coral-border: rgba(232, 120, 90, 0.35);
 
     /* ── Borders & Scrims ─────────────────────────────────────── */
-    --border:     rgba(245, 240, 232, 0.07);
-    --scrim-card: rgba(12, 11, 9, 0.82);
-    --scrim-hero: rgba(12, 11, 9, 0.55);
+    --border:     rgba(236, 243, 238, 0.07);
+    --scrim-card: rgba(7, 18, 13, 0.82);
+    --scrim-hero: rgba(7, 18, 13, 0.55);
 
     /* ── Radii — zero everywhere except pills (brand rule) ─────── */
     --radius-card: 0px;
@@ -92,19 +97,19 @@
   }
 
   :focus-visible {
-    outline: 2px solid rgba(201, 168, 76, 0.8) !important;
+    outline: 2px solid rgba(61, 220, 151, 0.8) !important;
     outline-offset: 3px !important;
   }
 
   ::selection {
-    background-color: rgba(201, 168, 76, 0.18);
+    background-color: rgba(61, 220, 151, 0.18);
     color: var(--text-primary);
   }
 
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: #2A2720; }
-  ::-webkit-scrollbar-thumb:hover { background: #3A3730; }
+  ::-webkit-scrollbar-thumb { background: #1F2E26; }
+  ::-webkit-scrollbar-thumb:hover { background: #2E4036; }
 }
 
 @layer components {
@@ -166,8 +171,8 @@
   }
 
   /* Warm-break variant */
-  .section--warm .section-label { color: #8B6914; }
-  .section--warm .section-label::before { background: #8B6914; }
+  .section--warm .section-label { color: #0E7A5C; }
+  .section--warm .section-label::before { background: #0E7A5C; }
 
   /* ── Scroll reveal ───────────────────────────────────────────── */
   .fade-up {
@@ -210,7 +215,7 @@
 
   .pill:hover {
     color: var(--text-primary);
-    border-color: rgba(245, 240, 232, 0.2);
+    border-color: rgba(236, 243, 238, 0.2);
   }
 
   .pill.active {
@@ -226,7 +231,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
-    background: rgba(245, 240, 232, 0.05);
+    background: rgba(236, 243, 238, 0.05);
     padding: 3px 9px;
     display: inline-flex;
     align-items: center;
@@ -253,7 +258,7 @@
 
   /* ── Stars ───────────────────────────────────────────────────── */
   .star-filled { color: var(--gold); }
-  .star-empty  { color: rgba(245, 240, 232, 0.12); }
+  .star-empty  { color: rgba(236, 243, 238, 0.12); }
 
   /* ── Divider ─────────────────────────────────────────────────── */
   .divider-line { height: 1px; background: var(--border); }
@@ -292,7 +297,7 @@
     display: block;
     width: 18px;
     height: 1px;
-    background: rgba(201, 168, 76, 0.6);
+    background: rgba(61, 220, 151, 0.6);
     flex-shrink: 0;
   }
 
@@ -345,7 +350,7 @@
   .moment-tag {
     border-radius: var(--radius-pill) !important;
     font-size: 8px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-    color: rgba(201,168,76,0.85); background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.20);
+    color: rgba(61,220,151,0.85); background: rgba(61,220,151,0.08); border: 1px solid rgba(61,220,151,0.20);
     padding: 2px 9px; display: inline-block;
   }
 
@@ -366,7 +371,7 @@
     color: var(--gold); transition: color 0.2s ease; display: inline-flex; align-items: center; gap: 6px;
   }
 
-  .link-gold:hover { color: rgba(201,168,76,0.75); }
+  .link-gold:hover { color: rgba(61,220,151,0.75); }
 
   @keyframes pulse-dot {
     0%, 100% { opacity: 1; transform: scale(1); }
@@ -379,5 +384,123 @@
     background: #8A9E6A;
     animation: pulse-dot 2s ease-in-out infinite;
     display: inline-block;
+  }
+
+  /* ── Hero ────────────────────────────────────────────────────── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 45fr 55fr;
+    height: 100vh;
+    min-height: 560px;
+    max-height: 900px;
+    background: var(--bg);
+    overflow: hidden;
+    position: relative;
+  }
+
+  @media (max-width: 767px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 42vh;
+      height: auto;
+      max-height: none;
+      min-height: 100vh;
+    }
+    .hero-grid > div:first-child { order: 2; padding-top: 3rem; padding-bottom: 4rem; }
+    .hero-grid > div:last-child  { order: 1; position: relative; }
+  }
+
+  @keyframes hero-glow {
+    0%, 100% { opacity: 0.5; transform: translate(0, 0) scale(1); }
+    50%      { opacity: 0.9; transform: translate(4%, -4%) scale(1.12); }
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 60vw; height: 60vw;
+    max-width: 780px; max-height: 780px;
+    left: -18%; bottom: -30%;
+    background: radial-gradient(circle at center, rgba(61,220,151,0.14) 0%, rgba(61,220,151,0.05) 40%, transparent 70%);
+    filter: blur(20px);
+    animation: hero-glow 9s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* ── Grain overlay ───────────────────────────────────────────── */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* ── City marquee strip ──────────────────────────────────────── */
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    padding: 1.125rem 0;
+    position: relative;
+  }
+
+  .marquee::before,
+  .marquee::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .marquee::before { left: 0;  background: linear-gradient(to right, var(--surface), transparent); }
+  .marquee::after  { right: 0; background: linear-gradient(to left,  var(--surface), transparent); }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 3.5rem;
+    padding-right: 3.5rem;
+    animation: marquee-scroll 42s linear infinite;
+  }
+
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 3.5rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.0625rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    transition: color 250ms ease;
+  }
+
+  .marquee-item:hover { color: var(--gold); }
+
+  .marquee-dot {
+    width: 4px; height: 4px;
+    border-radius: 50% !important;
+    background: var(--gold);
+    opacity: 0.45;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .hero-glow { animation: none; }
   }
 }

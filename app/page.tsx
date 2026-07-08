@@ -49,10 +49,10 @@ function SLabel({ children, dark }: { children: React.ReactNode; dark?: boolean 
     <p style={{
       fontSize: "var(--text-micro)", letterSpacing: "0.14em", textTransform: "uppercase",
       fontWeight: 700, fontFamily: "var(--font-sans)",
-      color: dark ? "#8B6914" : "var(--gold)", marginBottom: "12px",
+      color: dark ? "#0E7A5C" : "var(--gold)", marginBottom: "12px",
       display: "flex", alignItems: "center", gap: "10px",
     }}>
-      <span style={{ display: "inline-block", width: "1.5rem", height: "1px", background: dark ? "#8B6914" : "var(--gold)", opacity: 0.7 }} />
+      <span style={{ display: "inline-block", width: "1.5rem", height: "1px", background: dark ? "#0E7A5C" : "var(--gold)", opacity: 0.7 }} />
       {children}
     </p>
   );
@@ -118,19 +118,9 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════════════════════════════
           HERO — split viewport, 45% content / 55% atmospheric photo
       ══════════════════════════════════════════════════════════════════ */}
-      <section
-        id="hero"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "45fr 55fr",
-          height: "100vh",
-          minHeight: "560px",
-          maxHeight: "900px",
-          background: "var(--bg)",
-          overflow: "hidden",
-        }}
-        aria-label="Bienvenida a Hyex"
-      >
+      <section id="hero" className="hero-grid grain" aria-label="Bienvenida a Hyex">
+        <div className="hero-glow" aria-hidden="true" />
+
         {/* LEFT — editorial content */}
         <div style={{
           display: "flex",
@@ -138,6 +128,8 @@ export default function HomePage() {
           justifyContent: "center",
           padding: "0 clamp(2rem, 4vw, 4rem) 0 clamp(1.5rem, 5vw, 5rem)",
           gap: "1.75rem",
+          position: "relative",
+          zIndex: 1,
         }}>
 
           {/* Eyebrow */}
@@ -183,7 +175,10 @@ export default function HomePage() {
             {[`${MOCK_PLACES.length} lugares`, "6 ciudades", "6 categorías"].map((stat, i) => (
               <React.Fragment key={stat}>
                 {i > 0 && (
-                  <span style={{ color: "var(--border)", fontFamily: "var(--font-sans)" }}>·</span>
+                  <span aria-hidden="true" style={{
+                    width: "3px", height: "3px", borderRadius: "50%",
+                    background: "var(--coral)", opacity: 0.6, display: "inline-block",
+                  }} />
                 )}
                 <span style={{
                   fontFamily: "var(--font-sans)",
@@ -230,15 +225,53 @@ export default function HomePage() {
           {/* Left edge blends into dark bg */}
           <div style={{
             position: "absolute", inset: 0, pointerEvents: "none",
-            background: "linear-gradient(105deg, var(--bg) 0%, rgba(12,11,9,0.35) 40%, transparent 70%)",
+            background: "linear-gradient(105deg, var(--bg) 0%, rgba(7,18,13,0.35) 40%, transparent 70%)",
           }} />
-          {/* Scrim for overall darkening */}
+          {/* Emerald-tinted scrim for overall darkening */}
           <div style={{
             position: "absolute", inset: 0, pointerEvents: "none",
-            background: "rgba(12,11,9,0.25)",
+            background: "linear-gradient(to top, rgba(7,18,13,0.45), rgba(7,18,13,0.15) 45%, rgba(61,220,151,0.05))",
           }} />
         </div>
+
+        {/* Scroll cue */}
+        <div aria-hidden="true" className="hidden md:flex" style={{
+          position: "absolute", bottom: "1.75rem", left: "clamp(1.5rem, 5vw, 5rem)",
+          alignItems: "center", gap: "0.75rem", zIndex: 2,
+        }}>
+          <span style={{
+            width: "1px", height: "36px",
+            background: "linear-gradient(to bottom, transparent, var(--gold))",
+            display: "block",
+            animation: "scrollPulse 2.4s ease-in-out infinite",
+          }} />
+          <span style={{
+            fontFamily: "var(--font-sans)", fontSize: "9px", fontWeight: 600,
+            letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--text-muted)",
+          }}>
+            Desliza
+          </span>
+        </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          CITY MARQUEE — continuous editorial strip
+      ══════════════════════════════════════════════════════════════════ */}
+      <div className="marquee" aria-hidden="true">
+        <div className="marquee-track">
+          {[0, 1].map((copy) => (
+            <React.Fragment key={copy}>
+              {["Bogotá", "Medellín", "Cartagena", "Cali", "Santa Marta", "Salento",
+                "Villa de Leyva", "Barichara", "San Andrés", "Popayán", "Leticia", "Guatapé"].map((cityName) => (
+                <span className="marquee-item" key={`${copy}-${cityName}`}>
+                  {cityName}
+                  <span className="marquee-dot" />
+                </span>
+              ))}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
 
       {/* ══════════════════════════════════════════════════════════════════
           DISCOVERY SECTIONS
@@ -302,7 +335,7 @@ export default function HomePage() {
           <section
             id="about"
             aria-labelledby="about-heading"
-            style={{ background: "#F5F0E8", position: "relative", overflow: "hidden" }}
+            style={{ background: "#EFF4EE", position: "relative", overflow: "hidden" }}
           >
             {/* Subtle atmospheric texture — Cartagena, 6% opacity, multiply */}
             <div aria-hidden="true" style={{
@@ -326,9 +359,9 @@ export default function HomePage() {
                 display: "inline-flex", alignItems: "center", gap: "0.625rem",
                 fontFamily: "var(--font-sans)", fontSize: "var(--text-micro)",
                 fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase",
-                color: "#8B6914", marginBottom: "1.75rem",
+                color: "#0E7A5C", marginBottom: "1.75rem",
               }}>
-                <span style={{ display: "block", width: "1.5rem", height: "1px", background: "#8B6914", opacity: 0.7, flexShrink: 0 }} />
+                <span style={{ display: "block", width: "1.5rem", height: "1px", background: "#0E7A5C", opacity: 0.7, flexShrink: 0 }} />
                 Sobre Hyex
               </p>
 
@@ -339,13 +372,13 @@ export default function HomePage() {
                 data-delay="1"
                 style={{
                   fontSize: "clamp(2.25rem, 4.4vw, 3.75rem)",
-                  fontWeight: 400, color: "#1A1710",
+                  fontWeight: 400, color: "#0D1B14",
                   lineHeight: 1.1, letterSpacing: "-0.02em",
                   margin: 0, maxWidth: "780px",
                 }}
               >
                 Hyex no es una guía de viajes.{" "}
-                <em style={{ fontStyle: "italic", color: "#8B6914" }}>
+                <em style={{ fontStyle: "italic", color: "#0E7A5C" }}>
                   Es una forma de vivir Colombia de manera diferente.
                 </em>
               </h2>
@@ -353,7 +386,7 @@ export default function HomePage() {
               {/* Gold divider */}
               <div className="fade-up" data-delay="2" style={{
                 width: "32px", height: "1px",
-                background: "#8B6914", opacity: 0.5,
+                background: "#0E7A5C", opacity: 0.5,
                 margin: "3rem 0",
               }} />
 
@@ -361,7 +394,7 @@ export default function HomePage() {
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "680px" }}>
                 <p className="fade-up" data-delay="2" style={{
                   fontFamily: "var(--font-sans)", fontSize: "clamp(1rem, 1.15vw, 1.0625rem)",
-                  color: "rgba(26,23,16,0.65)", lineHeight: 1.8, margin: 0,
+                  color: "rgba(13,27,20,0.65)", lineHeight: 1.8, margin: 0,
                 }}>
                   Todo empezó con una frustración simple. Después de vivir en el exterior, nos acostumbramos
                   a plataformas que hacían que descubrir una ciudad fuera algo sin esfuerzo — dónde ir, qué
@@ -371,7 +404,7 @@ export default function HomePage() {
                 </p>
                 <p className="fade-up" data-delay="3" style={{
                   fontFamily: "var(--font-sans)", fontSize: "clamp(1rem, 1.15vw, 1.0625rem)",
-                  color: "#1A1710", fontWeight: 500, lineHeight: 1.8, margin: 0,
+                  color: "#0D1B14", fontWeight: 500, lineHeight: 1.8, margin: 0,
                 }}>
                   Hyex nació para cambiar eso.
                 </p>
@@ -379,10 +412,10 @@ export default function HomePage() {
 
               {/* SmallBreak: Propósito */}
               <div className="fade-up" style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "4rem 0 2.25rem" }}>
-                <span style={{ width: "32px", height: "1px", background: "#8B6914", opacity: 0.5, flexShrink: 0 }} />
+                <span style={{ width: "32px", height: "1px", background: "#0E7A5C", opacity: 0.5, flexShrink: 0 }} />
                 <span style={{
                   fontFamily: "var(--font-sans)", fontSize: "9px", fontWeight: 600,
-                  letterSpacing: "0.2em", textTransform: "uppercase", color: "#8B6914",
+                  letterSpacing: "0.2em", textTransform: "uppercase", color: "#0E7A5C",
                 }}>Propósito</span>
               </div>
 
@@ -390,24 +423,24 @@ export default function HomePage() {
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "680px" }}>
                 <p className="fade-up" style={{
                   fontFamily: "var(--font-sans)", fontSize: "clamp(1rem, 1.15vw, 1.0625rem)",
-                  color: "rgba(26,23,16,0.65)", lineHeight: 1.8, margin: 0,
+                  color: "rgba(13,27,20,0.65)", lineHeight: 1.8, margin: 0,
                 }}>
                   Creamos una plataforma para personas que no solo quieren visitar lugares — quieren entenderlos.
                   Personas que se preocupan por dónde van, a quién conocen, y las historias detrás de cada rincón.
                 </p>
                 <p className="fade-up" data-delay="1" style={{
                   fontFamily: "var(--font-sans)", fontSize: "clamp(1rem, 1.15vw, 1.0625rem)",
-                  color: "rgba(26,23,16,0.65)", lineHeight: 1.8, margin: 0,
+                  color: "rgba(13,27,20,0.65)", lineHeight: 1.8, margin: 0,
                 }}>
                   En lugar de abrumarte con opciones, Hyex cura lo que realmente importa:{" "}
-                  <strong style={{ color: "#1A1710", fontWeight: 500 }}>
+                  <strong style={{ color: "#0D1B14", fontWeight: 500 }}>
                     experiencias significativas, joyas ocultas y lugares que los locales recomendarían genuinamente
                   </strong>
                   {" "}— no los algoritmos.
                 </p>
                 <p className="fade-up" data-delay="2" style={{
                   fontFamily: "var(--font-sans)", fontSize: "clamp(1rem, 1.15vw, 1.0625rem)",
-                  color: "rgba(26,23,16,0.65)", lineHeight: 1.8, margin: 0,
+                  color: "rgba(13,27,20,0.65)", lineHeight: 1.8, margin: 0,
                 }}>
                   Desde un amanecer en Tayrona hasta una noche en el barrio de Getsemaní, cada plan en Hyex
                   está seleccionado para ayudarte a conectar con la cultura, no solo a pasar por ella.
@@ -417,36 +450,36 @@ export default function HomePage() {
               {/* SmallBreak + Pull quote: Filosofía */}
               <div className="fade-up" style={{ margin: "4rem 0" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.75rem" }}>
-                  <span style={{ width: "32px", height: "1px", background: "#8B6914", opacity: 0.5, flexShrink: 0 }} />
+                  <span style={{ width: "32px", height: "1px", background: "#0E7A5C", opacity: 0.5, flexShrink: 0 }} />
                   <span style={{
                     fontFamily: "var(--font-sans)", fontSize: "9px", fontWeight: 600,
-                    letterSpacing: "0.2em", textTransform: "uppercase", color: "#8B6914",
+                    letterSpacing: "0.2em", textTransform: "uppercase", color: "#0E7A5C",
                   }}>Filosofía</span>
                 </div>
                 <blockquote style={{
                   fontFamily: "var(--font-serif)",
                   fontStyle: "italic",
                   fontSize: "clamp(1.5rem, 2.6vw, 2.25rem)",
-                  color: "#1A1710",
+                  color: "#0D1B14",
                   lineHeight: 1.35,
                   letterSpacing: "-0.015em",
-                  borderLeft: "2px solid #8B6914",
+                  borderLeft: "2px solid #0E7A5C",
                   paddingLeft: "2rem",
                   margin: 0,
                   maxWidth: "720px",
                 }}>
                   Esto no se trata de marcar destinos en una lista. Se trata de descubrir qué hace que
                   cada lugar sea{" "}
-                  <span style={{ color: "#8B6914" }}>inolvidable.</span>
+                  <span style={{ color: "#0E7A5C" }}>inolvidable.</span>
                 </blockquote>
               </div>
 
               {/* SmallBreak: Visión */}
               <div className="fade-up" style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "4rem 0 2.25rem" }}>
-                <span style={{ width: "32px", height: "1px", background: "#8B6914", opacity: 0.5, flexShrink: 0 }} />
+                <span style={{ width: "32px", height: "1px", background: "#0E7A5C", opacity: 0.5, flexShrink: 0 }} />
                 <span style={{
                   fontFamily: "var(--font-sans)", fontSize: "9px", fontWeight: 600,
-                  letterSpacing: "0.2em", textTransform: "uppercase", color: "#8B6914",
+                  letterSpacing: "0.2em", textTransform: "uppercase", color: "#0E7A5C",
                 }}>Visión</span>
               </div>
 
@@ -454,16 +487,16 @@ export default function HomePage() {
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "680px" }}>
                 <p className="fade-up" style={{
                   fontFamily: "var(--font-sans)", fontSize: "clamp(1rem, 1.15vw, 1.0625rem)",
-                  color: "rgba(26,23,16,0.65)", lineHeight: 1.8, margin: 0,
+                  color: "rgba(13,27,20,0.65)", lineHeight: 1.8, margin: 0,
                 }}>
                   Hyex está construyendo una nueva forma de explorar — una que conecta personas, cultura y lugares.
                 </p>
                 <p className="fade-up" data-delay="1" style={{
                   fontFamily: "var(--font-sans)", fontSize: "clamp(1rem, 1.15vw, 1.0625rem)",
-                  color: "rgba(26,23,16,0.65)", lineHeight: 1.8, margin: 0,
+                  color: "rgba(13,27,20,0.65)", lineHeight: 1.8, margin: 0,
                 }}>
                   Hoy empezamos con Colombia.{" "}
-                  <span style={{ color: "#8B6914", fontWeight: 500 }}>
+                  <span style={{ color: "#0E7A5C", fontWeight: 500 }}>
                     Mañana, expandimos por toda América Latina.
                   </span>
                 </p>
@@ -473,7 +506,7 @@ export default function HomePage() {
               <div className="fade-up" data-delay="2" style={{
                 marginTop: "clamp(4rem, 8vw, 6rem)",
                 paddingTop: "3rem",
-                borderTop: "1px solid rgba(26,23,16,0.10)",
+                borderTop: "1px solid rgba(13,27,20,0.10)",
                 display: "flex",
                 flexDirection: "column",
                 gap: "2rem",
@@ -483,7 +516,7 @@ export default function HomePage() {
                   fontFamily: "var(--font-serif)",
                   fontStyle: "italic",
                   fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                  color: "#1A1710",
+                  color: "#0D1B14",
                   fontWeight: 400,
                   lineHeight: 1.25,
                   letterSpacing: "-0.02em",
@@ -498,19 +531,19 @@ export default function HomePage() {
                     display: "inline-flex", alignItems: "center", gap: "0.5rem",
                     fontFamily: "var(--font-sans)",
                     fontSize: "var(--text-micro)", letterSpacing: "0.14em", textTransform: "uppercase",
-                    fontWeight: 500, color: "#8B6914", textDecoration: "none",
-                    borderBottom: "1px solid rgba(139,105,20,0.35)", paddingBottom: "0.375rem",
+                    fontWeight: 500, color: "#0E7A5C", textDecoration: "none",
+                    borderBottom: "1px solid rgba(14,122,92,0.35)", paddingBottom: "0.375rem",
                     transition: "gap 200ms ease, border-color 200ms ease",
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget as HTMLAnchorElement;
                     el.style.gap = "0.875rem";
-                    el.style.borderBottomColor = "#8B6914";
+                    el.style.borderBottomColor = "#0E7A5C";
                   }}
                   onMouseLeave={(e) => {
                     const el = e.currentTarget as HTMLAnchorElement;
                     el.style.gap = "0.5rem";
-                    el.style.borderBottomColor = "rgba(139,105,20,0.35)";
+                    el.style.borderBottomColor = "rgba(14,122,92,0.35)";
                   }}
                 >
                   Leer más <span aria-hidden="true">→</span>

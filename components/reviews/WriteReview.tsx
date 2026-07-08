@@ -56,7 +56,7 @@ export default function WriteReview({ placeId, onSuccess }: WriteReviewProps) {
   };
 
   return (
-    <div className="bg-bg-card border border-[rgba(242,237,232,0.07)] rounded-card p-5">
+    <div className="bg-bg-card border border-[rgba(234,241,236,0.07)] rounded-card p-5">
       <h3 className="text-lg font-serif text-text mb-4">Write a Review</h3>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -83,7 +83,7 @@ export default function WriteReview({ placeId, onSuccess }: WriteReviewProps) {
             {...register("text")}
             rows={4}
             placeholder="Share your experience..."
-            className="w-full bg-bg-surface border border-[rgba(242,237,232,0.07)] rounded-btn px-4 py-3 text-sm text-text placeholder-text-dim focus:outline-none focus:border-coral resize-none transition-colors"
+            className="w-full bg-bg-surface border border-[rgba(234,241,236,0.07)] rounded-btn px-4 py-3 text-sm text-text placeholder-text-dim focus:outline-none focus:border-coral resize-none transition-colors"
           />
           {errors.text && (
             <p className="mt-1 text-xs text-coral">{errors.text.message}</p>

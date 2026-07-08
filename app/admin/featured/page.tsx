@@ -11,8 +11,8 @@ const ADMIN_EMAILS = ["admin@hyex.co"]; // extend as needed
 
 const statusColor: Record<string, string> = {
   paid: "#5A8F6E",
-  pending: "#C8A44E",
-  expired: "#4A4843",
+  pending: "#3DDC97",
+  expired: "#3A4A41",
   cancelled: "#7A3835",
 };
 
@@ -51,7 +51,7 @@ export default function AdminFeaturedPage() {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 flex items-center justify-center">
-        <p style={{ color: "#4A4843", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+        <p style={{ color: "#3A4A41", fontSize: "11px", letterSpacing: "0.14em", textTransform: "uppercase" }}>
           Verificando acceso…
         </p>
       </div>
@@ -68,8 +68,8 @@ export default function AdminFeaturedPage() {
       {/* Header */}
       <div className="flex items-end justify-between mb-10 pb-6 border-b border-[rgba(255,255,255,0.06)]">
         <div>
-          <p className="label-micro mb-3" style={{ color: "#C8A44E" }}>Admin</p>
-          <h1 className="font-serif" style={{ fontSize: "36px", color: "#D4D0C8" }}>
+          <p className="label-micro mb-3" style={{ color: "#3DDC97" }}>Admin</p>
+          <h1 className="font-serif" style={{ fontSize: "36px", color: "#CBD6CE" }}>
             Placements destacados
           </h1>
         </div>
@@ -81,11 +81,11 @@ export default function AdminFeaturedPage() {
               letterSpacing: "0.16em",
               textTransform: "uppercase",
               fontWeight: 600,
-              color: "#706D64",
+              color: "#64756B",
               border: "1px solid rgba(255,255,255,0.08)",
               padding: "10px 20px",
             }}
-            className="hover:text-[#D4D0C8] hover:border-[rgba(255,255,255,0.14)] transition-all duration-200"
+            className="hover:text-[#CBD6CE] hover:border-[rgba(255,255,255,0.14)] transition-all duration-200"
           >
             Ver insights →
           </Link>
@@ -96,8 +96,8 @@ export default function AdminFeaturedPage() {
               letterSpacing: "0.16em",
               textTransform: "uppercase",
               fontWeight: 600,
-              color: "#0A0A09",
-              background: "#C8A44E",
+              color: "#08130E",
+              background: "#3DDC97",
               border: "none",
               padding: "10px 20px",
               cursor: "pointer",
@@ -116,11 +116,11 @@ export default function AdminFeaturedPage() {
           { label: "Clicks (mock)", value: totalClicks },
           { label: "CTR (mock)", value: `${((totalClicks / totalImpressions) * 100).toFixed(1)}%` },
         ].map((stat) => (
-          <div key={stat.label} style={{ background: "#111110", padding: "20px 24px" }}>
-            <p style={{ fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4A4843", fontWeight: 600, marginBottom: "8px" }}>
+          <div key={stat.label} style={{ background: "#0F1B15", padding: "20px 24px" }}>
+            <p style={{ fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 600, marginBottom: "8px" }}>
               {stat.label}
             </p>
-            <p className="font-serif" style={{ fontSize: "28px", color: "#D4D0C8", lineHeight: 1 }}>
+            <p className="font-serif" style={{ fontSize: "28px", color: "#CBD6CE", lineHeight: 1 }}>
               {stat.value}
             </p>
           </div>
@@ -129,8 +129,8 @@ export default function AdminFeaturedPage() {
 
       {/* Add form */}
       {showAddForm && (
-        <div className="mb-10 p-8" style={{ background: "#111110", border: "1px solid rgba(200,164,78,0.15)", borderTop: "2px solid rgba(200,164,78,0.3)" }}>
-          <h2 className="font-serif mb-6" style={{ fontSize: "20px", color: "#D4D0C8" }}>
+        <div className="mb-10 p-8" style={{ background: "#0F1B15", border: "1px solid rgba(61,220,151,0.15)", borderTop: "2px solid rgba(61,220,151,0.3)" }}>
+          <h2 className="font-serif mb-6" style={{ fontSize: "20px", color: "#CBD6CE" }}>
             Nuevo placement
           </h2>
           <AddPlacementForm onClose={() => setShowAddForm(false)} />
@@ -152,7 +152,7 @@ export default function AdminFeaturedPage() {
                     letterSpacing: "0.18em",
                     textTransform: "uppercase",
                     fontWeight: 600,
-                    color: "#4A4843",
+                    color: "#3A4A41",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -169,15 +169,15 @@ export default function AdminFeaturedPage() {
                 className="group"
               >
                 <td style={{ padding: "14px 16px" }}>
-                  <span style={{ fontSize: "13px", color: "#D4D0C8", fontWeight: 500 }}>
+                  <span style={{ fontSize: "13px", color: "#CBD6CE", fontWeight: 500 }}>
                     {fp.place_slug}
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <span style={{ fontSize: "12px", color: "#706D64" }}>{fp.city ?? "—"}</span>
+                  <span style={{ fontSize: "12px", color: "#64756B" }}>{fp.city ?? "—"}</span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <span style={{ fontSize: "10px", color: "#706D64", letterSpacing: "0.08em" }}>
+                  <span style={{ fontSize: "10px", color: "#64756B", letterSpacing: "0.08em" }}>
                     {typeLabel[fp.placement_type] ?? fp.placement_type}
                   </span>
                 </td>
@@ -186,10 +186,10 @@ export default function AdminFeaturedPage() {
                     fontSize: "9px",
                     letterSpacing: "0.12em",
                     textTransform: "uppercase",
-                    color: "#C8A44E",
+                    color: "#3DDC97",
                     fontWeight: 600,
-                    background: "rgba(200,164,78,0.06)",
-                    border: "1px solid rgba(200,164,78,0.2)",
+                    background: "rgba(61,220,151,0.06)",
+                    border: "1px solid rgba(61,220,151,0.2)",
                     padding: "2px 8px",
                     display: "inline-block",
                   }}>
@@ -197,7 +197,7 @@ export default function AdminFeaturedPage() {
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <span style={{ fontSize: "11px", color: "#706D64" }}>{planLabel[fp.plan_type]}</span>
+                  <span style={{ fontSize: "11px", color: "#64756B" }}>{planLabel[fp.plan_type]}</span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
                   <span style={{
@@ -205,18 +205,18 @@ export default function AdminFeaturedPage() {
                     letterSpacing: "0.12em",
                     textTransform: "uppercase",
                     fontWeight: 600,
-                    color: fp.is_active ? "#5A8F6E" : "#4A4843",
+                    color: fp.is_active ? "#5A8F6E" : "#3A4A41",
                   }}>
                     {fp.is_active ? "Activo" : "Inactivo"}
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
-                  <span style={{ fontSize: "12px", color: "#C8A44E", fontFamily: "'Playfair Display', serif" }}>
+                  <span style={{ fontSize: "12px", color: "#3DDC97", fontFamily: "'Playfair Display', serif" }}>
                     {fp.rank_priority}/10
                   </span>
                 </td>
                 <td style={{ padding: "14px 16px", whiteSpace: "nowrap" }}>
-                  <span style={{ fontSize: "11px", color: "#4A4843" }}>
+                  <span style={{ fontSize: "11px", color: "#3A4A41" }}>
                     {new Date(fp.start_at).toLocaleDateString("es-CO", { month: "short", day: "numeric" })}
                     {" — "}
                     {new Date(fp.end_at).toLocaleDateString("es-CO", { month: "short", day: "numeric", year: "2-digit" })}
@@ -228,7 +228,7 @@ export default function AdminFeaturedPage() {
                     letterSpacing: "0.12em",
                     textTransform: "uppercase",
                     fontWeight: 600,
-                    color: statusColor[fp.payment_status] ?? "#706D64",
+                    color: statusColor[fp.payment_status] ?? "#64756B",
                   }}>
                     {fp.payment_status}
                   </span>
@@ -236,8 +236,8 @@ export default function AdminFeaturedPage() {
                 <td style={{ padding: "14px 16px" }}>
                   <div className="flex gap-3 items-center">
                     <button
-                      style={{ fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#706D64", background: "none", border: "none", cursor: "pointer", padding: 0 }}
-                      className="hover:text-[#D4D0C8] transition-colors"
+                      style={{ fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#64756B", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                      className="hover:text-[#CBD6CE] transition-colors"
                     >
                       Editar
                     </button>
@@ -249,8 +249,8 @@ export default function AdminFeaturedPage() {
                     </button>
                     <Link
                       href={`/admin/insights/${fp.id}`}
-                      style={{ fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C8A44E", whiteSpace: "nowrap" }}
-                      className="hover:text-[#D4B05A] transition-colors"
+                      style={{ fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "#3DDC97", whiteSpace: "nowrap" }}
+                      className="hover:text-[#4FE3A4] transition-colors"
                     >
                       Ver insights →
                     </Link>
@@ -262,7 +262,7 @@ export default function AdminFeaturedPage() {
         </table>
       </div>
 
-      <p style={{ fontSize: "11px", color: "#3A3835", marginTop: "24px" }}>
+      <p style={{ fontSize: "11px", color: "#2A3A31", marginTop: "24px" }}>
         Los datos de analítica requieren conexión a Supabase. Los placements mostrados son datos de prueba (mock).
       </p>
     </div>
@@ -274,7 +274,7 @@ function AddPlacementForm({ onClose }: { onClose: () => void }) {
     width: "100%",
     background: "#0D0D0C",
     border: "1px solid rgba(255,255,255,0.06)",
-    color: "#D4D0C8",
+    color: "#CBD6CE",
     fontSize: "13px",
     padding: "10px 12px",
     outline: "none",
@@ -292,7 +292,7 @@ function AddPlacementForm({ onClose }: { onClose: () => void }) {
         { id: "end_at", label: "Fin", type: "date" },
       ].map((field) => (
         <div key={field.id}>
-          <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4A4843", fontWeight: 600, marginBottom: "6px" }}>
+          <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 600, marginBottom: "6px" }}>
             {field.label}
           </label>
           <input type={field.type ?? "text"} placeholder={field.placeholder} style={inputStyle} />
@@ -300,7 +300,7 @@ function AddPlacementForm({ onClose }: { onClose: () => void }) {
       ))}
 
       <div>
-        <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4A4843", fontWeight: 600, marginBottom: "6px" }}>
+        <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 600, marginBottom: "6px" }}>
           Tipo
         </label>
         <select style={{ ...inputStyle, appearance: "none" }}>
@@ -311,7 +311,7 @@ function AddPlacementForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4A4843", fontWeight: 600, marginBottom: "6px" }}>
+        <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 600, marginBottom: "6px" }}>
           Plan
         </label>
         <select style={{ ...inputStyle, appearance: "none" }}>
@@ -322,7 +322,7 @@ function AddPlacementForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4A4843", fontWeight: 600, marginBottom: "6px" }}>
+        <label style={{ display: "block", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#3A4A41", fontWeight: 600, marginBottom: "6px" }}>
           Prioridad (1–10)
         </label>
         <input type="number" min={1} max={10} defaultValue={5} style={inputStyle} />
@@ -333,7 +333,7 @@ function AddPlacementForm({ onClose }: { onClose: () => void }) {
           type="submit"
           style={{
             fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: 600,
-            color: "#0A0A09", background: "#C8A44E", border: "none", padding: "10px 24px", cursor: "pointer",
+            color: "#08130E", background: "#3DDC97", border: "none", padding: "10px 24px", cursor: "pointer",
           }}
         >
           Guardar placement
@@ -343,7 +343,7 @@ function AddPlacementForm({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           style={{
             fontSize: "10px", letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: 500,
-            color: "#706D64", background: "none", border: "1px solid rgba(255,255,255,0.06)", padding: "10px 24px", cursor: "pointer",
+            color: "#64756B", background: "none", border: "1px solid rgba(255,255,255,0.06)", padding: "10px 24px", cursor: "pointer",
           }}
         >
           Cancelar

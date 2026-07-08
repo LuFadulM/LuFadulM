@@ -33,7 +33,7 @@ export default function EditorialBreak({ quote, sub }: EditorialBreakProps) {
         className="font-serif"
         style={{
           fontSize: "clamp(18px, 2.8vw, 26px)",
-          color: "rgba(242,237,232,0.68)",
+          color: "rgba(234,241,236,0.68)",
           fontStyle: "italic",
           fontWeight: 400,
           maxWidth: "560px",
